@@ -2,3 +2,6 @@ baseURL = 'https://www.bugcatt.com/'
 languageCode = 'zh-CN'
 title = '阿航的技术小站'
 theme = 'dream'
+
+[params]
+  footerBottomText = '<a href="https://beian.miit.gov.cn/" target="_blank" class="text-base-content/60 hover:underline">蜀ICP备2022014599号-1</a>'

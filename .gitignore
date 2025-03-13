@@ -1,0 +1,11 @@
+# Hugo默认输出目录
+/public/
+
+# Hugo默认资源目录
+/resources/
+
+# Hugo默认缓存目录
+.hugo_build.lock
+
+# macOS系统文件
+.DS_Store 
