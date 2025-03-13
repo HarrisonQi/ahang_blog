@@ -1,0 +1,54 @@
+baseURL: /
+languageCode: zh-cn
+title: 阿航的技术小站
+theme: dream
+
+# 设置文章类型
+permalinks:
+  posts: /post/:year/:slug/
+  page: /page/:year/:slug/
+
+# 设置菜单
+menu:
+  main:
+    - identifier: home
+      name: 首页
+      url: /
+      weight: -100
+    - identifier: posts
+      name: 文章
+      url: /post/
+      weight: -90
+    - identifier: pages
+      name: 页面
+      url: /page/
+      weight: -80
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: -70
+
+# 设置分页
+paginate: 12
+paginatePath: "page"
+
+# 设置文章类型
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+# 设置文章类型
+params:
+  mainSections:
+    - post
+    - page
+
+# 忽略 Raw HTML 警告
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false 
