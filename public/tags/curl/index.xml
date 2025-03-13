@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Curl on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/curl/</link>
+    <description>Recent content in Curl on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/curl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows 安装 &amp; 部署 CURL</title>
+      <link>http://localhost:1313/posts/post/2020/windows-%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2-curl/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/windows-%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2-curl/</guid>
+      <description>&lt;p&gt;很多时候对接API, 接口提供方都会给出CURL格式的数据让我们进行访问、运行. 今天阿航看到百度站长平台(百度搜索资源平台)的主动推送有CURL方式. 但是发现自己的Windows上没有CURL的运行环境, 在此记录一下安装、部署CURL的过程.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/01-1.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;需具备的条件&#34;&gt;需具备的条件&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;本篇教程针对于Windows系统用户, 阿航用的是Win10&lt;/li&gt;&#xA;&lt;li&gt;你的电脑可以联网&lt;/li&gt;&#xA;&lt;li&gt;电脑有了自己的压缩软件(比如WinRAR、 360压缩等)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;下载-curl&#34;&gt;下载 CURL&lt;/h2&gt;&#xA;&lt;p&gt;访问&lt;a href=&#34;https://curl.haxx.se/download.html&#34; target=&#34;_blank&#34;&gt;CURL官网&lt;/a&gt;&#xA;, 向下拉, 找到Windows的版本(汗, 在最下面. 这是多讨厌Windows…).&lt;br&gt;&#xA;如图:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/02-1-1500x633.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;解压, 应该可以看到如下目录:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/03-1.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;把压缩文件中的目录解压到某个地方(阿航放在了&lt;code&gt;D:\Program Files\curl-7.70.0-win64-mingw&lt;/code&gt;下):&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/04-1.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;配置-windows-环境变量&#34;&gt;配置 Windows 环境变量&lt;/h2&gt;&#xA;&lt;p&gt;打开环境变量设置(点击开始, 直接输入关键字&amp;quot;环境变量&amp;quot;):&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/05-1.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;点击&amp;quot;环境变量&amp;quot;按钮:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/06.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;选中&amp;quot;系统变量&amp;quot;的&lt;code&gt;Path&lt;/code&gt;, 点击编辑:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/07.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;新建一个环境变量, 值为&lt;code&gt;解压目录\bin&lt;/code&gt;. 阿航这里为&lt;code&gt;D:\Program Files\curl-7.70.0-win64-mingw\bin&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/08.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;一路确定保存.&lt;/p&gt;&#xA;&lt;h2 id=&#34;校验-curl-是否安装成功&#34;&gt;校验 CURL 是否安装成功&lt;/h2&gt;&#xA;&lt;p&gt;打开CMD, 输入:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl --version&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果出现了版本信息, 证明安装成功:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/09.png&#34; alt=&#34;Windows 安装&amp;amp;部署 CURL&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter-Actual-Combat | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/categories/flutter-actual-combat/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/categories/flutter-actual-combat/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter-Actual-Combat">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter-Actual-Combat">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">Flutter-Actual-Combat</h1>
+    <p class="text-sm">18 articles</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/categories/collection-box/" class="badge h-6 no-underline hover:badge-primary">
+        Collection-Box
+      </a>
+      
+      
+      
+      <a href="/categories/dart%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="badge h-6 no-underline hover:badge-primary">
+        Dart高级特性
+      </a>
+      
+      
+      
+      <a href="/categories/ditto/" class="badge h-6 no-underline hover:badge-primary">
+        Ditto
+      </a>
+      
+      
+      
+      <a href="/categories/docker/" class="badge h-6 no-underline hover:badge-primary">
+        Docker
+      </a>
+      
+      
+      
+      <a href="/categories/flame-tutorials/" class="badge h-6 no-underline hover:badge-primary">
+        Flame-Tutorials
+      </a>
+      
+      
+      
+      <a href="/categories/flutter/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        Flutter-Actual-Combat
+      </span>
+      
+      
+      
+      <a href="/categories/flutter%E6%96%B0%E9%97%BB/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter新闻
+      </a>
+      
+      
+      
+      <a href="/categories/flutter%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter游戏开发
+      </a>
+      
+      
+      
+      <a href="/categories/flutter%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/git/" class="badge h-6 no-underline hover:badge-primary">
+        Git
+      </a>
+      
+      
+      
+      <a href="/categories/github/" class="badge h-6 no-underline hover:badge-primary">
+        Github
+      </a>
+      
+      
+      
+      <a href="/categories/ide/" class="badge h-6 no-underline hover:badge-primary">
+        Ide
+      </a>
+      
+      
+      
+      <a href="/categories/java/" class="badge h-6 no-underline hover:badge-primary">
+        Java
+      </a>
+      
+      
+      
+      <a href="/categories/java-kotlin%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Java-Kotlin踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/java%E6%A1%86%E6%9E%B6/" class="badge h-6 no-underline hover:badge-primary">
+        Java框架
+      </a>
+      
+      
+      
+      <a href="/categories/linux/" class="badge h-6 no-underline hover:badge-primary">
+        Linux
+      </a>
+      
+      
+      
+      <a href="/categories/linux%E4%BC%98%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        Linux优化
+      </a>
+      
+      
+      
+      <a href="/categories/linux%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Linux踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/mac/" class="badge h-6 no-underline hover:badge-primary">
+        Mac
+      </a>
+      
+      
+      
+      <a href="/categories/mybatis-plus/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis-Plus
+      </a>
+      
+      
+      
+      <a href="/categories/mysql/" class="badge h-6 no-underline hover:badge-primary">
+        Mysql
+      </a>
+      
+      
+      
+      <a href="/categories/nginx/" class="badge h-6 no-underline hover:badge-primary">
+        Nginx
+      </a>
+      
+      
+      
+      <a href="/categories/windows/" class="badge h-6 no-underline hover:badge-primary">
+        Windows
+      </a>
+      
+      
+      
+      <a href="/categories/windows%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="badge h-6 no-underline hover:badge-primary">
+        Windows环境部署
+      </a>
+      
+      
+      
+      <a href="/categories/wordpress/" class="badge h-6 no-underline hover:badge-primary">
+        Wordpress
+      </a>
+      
+      
+      
+      <a href="/categories/%E6%95%88%E7%8E%87/" class="badge h-6 no-underline hover:badge-primary">
+        效率
+      </a>
+      
+      
+      
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        数据库
+      </a>
+      
+      
+      
+      <a href="/categories/%E6%9E%81%E5%AE%A2%E7%94%A8%E8%AF%AD/" class="badge h-6 no-underline hover:badge-primary">
+        极客用语
+      </a>
+      
+      
+      
+      <a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge h-6 no-underline hover:badge-primary">
+        运维
+      </a>
+      
+      
+      
+      <a href="/categories/%E9%9A%8F%E6%89%8B%E5%86%99/" class="badge h-6 no-underline hover:badge-primary">
+        随手写
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+      <div class="dream-grid">
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E5%AE%9E%E7%8E%B0%E6%AF%9B%E7%8E%BB%E7%92%83-%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 实现毛玻璃/磨砂效果</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, Jun 8, 2020
+    
+    </p>
+
+    <p>还记得之前风靡一时的Windows 7的毛玻璃效果吗? 虽然过去了好多年, 但毛玻璃效果一直没有过时👨‍🎓. 本篇文章就来记录下如何使用Flutter实现毛玻璃/磨砂效果.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 先来看下我们要实现的最终效果:</p>
+<p><img src="images/Flutter-%E5%AE%9E%E7%8E%B0%E6%AF%9B%E7%8E%BB%E7%92%83%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C-05.png" alt=""></p>
+<h2 id="环境需具备的条件">环境&amp;需具备的条件</h2>
+<p>本篇文章的开发环境:</p>
+<!-- raw HTML omitted -->
+<p>若想顺利阅读本篇教程, 你需要具备:</p>
+<ul>
+<li>计算机已安装Flutter开发环境</li>
+<li>掌握Flutter基础</li>
+</ul>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建项目-清理代码">创建项目, 清理代码</h3>
+<p>先来创建一个空项目, 直接用IDE创建或在终端中输入:</p>
+<pre tabindex="0"><code>flutter create my_frosted
+</code></pre><p>删除<code>./test</code>目录. 并替换<code>./lib/main.dart</code>为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;My Frosted Demo&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyFrosted(),
+    );
+  }
+}
+
+class MyFrosted extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [],
+      ),
+    );
+  }
+}
+</code></pre><p>🟢 运行项目, 可以看到白白的一片, 啥也没有:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-clipboard-%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-%E5%A4%8D%E5%88%B6%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF-%E4%BB%8E%E5%89%AA%E8%B4%B4%E6%9D%BF%E4%B8%AD%E8%8E%B7%E5%8F%96/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter Clipboard 剪贴板操作: 复制到剪贴板 / 从剪贴板中获取</h2>
+
+    <p class="date text-base-content/60">
+    
+      Saturday, May 30, 2020
+    
+    </p>
+
+    <p>我们在使用Flutter进行开发时, 有时会使用类似&quot;复制本段文字&quot;的功能. 为了提升用户体验, 我们不希望用户长按文字, 再自行复制, 我们希望提供一个按钮直接点击复制, 甚至自动复制! 反之从剪贴板获取也一样.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 不说废话, 直接展示最终效果:</p>
+<h4 id="复制到剪贴板">复制到剪贴板</h4>
+<p><img src="images/Flutter%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-03.gif" alt="Flutter剪贴板操作-03"></p>
+<h4 id="从剪贴板获取粘贴">从剪贴板获取(粘贴)</h4>
+<p><img src="images/Flutter%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-04.gif" alt="Flutter剪贴板操作-04"></p>
+<p>[epcl_box type=&ldquo;information&rdquo;]如果你了解阿航的技术小站, 应该会知悉每篇文章都会提供相当详细且完整的源码. [/epcl_box]</p>
+<h2 id="应用场景">应用场景</h2>
+<h3 id="复制到剪贴板-1">复制到剪贴板</h3>
+<ol>
+<li>生成了运单号, 需要用户进行保存;</li>
+<li>某些微商APP需要复制文案, 发布朋友圈;</li>
+<li>文学类APP中, 发现一段非常好的句子, 想发给好友.</li>
+</ol>
+<h3 id="从剪贴板中获取">从剪贴板中获取</h3>
+<ol>
+<li>直接填入用户复制的短信验证码.</li>
+<li>淘宝分享的东西, 复制后打开淘宝APP.</li>
+</ol>
+<p>[epcl_box type=&ldquo;information&rdquo;]当然, 以上只是举了几种例子, 还有更多可以提升用户操作体验的实例在此不过多举例了, 直接开始.[/epcl_box]</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="初始化flutter项目">初始化Flutter项目</h3>
+<p>创建Flutter项目, 清理一下<code>./lib/main.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter剪贴板操作&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;Flutter剪贴板操作&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              &#39;You have pushed the button this many times:&#39;,
+            ),
+            Text(
+              &#39;$_counter&#39;,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: &#39;Increment&#39;,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+</code></pre><p>运行下项目, 应该空空如也:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>3 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E5%9C%A8flutter%E4%B8%AD%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">在Flutter中设置背景图片 / background image</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, May 27, 2020
+    
+    </p>
+
+    <p>有时我们需要给APP的某个页面或某个widget添加背景图. 本篇文章就来记录下如何在Flutter中设置背景图片.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 先来看下我们本篇博客将实现的最终效果:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-04.png" alt=""></p>
+<p>速度快的同学直接看下面的核心代码!</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建flutter项目">创建Flutter项目</h3>
+<p>创建一个新的Flutter项目, 运行查看一下:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-02.png" alt="Flutter 设置背景图片 background image-02"></p>
+<p>空白的, 啥也木有.</p>
+<h3 id="添加图片资源">添加图片资源</h3>
+<p>这里为大家提供一个好看的背景图:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-01-1001x1500.jpg" alt="Flutter 设置背景图片 background image-01"></p>
+<!-- raw HTML omitted -->
+<p><strong><a href="https://www.pexels.com/zh-cn/photo/2110951/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+</strong> 上的 <strong><a href="https://www.pexels.com/zh-cn/@emrecan?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Emre Can</a>
+</strong> 拍摄的照片</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>下载此图片, 重命名为<code>background.jpg</code>. 我们来将其添加至Flutter项目中.</p>
+<h4 id="创建资源目录">创建资源目录</h4>
+<p>创建目录<code>./assets/images</code>, 将上面的图片放到该目录下:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-03.png" alt=""></p>
+<h4 id="引入pubspecyaml">引入pubspec.yaml</h4>
+<p>进入<code>pubspec.yaml</code>, 将背景图片资源文件路径<code>assets/images/background.jpg</code>进行导入:</p>
+<pre tabindex="0"><code>flutter:
+  uses-material-design: true
+  assets:
+   - assets/images/background.jpg
+</code></pre><p>[epcl_box type=&ldquo;notice&rdquo;]这里一定要注意缩进, 若格式有误将会出错![/epcl_box]</p>
+<p>进行<code>package get</code>或在终端中输入:</p>
+<pre tabindex="0"><code>flutter packages get
+</code></pre><h3 id="展示背景图">展示背景图</h3>
+<p>回到<code>./lib/main.dart</code>, 进行代码替换:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-toast%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E8%BD%BB%E6%8F%90%E7%A4%BA/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter Toast、弹出提示、轻提示</h2>
+
+    <p class="date text-base-content/60">
+    
+      Thursday, May 21, 2020
+    
+    </p>
+
+    <p>主流的三种APP反馈形式: <code>toast</code>、<code>snackbar</code>以及<code>dialog</code>. <code>toast</code>又称为弹出提示、轻提示.通常用于提示用户一些不那么重要的信息, 会弹出并显示文字一段时间. 时间一到就会消失. 相较于<code>snackbar</code>和<code>dialog</code>, 对屏幕的入侵较少. 身为开发人员怎能不掌握toast的基本使用? 这篇文章阿航就带着大家一起探讨一下Flutter中的<code>toast</code>.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 我们来看下我们本次要实现的最终效果:</p>
+<p><img src="images/Flutter-Toast%E3%80%81%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E3%80%81%E8%BD%BB%E6%8F%90%E7%A4%BA-06.gif" alt="Flutter-Toast、弹出提示、轻提示-06"></p>
+<h2 id="源码地址">源码地址</h2>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flutter-actual-combat-demo/tree/master/" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flutter-actual-combat-demo/tree/master/flutter_toast_tutorial" target="_blank">码云</a>
+上查看本篇文章全部代码.</strong></p>
+<h2 id="搜索fluttertoast">搜索fluttertoast</h2>
+<p>[epcl_box type=&ldquo;information&rdquo;]有同学会问, 为什么要选择插件, 不选择原生呢… 因为Flutter没有我们所需的这种效果! 只有自带的snackBar![/epcl_box]</p>
+<p>老样子, 上<a href="https://pub.flutter-io.cn/packages" target="_blank">pub.dev</a>
+寻找我们所需的插件, 在搜索框输入<code>fluttertoast</code>:</p>
+<p>看到第一条:</p>
+<p><img src="images/Flutter-Toast%E3%80%81%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E3%80%81%E8%BD%BB%E6%8F%90%E7%A4%BA-01.png" alt=""></p>
+<p><code>99</code>分, 相当高的评分.</p>
+<p>点进去, 查看最新版本发布日期和兼容性:</p>
+<p><img src="images/Flutter-Toast%E3%80%81%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E3%80%81%E8%BD%BB%E6%8F%90%E7%A4%BA-02.png" alt=""></p>
+<p>[epcl_box type=&ldquo;information&rdquo;]一般我们在选择一款Flutter插件时, 会先看它的评分(Flutter官方评分还是比较严格的). 之后再去看看它的最新日期(如果很久未更新, 可能项目已经停止维护了). 最后再来看看它的兼容性, 是否合乎我们的规则.[/epcl_box]</p>
+<p>同时支持<code>Android</code>、<code>IOS</code>以及<code>Web</code>. 兼容性很好.</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建项目">创建项目</h3>
+<p>创建一个Flutter项目, 先来清理项目.</p>
+<p>删除<code>./test</code>目录, 因为我们的这个项目只是一个简单的demo. 不需要测试驱动开发.</p>
+<p><img src="images/Flutter-Toast%E3%80%81%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E3%80%81%E8%BD%BB%E6%8F%90%E7%A4%BA-03.png" alt=""></p>
+<p>通过flutter创建的项目的<code>./lib/main.dart</code>会有很多自带的注释, 我们替换整个文件为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;阿航的技术小站 Flutter toast&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;Flutter toast实战&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 删除了多余的注释, 和部分初始化的按钮. 添加一些名称.</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E5%9B%BD%E9%99%85%E5%8C%96-%E5%A4%9A%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86easy-localization/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 国际化: 多语言处理(Easy localization)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, Apr 22, 2020
+    
+    </p>
+
+    <p>语言不互通是困扰了人类几千年的大难题🤐. 许多国外优秀的文学作品、 APP因为没有进行多国语言的处理, 导致发展缓慢甚至停滞. 虽然现在的各大翻译软件已经非常强大了. 但是想象一下: 一个用户一边拿着翻译机一边使用某个软件. 这样恐怕会逼疯用户, 可能会很快的放弃😭😭.</p>
+<p>如果你的APP有相当一部分用户是来自全球各地, 那么对APP的国际化就是刚需💪.</p>
+<p>对APP的国际化可以直线提升外国友人用户体验, 顺便会提高你的APP的&quot;逼格&quot;, 用最简单的方式给用户一种&quot;你们的APP很大很强&quot;的感觉😏😏😏.</p>
+<h2 id="最终效果">最终效果</h2>
+<p>老规矩, 有图有真相. 先来看看我们最终会实现的效果:</p>
+<p><img src="images/09-2.gif" alt="Flutter 国际化: 多语言处理(Easy localization)"></p>
+<h2 id="需求">需求</h2>
+<p>在做一个事情之前, 我们先来简单的规划一下, 我们的目标是什么, 我们要怎么做:</p>
+<ol>
+<li>提供多种语言处理, 对每部分文本进行单独的翻译.</li>
+<li>用户可以随时切换语言</li>
+</ol>
+<h2 id="开始">开始</h2>
+<h3 id="第一步-创建flutter-app">第一步: 创建Flutter APP</h3>
+<p>这一步不再赘述, 相当基础的东西啦!</p>
+<h3 id="第二步-清理项目">第二步: 清理项目</h3>
+<h4 id="删除测试目录">删除测试目录</h4>
+<p>删除<code>./lib/test</code>目录, 因为我们暂时用不上.</p>
+<h4 id="清理maindart">清理main.dart</h4>
+<p>因为新的Flutter项目中的main会给我们很多用不上的代码, 所以进行替换<code>./lib/main.dart</code>为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter 国际化: 多语言处理&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;Hi, 国际化!&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              &#39;你好!&#39;,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre><p>🟢 运行项目, 应该如图所示:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8-sharedpreferences/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 数据存储 SharedPreferences</h2>
+
+    <p class="date text-base-content/60">
+    
+      Thursday, Apr 9, 2020
+    
+    </p>
+
+    <p>我们在做APP开发时, 经常会涉及到用户的 数据存储(比如保存用户登录token、用户的某些偏好设置等). 开发过Android的朋友应该知道有 SharedPreferences. 在 Flutter 中, 同样为我们提供了十分相似的(甚至名字都一样)组件, 为我们提供数据存储的能力.</p>
+<p>本篇教程将用一个简单的小Demo, 让你完全掌握 数据存储之SharedPreferences 的用法.</p>
+
+
+
+  <blockquote>
+    <p>若图片展示异常, 请访问我的<a href="https://blog.bugcatt.com/archives/165" target="_blank">官方博客</a>
+</p>
+  </blockquote>
+
+<h2 id="效果">效果</h2>
+<p>有图有真相, 我们先来看一下我们最终的效果:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/SharedPreferences%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C.gif" alt="Flutter 数据存储 SharedPreferences"></p>
+<!-- raw HTML omitted -->
+<p>SharedPreferences最终效果</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="仓库地址">仓库地址</h2>
+<p>所有源码(含注释)均已上传至开源仓库:</p>
+<ul>
+<li><a href="https://github.com/HarrisonQi/flutter-actual-combat-demo/tree/master/my_shared_preferences_demo" target="_blank">Github</a>
+</li>
+<li><a href="https://gitee.com/HarrisonQI/flutter-actual-combat-demo/tree/master/my_shared_preferences_demo" target="_blank">码云</a>
+</li>
+</ul>
+<h2 id="准备工作">准备工作</h2>
+<h3 id="开发环境">开发环境</h3>
+<p>本博客的环境一览:</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Flutter</td>
+          <td>1.14.6 beta</td>
+      </tr>
+      <tr>
+          <td>Dart</td>
+          <td>2.8.0-dev.5.0</td>
+      </tr>
+      <tr>
+          <td>Android Studio</td>
+          <td>3.5.2</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <blockquote>
+    <p>注意您的环境和文中的差异, 避免出现不兼容的情况哦!</p>
+  </blockquote>
+
+<h3 id="需具备的条件">需具备的条件</h3>
+<p>要顺利阅读本文, 假定您已经具备以下条件:</p>
+<ol>
+<li>一台电脑(能同时运行IDE、APP模拟器).</li>
+<li><code>Android Studio</code> 或 <code>VSCode</code>(或任何你喜欢的代码编辑器).</li>
+<li><code>Flutter</code>开发环境.</li>
+<li>您掌握了<code>Flutter</code>的开发基础(至少了解目录结构、<code>Dart</code>语言基本知识).</li>
+</ol>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建flutter项目">创建Flutter项目</h3>
+<p>创建一个新的Flutter项目, 命名为<code>my_shared_preferences_demo</code>(您可以随意起名, 但是在下面也要替换名字为您自己的).</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>3 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E5%AE%9E%E6%88%98-%E5%BA%95%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%8F-bottomnavigationbar/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 底部导航栏 / BottomNavigationBar</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, Apr 7, 2020
+    
+    </p>
+
+    <p>几乎99%的应用类APP都需要一个底部导航栏. 这篇教程为 <strong>Flutter</strong> 语言中, 如何写一个主流的 <strong>底部导航栏</strong> . 并使用 <strong>Flutter</strong> 官方提供的 <strong>BottomNavigationBar</strong> 组件. 几乎每一个APP都拥有一个底部导航栏, 所以这篇教程将会十分有用🤭</p>
+<hr>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 我们本次要实现 底部导航栏 的最终效果如下🙊:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/final-renderings.gif" alt="Flutter 底部导航栏 / BottomNavigationBar"></p>
+<!-- raw HTML omitted -->
+<p>底部导航栏最终效果</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="仓库地址">仓库地址</h2>
+<p>全部代码均已上传至开源仓库(含完整注释):</p>
+<ul>
+<li><a href="https://github.com/HarrisonQi/flutter-actual-combat-demo/tree/master/bottom_navigation" target="_blank">Github</a>
+</li>
+<li><a href="https://gitee.com/HarrisonQI/flutter-actual-combat-demo/tree/master/bottom_navigation" target="_blank">码云</a>
+</li>
+</ul>
+<h2 id="用途">用途</h2>
+<p>虽然如此普遍, 但我们还是要更直观的看下哪里需要用到底部导航栏, 如下图:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/demo.png" alt="Flutter 底部导航栏 / BottomNavigationBar"></p>
+<!-- raw HTML omitted -->
+<p>用到底部导航栏的主流APP</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>可以得知, 最流行的、最主流的APP都需要导航栏</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>3 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E6%8C%87%E7%BA%B9%E9%AA%8C%E8%AF%81-%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 指纹验证/人脸识别</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, Apr 7, 2020
+    
+    </p>
+
+    <p>指纹验证/指纹识别 以及 人脸识别 是我们在平常使用各种APP时常用的功能, 这篇教程将使用第三方库 local_auth 来实现 Flutter 中的指纹验证以及人脸识别.</p>
+<hr>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 我们本次要实现的最终效果如下:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/rendering.gif" alt="Flutter 指纹验证/人脸识别"></p>
+<!-- raw HTML omitted -->
+<p>指纹识别图片效果展示</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="仓库地址">仓库地址</h2>
+<p>全部代码均已上传至开源仓库(含完整注释):</p>
+<ul>
+<li><a href="https://github.com/HarrisonQi/flutter-actual-combat-demo/tree/master/fingerprint_verification" target="_blank">Github</a>
+</li>
+<li><a href="https://gitee.com/HarrisonQI/flutter-actual-combat-demo/tree/master/fingerprint_verification" target="_blank">码云</a>
+</li>
+</ul>
+<h2 id="用途">用途</h2>
+<p>这个在支付相关功能中最常见了, 用于二次验证当前操作者是否为本人. 当然, 有时我们保护的不仅是现金.</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="导入第三方库-local_auth">导入第三方库: local_auth</h3>
+<p>在<code>./lib/pubspec.yaml</code>中导入:</p>
+<pre tabindex="0"><code>dependencies:
+  local_auth: ^0.6.1+3
+</code></pre><h3 id="修改mainactivity">修改MainActivity</h3>
+<p>进入<code>./android/app/src/main/***/MainActivity.java</code>或<code>MainActivity.kt</code>,导入依赖:</p>
+<pre tabindex="0"><code>import io.flutter.embedding.android.FlutterFragmentActivity;
+</code></pre><p>修改:</p>
+<pre tabindex="0"><code>class MainActivity: FlutterActivity() {
+    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
+    }
+}
+</code></pre><p>为:</p>
+<pre tabindex="0"><code>class MainActivity: FlutterFragmentActivity() {
+    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
+    }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>这里主要是修改了<code>FlutterActivity</code>为<code>FlutterFragmentActivity</code></p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+      </div>
+    
+
+    
+    <div class="flex justify-center pt-8">
+      <div class="join grid grid-cols-2">
+  
+  <a href="/categories/flutter-actual-combat/" title=Previous&#32;page class="join-item btn btn-outline btn-sm">
+    Previous page
+  </a>
+  
+  
+  <button class="join-item btn btn-outline btn-sm" disabled>
+    Next page
+  </button>
+  
+</div>
+
+    </div>
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

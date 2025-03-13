@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/tags/docker/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/tags/docker/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Docker">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">Docker</h1>
+    <p class="text-sm">7 articles</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/tags/404/" class="badge h-6 no-underline hover:badge-primary">
+        404
+      </a>
+      
+      
+      
+      <a href="/tags/adobe-xd/" class="badge h-6 no-underline hover:badge-primary">
+        Adobe-Xd
+      </a>
+      
+      
+      
+      <a href="/tags/app%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        App开发
+      </a>
+      
+      
+      
+      <a href="/tags/bbs/" class="badge h-6 no-underline hover:badge-primary">
+        Bbs
+      </a>
+      
+      
+      
+      <a href="/tags/centos/" class="badge h-6 no-underline hover:badge-primary">
+        Centos
+      </a>
+      
+      
+      
+      <a href="/tags/curl/" class="badge h-6 no-underline hover:badge-primary">
+        Curl
+      </a>
+      
+      
+      
+      <a href="/tags/dart/" class="badge h-6 no-underline hover:badge-primary">
+        Dart
+      </a>
+      
+      
+      
+      <a href="/tags/discourse/" class="badge h-6 no-underline hover:badge-primary">
+        Discourse
+      </a>
+      
+      
+      
+      <a href="/tags/ditto/" class="badge h-6 no-underline hover:badge-primary">
+        Ditto
+      </a>
+      
+      
+      
+      <a href="/tags/dns/" class="badge h-6 no-underline hover:badge-primary">
+        Dns
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        Docker
+      </span>
+      
+      
+      
+      <a href="/tags/fastjson/" class="badge h-6 no-underline hover:badge-primary">
+        Fastjson
+      </a>
+      
+      
+      
+      <a href="/tags/flame/" class="badge h-6 no-underline hover:badge-primary">
+        Flame
+      </a>
+      
+      
+      
+      <a href="/tags/flutter/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter
+      </a>
+      
+      
+      
+      <a href="/tags/flutter-web/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter-Web
+      </a>
+      
+      
+      
+      <a href="/tags/fork/" class="badge h-6 no-underline hover:badge-primary">
+        Fork
+      </a>
+      
+      
+      
+      <a href="/tags/git/" class="badge h-6 no-underline hover:badge-primary">
+        Git
+      </a>
+      
+      
+      
+      <a href="/tags/github/" class="badge h-6 no-underline hover:badge-primary">
+        Github
+      </a>
+      
+      
+      
+      <a href="/tags/hexo/" class="badge h-6 no-underline hover:badge-primary">
+        Hexo
+      </a>
+      
+      
+      
+      <a href="/tags/homebrew/" class="badge h-6 no-underline hover:badge-primary">
+        Homebrew
+      </a>
+      
+      
+      
+      <a href="/tags/idea/" class="badge h-6 no-underline hover:badge-primary">
+        Idea
+      </a>
+      
+      
+      
+      <a href="/tags/jar/" class="badge h-6 no-underline hover:badge-primary">
+        Jar
+      </a>
+      
+      
+      
+      <a href="/tags/java/" class="badge h-6 no-underline hover:badge-primary">
+        Java
+      </a>
+      
+      
+      
+      <a href="/tags/json/" class="badge h-6 no-underline hover:badge-primary">
+        Json
+      </a>
+      
+      
+      
+      <a href="/tags/just-for-fun/" class="badge h-6 no-underline hover:badge-primary">
+        Just-for-Fun
+      </a>
+      
+      
+      
+      <a href="/tags/kotlin/" class="badge h-6 no-underline hover:badge-primary">
+        Kotlin
+      </a>
+      
+      
+      
+      <a href="/tags/linux/" class="badge h-6 no-underline hover:badge-primary">
+        Linux
+      </a>
+      
+      
+      
+      <a href="/tags/macos/" class="badge h-6 no-underline hover:badge-primary">
+        Macos
+      </a>
+      
+      
+      
+      <a href="/tags/map/" class="badge h-6 no-underline hover:badge-primary">
+        Map
+      </a>
+      
+      
+      
+      <a href="/tags/maven/" class="badge h-6 no-underline hover:badge-primary">
+        Maven
+      </a>
+      
+      
+      
+      <a href="/tags/microsoft%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/" class="badge h-6 no-underline hover:badge-primary">
+        Microsoft应用商店
+      </a>
+      
+      
+      
+      <a href="/tags/minecraft/" class="badge h-6 no-underline hover:badge-primary">
+        Minecraft
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis-plus/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis-Plus
+      </a>
+      
+      
+      
+      <a href="/tags/mysql/" class="badge h-6 no-underline hover:badge-primary">
+        Mysql
+      </a>
+      
+      
+      
+      <a href="/tags/nginx/" class="badge h-6 no-underline hover:badge-primary">
+        Nginx
+      </a>
+      
+      
+      
+      <a href="/tags/node/" class="badge h-6 no-underline hover:badge-primary">
+        Node
+      </a>
+      
+      
+      
+      <a href="/tags/npm/" class="badge h-6 no-underline hover:badge-primary">
+        Npm
+      </a>
+      
+      
+      
+      <a href="/tags/null/" class="badge h-6 no-underline hover:badge-primary">
+        Null
+      </a>
+      
+      
+      
+      <a href="/tags/nvm/" class="badge h-6 no-underline hover:badge-primary">
+        Nvm
+      </a>
+      
+      
+      
+      <a href="/tags/object/" class="badge h-6 no-underline hover:badge-primary">
+        Object
+      </a>
+      
+      
+      
+      <a href="/tags/php/" class="badge h-6 no-underline hover:badge-primary">
+        Php
+      </a>
+      
+      
+      
+      <a href="/tags/pip/" class="badge h-6 no-underline hover:badge-primary">
+        Pip
+      </a>
+      
+      
+      
+      <a href="/tags/pr/" class="badge h-6 no-underline hover:badge-primary">
+        Pr
+      </a>
+      
+      
+      
+      <a href="/tags/python/" class="badge h-6 no-underline hover:badge-primary">
+        Python
+      </a>
+      
+      
+      
+      <a href="/tags/react/" class="badge h-6 no-underline hover:badge-primary">
+        React
+      </a>
+      
+      
+      
+      <a href="/tags/spring/" class="badge h-6 no-underline hover:badge-primary">
+        Spring
+      </a>
+      
+      
+      
+      <a href="/tags/springboot/" class="badge h-6 no-underline hover:badge-primary">
+        Springboot
+      </a>
+      
+      
+      
+      <a href="/tags/sql/" class="badge h-6 no-underline hover:badge-primary">
+        Sql
+      </a>
+      
+      
+      
+      <a href="/tags/stack-overflow/" class="badge h-6 no-underline hover:badge-primary">
+        Stack-Overflow
+      </a>
+      
+      
+      
+      <a href="/tags/swagger/" class="badge h-6 no-underline hover:badge-primary">
+        Swagger
+      </a>
+      
+      
+      
+      <a href="/tags/ubuntu/" class="badge h-6 no-underline hover:badge-primary">
+        Ubuntu
+      </a>
+      
+      
+      
+      <a href="/tags/unicode/" class="badge h-6 no-underline hover:badge-primary">
+        Unicode
+      </a>
+      
+      
+      
+      <a href="/tags/vim/" class="badge h-6 no-underline hover:badge-primary">
+        Vim
+      </a>
+      
+      
+      
+      <a href="/tags/vue/" class="badge h-6 no-underline hover:badge-primary">
+        Vue
+      </a>
+      
+      
+      
+      <a href="/tags/win10/" class="badge h-6 no-underline hover:badge-primary">
+        Win10
+      </a>
+      
+      
+      
+      <a href="/tags/windows/" class="badge h-6 no-underline hover:badge-primary">
+        Windows
+      </a>
+      
+      
+      
+      <a href="/tags/wordpress/" class="badge h-6 no-underline hover:badge-primary">
+        Wordpress
+      </a>
+      
+      
+      
+      <a href="/tags/yum/" class="badge h-6 no-underline hover:badge-primary">
+        Yum
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B8%8A%E7%BA%BF%E5%87%86%E5%A4%87/" class="badge h-6 no-underline hover:badge-primary">
+        上线准备
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%B5%84%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        书籍资源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" class="badge h-6 no-underline hover:badge-primary">
+        关联查询
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%87%BA%E7%94%9F%E6%97%A5%E6%9C%9F/" class="badge h-6 no-underline hover:badge-primary">
+        出生日期
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        前端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%8E%92%E7%89%88/" class="badge h-6 no-underline hover:badge-primary">
+        博客排版
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%90%8E%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        后端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E5%86%85%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        国内加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        国际化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BE%E5%83%8F/" class="badge h-6 no-underline hover:badge-primary">
+        图像
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E6%AE%B5/" class="badge h-6 no-underline hover:badge-primary">
+        字段
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/" class="badge h-6 no-underline hover:badge-primary">
+        字符编码
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89/" class="badge h-6 no-underline hover:badge-primary">
+        字符转义
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AE%B9%E5%99%A8/" class="badge h-6 no-underline hover:badge-primary">
+        容器
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="badge h-6 no-underline hover:badge-primary">
+        常用操作
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6/" class="badge h-6 no-underline hover:badge-primary">
+        常用组件
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E8%AF%86/" class="badge h-6 no-underline hover:badge-primary">
+        常识
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        序列化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BC%80%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        开源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        快速开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF%E4%B9%A6%E7%B1%8D/" class="badge h-6 no-underline hover:badge-primary">
+        技术书籍
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%90%9C%E7%8B%97/" class="badge h-6 no-underline hover:badge-primary">
+        搜狗
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" class="badge h-6 no-underline hover:badge-primary">
+        支付宝
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%88%E7%8E%87/" class="badge h-6 no-underline hover:badge-primary">
+        效率
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/" class="badge h-6 no-underline hover:badge-primary">
+        教程
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        数据库
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91/" class="badge h-6 no-underline hover:badge-primary">
+        文件编辑
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%97%B6%E5%8C%BA/" class="badge h-6 no-underline hover:badge-primary">
+        时区
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%9E%81%E5%AE%A2%E7%94%A8%E8%AF%AD/" class="badge h-6 no-underline hover:badge-primary">
+        极客用语
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%AF%9B%E7%8E%BB%E7%92%83/" class="badge h-6 no-underline hover:badge-primary">
+        毛玻璃
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        游戏开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="badge h-6 no-underline hover:badge-primary">
+        环境部署
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%94%9F%E6%97%A5/" class="badge h-6 no-underline hover:badge-primary">
+        生日
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%A9%BA%E6%A0%BC/" class="badge h-6 no-underline hover:badge-primary">
+        空格
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BC%93%E5%AD%98/" class="badge h-6 no-underline hover:badge-primary">
+        缓存
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="badge h-6 no-underline hover:badge-primary">
+        网络配置
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AE%BF%E9%97%AE%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        访问加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AF%8D%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        词库
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        踩坑
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" class="badge h-6 no-underline hover:badge-primary">
+        输入法
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BF%90%E7%BB%B4/" class="badge h-6 no-underline hover:badge-primary">
+        运维
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%97%B2%E9%B1%BC/" class="badge h-6 no-underline hover:badge-primary">
+        闲鱼
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" class="badge h-6 no-underline hover:badge-primary">
+        阿里巴巴
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%A1%B9%E7%9B%AE%E4%BF%A1%E6%81%AF/" class="badge h-6 no-underline hover:badge-primary">
+        项目信息
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+      <div class="dream-grid">
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2021/docker%E4%BC%A0%E8%BE%93-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8E%E5%AE%B9%E5%99%A8/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker传输/复制文件(宿主机与容器)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Friday, Mar 5, 2021
+    
+    </p>
+
+    <p>有时我们并没有配置某文件的映射关系, 当需要调整时, 就需要将文件进行复制. 所以本篇文章来记录下如何在docker容器和宿主机直接传输文件.</p>
+<h2 id="开始">开始</h2>
+<p>首先来确认下你的容器ID:</p>
+<pre><code>`docker ps`
+</code></pre>
+<p>拿到需要传输文件的容器ID(示例中是<code>bec079</code>):</p>
+<p><img src="images/image.png" alt=""></p>
+<h3 id="宿主机向容器传输文件">宿主机向容器传输文件</h3>
+<p>先来看下把宿主机的文件传入容器的命令:</p>
+<pre tabindex="0"><code>docker cp 宿主机文件路径 容器ID:容器内目录路径
+</code></pre><p>例如:</p>
+<pre><code>`docker cp /usr/local/bin/mysql.cnf bec079:/etc/mysql/`
+</code></pre>
+<h3 id="容器向宿主机传输文件">容器向宿主机传输文件</h3>
+<p>类似的, 只需要将公式交换即可:</p>
+<pre tabindex="0"><code>docker cp 容器ID:容器内文件路径 宿主机目录路径
+</code></pre><p>例如:</p>
+<pre><code>`docker cp bec079:/etc/mysql/mysql.cnf /usr/local/bin/`
+</code></pre>
+<h2 id="搞定">搞定!</h2>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/docker%E5%AE%89%E8%A3%85discourse%E8%AE%BA%E5%9D%9B-bbs%E7%B3%BB%E7%BB%9Fnginx/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker安装Discourse论坛/BBS系统（Nginx）</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, Aug 19, 2020
+    
+    </p>
+
+    <p>最近要做<a href="https://flame-cn.com" target="_blank">Flame中文站</a>
+的论坛模块，考虑到技术人社区的重要性，选用了Discourse论坛系统。安装过程相当坎坷，本篇文章就来记录下Docker安装Discourse论坛/BBS系统的全过程。</p>
+<h2 id="先决条件">先决条件</h2>
+<ul>
+<li>你的服务器/主机已经妥善安装Docker</li>
+<li>你的服务器/主机已经妥善安装Git</li>
+<li>掌握Git基础</li>
+<li>掌握Docker基础</li>
+<li>掌握Bash基础</li>
+</ul>
+<p>本篇文章的环境：</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>主机</td>
+          <td>阿里云ECS</td>
+      </tr>
+      <tr>
+          <td>操作系统</td>
+          <td>CentOS 7</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="开始">开始</h2>
+<p>[epcl_box type=&ldquo;notice&rdquo;]即使有阿航的教程会较少大部分坑，在国内部署Discourse是仍然是较痛苦的一件事情。可以查询的资料微乎其微，如果你不喜欢折腾，请选用其他的论坛框架！[/epcl_box]</p>
+<h3 id="配置">配置</h3>
+<p>你的服务器的<strong>必须大于</strong>以下配置，否则你会无限踩坑：</p>
+<ul>
+<li>双核CPU</li>
+<li>1 GB 运行内存</li>
+<li>64位 Linux内核系统</li>
+<li>已经安装Docker</li>
+</ul>
+<h3 id="下载discourse">下载Discourse</h3>
+<p>创建一个目录，用于存放Discourse。比如：</p>
+<pre><code>`mkdir /usr/local/discourse`
+</code></pre>
+<p>获得管理员权限：</p>
+<pre><code>`sudo -s`
+</code></pre>
+<p>克隆discourse(命令后半段的路径和上方创建的保持一致)：</p>
+<pre><code>`git clone 'https://github.com/discourse/discourse_docker.git' /usr/local/discourse`
+</code></pre>
+<p>耐心等待完成。</p>
+<p>完成后，进入该目录：</p>
+<pre><code>`cd /usr/local/discourse`
+</code></pre>
+<h3 id="修改配置">修改配置</h3>
+<p>克隆示例配置文件：</p>
+<pre><code>`cp samples/standalone.yml containers/app.yml`
+</code></pre>
+<p>打开文本编辑器，修改复制后的配置文件：</p>
+<pre><code>`vim containers/app.yml`
+</code></pre>
+<h4 id="配置国内镜像">配置国内镜像</h4>
+<p>如果你身在大陆，则需要进行镜像加速。找到配置文件中的<code>templates</code>块，添加国内镜像<code>templates/web.china.template.yml</code>：</p>
+<pre><code>` templates:   - &quot;templates/postgres.template.yml&quot;   - &quot;templates/redis.template.yml&quot;   - &quot;templates/sshd.template.yml&quot;   - &quot;templates/web.template.yml&quot;   - &quot;templates/web.china.template.yml&quot;`
+</code></pre>
+<h4 id="其他配置">其他配置</h4>
+<p>注销或删除掉expose下面的80和443端口：</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E4%BF%AE%E6%94%B9docker-%E7%9A%84-mysql-%E5%AE%B9%E5%99%A8%E6%97%B6%E5%8C%BA/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">修改Docker 的 MySQL 容器时区</h2>
+
+    <p class="date text-base-content/60">
+    
+      Sunday, Jul 12, 2020
+    
+    </p>
+
+    <p>阿航在开发Springboot项目时, 前端告诉验证码一直无效. 本地测试没有问题, 一看远程服务器的数据库时间, 哇塞&ndash;早了8小时. 很明显, 是MySQL的时区问题. 本篇文章就来记录下如何修改Docker 的 MySQL 容器时区.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>先来校验下数据库是否真的时区不对. 进入MySQL数据库, 运行语句:</p>
+<pre><code>`SELECT NOW();`
+</code></pre>
+<p>会返回类似这样的数据:</p>
+<pre><code>`mysql&gt; SELECT NOW(); +---------------------+ | NOW()               | +---------------------+ | 2020-07-04 15:46:46 | +---------------------+ 1 row in set (0.09 sec)`
+</code></pre>
+<p>再来查询下当前时区, 输入以下命令:</p>
+<pre><code>`SHOW VARIABLES LIKE '%time_zone%';`
+</code></pre>
+<p>会返回类似这样的数据:</p>
+<pre><code>`mysql&gt; SHOW VARIABLES LIKE '%time_zone%'; +------------------+--------+ | Variable_name    | Value  | +------------------+--------+ | system_time_zone | UTC    | | time_zone        | +00:00 | +------------------+--------+ 2 rows in set (0.12 sec)`
+</code></pre>
+<p>如果返回的时间和你的相差多个小时, 并且时区不对(非+08:00)的话, 那么证明你需要向下看了.</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/docker%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89vim%E5%91%BD%E4%BB%A4%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker容器没有vim命令的解决方案</h2>
+
+    <p class="date text-base-content/60">
+    
+      Friday, Jul 10, 2020
+    
+    </p>
+
+    <p>今天在尝试修改Docker容器内文件时, 发现容器内并没有vim命令, 返回了:</p>
+<pre><code>`vim my.cnf bash: vim: command not found`
+</code></pre>
+<p>本篇文章就来记录下如何解决此问题.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>仍然在docker容器内部, 首先运行以下命令, 并耐心等待一会儿:</p>
+<pre><code>`apt-get update`
+</code></pre>
+<p>完成后运行:</p>
+<pre><code>`apt-get install vim`
+</code></pre>
+<p>等待安装完成后, 运行以下命令, 验证是否安装成功:</p>
+<pre><code>`vim`
+</code></pre>
+<p>如果返回了类似以下界面则证明vim安装成功:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Docker%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89vim%E5%91%BD%E4%BB%A4%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-01.png" alt="VIM安装成功返回"></p>
+<!-- raw HTML omitted -->
+<p>VIM安装成功返回</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]成功搞定. 继续你的文本编辑操作吧![/epcl_box]</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内</h2>
+
+    <p class="date text-base-content/60">
+    
+      Sunday, Jun 21, 2020
+    
+    </p>
+
+    <p>Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.</p>
+<h2 id="应用场景">应用场景</h2>
+<p>先来看下传统的部署流程:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-01.png" alt=""></p>
+<p>传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ul>
+<li>你了解服务器的基本使用.</li>
+<li>你掌握Docker/Dockerfile的使用.</li>
+<li>你掌握基础的Bash命令.</li>
+</ul>
+<p>本篇文章的环境:</p>
+<!-- raw HTML omitted -->
+<h2 id="实战开始">实战开始</h2>
+<p>[epcl_box type=&ldquo;notice&rdquo;]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]</p>
+<h3 id="生成ca公钥私钥">生成CA公钥私钥</h3>
+<p>进入<strong>安装了Docker的远程服务器</strong>, 创建目录<code>ca</code>, 用于存储docker ca认证文件:</p>
+<pre tabindex="0"><code>mkdir -p /usr/local/ca
+</code></pre><p>进入该目录中:</p>
+<pre tabindex="0"><code>cd /usr/local/ca
+</code></pre><p>执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. <strong>记住该密码, 下面会多次使用</strong>:</p>
+<pre tabindex="0"><code>openssl genrsa -aes256 -out ca-key.pem 4096
+</code></pre><p>执行以下命令, 根据提示分别输入你的信息:</p>
+<pre tabindex="0"><code>openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
+</code></pre><p>执行以下命令生成key:</p>
+<pre tabindex="0"><code>openssl genrsa -out server-key.pem 4096
+</code></pre><p>执行以下命令, 把<code>$HOST</code>替换为你的远程服务器的IP地址:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker 搭建 Minecraft (我的世界)服务器</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, May 4, 2020
+    
+    </p>
+
+    <p>国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓<br>
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>本篇教程针对于以下人群:</p>
+<ul>
+<li>愿意为Minecraft而折腾的人.</li>
+<li>了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读<a href="https://www.docker.com/" target="_blank">Docker官方文档</a>
+、<a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank">Docker菜鸟教程</a>
+等.</li>
+<li>拥有自己的云服务器(阿里云等).</li>
+<li>了解常见终端语法.</li>
+</ul>
+<h2 id="使用pocketmine">使用PocketMine</h2>
+<p>在<a href="https://hub.docker.com/" target="_blank">Docker Hub</a>
+中搜索关键字: <code>pocketmine</code>, 可以看到有好多相关镜像.</p>
+
+
+
+  <blockquote>
+    <p>在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&quot;没凉&quot;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!</p>
+  </blockquote>
+
+<p>途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!</p>
+<p><img src="images/01-1500x812.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>点击, 进入<a href="https://hub.docker.com/r/circleeh/pocketmine" target="_blank">circleeh/pocketmine详情页</a>
+.</p>
+<h2 id="拉取镜像">拉取镜像</h2>
+<h3 id="选取版本">选取版本</h3>
+<p>这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去<a href="https://github.com/pmmp/PocketMine-MP/releases" target="_blank">这个Github网址</a>
+对照自己的版本!</p>
+<p>打开<a href="https://github.com/pmmp/PocketMine-MP/releases" target="_blank">官方Github Release网址</a>
+, 可以看到:</p>
+<p><img src="images/02-1500x745.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.</p>
+<p>回到<a href="https://hub.docker.com/r/circleeh/pocketmine" target="_blank">circleeh/pocketmine详情页</a>
+, 点击Tags:</p>
+<p><img src="images/03-1500x673.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/docker-%E5%AE%89%E8%A3%85-mysql/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
+      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker 安装 MySQL</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, Apr 13, 2020
+    
+    </p>
+
+    <p>本文为 docker 安装 mysql 容器的完整详细教程.</p>
+
+
+
+  <blockquote>
+    <p>若图片展示异常, 请访问我的<a href="https://blog.bugcatt.com/archives/267" target="_blank">官方博客</a>
+</p>
+  </blockquote>
+
+<h2 id="准备工作">准备工作</h2>
+<h3 id="开发环境">开发环境</h3>
+<p>本博客的环境一览:</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>docker</td>
+          <td>1.13.1</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <blockquote>
+    <p>注意您的环境和文中的差异, 避免出现不兼容的情况哦!</p>
+  </blockquote>
+
+<h3 id="需具备的条件">需具备的条件</h3>
+<p>要顺利阅读本文, 假定您已经掌握了以下知识:</p>
+<ol>
+<li>docker环境已正常安装</li>
+<li>掌握基本的终端命令</li>
+</ol>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="查询所有的mysql镜像">查询所有的mysql镜像</h3>
+<pre tabindex="0"><code>docker search mysql
+</code></pre><h3 id="选择并拉取你想要的镜像这里拿官方的mysql8进行举例">选择并拉取你想要的镜像(这里拿官方的mysql8进行举例)</h3>
+<pre tabindex="0"><code>docker pull mysql:8.0
+</code></pre><h3 id="查询已下载的mysql镜像">查询已下载的MySQL镜像</h3>
+<pre tabindex="0"><code>docker images |grep mysql
+</code></pre><h3 id="使用镜像创建容器">使用镜像创建容器</h3>
+<pre tabindex="0"><code>docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0
+</code></pre><p>解析:</p>
+<ul>
+<li><strong><code>-p 3306:3306</code></strong>：将容器的 3306 端口映射到主机的 3306 端口。</li>
+<li><strong><code>-v $PWD/conf:/etc/mysql/conf.d</code></strong>：将主机当前目录下的 <code>conf/my.cnf</code> 挂载到容器的<code>/etc/mysql/my.cnf</code>。</li>
+<li><strong><code>-v $PWD/logs:/logs</code></strong>：将主机当前目录下的 logs 目录挂载到容器的 <code>/logs</code>。</li>
+<li><strong><code>-v $PWD/data:/var/lib/mysql</code></strong> ：将主机当前目录下的<code>data</code>目录挂载到容器的 <code>/var/lib/mysql</code></li>
+<li>**<code>-e MYSQL_ROOT_PASSWORD=123456</code>：**初始化 root 用户的密码。</li>
+</ul>
+<h3 id="查看容器运行情况">查看容器运行情况</h3>
+<pre tabindex="0"><code>docker ps
+</code></pre><h3 id="优雅关闭">优雅关闭</h3>
+<pre tabindex="0"><code>docker stop [容器id]
+</code></pre><h3 id="启动已停止的容器">启动已停止的容器</h3>
+<pre tabindex="0"><code>docker start [容器id]
+</code></pre><h3 id="重启容器">重启容器</h3>
+<pre tabindex="0"><code>docker restart [容器id]
+</code></pre><h2 id="大功告成">大功告成</h2>
+<p>通过以上的一些步骤, 我们完成了Dokcer安装Mysql的目标, 是不是很简单?</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+      </div>
+    
+
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

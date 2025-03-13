@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter为widget添加border边框、下划线 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86%E4%B8%8B%E5%88%92%E7%BA%BF/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="有时我们需要为Flutter的widget小部件添加各式各样的边框. 但是并不是所有widget都提供了边框的属性, 本篇文章就来记录下如何为Flutter 的 widget 添加border边框、下划线.
+效果 有图有真相, 先来看下我们要实现的最终效果:
+需具备的条件 你已经掌握Flutter基础 本篇文章的开发环境:
+环境 版本 操作系统 Windows 10 Flutter 1.19.0-2.0.pre IDE Android Studio 3.5 [epcl_box type=&ldquo;information&rdquo;]速度快的同学直接复制下方的&quot;全部源码&quot;自行研究! 稳一点的同学请按照教程一步一步来! [/epcl_box]
+实战开始 创建项目&amp;清理代码 为了便于演示, 阿航在这里创建一个空项目.
+创建完成后, 删除./test目录. 因为我们的demo无需测试类.
+替换./lib/main.dart为:
+import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Awesome Border&#39;, theme: ThemeData(primarySwatch: Colors.blue), home: MyHomePage(title: &#39;My Awesome Border&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State { // 即将渲染的边框组件集合 List _borderWidgets; @override void initState() { // 处理带边框的对象集合 _borderWidgets = []; super.initState(); } @override Widget build(BuildContext context) { // 为了美观, 将内容全部居中处理 _borderWidgets.forEach((element) { _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element); }); return Scaffold( appBar: AppBar(title: Text(widget.title)), body: Center( child: Container( padding: EdgeInsets.all(20), child: GridView.count( padding: const EdgeInsets.all(8.0), crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 5, children: _borderWidgets, ), )), ); } } 我们首先在26行定义了实例变量_borderWidgets, 它将保存我们所有的用来展示边框的Widget.
+" />
+
+
+<meta name="keywords" content="Flutter,常用操作,常用组件">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86%E4%B8%8B%E5%88%92%E7%BA%BF/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter为widget添加border边框、下划线">
+  <meta property="og:description" content="有时我们需要为Flutter的widget小部件添加各式各样的边框. 但是并不是所有widget都提供了边框的属性, 本篇文章就来记录下如何为Flutter 的 widget 添加border边框、下划线.
+效果 有图有真相, 先来看下我们要实现的最终效果:
+需具备的条件 你已经掌握Flutter基础 本篇文章的开发环境:
+环境 版本 操作系统 Windows 10 Flutter 1.19.0-2.0.pre IDE Android Studio 3.5 [epcl_box type=“information”]速度快的同学直接复制下方的&#34;全部源码&#34;自行研究! 稳一点的同学请按照教程一步一步来! [/epcl_box]
+实战开始 创建项目&amp;清理代码 为了便于演示, 阿航在这里创建一个空项目.
+创建完成后, 删除./test目录. 因为我们的demo无需测试类.
+替换./lib/main.dart为:
+import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Awesome Border&#39;, theme: ThemeData(primarySwatch: Colors.blue), home: MyHomePage(title: &#39;My Awesome Border&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State { // 即将渲染的边框组件集合 List _borderWidgets; @override void initState() { // 处理带边框的对象集合 _borderWidgets = []; super.initState(); } @override Widget build(BuildContext context) { // 为了美观, 将内容全部居中处理 _borderWidgets.forEach((element) { _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element); }); return Scaffold( appBar: AppBar(title: Text(widget.title)), body: Center( child: Container( padding: EdgeInsets.all(20), child: GridView.count( padding: const EdgeInsets.all(8.0), crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 5, children: _borderWidgets, ), )), ); } } 我们首先在26行定义了实例变量_borderWidgets, 它将保存我们所有的用来展示边框的Widget.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-15T00:00:00+00:00">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="常用操作">
+    <meta property="article:tag" content="常用组件">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter为widget添加border边框、下划线">
+  <meta name="twitter:description" content="有时我们需要为Flutter的widget小部件添加各式各样的边框. 但是并不是所有widget都提供了边框的属性, 本篇文章就来记录下如何为Flutter 的 widget 添加border边框、下划线.
+效果 有图有真相, 先来看下我们要实现的最终效果:
+需具备的条件 你已经掌握Flutter基础 本篇文章的开发环境:
+环境 版本 操作系统 Windows 10 Flutter 1.19.0-2.0.pre IDE Android Studio 3.5 [epcl_box type=“information”]速度快的同学直接复制下方的&#34;全部源码&#34;自行研究! 稳一点的同学请按照教程一步一步来! [/epcl_box]
+实战开始 创建项目&amp;清理代码 为了便于演示, 阿航在这里创建一个空项目.
+创建完成后, 删除./test目录. 因为我们的demo无需测试类.
+替换./lib/main.dart为:
+import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Awesome Border&#39;, theme: ThemeData(primarySwatch: Colors.blue), home: MyHomePage(title: &#39;My Awesome Border&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State { // 即将渲染的边框组件集合 List _borderWidgets; @override void initState() { // 处理带边框的对象集合 _borderWidgets = []; super.initState(); } @override Widget build(BuildContext context) { // 为了美观, 将内容全部居中处理 _borderWidgets.forEach((element) { _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element); }); return Scaffold( appBar: AppBar(title: Text(widget.title)), body: Center( child: Container( padding: EdgeInsets.all(20), child: GridView.count( padding: const EdgeInsets.all(8.0), crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 5, children: _borderWidgets, ), )), ); } } 我们首先在26行定义了实例变量_borderWidgets, 它将保存我们所有的用来展示边框的Widget.">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter为widget添加border边框、下划线">
+  <meta itemprop="description" content="有时我们需要为Flutter的widget小部件添加各式各样的边框. 但是并不是所有widget都提供了边框的属性, 本篇文章就来记录下如何为Flutter 的 widget 添加border边框、下划线.
+效果 有图有真相, 先来看下我们要实现的最终效果:
+需具备的条件 你已经掌握Flutter基础 本篇文章的开发环境:
+环境 版本 操作系统 Windows 10 Flutter 1.19.0-2.0.pre IDE Android Studio 3.5 [epcl_box type=“information”]速度快的同学直接复制下方的&#34;全部源码&#34;自行研究! 稳一点的同学请按照教程一步一步来! [/epcl_box]
+实战开始 创建项目&amp;清理代码 为了便于演示, 阿航在这里创建一个空项目.
+创建完成后, 删除./test目录. 因为我们的demo无需测试类.
+替换./lib/main.dart为:
+import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Awesome Border&#39;, theme: ThemeData(primarySwatch: Colors.blue), home: MyHomePage(title: &#39;My Awesome Border&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State { // 即将渲染的边框组件集合 List _borderWidgets; @override void initState() { // 处理带边框的对象集合 _borderWidgets = []; super.initState(); } @override Widget build(BuildContext context) { // 为了美观, 将内容全部居中处理 _borderWidgets.forEach((element) { _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element); }); return Scaffold( appBar: AppBar(title: Text(widget.title)), body: Center( child: Container( padding: EdgeInsets.all(20), child: GridView.count( padding: const EdgeInsets.all(8.0), crossAxisCount: 3, crossAxisSpacing: 5, mainAxisSpacing: 5, children: _borderWidgets, ), )), ); } } 我们首先在26行定义了实例变量_borderWidgets, 它将保存我们所有的用来展示边框的Widget.">
+  <meta itemprop="datePublished" content="2020-06-15T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-06-15T00:00:00+00:00">
+  <meta itemprop="wordCount" content="953">
+  <meta itemprop="keywords" content="Flutter,常用操作,常用组件">
+
+      <header>
+        <h1 itemprop="headline">Flutter为widget添加border边框、下划线</h1>
+        <p class="text-sm">
+          
+            Monday, Jun 15, 2020
+          
+
+          | <span>5 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Monday, Jun 15, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%e4%b8%bawidget%e6%b7%bb%e5%8a%a0border%e8%be%b9%e6%a1%86%e3%80%81%e4%b8%8b%e5%88%92%e7%ba%bf&amp;url=http://localhost:1313/posts/post/2020/flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86%E4%B8%8B%E5%88%92%E7%BA%BF/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86%E4%B8%8B%E5%88%92%E7%BA%BF/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%e4%b8%bawidget%e6%b7%bb%e5%8a%a0border%e8%be%b9%e6%a1%86%e3%80%81%e4%b8%8b%e5%88%92%e7%ba%bf%20http://localhost:1313/posts/post/2020/flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86%E4%B8%8B%E5%88%92%E7%BA%BF/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>有时我们需要为Flutter的widget小部件添加各式各样的边框. 但是并不是所有widget都提供了边框的属性, 本篇文章就来记录下如何为Flutter 的 widget 添加border边框、下划线.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 先来看下我们要实现的最终效果:</p>
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-11.png" alt=""></p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ul>
+<li>你已经掌握Flutter基础</li>
+</ul>
+<p>本篇文章的开发环境:</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>操作系统</td>
+          <td>Windows 10</td>
+      </tr>
+      <tr>
+          <td>Flutter</td>
+          <td>1.19.0-2.0.pre</td>
+      </tr>
+      <tr>
+          <td>IDE</td>
+          <td>Android Studio 3.5</td>
+      </tr>
+  </tbody>
+</table>
+<p>[epcl_box type=&ldquo;information&rdquo;]速度快的同学直接复制下方的&quot;全部源码&quot;自行研究! 稳一点的同学请按照教程一步一步来! [/epcl_box]</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建项目清理代码">创建项目&amp;清理代码</h3>
+<p>为了便于演示, 阿航在这里创建一个空项目.</p>
+<p>创建完成后, 删除<code>./test</code>目录. 因为我们的demo无需测试类.</p>
+<p>替换<code>./lib/main.dart</code>为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Awesome Border&#39;,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MyHomePage(title: &#39;My Awesome Border&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  // 即将渲染的边框组件集合
+  List _borderWidgets;
+
+  @override
+  void initState() {
+    // 处理带边框的对象集合
+    _borderWidgets = [];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // 为了美观, 将内容全部居中处理
+    _borderWidgets.forEach((element) {
+      _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element);
+    });
+
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title)),
+      body: Center(
+          child: Container(
+        padding: EdgeInsets.all(20),
+        child: GridView.count(
+          padding: const EdgeInsets.all(8.0),
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          children: _borderWidgets,
+        ),
+      )),
+    );
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>我们首先在<code>26</code>行定义了实例变量<code>_borderWidgets</code>, 它将保存我们所有的用来展示边框的Widget.</p>
+<p>然后定义<code>initState()</code>, 用于初始化<code>_borderWidgets</code>.</p>
+<p>在下方的build内部为其套上一层<code>Center</code>实现居中效果.</p>
+<p>最后就是使用<code>GridView</code>进行渲染了.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目. 应该是空白的, 啥也木有:</p>
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-01.png" alt="Flutter为widget添加border边框-01"></p>
+<h3 id="添加边框">添加边框</h3>
+<p>至此, 准备工作已经完成了. 我们接下来添加一个<code>Text</code>对象, 并为其添加边框.</p>
+<p>先来添加一个<code>Text</code>对象. 在初始化<code>_borderWidgets</code>的集合中添加:</p>
+<pre tabindex="0"><code>Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+</code></pre><!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-02.png" alt="Flutter为widget添加border边框-02"></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>我们在这里定义了一个<code>Container</code>对象, 定义其 padding 为 10 . child 为一个 Text 对象.</p>
+<p>我们的重点就是在其<code>decoration</code>属性了, 这里我们定义了一个最基本的边框.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目(非热部署, 热部署无法重新<code>initState</code>), 看到了如下的边框:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-03.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>边框效果</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]至此, 我们成功为widget提供了边框. 但是下方还有更多的示例![/epcl_box]</p>
+<h3 id="边框粗细厚度">边框粗细(厚度)</h3>
+<p>实现了最基础的边框, 我们来尝试改变下其粗细.</p>
+<p>在<code>_borderWidgets</code>中, 刚才定义的Container下方添加:</p>
+<pre tabindex="0"><code>// 细边框
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(width: 3),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 粗边框
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(width: 10),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+</code></pre><!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-04.png" alt="Flutter为widget添加border边框-04"></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>我们的重点放在<code>Border.all()</code>上. 我们新增的两个widget, 它们的 Border.all()的<code>width</code>属性分别传入了<code>3</code>和<code>10</code>. 数值越大, 边框越粗.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目, 查看效果:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-05.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>不同粗细的边框</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]搞定边框粗细啦![/epcl_box]</p>
+<h3 id="边框颜色">边框颜色</h3>
+<p>解决了边框粗细, 我们来设置下边框颜色吧!</p>
+<p>在<code>_borderWidgets</code>中继续添加:</p>
+<pre tabindex="0"><code>// 紫色边框
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(width: 5, color: Colors.purple),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 黄色边框
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(width: 5, color: Colors.yellow),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 蓝色边框
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border.all(width: 5, color: Colors.blue),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+</code></pre><!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-06.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>焦点放在Border.all的<code>color</code>属性上, 指定不同颜色的色值!</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目, 查看效果:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-07.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>不同颜色的边框</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]再次搞定边框颜色![/epcl_box]</p>
+<h3 id="边框方向">边框方向</h3>
+<p>当我们只想在某几个方向添加边框怎么办? 很简单!</p>
+<p>继续添加:</p>
+<pre tabindex="0"><code>// 边框方向(仅底部)
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border(bottom: BorderSide(width: 5, color: Colors.black)),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 边框方向并加粗(左、底)
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border(
+        left: BorderSide(width: 8, color: Colors.black),
+        bottom: BorderSide(width: 8, color: Colors.black)),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 边框方向, 3d效果
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    border: Border(
+        top: BorderSide(width: 10, color: Colors.lightBlue),
+        left: BorderSide(width: 15, color: Colors.lightBlueAccent),
+        right: BorderSide(width: 5, color: Colors.blue),
+        bottom: BorderSide(width: 3, color: Colors.blueAccent)),
+  ),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+</code></pre>
+
+
+  <blockquote>
+    <p>这回我们没有用Border.all进行创建, 而是用了<code>Border()</code>的构造函数, 可以上下左右分别传入<code>BorderSide</code>进行每个边的设置.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-08.png" alt="Flutter为widget添加border边框-08"></p>
+<p>🟢 运行项目, 看看效果(第三行):</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-09.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>不同方向的边框(第3行)</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;information&rdquo;]仔细观察第三行第三个. 我们可以通过不同的处理为其添加&quot;按钮高度&quot;的3d效果![/epcl_box]</p>
+<p>[epcl_box type=&ldquo;success&rdquo;]轻松搞定方向, 是不是超简单?[/epcl_box]</p>
+<h3 id="边框半径圆角">边框半径(圆角)</h3>
+<p>我们接下来搞定圆角. 继续添加:</p>
+<pre tabindex="0"><code>// 边框半径(圆角)
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+      border: Border.all(width: 5),
+      borderRadius: BorderRadius.all(Radius.circular(15))),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 边框半径(较大圆角)
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+      border: Border.all(width: 5),
+      borderRadius: BorderRadius.all(Radius.circular(30))),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+// 边框半径(指定方向圆角)
+Container(
+  padding: EdgeInsets.all(10),
+  decoration: BoxDecoration(
+      border: Border.all(width: 5),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30))),
+  child: Text(
+    &#34;hello&#34;,
+    style: TextStyle(fontSize: 35),
+  ),
+),
+</code></pre><!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-10.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>我们把焦点放在<code>borderRadius</code>上. 我们分别用到了<code>BorderRadius.all()</code>以及<code>BorderRadius.only()</code>进行初始化边框半径. 和此前的用法类似, all代表所有角, only用来指定某角度.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目, 看看效果(第四行):</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E4%B8%BAwidget%E6%B7%BB%E5%8A%A0border%E8%BE%B9%E6%A1%86-11.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>边框半径(圆角)的不同效果(第4行)</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]又一次轻松搞定🤘🤘🤘🤘[/epcl_box]</p>
+<h2 id="全部源码">全部源码</h2>
+<p>这里为大家提供<code>./lib/main.dart</code>的可直接运行的全部源码:</p>
+<p>[epcl_toggle title=&ldquo;点击展开全部源码&rdquo;]</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Awesome Border&#39;,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MyHomePage(title: &#39;My Awesome Border&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  // 即将渲染的边框组件集合
+  List _borderWidgets;
+
+  @override
+  void initState() {
+    // 处理带边框的对象集合
+    _borderWidgets = [
+      // 普通边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 细边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(width: 3),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 粗边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(width: 10),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 紫色边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(width: 5, color: Colors.purple),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 黄色边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(width: 5, color: Colors.yellow),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 蓝色边框
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(width: 5, color: Colors.blue),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框方向(仅底部)
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 5, color: Colors.black)),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框方向并加粗(左、底)
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border(
+              left: BorderSide(width: 8, color: Colors.black),
+              bottom: BorderSide(width: 8, color: Colors.black)),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框方向, 3d效果
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border(
+              top: BorderSide(width: 10, color: Colors.lightBlue),
+              left: BorderSide(width: 15, color: Colors.lightBlueAccent),
+              right: BorderSide(width: 5, color: Colors.blue),
+              bottom: BorderSide(width: 3, color: Colors.blueAccent)),
+        ),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框半径(圆角)
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(width: 5),
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框半径(较大圆角)
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(width: 5),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+      // 边框半径(指定方向圆角)
+      Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            border: Border.all(width: 5),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30))),
+        child: Text(
+          &#34;hello&#34;,
+          style: TextStyle(fontSize: 35),
+        ),
+      ),
+    ];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // 为了美观, 将内容全部居中处理
+    _borderWidgets.forEach((element) {
+      _borderWidgets[_borderWidgets.indexOf(element)] = Center(child: element);
+    });
+
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title)),
+      body: Center(
+          child: Container(
+        padding: EdgeInsets.all(20),
+        child: GridView.count(
+          padding: const EdgeInsets.all(8.0),
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          children: _borderWidgets,
+        ),
+      )),
+    );
+  }
+}
+</code></pre><p>[/epcl_toggle]</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://stackoverflow.com/questions/47423297/how-to-add-a-border-to-a-widget-in-flutter" target="_blank">How to add a border to a widget in Flutter?</a>
+</p>
+<h2 id="结语">结语</h2>
+
+
+
+  <blockquote>
+    <p>什么, 你认为项目示例写法重复过多, 有更好的方法? 这是必然的. 阿航完全可以使用循环, 只需要保存不同的属性就可以了. 但是为什么不这么做? 因为这么写, 每种示例都可以提供给你直接复制使用.</p>
+  </blockquote>
+
+<p>以上就是本篇文章的全部内容了. 有任何问题欢迎在下方评论区留言. 👦👦👦</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

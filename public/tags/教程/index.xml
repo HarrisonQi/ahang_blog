@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>教程 on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/%E6%95%99%E7%A8%8B/</link>
+    <description>Recent content in 教程 on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 24 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL教程 01 什么是MySQL</title>
+      <link>http://localhost:1313/posts/post/2020/mysql%E6%95%99%E7%A8%8B-01-%E4%BB%80%E4%B9%88%E6%98%AFmysql/</link>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/mysql%E6%95%99%E7%A8%8B-01-%E4%BB%80%E4%B9%88%E6%98%AFmysql/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1eT4y1F7cp/&#34; target=&#34;_blank&#34;&gt;点击进入bilibili查看高清教程&lt;/a&gt;&#xA;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

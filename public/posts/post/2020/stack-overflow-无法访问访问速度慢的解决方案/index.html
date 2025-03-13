@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Overflow 无法访问、访问速度慢的解决方案 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/stack-overflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="因为大陆对Google进行了封锁, 所以大陆无法访问包含了Google域名的资源文件的页面, 即使能访问也过慢. Stack Overflow作为全球最大的技术问答平台, 无法访问是我们相当大的一个损失. 本篇文章就来记录几种解决方案.
+问题原因 打开调试控制台(F12), 访问 https://stackoverflow.com/ . 我们会发现有关Google的请求非常慢, 甚至无法访问. 如:
+https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js 那么找到了原因, 我们就针对此问题进行解决即可!
+解决方案 Replace Google CDN FireFox 直接安装插件即可 插件地址 Chrome/Edge等谷歌内核的浏览器: 点击下载插件 , 并解压. 找到其中的chrome目录
+打开浏览器, 输入chrome://extensions/
+开启右上角的开发者模式或者Developer Mode:
+紧接着点击加载已解压的扩展程序或Load unpacked extension...:
+选择刚才下载的插件目录中的chrome目录.
+关闭开发者模式.
+[epcl_box type=&ldquo;success&rdquo;]再次访问Stack Overflow, 感受飞一样的速度吧![/epcl_box]
+感谢 justjavac / ReplaceGoogleCDN " />
+
+
+<meta name="keywords" content="Stack-Overflow,访问加速">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/stack-overflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Stack Overflow 无法访问、访问速度慢的解决方案">
+  <meta property="og:description" content="因为大陆对Google进行了封锁, 所以大陆无法访问包含了Google域名的资源文件的页面, 即使能访问也过慢. Stack Overflow作为全球最大的技术问答平台, 无法访问是我们相当大的一个损失. 本篇文章就来记录几种解决方案.
+问题原因 打开调试控制台(F12), 访问 https://stackoverflow.com/ . 我们会发现有关Google的请求非常慢, 甚至无法访问. 如:
+https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js 那么找到了原因, 我们就针对此问题进行解决即可!
+解决方案 Replace Google CDN FireFox 直接安装插件即可 插件地址 Chrome/Edge等谷歌内核的浏览器: 点击下载插件 , 并解压. 找到其中的chrome目录
+打开浏览器, 输入chrome://extensions/
+开启右上角的开发者模式或者Developer Mode:
+紧接着点击加载已解压的扩展程序或Load unpacked extension...:
+选择刚才下载的插件目录中的chrome目录.
+关闭开发者模式.
+[epcl_box type=“success”]再次访问Stack Overflow, 感受飞一样的速度吧![/epcl_box]
+感谢 justjavac / ReplaceGoogleCDN">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="Stack-Overflow">
+    <meta property="article:tag" content="访问加速">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Stack Overflow 无法访问、访问速度慢的解决方案">
+  <meta name="twitter:description" content="因为大陆对Google进行了封锁, 所以大陆无法访问包含了Google域名的资源文件的页面, 即使能访问也过慢. Stack Overflow作为全球最大的技术问答平台, 无法访问是我们相当大的一个损失. 本篇文章就来记录几种解决方案.
+问题原因 打开调试控制台(F12), 访问 https://stackoverflow.com/ . 我们会发现有关Google的请求非常慢, 甚至无法访问. 如:
+https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js 那么找到了原因, 我们就针对此问题进行解决即可!
+解决方案 Replace Google CDN FireFox 直接安装插件即可 插件地址 Chrome/Edge等谷歌内核的浏览器: 点击下载插件 , 并解压. 找到其中的chrome目录
+打开浏览器, 输入chrome://extensions/
+开启右上角的开发者模式或者Developer Mode:
+紧接着点击加载已解压的扩展程序或Load unpacked extension...:
+选择刚才下载的插件目录中的chrome目录.
+关闭开发者模式.
+[epcl_box type=“success”]再次访问Stack Overflow, 感受飞一样的速度吧![/epcl_box]
+感谢 justjavac / ReplaceGoogleCDN">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Stack Overflow 无法访问、访问速度慢的解决方案">
+  <meta itemprop="description" content="因为大陆对Google进行了封锁, 所以大陆无法访问包含了Google域名的资源文件的页面, 即使能访问也过慢. Stack Overflow作为全球最大的技术问答平台, 无法访问是我们相当大的一个损失. 本篇文章就来记录几种解决方案.
+问题原因 打开调试控制台(F12), 访问 https://stackoverflow.com/ . 我们会发现有关Google的请求非常慢, 甚至无法访问. 如:
+https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js 那么找到了原因, 我们就针对此问题进行解决即可!
+解决方案 Replace Google CDN FireFox 直接安装插件即可 插件地址 Chrome/Edge等谷歌内核的浏览器: 点击下载插件 , 并解压. 找到其中的chrome目录
+打开浏览器, 输入chrome://extensions/
+开启右上角的开发者模式或者Developer Mode:
+紧接着点击加载已解压的扩展程序或Load unpacked extension...:
+选择刚才下载的插件目录中的chrome目录.
+关闭开发者模式.
+[epcl_box type=“success”]再次访问Stack Overflow, 感受飞一样的速度吧![/epcl_box]
+感谢 justjavac / ReplaceGoogleCDN">
+  <meta itemprop="datePublished" content="2020-06-17T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-06-17T00:00:00+00:00">
+  <meta itemprop="wordCount" content="47">
+  <meta itemprop="keywords" content="Stack-Overflow,访问加速">
+
+      <header>
+        <h1 itemprop="headline">Stack Overflow 无法访问、访问速度慢的解决方案</h1>
+        <p class="text-sm">
+          
+            Wednesday, Jun 17, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Wednesday, Jun 17, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Stack%20Overflow%20%e6%97%a0%e6%b3%95%e8%ae%bf%e9%97%ae%e3%80%81%e8%ae%bf%e9%97%ae%e9%80%9f%e5%ba%a6%e6%85%a2%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88&amp;url=http://localhost:1313/posts/post/2020/stack-overflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/stack-overflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Stack%20Overflow%20%e6%97%a0%e6%b3%95%e8%ae%bf%e9%97%ae%e3%80%81%e8%ae%bf%e9%97%ae%e9%80%9f%e5%ba%a6%e6%85%a2%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%20http://localhost:1313/posts/post/2020/stack-overflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>因为大陆对Google进行了封锁, 所以大陆无法访问包含了Google域名的资源文件的页面, 即使能访问也过慢. Stack Overflow作为全球最大的技术问答平台, 无法访问是我们相当大的一个损失. 本篇文章就来记录几种解决方案.</p>
+<h2 id="问题原因">问题原因</h2>
+<p>打开调试控制台(F12), 访问 <a href="https://stackoverflow.com/" target="_blank">https://stackoverflow.com/</a>
+ . 我们会发现有关Google的请求非常慢, 甚至无法访问. 如:</p>
+<pre tabindex="0"><code>https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
+</code></pre><p>那么找到了原因, 我们就针对此问题进行解决即可!</p>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="replace-google-cdn">Replace Google CDN</h3>
+<h4 id="firefox">FireFox</h4>
+<p>直接安装插件即可 <a href="https://addons.mozilla.org/en-US/firefox/addon/replace-google-cdn/" target="_blank">插件地址</a>
+</p>
+<h4 id="chromeedge等谷歌内核的浏览器">Chrome/Edge等谷歌内核的浏览器:</h4>
+<p><a href="https://github.com/justjavac/ReplaceGoogleCDN/archive/master.zip" target="_blank">点击下载插件</a>
+, 并解压. 找到其中的<code>chrome</code>目录</p>
+<p>打开浏览器, 输入<code>chrome://extensions/</code></p>
+<p>开启右上角的<code>开发者模式</code>或者<code>Developer Mode</code>:</p>
+<p><img src="images/StackOverflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E3%80%81%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-01.png" alt=""></p>
+<p>紧接着点击<code>加载已解压的扩展程序</code>或<code>Load unpacked extension...</code>:</p>
+<p><img src="images/StackOverflow-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E3%80%81%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-02.png" alt=""></p>
+<p>选择刚才下载的插件目录中的<code>chrome</code>目录.</p>
+<p>关闭开发者模式.</p>
+<p>[epcl_box type=&ldquo;success&rdquo;]再次访问Stack Overflow, 感受飞一样的速度吧![/epcl_box]</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://github.com/justjavac" target="_blank">justjavac</a>
+ / <strong><a href="https://github.com/justjavac/ReplaceGoogleCDN" target="_blank">ReplaceGoogleCDN</a>
+</strong></p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

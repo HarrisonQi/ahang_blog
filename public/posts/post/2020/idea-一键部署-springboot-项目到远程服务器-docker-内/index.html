@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.
+应用场景 先来看下传统的部署流程:
+传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.
+需具备的条件 你了解服务器的基本使用. 你掌握Docker/Dockerfile的使用. 你掌握基础的Bash命令. 本篇文章的环境:
+实战开始 [epcl_box type=&ldquo;notice&rdquo;]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]
+生成CA公钥私钥 进入安装了Docker的远程服务器, 创建目录ca, 用于存储docker ca认证文件:
+mkdir -p /usr/local/ca 进入该目录中:
+cd /usr/local/ca 执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. 记住该密码, 下面会多次使用:
+openssl genrsa -aes256 -out ca-key.pem 4096 执行以下命令, 根据提示分别输入你的信息:
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem 执行以下命令生成key:
+openssl genrsa -out server-key.pem 4096 执行以下命令, 把$HOST替换为你的远程服务器的IP地址:
+" />
+
+
+<meta name="keywords" content="Docker,Idea,效率">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内">
+  <meta property="og:description" content="Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.
+应用场景 先来看下传统的部署流程:
+传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.
+需具备的条件 你了解服务器的基本使用. 你掌握Docker/Dockerfile的使用. 你掌握基础的Bash命令. 本篇文章的环境:
+实战开始 [epcl_box type=“notice”]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]
+生成CA公钥私钥 进入安装了Docker的远程服务器, 创建目录ca, 用于存储docker ca认证文件:
+mkdir -p /usr/local/ca 进入该目录中:
+cd /usr/local/ca 执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. 记住该密码, 下面会多次使用:
+openssl genrsa -aes256 -out ca-key.pem 4096 执行以下命令, 根据提示分别输入你的信息:
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem 执行以下命令生成key:
+openssl genrsa -out server-key.pem 4096 执行以下命令, 把$HOST替换为你的远程服务器的IP地址:">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-21T00:00:00+00:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Idea">
+    <meta property="article:tag" content="效率">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内">
+  <meta name="twitter:description" content="Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.
+应用场景 先来看下传统的部署流程:
+传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.
+需具备的条件 你了解服务器的基本使用. 你掌握Docker/Dockerfile的使用. 你掌握基础的Bash命令. 本篇文章的环境:
+实战开始 [epcl_box type=“notice”]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]
+生成CA公钥私钥 进入安装了Docker的远程服务器, 创建目录ca, 用于存储docker ca认证文件:
+mkdir -p /usr/local/ca 进入该目录中:
+cd /usr/local/ca 执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. 记住该密码, 下面会多次使用:
+openssl genrsa -aes256 -out ca-key.pem 4096 执行以下命令, 根据提示分别输入你的信息:
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem 执行以下命令生成key:
+openssl genrsa -out server-key.pem 4096 执行以下命令, 把$HOST替换为你的远程服务器的IP地址:">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内">
+  <meta itemprop="description" content="Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.
+应用场景 先来看下传统的部署流程:
+传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.
+需具备的条件 你了解服务器的基本使用. 你掌握Docker/Dockerfile的使用. 你掌握基础的Bash命令. 本篇文章的环境:
+实战开始 [epcl_box type=“notice”]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]
+生成CA公钥私钥 进入安装了Docker的远程服务器, 创建目录ca, 用于存储docker ca认证文件:
+mkdir -p /usr/local/ca 进入该目录中:
+cd /usr/local/ca 执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. 记住该密码, 下面会多次使用:
+openssl genrsa -aes256 -out ca-key.pem 4096 执行以下命令, 根据提示分别输入你的信息:
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem 执行以下命令生成key:
+openssl genrsa -out server-key.pem 4096 执行以下命令, 把$HOST替换为你的远程服务器的IP地址:">
+  <meta itemprop="datePublished" content="2020-06-21T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-06-21T00:00:00+00:00">
+  <meta itemprop="wordCount" content="328">
+  <meta itemprop="keywords" content="Docker,Idea,效率">
+
+      <header>
+        <h1 itemprop="headline">IDEA 一键部署 SpringBoot 项目到远程服务器 Docker 内</h1>
+        <p class="text-sm">
+          
+            Sunday, Jun 21, 2020
+          
+
+          | <span>2 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Sunday, Jun 21, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=IDEA%20%e4%b8%80%e9%94%ae%e9%83%a8%e7%bd%b2%20SpringBoot%20%e9%a1%b9%e7%9b%ae%e5%88%b0%e8%bf%9c%e7%a8%8b%e6%9c%8d%e5%8a%a1%e5%99%a8%20Docker%20%e5%86%85&amp;url=http://localhost:1313/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=IDEA%20%e4%b8%80%e9%94%ae%e9%83%a8%e7%bd%b2%20SpringBoot%20%e9%a1%b9%e7%9b%ae%e5%88%b0%e8%bf%9c%e7%a8%8b%e6%9c%8d%e5%8a%a1%e5%99%a8%20Docker%20%e5%86%85%20http://localhost:1313/posts/post/2020/idea-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-springboot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-docker-%E5%86%85/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>Docker作为当前较为流行的微服务容器管理工具, 极大的方便了传统运维部署的工作. IDEA作为地表最强Java开发IDE, 自然提供了对Docker服务的支持. 本篇文章就来记录下如何使用IDEA 一键部署 SpringBoot 到远程服务器 Docker 内.</p>
+<h2 id="应用场景">应用场景</h2>
+<p>先来看下传统的部署流程:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-01.png" alt=""></p>
+<p>传统开发流程还好, 每个版本的间隔时间较长. 但是对于小型敏捷开发团队, 这个流程就很要命了! 阿航个人的经验, 每个项目从打包到重启Docker服务器, 预计要花费近10~20分钟! 痛不欲生.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ul>
+<li>你了解服务器的基本使用.</li>
+<li>你掌握Docker/Dockerfile的使用.</li>
+<li>你掌握基础的Bash命令.</li>
+</ul>
+<p>本篇文章的环境:</p>
+<!-- raw HTML omitted -->
+<h2 id="实战开始">实战开始</h2>
+<p>[epcl_box type=&ldquo;notice&rdquo;]本篇教程小步骤较多! 只要稍有疏忽就可能导致失败! 请实践时仔细阅读教程![/epcl_box]</p>
+<h3 id="生成ca公钥私钥">生成CA公钥私钥</h3>
+<p>进入<strong>安装了Docker的远程服务器</strong>, 创建目录<code>ca</code>, 用于存储docker ca认证文件:</p>
+<pre tabindex="0"><code>mkdir -p /usr/local/ca
+</code></pre><p>进入该目录中:</p>
+<pre tabindex="0"><code>cd /usr/local/ca
+</code></pre><p>执行以下命令, 生成公钥及私钥. 需要输入你自己的密码. <strong>记住该密码, 下面会多次使用</strong>:</p>
+<pre tabindex="0"><code>openssl genrsa -aes256 -out ca-key.pem 4096
+</code></pre><p>执行以下命令, 根据提示分别输入你的信息:</p>
+<pre tabindex="0"><code>openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
+</code></pre><p>执行以下命令生成key:</p>
+<pre tabindex="0"><code>openssl genrsa -out server-key.pem 4096
+</code></pre><p>执行以下命令, 把<code>$HOST</code>替换为你的远程服务器的IP地址:</p>
+
+
+
+  <blockquote>
+    <p>比如你的IP地址为<code>165.115.12.0</code>, 那么就变为<code>&quot;/CN=165.115.12.0&quot;</code></p>
+  </blockquote>
+
+<pre tabindex="0"><code>openssl req -subj &#34;/CN=$HOST&#34; -sha256 -new -key server-key.pem -out server.csr
+</code></pre><p>执行以下命令, 来配置白名单.</p>
+
+
+
+  <blockquote>
+    <p>也就是允许指定IP机器远程操作docker. 这里建议直接配置为<code>0.0.0.0</code>, 也就是放行所有IP. 因为我们已经有了证书加密, 只要保护证书文件即可.</p>
+<p>同样别忘了将<code>$HOST</code>替换为你远程服务器的IP地址!</p>
+  </blockquote>
+
+<pre tabindex="0"><code>echo subjectAltName = IP:$HOST,IP:0.0.0.0 &gt;&gt; extfile.cnf
+</code></pre><p>将Docker守护进程密钥的扩展用法属性设置为仅用于服务器身份验证:</p>
+<pre tabindex="0"><code>echo extendedKeyUsage = serverAuth &gt;&gt; extfile.cnf
+</code></pre><p>生成<code>ca-key</code>(需要输入上面设置的密码):</p>
+<pre tabindex="0"><code>openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \-CAcreateserial -out server-cert.pem -extfile extfile.cnf
+</code></pre><p>生成远程连接需要的连接key, 依次执行:</p>
+<pre tabindex="0"><code>openssl genrsa -out key.pem 4096
+</code></pre><pre tabindex="0"><code>openssl req -subj &#39;/CN=client&#39; -new -key key.pem -out client.csr
+</code></pre><pre tabindex="0"><code>echo extendedKeyUsage = clientAuth &gt;&gt; extfile.cnf
+</code></pre><p>生成<code>cert.pem</code>(需要输入上面设置的密码):</p>
+<pre tabindex="0"><code>openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \-CAcreateserial -out cert.pem -extfile extfile.cnf
+</code></pre><p>在生成了<code>cert.pem</code>以及<code>server-cert.pem</code>后, 我们可以安全地删除不需要的配置文件了:</p>
+<pre tabindex="0"><code>rm -v client.csr server.csr
+</code></pre><p>为了保护这两个文件不受到破坏, 移除它们的可写权限, 使它们变为只读. 依次执行:</p>
+<pre tabindex="0"><code>chmod -v 0400 ca-key.pem key.pem server-key.pem
+</code></pre><pre tabindex="0"><code>chmod -v 0444 ca.pem server-cert.pem cert.pem
+</code></pre><p>将服务器证书拷贝至<code>/etc/docker</code>:</p>
+
+
+
+  <blockquote>
+    <p>注意, 你的docker安装目录可能不为<code>/etc/docker</code>.<br>
+可通过命令<code>docker info | grep &quot;Docker Root Dir&quot;</code>查询你的实际目录</p>
+  </blockquote>
+
+<pre tabindex="0"><code>cp server-*.pem  /etc/docker/
+</code></pre><pre tabindex="0"><code>cp ca.pem /etc/docker/
+</code></pre><p>修改docker配置:</p>
+<pre tabindex="0"><code>vi /lib/systemd/system/docker.service
+</code></pre><p>将其中的(可能略有差异):</p>
+<pre tabindex="0"><code>ExecStart=/usr/bin/dockerd
+</code></pre><p>替换为(<strong>同样别忘记将<code>/etc/docker</code>替换为你自己的路径!</strong>):</p>
+<pre tabindex="0"><code>ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server-cert.pem --tlskey=/etc/docker/server-key.pem -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock
+</code></pre><p>编辑完毕, 保存.</p>
+<pre><code>`:wq`
+</code></pre>
+<h4 id="重启docker守护进程">重启docker守护进程</h4>
+<p>依次输入以下命令:</p>
+<pre tabindex="0"><code>systemctl daemon-reload
+</code></pre><pre tabindex="0"><code>systemctl restart docker
+</code></pre><h4 id="开放外部端口">开放外部端口</h4>
+<p>依次输入以下命令, 开放端口:</p>
+<pre tabindex="0"><code>/sbin/iptables -I INPUT -p tcp --dport 2376 -j ACCEPT
+</code></pre><pre tabindex="0"><code>iptables-save
+</code></pre><p><strong>注意</strong>, 如果你使用了云服务器(如阿里云), 同样需要在云服务器上开放2376端口!</p>
+<h4 id="重启docker">重启docker</h4>
+<pre tabindex="0"><code>service docker restart
+</code></pre><h3 id="下载客户端访问校验文件">下载客户端访问校验文件</h3>
+<p>使用FTP工具(如WinSCP), 进入<code>/usr/local/ca</code>目录, 将其中的三个文件:</p>
+<pre tabindex="0"><code>/usr/local/ca/ca.pem
+/usr/local/ca/cert.pem
+/usr/local/ca/key.pem
+</code></pre><p>存储至本地某文件夹内.</p>
+<h3 id="idea安装docker插件">IDEA安装Docker插件</h3>
+<p>打开IDEA设置, 左上角<code>File</code>-&gt;<code>Settings</code>(快捷键<code>CTRL</code>+<code>ALT</code>+<code>S</code>).</p>
+<p>找到<code>Plugins</code>, 搜索关键词&quot;docker`:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-04.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>IDEA Docker 插件</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>若未安装, 点击<code>INSTALL</code>按钮进行安装. 安装完成后重启IDEA.</p>
+<h3 id="idea连接docker">IDEA连接Docker</h3>
+<p>打开IDEA设置, 左上角<code>File</code>-&gt;<code>Settings</code>(快捷键<code>CTRL</code>+<code>ALT</code>+<code>S</code>).</p>
+<p>找到Docker设置:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-02.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>IDEA Docker设置位置</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>按照下方图片步骤操作:</p>
+<ol>
+<li>点击加号, 创建Docker配置</li>
+<li>设置远程服务器地址, 格式为<code>https://你的IP:2376</code></li>
+<li>设置本地ca目录, 也就是上面我们拷贝下来的三个文件存放的目录</li>
+<li>查看下方文本提示, 若为<code>Connection successful</code>则表示成功</li>
+<li>保存配置</li>
+</ol>
+<!-- raw HTML omitted -->
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-03.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>IDEA配置Docker</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="创建dockerfile">创建Dockerfile</h3>
+<p>在项目目录中创建文件<code>Dockerfile</code>:</p>
+<pre tabindex="0"><code>#运行项目需要基于java镜像
+FROM java:8
+# 设置时区
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &#39;Asia/Shanghai&#39; &gt;/etc/timezone
+#拷贝文件到容器
+ADD target/*.jar app.jar
+#配置容器启动后执行的命令
+ENTRYPOINT [&#34;java&#34;,&#34;-jar&#34;,&#34;/app.jar&#34;]
+</code></pre><h3 id="创建docker运行配置">创建Docker运行配置</h3>
+<p>点击上方偏右的下拉框, 选择<code>Edit Configurations</code>点击:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-05.png" alt=""></p>
+<p>创建一个Docker运行配置:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-06.png" alt=""></p>
+<p>点击后进入一个详情页, 几个重要配置项在图片中有解释:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-07.png" alt=""></p>
+<p>完成后进行保存.</p>
+<p>[epcl_box type=&ldquo;success&rdquo;]进行如此一番折腾, 我们终于成功的搞定IDEA一键部署了![/epcl_box]</p>
+<p>🟢 运行一下, 当控制台日志显示success即为成功:</p>
+<p><img src="images/IDEA-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-SpringBoot-%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E5%86%85-08.png" alt=""></p>
+<p>享受一键部署吧!</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/security/https/#create-a-ca-server-and-client-keys-with-openssl" target="_blank">Protect the Docker daemon socket</a>
+</li>
+<li><a href="https://blog.csdn.net/lovexiaotaozi/article/details/82797236" target="_blank">【Docker】在IDEA中实现一键部署到服务器(附ssl连接加密)</a>
+</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

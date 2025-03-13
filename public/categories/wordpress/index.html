@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordpress | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/categories/wordpress/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/categories/wordpress/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Wordpress">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Wordpress">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">Wordpress</h1>
+    <p class="text-sm">2 articles</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/categories/collection-box/" class="badge h-6 no-underline hover:badge-primary">
+        Collection-Box
+      </a>
+      
+      
+      
+      <a href="/categories/dart%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="badge h-6 no-underline hover:badge-primary">
+        Dart高级特性
+      </a>
+      
+      
+      
+      <a href="/categories/ditto/" class="badge h-6 no-underline hover:badge-primary">
+        Ditto
+      </a>
+      
+      
+      
+      <a href="/categories/docker/" class="badge h-6 no-underline hover:badge-primary">
+        Docker
+      </a>
+      
+      
+      
+      <a href="/categories/flame-tutorials/" class="badge h-6 no-underline hover:badge-primary">
+        Flame-Tutorials
+      </a>
+      
+      
+      
+      <a href="/categories/flutter/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter
+      </a>
+      
+      
+      
+      <a href="/categories/flutter-actual-combat/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter-Actual-Combat
+      </a>
+      
+      
+      
+      <a href="/categories/flutter%E6%96%B0%E9%97%BB/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter新闻
+      </a>
+      
+      
+      
+      <a href="/categories/flutter%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter游戏开发
+      </a>
+      
+      
+      
+      <a href="/categories/flutter%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/git/" class="badge h-6 no-underline hover:badge-primary">
+        Git
+      </a>
+      
+      
+      
+      <a href="/categories/github/" class="badge h-6 no-underline hover:badge-primary">
+        Github
+      </a>
+      
+      
+      
+      <a href="/categories/ide/" class="badge h-6 no-underline hover:badge-primary">
+        Ide
+      </a>
+      
+      
+      
+      <a href="/categories/java/" class="badge h-6 no-underline hover:badge-primary">
+        Java
+      </a>
+      
+      
+      
+      <a href="/categories/java-kotlin%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Java-Kotlin踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/java%E6%A1%86%E6%9E%B6/" class="badge h-6 no-underline hover:badge-primary">
+        Java框架
+      </a>
+      
+      
+      
+      <a href="/categories/linux/" class="badge h-6 no-underline hover:badge-primary">
+        Linux
+      </a>
+      
+      
+      
+      <a href="/categories/linux%E4%BC%98%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        Linux优化
+      </a>
+      
+      
+      
+      <a href="/categories/linux%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        Linux踩坑
+      </a>
+      
+      
+      
+      <a href="/categories/mac/" class="badge h-6 no-underline hover:badge-primary">
+        Mac
+      </a>
+      
+      
+      
+      <a href="/categories/mybatis-plus/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis-Plus
+      </a>
+      
+      
+      
+      <a href="/categories/mysql/" class="badge h-6 no-underline hover:badge-primary">
+        Mysql
+      </a>
+      
+      
+      
+      <a href="/categories/nginx/" class="badge h-6 no-underline hover:badge-primary">
+        Nginx
+      </a>
+      
+      
+      
+      <a href="/categories/windows/" class="badge h-6 no-underline hover:badge-primary">
+        Windows
+      </a>
+      
+      
+      
+      <a href="/categories/windows%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="badge h-6 no-underline hover:badge-primary">
+        Windows环境部署
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        Wordpress
+      </span>
+      
+      
+      
+      <a href="/categories/%E6%95%88%E7%8E%87/" class="badge h-6 no-underline hover:badge-primary">
+        效率
+      </a>
+      
+      
+      
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        数据库
+      </a>
+      
+      
+      
+      <a href="/categories/%E6%9E%81%E5%AE%A2%E7%94%A8%E8%AF%AD/" class="badge h-6 no-underline hover:badge-primary">
+        极客用语
+      </a>
+      
+      
+      
+      <a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge h-6 no-underline hover:badge-primary">
+        运维
+      </a>
+      
+      
+      
+      <a href="/categories/%E9%9A%8F%E6%89%8B%E5%86%99/" class="badge h-6 no-underline hover:badge-primary">
+        随手写
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+      <div class="dream-grid">
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">解决 Briefly unavailable for scheduled maintenance. Check back in a minute</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, Jul 6, 2020
+    
+    </p>
+
+    <p>阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示<code>Briefly unavailable for scheduled maintenance. Check back in a minute.</code>好郁闷&hellip; 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.</p>
+<h2 id="情景再现">情景再现</h2>
+<p>先来看下阿航的报错, 是不是和你一样?</p>
+<p><img src="images/Briefly-unavailable-for-01.png" alt=""></p>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="方案一-耐心等待">方案一: 耐心等待</h3>
+<p>遇到此种情况, 最好的解决方案就是<strong>等</strong>. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.</p>
+<p>如果等待无效, 请查看下面的方法.</p>
+<h3 id="方案二-删除-maintenance">方案二: 删除 .maintenance</h3>
+<p>在WordPress进行更新/维护时, 会在目录下创建一个 <strong>.maintenance</strong> 文件. 当更新/维护结束时, 会自动删除它.</p>
+<p>所以我们只要手动删除即可解除更新/维护模式.</p>
+<p>进入WordPress安装目录, 找到<code>.maintenance</code>文件, 删除即可:</p>
+<p><img src="images/Briefly-unavailable-for-02.png" alt=""></p>
+<p>再次刷新网站, 查看最终效果.</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://www.cnblogs.com/ytkah/p/11097523.html" target="_blank">wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute.</a>
+</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/wordpress-%E7%9F%AD%E4%BB%A3%E7%A0%81-shortcode-%E8%BD%AC%E4%B9%89%E4%B8%BA%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">WordPress 短代码 shortcode 转义为普通字符串</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, Jun 23, 2020
+    
+    </p>
+
+    <p>在使用WordPress进行创作时, 阿航碰到了需要将短代码转为普通字符展示在文章内. 本篇文章就来记录下如何将WordPress的短代码转义为普通字符串.</p>
+<h2 id="效果">效果</h2>
+<p>将短代码转为普通字符串, 展示在屏幕上的 3 个方案的 2 种效果:</p>
+<hr>
+<p>[[epcl_box type=&ldquo;information&rdquo;]这是一条被短代码包住的信息![/epcl_box]]</p>
+<hr>
+<pre tabindex="0"><code>[epcl_box type=&#34;information&#34;]这是一条被短代码包住的信息![/epcl_box]
+</code></pre><hr>
+<h2 id="场景">场景</h2>
+<p>阿航的网站上有这样的提示短代码:</p>
+<p>[epcl_box type=&ldquo;information&rdquo;]这是一条被短代码包住的信息![/epcl_box]</p>
+<p>在转义前, 我们是这样输入的:</p>
+<pre tabindex="0"><code>[epcl_box type=&#34;information&#34;]这是一条被短代码包住的信息![/epcl_box]
+</code></pre><p>很明显, 这样输入会被WordPress自动转为短代码.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ul>
+<li>你掌握WordPress的基础使用</li>
+</ul>
+<p>本篇文章的环境:</p>
+<!-- raw HTML omitted -->
+<h2 id="解决方案">解决方案</h2>
+<h3 id="方案一-被包裹">方案一: 被&quot;<!-- raw HTML omitted -->&ldquo;包裹</h3>
+<p>此方案非常简单, 只要我们使用<code>&lt;code&gt;&lt;/code&gt;</code>标签将短代码括住, 代码将被自动转义, HTML写法 (区块编辑器直接找&quot;代码&quot;区块, 输入即可) :</p>
+<pre tabindex="0"><code>&lt;code&gt;
+    [epcl_box type=&#34;information&#34;]这是一条被短代码包住的信息![/epcl_box]
+</code></pre><p>效果:</p>
+<hr>
+<pre tabindex="0"><code>[epcl_box type=&#34;information&#34;]这是一条被短代码包住的信息![/epcl_box]
+</code></pre><hr>
+<p>[epcl_box type=&ldquo;success&rdquo;]顺利搞定![/epcl_box]</p>
+<h3 id="方案二-被包裹">方案二: 被&rdquo;[]&ldquo;包裹</h3>
+<p>此方案也相当简单, 我们在短代码外包裹一层&rdquo;<code>[]</code>&quot;. 写法改为:</p>
+<pre tabindex="0"><code>[[epcl_box type=&#34;information&#34;][/epcl_box]]
+</code></pre><p>效果:</p>
+<hr>
+<p>[[epcl_box type=&ldquo;information&rdquo;]这是一条被短代码包住的信息![/epcl_box]]</p>
+<hr>
+<p>[epcl_box type=&ldquo;success&rdquo;]搞定! 本方法相当方便![/epcl_box]</p>
+<h3 id="方案三-使用转义字符串">方案三: 使用转义字符串</h3>
+<p>此方法需要我们的重点就是把<code>[</code>和<code>]</code>转为转义字符串. 一张表格查看对应关系:</p>
+<table>
+  <thead>
+      <tr>
+          <th>转义前</th>
+          <th>转义后</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>[</td>
+          <td><code>&amp;#91;</code></td>
+      </tr>
+      <tr>
+          <td>]</td>
+          <td><code>&amp;#93;</code></td>
+      </tr>
+      <tr>
+          <td>[shortcode]</td>
+          <td><code>&amp;#91;shortcode&amp;#93;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>那么, 我们上述例子的最终写法应为:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+      </div>
+    
+
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

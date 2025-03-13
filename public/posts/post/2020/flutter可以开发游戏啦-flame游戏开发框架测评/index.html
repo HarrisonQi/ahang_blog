@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter可以开发游戏啦! Flame游戏开发框架测评 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E5%95%A6-flame%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%84/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="
+Flutter作为近年来的新兴混合开发语言, 一直备受关注. 既然Flutter这么好用, 并且宣传渲染帧率可高达60fps.
+那我们是不是可以用它开发游戏呢?
+答案是肯定的, 某个Flutter大神制作了一款框架, 名为Flame.
+如果你没有代码基础, 想开发一款自己的游戏, 那么Flutter &#43; Flame也许是比较好的选择.
+先来看一下使用Flutter &#43; Flame做的几款游戏吧:
+DarknessDungeon 地牢游戏
+4 in A Row 四子棋益智游戏
+嗯…看起来还不错
+阿航在之前的空闲时间也使用了该框架进行了游戏开发, 体验还不错.
+这个是游戏大体的框架结构:
+使用Flame开发游戏, 只需要先创建Game loop(游戏循环/游戏场景), 维护好update函数(计算各种数值)以及render函数(渲染屏幕).
+在这里贴出一个Flutter开发与其他游戏开发引擎的对比:
+Flutter &#43; Flame Unity、虚幻等主流开发引擎 适合独立开发 很适合 适合 需要掌握的技术 仅Flutter 开发语言&#43;软件使用 学习难度 容易 中等甚至困难 开发难度 容易 中等甚至困难 国内文档支持 较少, 阿航的技术小站将会提供中文文档 丰富 3d支持 暂无 3d支持很好 开发大型游戏 适合 非常适合 开发小型游戏 非常适合 适合 我已经在博客里写了这个框架的教程以及实例教学！
+立即访问《Flutter 游戏开发(flame) 01 初识Flame 》开始学习!
+" />
+
+
+<meta name="keywords" content="Flame,Flutter,游戏开发">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E5%95%A6-flame%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%84/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter可以开发游戏啦! Flame游戏开发框架测评">
+  <meta property="og:description" content="Flutter作为近年来的新兴混合开发语言, 一直备受关注. 既然Flutter这么好用, 并且宣传渲染帧率可高达60fps.
+那我们是不是可以用它开发游戏呢?
+答案是肯定的, 某个Flutter大神制作了一款框架, 名为Flame.
+如果你没有代码基础, 想开发一款自己的游戏, 那么Flutter &#43; Flame也许是比较好的选择.
+先来看一下使用Flutter &#43; Flame做的几款游戏吧:
+DarknessDungeon 地牢游戏
+4 in A Row 四子棋益智游戏
+嗯…看起来还不错
+阿航在之前的空闲时间也使用了该框架进行了游戏开发, 体验还不错.
+这个是游戏大体的框架结构:
+使用Flame开发游戏, 只需要先创建Game loop(游戏循环/游戏场景), 维护好update函数(计算各种数值)以及render函数(渲染屏幕).
+在这里贴出一个Flutter开发与其他游戏开发引擎的对比:
+Flutter &#43; Flame Unity、虚幻等主流开发引擎 适合独立开发 很适合 适合 需要掌握的技术 仅Flutter 开发语言&#43;软件使用 学习难度 容易 中等甚至困难 开发难度 容易 中等甚至困难 国内文档支持 较少, 阿航的技术小站将会提供中文文档 丰富 3d支持 暂无 3d支持很好 开发大型游戏 适合 非常适合 开发小型游戏 非常适合 适合 我已经在博客里写了这个框架的教程以及实例教学！
+立即访问《Flutter 游戏开发(flame) 01 初识Flame 》开始学习!">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-15T00:00:00+00:00">
+    <meta property="article:tag" content="Flame">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="游戏开发">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter可以开发游戏啦! Flame游戏开发框架测评">
+  <meta name="twitter:description" content="Flutter作为近年来的新兴混合开发语言, 一直备受关注. 既然Flutter这么好用, 并且宣传渲染帧率可高达60fps.
+那我们是不是可以用它开发游戏呢?
+答案是肯定的, 某个Flutter大神制作了一款框架, 名为Flame.
+如果你没有代码基础, 想开发一款自己的游戏, 那么Flutter &#43; Flame也许是比较好的选择.
+先来看一下使用Flutter &#43; Flame做的几款游戏吧:
+DarknessDungeon 地牢游戏
+4 in A Row 四子棋益智游戏
+嗯…看起来还不错
+阿航在之前的空闲时间也使用了该框架进行了游戏开发, 体验还不错.
+这个是游戏大体的框架结构:
+使用Flame开发游戏, 只需要先创建Game loop(游戏循环/游戏场景), 维护好update函数(计算各种数值)以及render函数(渲染屏幕).
+在这里贴出一个Flutter开发与其他游戏开发引擎的对比:
+Flutter &#43; Flame Unity、虚幻等主流开发引擎 适合独立开发 很适合 适合 需要掌握的技术 仅Flutter 开发语言&#43;软件使用 学习难度 容易 中等甚至困难 开发难度 容易 中等甚至困难 国内文档支持 较少, 阿航的技术小站将会提供中文文档 丰富 3d支持 暂无 3d支持很好 开发大型游戏 适合 非常适合 开发小型游戏 非常适合 适合 我已经在博客里写了这个框架的教程以及实例教学！
+立即访问《Flutter 游戏开发(flame) 01 初识Flame 》开始学习!">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter可以开发游戏啦! Flame游戏开发框架测评">
+  <meta itemprop="description" content="Flutter作为近年来的新兴混合开发语言, 一直备受关注. 既然Flutter这么好用, 并且宣传渲染帧率可高达60fps.
+那我们是不是可以用它开发游戏呢?
+答案是肯定的, 某个Flutter大神制作了一款框架, 名为Flame.
+如果你没有代码基础, 想开发一款自己的游戏, 那么Flutter &#43; Flame也许是比较好的选择.
+先来看一下使用Flutter &#43; Flame做的几款游戏吧:
+DarknessDungeon 地牢游戏
+4 in A Row 四子棋益智游戏
+嗯…看起来还不错
+阿航在之前的空闲时间也使用了该框架进行了游戏开发, 体验还不错.
+这个是游戏大体的框架结构:
+使用Flame开发游戏, 只需要先创建Game loop(游戏循环/游戏场景), 维护好update函数(计算各种数值)以及render函数(渲染屏幕).
+在这里贴出一个Flutter开发与其他游戏开发引擎的对比:
+Flutter &#43; Flame Unity、虚幻等主流开发引擎 适合独立开发 很适合 适合 需要掌握的技术 仅Flutter 开发语言&#43;软件使用 学习难度 容易 中等甚至困难 开发难度 容易 中等甚至困难 国内文档支持 较少, 阿航的技术小站将会提供中文文档 丰富 3d支持 暂无 3d支持很好 开发大型游戏 适合 非常适合 开发小型游戏 非常适合 适合 我已经在博客里写了这个框架的教程以及实例教学！
+立即访问《Flutter 游戏开发(flame) 01 初识Flame 》开始学习!">
+  <meta itemprop="datePublished" content="2020-04-15T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-04-15T00:00:00+00:00">
+  <meta itemprop="wordCount" content="75">
+  <meta itemprop="keywords" content="Flame,Flutter,游戏开发">
+
+      <header>
+        <h1 itemprop="headline">Flutter可以开发游戏啦! Flame游戏开发框架测评</h1>
+        <p class="text-sm">
+          
+            Wednesday, Apr 15, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Wednesday, Apr 15, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%e5%8f%af%e4%bb%a5%e5%bc%80%e5%8f%91%e6%b8%b8%e6%88%8f%e5%95%a6!%20Flame%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%e6%a1%86%e6%9e%b6%e6%b5%8b%e8%af%84&amp;url=http://localhost:1313/posts/post/2020/flutter%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E5%95%A6-flame%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%84/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E5%95%A6-flame%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%84/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%e5%8f%af%e4%bb%a5%e5%bc%80%e5%8f%91%e6%b8%b8%e6%88%8f%e5%95%a6!%20Flame%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%e6%a1%86%e6%9e%b6%e6%b5%8b%e8%af%84%20http://localhost:1313/posts/post/2020/flutter%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E5%95%A6-flame%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%84/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p><img src="images/photo-of-white-wall-1484759.png" alt="Flutter可以开发游戏啦! Flame游戏开发框架测评"></p>
+<p>Flutter作为近年来的新兴混合开发语言, 一直备受关注. 既然Flutter这么好用, 并且宣传渲染帧率可高达60fps.</p>
+<p>那我们是不是可以用它开发游戏呢?</p>
+<p>答案是肯定的, 某个Flutter大神制作了一款框架, 名为Flame.</p>
+<p>如果你没有代码基础, 想开发一款自己的游戏, 那么Flutter + Flame也许是比较好的选择.</p>
+<p>先来看一下使用Flutter + Flame做的几款游戏吧:</p>
+<p><a href="https://github.com/RafaelBarbosatec/darkness_dungeon" target="_blank">DarknessDungeon</a>
+ 地牢游戏</p>
+<p><img src="images/DarknessDungeon-3.gif" alt="Flutter可以开发游戏啦! Flame游戏开发框架测评"></p>
+<p>4 in A Row 四子棋益智游戏</p>
+<p><img src="images/4-in-A-Row-2.gif" alt="Flutter可以开发游戏啦! Flame游戏开发框架测评"></p>
+<p>嗯…看起来还不错</p>
+<p>阿航在之前的空闲时间也使用了该框架进行了游戏开发, 体验还不错.</p>
+<p>这个是游戏大体的框架结构:</p>
+<p><img src="images/%E6%A1%86%E6%9E%B6%E5%9B%BE%E7%A4%BA-1024x399.png" alt="Flutter可以开发游戏啦! Flame游戏开发框架测评"></p>
+<p>使用Flame开发游戏, 只需要先创建<strong>Game loop</strong>(游戏循环/游戏场景), 维护好<strong>update</strong>函数(计算各种数值)以及<strong>render</strong>函数(渲染屏幕).</p>
+<p>在这里贴出一个Flutter开发与其他游戏开发引擎的对比:</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Flutter + Flame</th>
+          <th>Unity、虚幻等主流开发引擎</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>适合独立开发</td>
+          <td>很适合</td>
+          <td>适合</td>
+      </tr>
+      <tr>
+          <td>需要掌握的技术</td>
+          <td>仅Flutter</td>
+          <td>开发语言+软件使用</td>
+      </tr>
+      <tr>
+          <td>学习难度</td>
+          <td>容易</td>
+          <td>中等甚至困难</td>
+      </tr>
+      <tr>
+          <td>开发难度</td>
+          <td>容易</td>
+          <td>中等甚至困难</td>
+      </tr>
+      <tr>
+          <td>国内文档支持</td>
+          <td>较少, 阿航的技术小站将会提供中文文档</td>
+          <td>丰富</td>
+      </tr>
+      <tr>
+          <td>3d支持</td>
+          <td>暂无</td>
+          <td>3d支持很好</td>
+      </tr>
+      <tr>
+          <td>开发大型游戏</td>
+          <td>适合</td>
+          <td>非常适合</td>
+      </tr>
+      <tr>
+          <td>开发小型游戏</td>
+          <td>非常适合</td>
+          <td>适合</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <blockquote>
+    <p>我已经在博客里写了这个框架的教程以及实例教学！<br>
+立即访问《<a href="https://blog.bugcatt.com/archives/279" target="_blank">Flutter 游戏开发(flame) 01 初识Flame</a>
+》开始学习!</p>
+  </blockquote>
+
+<p>对文章有任何问题、 建议, 欢迎在评论区下方评论. 作者将会尽力、尽快回复.</p>
+<p>最新、更多、更好的教程/博客/资讯, 欢迎访问我的官网: <a href="https://blog.bugcatt.com" target="_blank">阿航的技术小站</a>
+.</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter%E6%A0%B9%E6%8D%AE%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E5%AE%BD%E5%BA%A6-%E9%AB%98%E5%BA%A6%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%85%83%E7%B4%A0%E5%B0%8F%E9%83%A8%E4%BB%B6/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="最让前端开发人员头疼的问题之一就是屏幕尺寸兼容性问题了. Web端开发人员经常会对测试人员说: &ldquo;换个浏览器试一下&rdquo;.😂 虽然现在的主流的屏幕大小非常相似, 但是我们也要事先处理好. 本篇文章就来记录Flutter如何根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸.
+效果 有图有真相, 先来看一下效果:
+需具备的条件 你掌握Flutter基础. 你了解基础的Flutter布局. 本篇文章的开发环境:
+[epcl_box type=&ldquo;information&rdquo;]老规矩, 速度快的同学直接看最下方的核心代码![/epcl_box]
+实战开始 准备工作 创建一个Flutter项目, 替换main.dart为:
+`import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Flutter Demo&#39;, theme: ThemeData( primarySwatch: Colors.blue, ), home: MyHomePage(title: &#39;屏幕百分比设定元素尺寸&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State&lt;MyHomePage&gt; { @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: Text(widget.title), ), body: Row( children: [ Container( color: Color(0xFFFF6666), child: Text(&quot;30%&quot;, style: Theme.of(context).textTheme.headline2,), ), Container( color: Color(0xFFFFFF66), child: Text(&quot;70%&quot;, style: Theme.of(context).textTheme.headline2,), ) ], ), ); } }` 🟢 运行项目, 应该是这样的:
+" />
+
+
+<meta name="keywords" content="Flutter,常用操作,常用组件">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter%E6%A0%B9%E6%8D%AE%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E5%AE%BD%E5%BA%A6-%E9%AB%98%E5%BA%A6%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%85%83%E7%B4%A0%E5%B0%8F%E9%83%A8%E4%BB%B6/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸">
+  <meta property="og:description" content="最让前端开发人员头疼的问题之一就是屏幕尺寸兼容性问题了. Web端开发人员经常会对测试人员说: “换个浏览器试一下”.😂 虽然现在的主流的屏幕大小非常相似, 但是我们也要事先处理好. 本篇文章就来记录Flutter如何根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸.
+效果 有图有真相, 先来看一下效果:
+需具备的条件 你掌握Flutter基础. 你了解基础的Flutter布局. 本篇文章的开发环境:
+[epcl_box type=“information”]老规矩, 速度快的同学直接看最下方的核心代码![/epcl_box]
+实战开始 准备工作 创建一个Flutter项目, 替换main.dart为:
+`import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Flutter Demo&#39;, theme: ThemeData( primarySwatch: Colors.blue, ), home: MyHomePage(title: &#39;屏幕百分比设定元素尺寸&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State&lt;MyHomePage&gt; { @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: Text(widget.title), ), body: Row( children: [ Container( color: Color(0xFFFF6666), child: Text(&#34;30%&#34;, style: Theme.of(context).textTheme.headline2,), ), Container( color: Color(0xFFFFFF66), child: Text(&#34;70%&#34;, style: Theme.of(context).textTheme.headline2,), ) ], ), ); } }` 🟢 运行项目, 应该是这样的:">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-30T00:00:00+00:00">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="常用操作">
+    <meta property="article:tag" content="常用组件">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸">
+  <meta name="twitter:description" content="最让前端开发人员头疼的问题之一就是屏幕尺寸兼容性问题了. Web端开发人员经常会对测试人员说: “换个浏览器试一下”.😂 虽然现在的主流的屏幕大小非常相似, 但是我们也要事先处理好. 本篇文章就来记录Flutter如何根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸.
+效果 有图有真相, 先来看一下效果:
+需具备的条件 你掌握Flutter基础. 你了解基础的Flutter布局. 本篇文章的开发环境:
+[epcl_box type=“information”]老规矩, 速度快的同学直接看最下方的核心代码![/epcl_box]
+实战开始 准备工作 创建一个Flutter项目, 替换main.dart为:
+`import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Flutter Demo&#39;, theme: ThemeData( primarySwatch: Colors.blue, ), home: MyHomePage(title: &#39;屏幕百分比设定元素尺寸&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State&lt;MyHomePage&gt; { @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: Text(widget.title), ), body: Row( children: [ Container( color: Color(0xFFFF6666), child: Text(&#34;30%&#34;, style: Theme.of(context).textTheme.headline2,), ), Container( color: Color(0xFFFFFF66), child: Text(&#34;70%&#34;, style: Theme.of(context).textTheme.headline2,), ) ], ), ); } }` 🟢 运行项目, 应该是这样的:">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸">
+  <meta itemprop="description" content="最让前端开发人员头疼的问题之一就是屏幕尺寸兼容性问题了. Web端开发人员经常会对测试人员说: “换个浏览器试一下”.😂 虽然现在的主流的屏幕大小非常相似, 但是我们也要事先处理好. 本篇文章就来记录Flutter如何根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸.
+效果 有图有真相, 先来看一下效果:
+需具备的条件 你掌握Flutter基础. 你了解基础的Flutter布局. 本篇文章的开发环境:
+[epcl_box type=“information”]老规矩, 速度快的同学直接看最下方的核心代码![/epcl_box]
+实战开始 准备工作 创建一个Flutter项目, 替换main.dart为:
+`import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(MyApp()); class MyApp extends StatelessWidget { @override Widget build(BuildContext context) { return MaterialApp( title: &#39;Flutter Demo&#39;, theme: ThemeData( primarySwatch: Colors.blue, ), home: MyHomePage(title: &#39;屏幕百分比设定元素尺寸&#39;), ); } } class MyHomePage extends StatefulWidget { MyHomePage({Key key, this.title}) : super(key: key); final String title; @override _MyHomePageState createState() =&gt; _MyHomePageState(); } class _MyHomePageState extends State&lt;MyHomePage&gt; { @override Widget build(BuildContext context) { return Scaffold( appBar: AppBar( title: Text(widget.title), ), body: Row( children: [ Container( color: Color(0xFFFF6666), child: Text(&#34;30%&#34;, style: Theme.of(context).textTheme.headline2,), ), Container( color: Color(0xFFFFFF66), child: Text(&#34;70%&#34;, style: Theme.of(context).textTheme.headline2,), ) ], ), ); } }` 🟢 运行项目, 应该是这样的:">
+  <meta itemprop="datePublished" content="2020-06-30T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-06-30T00:00:00+00:00">
+  <meta itemprop="wordCount" content="218">
+  <meta itemprop="keywords" content="Flutter,常用操作,常用组件">
+
+      <header>
+        <h1 itemprop="headline">Flutter根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸</h1>
+        <p class="text-sm">
+          
+            Tuesday, Jun 30, 2020
+          
+
+          | <span>2 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Tuesday, Jun 30, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%e6%a0%b9%e6%8d%ae%e5%b1%8f%e5%b9%95%e5%b0%ba%e5%af%b8%28%e5%ae%bd%e5%ba%a6/%e9%ab%98%e5%ba%a6%29%e7%9a%84%e7%99%be%e5%88%86%e6%af%94%e8%ae%be%e5%ae%9a%e5%85%83%e7%b4%a0%28%e5%b0%8f%e9%83%a8%e4%bb%b6/%e7%bb%84%e4%bb%b6/Widget%29%e5%b0%ba%e5%af%b8&amp;url=http://localhost:1313/posts/post/2020/flutter%E6%A0%B9%E6%8D%AE%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E5%AE%BD%E5%BA%A6-%E9%AB%98%E5%BA%A6%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%85%83%E7%B4%A0%E5%B0%8F%E9%83%A8%E4%BB%B6/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter%E6%A0%B9%E6%8D%AE%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E5%AE%BD%E5%BA%A6-%E9%AB%98%E5%BA%A6%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%85%83%E7%B4%A0%E5%B0%8F%E9%83%A8%E4%BB%B6/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%e6%a0%b9%e6%8d%ae%e5%b1%8f%e5%b9%95%e5%b0%ba%e5%af%b8%28%e5%ae%bd%e5%ba%a6/%e9%ab%98%e5%ba%a6%29%e7%9a%84%e7%99%be%e5%88%86%e6%af%94%e8%ae%be%e5%ae%9a%e5%85%83%e7%b4%a0%28%e5%b0%8f%e9%83%a8%e4%bb%b6/%e7%bb%84%e4%bb%b6/Widget%29%e5%b0%ba%e5%af%b8%20http://localhost:1313/posts/post/2020/flutter%E6%A0%B9%E6%8D%AE%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E5%AE%BD%E5%BA%A6-%E9%AB%98%E5%BA%A6%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%E8%AE%BE%E5%AE%9A%E5%85%83%E7%B4%A0%E5%B0%8F%E9%83%A8%E4%BB%B6/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>最让前端开发人员头疼的问题之一就是屏幕尺寸兼容性问题了. Web端开发人员经常会对测试人员说: &ldquo;换个浏览器试一下&rdquo;.😂 虽然现在的主流的屏幕大小非常相似, 但是我们也要事先处理好. 本篇文章就来记录Flutter如何根据屏幕尺寸(宽度/高度)的百分比设定元素(小部件/组件/Widget)尺寸.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 先来看一下效果:</p>
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-04.png" alt=""></p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ul>
+<li>你掌握Flutter基础.</li>
+<li>你了解基础的Flutter布局.</li>
+</ul>
+<p>本篇文章的开发环境:</p>
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;information&rdquo;]老规矩, 速度快的同学直接看最下方的核心代码![/epcl_box]</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="准备工作">准备工作</h3>
+<p>创建一个Flutter项目, 替换<code>main.dart</code>为:</p>
+<pre><code>`import 'package:flutter/material.dart';  void main() =&gt; runApp(MyApp());  class MyApp extends StatelessWidget {   @override   Widget build(BuildContext context) {     return MaterialApp(       title: 'Flutter Demo',       theme: ThemeData(         primarySwatch: Colors.blue,       ),       home: MyHomePage(title: '屏幕百分比设定元素尺寸'),     );   } }  class MyHomePage extends StatefulWidget {   MyHomePage({Key key, this.title}) : super(key: key);   final String title;    @override   _MyHomePageState createState() =&gt; _MyHomePageState(); }  class _MyHomePageState extends State&lt;MyHomePage&gt; {    @override   Widget build(BuildContext context) {     return Scaffold(       appBar: AppBar(         title: Text(widget.title),       ),       body: Row(         children: [           Container(             color: Color(0xFFFF6666),             child: Text(&quot;30%&quot;, style: Theme.of(context).textTheme.headline2,),           ),           Container(             color: Color(0xFFFFFF66),             child: Text(&quot;70%&quot;, style: Theme.of(context).textTheme.headline2,),           )         ],       ),     );   } }`
+</code></pre>
+<p>🟢 运行项目, 应该是这样的:</p>
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-01.png" alt=""></p>
+
+
+
+  <blockquote>
+    <p>重点在<code>Row</code>内. 我们创建了两个<code>Container</code>, 并分别使用<code>30%</code>和<code>70%</code>文字进行标识. 我们的目标就是通过处理, 使两个Container各自的宽高占据正确的空间.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<h3 id="方法一-获取屏幕尺寸">方法一: 获取屏幕尺寸</h3>
+<p>在第一个<code>Container</code>内添加:</p>
+<pre><code>`height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width * 0.3,`
+</code></pre>
+<p>在第二个<code>Container</code>内添加:</p>
+<pre><code>`height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width * 0.7,`
+</code></pre>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-02.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+
+
+  <blockquote>
+    <p>核心就是<code>MediaQuery._of_(context).size</code>我们通过该函数分别获取屏幕宽高, 并且乘以相应的比例. 并将计算出的数值赋给<code>Container</code>的宽高.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<p>🟢 运行项目, 效果应该是这样的:</p>
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-03.png" alt=""></p>
+<p>[epcl_box type=&ldquo;success&rdquo;]很明显, 它们的高度均和屏幕高度一致. 它们的宽度变成了正确的比例. 成功搞定![/epcl_box]</p>
+<h3 id="方法二-使用expandedflex">方法二: 使用Expanded.Flex</h3>
+<p>如果你使用过其他方法, 请先恢复你的代码为<strong>准备工作</strong>步骤的代码.</p>
+<p>替换整个body的入参为:</p>
+<pre><code>`body: Row(   children: [     Expanded(       flex: 3,       child: Container(color: Color(0xFFFF6666), child: Center(child: Text(&quot;30%&quot;, style: Theme.of(context).textTheme.headline2,),),),     ),     Expanded(       flex: 7,       child: Container(color: Color(0xFFFFFF66), child: Center(child: Text(&quot;70%&quot;, style: Theme.of(context).textTheme.headline2,),)),     )   ], ),`
+</code></pre>
+
+
+
+  <blockquote>
+    <p>这里的核心就是使用了<code>Expanded</code> 的<code>flex</code>属性进行分块. 在同一<code>Row</code>内传入多个<code>Expanded</code>并指定它们的<code>flex</code>属性, Flutter将自动设置它们的宽/高.</p>
+<p>💡 代码解析</p>
+  </blockquote>
+
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-05.png" alt=""></p>
+<!-- raw HTML omitted -->
+<p>代码截图</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>🟢 运行项目, 查看效果:</p>
+<p><img src="images/Flutter-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8-04.png" alt=""></p>
+<p>[epcl_box type=&ldquo;success&rdquo;]这个方案虽然代码较多, 但是我们只需要传入相应的比例即可. 方便维护.[/epcl_box]</p>
+<h3 id="其他方案">其他方案</h3>
+<p>使用<code>FractionallySizedBox</code>同样可以实现类似的效果. 但是阿航测试后, 发现代码较多, 并非一个良好的解决方案. 所以这里就不记录demo了. 感兴趣的同学可以自行研究.</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://stackoverflow.com/questions/43122113/sizing-elements-to-percentage-of-screen-width-height" target="_blank">Sizing elements to percentage of screen width/height</a>
+</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

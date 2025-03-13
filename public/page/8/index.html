@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="阿航的技术小站">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="阿航的技术小站">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+
+
+<div class="dream-grid opacity-0">
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-clipboard-%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-%E5%A4%8D%E5%88%B6%E5%88%B0%E5%89%AA%E8%B4%B4%E6%9D%BF-%E4%BB%8E%E5%89%AA%E8%B4%B4%E6%9D%BF%E4%B8%AD%E8%8E%B7%E5%8F%96/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter Clipboard 剪贴板操作: 复制到剪贴板 / 从剪贴板中获取</h2>
+
+    <p class="date text-base-content/60">
+    
+      Saturday, May 30, 2020
+    
+    </p>
+
+    <p>我们在使用Flutter进行开发时, 有时会使用类似&quot;复制本段文字&quot;的功能. 为了提升用户体验, 我们不希望用户长按文字, 再自行复制, 我们希望提供一个按钮直接点击复制, 甚至自动复制! 反之从剪贴板获取也一样.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 不说废话, 直接展示最终效果:</p>
+<h4 id="复制到剪贴板">复制到剪贴板</h4>
+<p><img src="images/Flutter%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-03.gif" alt="Flutter剪贴板操作-03"></p>
+<h4 id="从剪贴板获取粘贴">从剪贴板获取(粘贴)</h4>
+<p><img src="images/Flutter%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%93%8D%E4%BD%9C-04.gif" alt="Flutter剪贴板操作-04"></p>
+<p>[epcl_box type=&ldquo;information&rdquo;]如果你了解阿航的技术小站, 应该会知悉每篇文章都会提供相当详细且完整的源码. [/epcl_box]</p>
+<h2 id="应用场景">应用场景</h2>
+<h3 id="复制到剪贴板-1">复制到剪贴板</h3>
+<ol>
+<li>生成了运单号, 需要用户进行保存;</li>
+<li>某些微商APP需要复制文案, 发布朋友圈;</li>
+<li>文学类APP中, 发现一段非常好的句子, 想发给好友.</li>
+</ol>
+<h3 id="从剪贴板中获取">从剪贴板中获取</h3>
+<ol>
+<li>直接填入用户复制的短信验证码.</li>
+<li>淘宝分享的东西, 复制后打开淘宝APP.</li>
+</ol>
+<p>[epcl_box type=&ldquo;information&rdquo;]当然, 以上只是举了几种例子, 还有更多可以提升用户操作体验的实例在此不过多举例了, 直接开始.[/epcl_box]</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="初始化flutter项目">初始化Flutter项目</h3>
+<p>创建Flutter项目, 清理一下<code>./lib/main.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter剪贴板操作&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;Flutter剪贴板操作&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              &#39;You have pushed the button this many times:&#39;,
+            ),
+            Text(
+              &#39;$_counter&#39;,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: &#39;Increment&#39;,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+</code></pre><p>运行下项目, 应该空空如也:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>3 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/scaffold-of-called-with-a-context-that-does-not-contain-a-scaffold/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Scaffold.of() called with a context that does not contain a Scaffold</h2>
+
+    <p class="date text-base-content/60">
+    
+      Friday, May 29, 2020
+    
+    </p>
+
+    <p>今天阿航在研究底部弹出提示<code>showSnackBar()</code>组件时碰到了这个报错:</p>
+<pre tabindex="0"><code>Scaffold.of() called with a context that does not contain a Scaffold.
+</code></pre><p>本篇文章就来记录下这种报错该如何解决!</p>
+<h2 id="问题原因">问题原因</h2>
+<p>完整报错日志:</p>
+<pre tabindex="0"><code>════════ Exception caught by gesture ═══════════════════════════════════════════════════════════════
+The following assertion was thrown while handling a gesture:
+Scaffold.of() called with a context that does not contain a Scaffold.
+
+No Scaffold ancestor could be found starting from the context that was passed to Scaffold.of(). This usually happens when the context provided is from the same StatefulWidget as that whose build function actually creates the Scaffold widget being sought.
+
+There are several ways to avoid this problem. The simplest is to use a Builder to get a context that is &#34;under&#34; the Scaffold. For an example of this, please see the documentation for Scaffold.of():
+</code></pre><p>先来看下阿航出错的源码:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>3 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83%E6%98%AF%E5%90%A6%E4%B8%BAweb-%E5%AE%89%E5%8D%93-ios-macos-windows-linux-fuchsia/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 判断当前环境是否为Web/安卓/IOS/MacOS/Windows/Linux/Fuchsia</h2>
+
+    <p class="date text-base-content/60">
+    
+      Thursday, May 28, 2020
+    
+    </p>
+
+    <p>如果你最近在使用Flutter, 应该了解到目前Flutter已经可以导出为Web/安卓/IOS/MacOS/Windows/Linux/Fuchsia项目了. 但是目前兼容Web的Flutter第三方库不是很多, 并且布局上可能需要进行相应的调整, 所以本篇文章就来记录下Flutter判断当前环境是否为Web!</p>
+<h2 id="适用场景">适用场景</h2>
+<p>我们通常会在原生应用和web端等有环境差异时使用, 根据不同环境做不同处理.</p>
+<h3 id="方法一-使用原生platform判断">方法一: 使用原生Platform判断</h3>
+<p>flutter已经为我们提供了获取当前运行环境的<code>Platform</code>类.</p>
+<p>先导入:</p>
+<pre tabindex="0"><code>import &#39;dart:io&#39;;
+</code></pre><p>进行调用:</p>
+<pre tabindex="0"><code>if(Platform.isAndroid){
+  // Android
+}else if(Platform.isIOS){
+  // IOS
+}else if(Platform.isFuchsia){
+  // Fuchsia
+}else if(Platform.isWindows){
+  // Windows
+}else if(Platform.isMacOS){
+  // MacOS
+}else if(Platform.isLinux){
+  // Linux
+}
+</code></pre><p>当然, 这个方法是有缺陷的. 因为我们无法从中判断当前环境是否为Web! 所以, 方法二就出现了.</p>
+<h3 id="方法二-自定义工具类所有环境">方法二: 自定义工具类(所有环境)</h3>
+<h4 id="查看-constantsdart-源码">查看 constants.dart 源码</h4>
+<p>进入<code>flutter/packages/flutter/lib/src/foundation/constants.dart</code>, 我们来看看源码:</p>
+<p><img src="images/Flutter-%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83-01.png" alt=""></p>
+<p>我们可以看到一行<code>kIsWeb</code>的注释:</p>
+<pre tabindex="0"><code>/// A constant that is true if the application was compiled to run on the web.
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 含义: 当应用编译运行在web上时, 该常量为<code>true</code></p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E5%9C%A8flutter%E4%B8%AD%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">在Flutter中设置背景图片 / background image</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, May 27, 2020
+    
+    </p>
+
+    <p>有时我们需要给APP的某个页面或某个widget添加背景图. 本篇文章就来记录下如何在Flutter中设置背景图片.</p>
+<h2 id="效果">效果</h2>
+<p>有图有真相, 先来看下我们本篇博客将实现的最终效果:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-04.png" alt=""></p>
+<p>速度快的同学直接看下面的核心代码!</p>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="创建flutter项目">创建Flutter项目</h3>
+<p>创建一个新的Flutter项目, 运行查看一下:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-02.png" alt="Flutter 设置背景图片 background image-02"></p>
+<p>空白的, 啥也木有.</p>
+<h3 id="添加图片资源">添加图片资源</h3>
+<p>这里为大家提供一个好看的背景图:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-01-1001x1500.jpg" alt="Flutter 设置背景图片 background image-01"></p>
+<!-- raw HTML omitted -->
+<p><strong><a href="https://www.pexels.com/zh-cn/photo/2110951/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+</strong> 上的 <strong><a href="https://www.pexels.com/zh-cn/@emrecan?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Emre Can</a>
+</strong> 拍摄的照片</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>下载此图片, 重命名为<code>background.jpg</code>. 我们来将其添加至Flutter项目中.</p>
+<h4 id="创建资源目录">创建资源目录</h4>
+<p>创建目录<code>./assets/images</code>, 将上面的图片放到该目录下:</p>
+<p><img src="images/Flutter-%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87-background-image-03.png" alt=""></p>
+<h4 id="引入pubspecyaml">引入pubspec.yaml</h4>
+<p>进入<code>pubspec.yaml</code>, 将背景图片资源文件路径<code>assets/images/background.jpg</code>进行导入:</p>
+<pre tabindex="0"><code>flutter:
+  uses-material-design: true
+  assets:
+   - assets/images/background.jpg
+</code></pre><p>[epcl_box type=&ldquo;notice&rdquo;]这里一定要注意缩进, 若格式有误将会出错![/epcl_box]</p>
+<p>进行<code>package get</code>或在终端中输入:</p>
+<pre tabindex="0"><code>flutter packages get
+</code></pre><h3 id="展示背景图">展示背景图</h3>
+<p>回到<code>./lib/main.dart</code>, 进行代码替换:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Waiting for another flutter command to release the startup lock...</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, May 26, 2020
+    
+    </p>
+
+    <p>又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:</p>
+<pre tabindex="0"><code>Waiting for another flutter command to release the startup lock…
+</code></pre><p>字面意思是: 正在等待另一个正在执行的Flutter命令完成&hellip; 本篇文章就来记录一下如何如何解决这种问题.</p>
+<h2 id="出现原因">出现原因</h2>
+<p>非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!</p>
+<p>这里阿航给大家提供了若干方法, 大家可以按需选择.</p>
+<h3 id="方法一-安全地等待执行结束">方法一: 安全地等待执行结束</h3>
+<p>这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter&hellip; 如果真变成这样就糟透了😭😭😭</p>
+<p>当然, 有时我们不想等, 那么就需要下面的方法了.</p>
+<h3 id="方法二-taskkill">方法二: taskkill</h3>
+<p>打开Flutter安装目录, 复制<code>dart.exe</code>的路径(一般会在<code>flutter安装目录\bin\cache\dart-sdk\bin</code>).</p>
+<p>打开Powershell或CMD.</p>
+<p>若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:</p>
+<pre tabindex="0"><code>D:
+</code></pre><p>CD进入刚才复制的路径:</p>
+<pre tabindex="0"><code>cd flutter安装目录\bin\cache\dart-sdk\bin
+</code></pre><p>使用taskkill关闭进程:</p>
+<pre tabindex="0"><code>taskkill /F /IM dart.exe
+</code></pre><p>如果返回类似这样的信息即是成功:</p>
+<pre tabindex="0"><code>taskkill /F /IM dart.exe
+成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。
+</code></pre><p>[epcl_box type=&ldquo;success&rdquo;]这是目前最便捷的强行关闭方式![/epcl_box]</p>
+<h3 id="方法三-任务管理器关闭dart进程">方法三: 任务管理器关闭dart进程</h3>
+<p>打开任务管理器, 点击详细信息:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter%E8%8E%B7%E5%8F%96%E5%8C%85%E5%90%8Dapp%E5%90%8D%E7%A7%B0%E7%89%88%E6%9C%AC%E5%8F%B7build%E6%9E%84%E5%BB%BA%E7%89%88%E6%9C%AC%E5%8F%B7/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter获取包名、APP名称、版本号、build构建版本号</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, May 25, 2020
+    
+    </p>
+
+    <p>在进行APP版本迭代的过程中, 有时我们需要通过获取当前APP的版本号, 与后端服务器获取的当前最新版本进行比对, 如果出现了最新版本, 我们提醒用户进行应用更新. 本篇文章就来记录一下Flutter获取包名、应用APP名称、版本号、build构建版本号.</p>
+<h2 id="最终效果">最终效果</h2>
+<p>有图有真相, 先来看下最终效果吧!</p>
+<p><img src="images/Flutter%E8%8E%B7%E5%8F%96%E5%8C%85%E5%90%8D%E3%80%81%E5%BA%94%E7%94%A8APP%E5%90%8D%E7%A7%B0%E3%80%81%E7%89%88%E6%9C%AC%E5%8F%B7%E3%80%81build%E6%9E%84%E5%BB%BA%E7%89%88%E6%9C%AC%E5%8F%B7-04.gif" alt=""></p>
+<h2 id="应用场景">应用场景</h2>
+<ol>
+<li>通过检查当前APP版本号来判断是否需要更新.</li>
+<li>APP出现错误日志需要传回服务器时, 获取APP基本信息(也就是看看bug出现在哪个版本!).</li>
+</ol>
+<h2 id="实战开始">实战开始</h2>
+<h3 id="引入packageinfo">引入PackageInfo</h3>
+<p>老样子, 上官方的存储库中寻找我们今天需要的<code>PackageInfo</code>:</p>
+<p><img src="images/Flutter%E8%8E%B7%E5%8F%96%E5%8C%85%E5%90%8D%E3%80%81%E5%BA%94%E7%94%A8APP%E5%90%8D%E7%A7%B0%E3%80%81%E7%89%88%E6%9C%AC%E5%8F%B7%E3%80%81build%E6%9E%84%E5%BB%BA%E7%89%88%E6%9C%AC%E5%8F%B7-01.png" alt="Flutter获取包名、应用APP名称、版本号、build构建版本号-01"></p>
+<p>[epcl_box type=&ldquo;information&rdquo;]一般我们选用第三方库会看三个指标: 评分、兼容性以及活跃度.[/epcl_box]</p>
+<p>这个库将会成为我们获取APP信息的主力.</p>
+<p>进入<code>./pubspec.yaml</code>, 导入:</p>
+<pre tabindex="0"><code>dependencies:
+  package_info: ^0.4.0+18
+</code></pre><p><img src="images/Flutter%E8%8E%B7%E5%8F%96%E5%8C%85%E5%90%8D%E3%80%81%E5%BA%94%E7%94%A8APP%E5%90%8D%E7%A7%B0%E3%80%81%E7%89%88%E6%9C%AC%E5%8F%B7%E3%80%81build%E6%9E%84%E5%BB%BA%E7%89%88%E6%9C%AC%E5%8F%B7-02.png" alt="Flutter获取包名、应用APP名称、版本号、build构建版本号-02"></p>
+<p>一定要注意缩进哦!</p>
+<h3 id="初始化项目">初始化项目</h3>
+<p>为了让大家更直观的看到, 这里提供<code>./lib/main.dart</code>的代码, 你可以直接进行复制并运行:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;获取设备信息Demo&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;获取设备信息&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              &#39;App信息&#39;,
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 只是一个空的项目. 我们将基于这个空项目继续我们的实例.</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/page/2020/%E9%98%BF%E8%88%AA%E7%9A%84%E6%8A%80%E6%9C%AF%E5%B0%8F%E7%AB%99-%E6%84%9F%E5%8F%97%E5%BC%80%E6%BA%90%E4%B9%8B%E7%BE%8E-%E5%93%81%E5%91%B3%E5%B9%B8%E7%A6%8F%E4%BB%A3%E7%A0%81%E4%BA%BA%E7%94%9F/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">阿航的技术小站 - 感受开源之美, 品味幸福代码人生</h2>
+
+    <p class="date text-base-content/60">
+    
+      Monday, May 25, 2020
+    
+    </p>
+
+    
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>0 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E7%9A%84%E4%B9%90%E8%B6%A3-%E4%B8%BA%E4%BD%A0%E7%9A%84git%E6%8F%90%E4%BA%A4%E6%97%A5%E5%BF%97%E6%B7%BB%E5%8A%A0emoji%E8%A1%A8%E6%83%85/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">代码提交的乐趣 - 为你的Git提交日志添加emoji表情</h2>
+
+    <p class="date text-base-content/60">
+    
+      Sunday, May 24, 2020
+    
+    </p>
+
+    <p>漫漫的代码生涯, 不知何时才是尽头😩😩. 苦中作乐, 才是良药. 我们不能改变作为程序员的命运, 但是我们可以为其添上几朵小花, 点缀一下. 本篇文章非技术干货, 而是跳出技术之外, 为我们的开发生活添加一点乐趣 &ndash; 为你的Git提交日志添加emoji表情!</p>
+<h2 id="举个栗子">举个栗子</h2>
+<p>在Github上找寻所需的轮子时, 是否看到过这样的情形:</p>
+<p><img src="images/Git%E6%8F%90%E4%BA%A4%E8%A1%A8%E6%83%85-01.png" alt=""></p>
+<p>什么? 你没发现亮点? 那我给你圈出来!</p>
+<p><img src="images/Git%E6%8F%90%E4%BA%A4%E8%A1%A8%E6%83%85-02.png" alt=""></p>
+<p>看到提交日志左边那些&quot;bu ling bu ling&quot;✨✨的小图标了吗?</p>
+<p>在代码仓库看到这个, 不知你的心情是否多少放松了一些?😏</p>
+<p>当然, 无规矩不成方圆. 如果不设定一些规范, 可想而知, 日志将会一团糟🤯🤯. (还不如没有呢!)</p>
+<h2 id="如何使用">如何使用</h2>
+<p>使用的方法很简单, 只需要找到emoji对应的代码, 放在提交日志中即可!</p>
+<p>比如🎉代表的是&quot;首次提交&quot;, 其代码为<code>🎉</code>. 我们假设进行git提交:</p>
+<pre tabindex="0"><code>git commit -m &#34;🎉 首次提交哦!&#34;
+</code></pre><p>之后去到远程仓库, 你会发现提交信息变得没那么单调啦!</p>
+<p><img src="images/Git%E6%8F%90%E4%BA%A4%E8%A1%A8%E6%83%85-03.png" alt=""></p>
+<h2 id="常用提交图标及含义">常用提交图标及含义</h2>
+<p>在这里我们放出部分常用的提交图标吧:</p>
+<p>[epcl_col width=&ldquo;20&rdquo;]</p>
+<p>🎉</p>
+<p>**🎉<br>
+**首次提交</p>
+<p>[/epcl_col]</p>
+<p>[epcl_col width=&ldquo;20&rdquo;]</p>
+<p>✨</p>
+<p>**✨<br>
+**添加新功能</p>
+<p>[/epcl_col]</p>
+<p>[epcl_col width=&ldquo;20&rdquo;]</p>
+<p>🔥</p>
+<p>**🔥<br>
+**删除文件/删除代码</p>
+<p>[/epcl_col]</p>
+<p>[epcl_col width=&ldquo;20&rdquo;]</p>
+<p>🐛</p>
+<p>**🐛<br>
+**bug修复</p>
+<p>[/epcl_col]</p>
+<p>[epcl_col width=&ldquo;20&rdquo;]</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Git push 推送异常 : &#34;Authentication failed for&#34;</h2>
+
+    <p class="date text-base-content/60">
+    
+      Saturday, May 23, 2020
+    
+    </p>
+
+    <p>今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(<code>Push failed</code>). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.</p>
+<h2 id="问题分析">问题分析</h2>
+<p>先来看一下完整报错:</p>
+<pre tabindex="0"><code>Invocation failed Server returned invalid Response. java.lang.RuntimeException: 
+Invocation failed Server returned invalid Response. 
+  at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) 
+  at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. 
+  at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) 
+  at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) 
+  at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) 
+  at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) 
+... 1 more remote: No anonymous write access. 
+Authentication failed for &#39;https://github.com/XXX&#39;
+</code></pre><p>可以看到关键字:</p>
+<pre tabindex="0"><code>No anonymous write access.
+</code></pre><p>👆这句话的字面意思是&quot;没有匿名写入权限&quot;. 但是他也没提示我登录啊? 不清不楚</p>
+<pre tabindex="0"><code>Authentication failed for &#39;https://github.com/XXX&#39;
+</code></pre><p>👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+      <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/pr-lgtm-wip-%E7%9B%98%E7%82%B9github%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BC%A9%E5%86%99/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
+      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">PR? LGTM? WIP? 盘点Github的那些缩写!</h2>
+
+    <p class="date text-base-content/60">
+    
+      Saturday, May 23, 2020
+    
+    </p>
+
+    <p>今天阿航在请求合并代码时, 仓库原作者突然回复了一个&quot;LGTM&quot;. 一下子给我搞蒙了!😲😲 拼音缩写? 不是! 查词典? 查不到! 后面Google了一下, 看到了最终解释, 茅塞顿开! PR? LGTM? SGTM? 这篇文章来给大家罗列一下Github中老司机的常用缩写!</p>
+<h2 id="例子">例子</h2>
+<p>直接举阿航碰到的:</p>
+<p><img src="images/PR-LGTM-WIP-%E7%9B%98%E7%82%B9Github%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BC%A9%E5%86%99-01.png" alt="PR LGTM WIP 盘点Github的那些缩写-01"></p>
+<p>如果你不知道这些缩写, 估计你也会一脸懵逼!</p>
+<h2 id="缩写含义">缩写&amp;含义</h2>
+<p>就像&quot;LBWNB&quot;代表&quot;卢本伟牛逼&quot;, &ldquo;现充&quot;代表&quot;现实生活很充实的人生赢家&quot;一样.</p>
+<p>如果你不去刻意了解, 是无法从缩写中猜出这些词的真正含义一样. Github的老司机会通过缩写来节省时间或者提高逼格.</p>
+<table>
+  <thead>
+      <tr>
+          <th>缩写</th>
+          <th>完整写法</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>PR</td>
+          <td>Pull Request</td>
+          <td>拉取请求, 贡献其他项目.</td>
+      </tr>
+      <tr>
+          <td>LGTM</td>
+          <td>Looks Good To Me</td>
+          <td>已阅, 代码经过review(审查), 可以合并.</td>
+      </tr>
+      <tr>
+          <td>SGTM</td>
+          <td>Sounds Good To Me</td>
+          <td>和LGTM类似, 也是经过review的意思.</td>
+      </tr>
+      <tr>
+          <td>WIP</td>
+          <td>Work In Progress</td>
+          <td>已经提上日程了, 属于&quot;部分&quot;PR, 告诉项目维护者功能还未完成, 方便其提前进行部分review</td>
+      </tr>
+      <tr>
+          <td>PTAL</td>
+          <td>Please Take A Look</td>
+          <td>你来看一下? 提示别人再审查下代码.</td>
+      </tr>
+      <tr>
+          <td>TBR</td>
+          <td>To Be Reviewed</td>
+          <td>待评审, 用于提示项目维护者进行review.</td>
+      </tr>
+      <tr>
+          <td>TL;DR</td>
+          <td>Too Long; Didn&rsquo;t Read</td>
+          <td>文字过多, 懒得看. 代码过长, 不便于进行Code review.</td>
+      </tr>
+      <tr>
+          <td>TBD</td>
+          <td>To Be Done(or Defined/Discussed/Decided/Determined)</td>
+          <td>通常是&quot;没搞定&quot;的意思, 也需要根据语境进行判断.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li>这篇<a href="https://github.com/flame-engine/flame/pull/350" target="_blank">PR</a>
+的<a href="https://github.com/impulse" target="_blank">impulse</a>
+发布的评论, 让我了解到这个东西</li>
+<li><a href="https://farer.org/2017/03/01/code-review-acronyms/" target="_blank">《LGTM? 那些迷之缩写》</a>
+</li>
+</ul>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+    </div>
+  
+</div>
+
+
+
+<div class="flex justify-center mt-8">
+  <div class="join grid grid-cols-2">
+  
+  <a href="/page/7/" title=Previous&#32;page class="join-item btn btn-outline btn-sm">
+    Previous page
+  </a>
+  
+  
+  <a href="/page/9/" title="Next page" class="join-item btn btn-outline btn-sm">
+    Next page
+  </a>
+  
+</div>
+
+</div>
+
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

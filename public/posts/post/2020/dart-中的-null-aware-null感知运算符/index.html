@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dart 中的 Null-aware (null感知运算符) | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!
+背景 Dart的Null-aware来自于Dart 1.12正式版本:
+你也可以看看官网版本介绍 用途 存在即是合理. 既然有这样的新运算符, 说明它在一定程度上节省了我们的代码, 使代码更加简洁.
+既然它被称为Null-aware, 说明这个运算符是专门用于处理null值的. 将会提供空指针的相关操作.
+创建示例对象 我们来创建一个Person对象, 方便后续使用:
+class Person{ // 性别 String gender; // 变更性别为女性 void changeToFemale(){ gender = &#34;女性&#34;; } } Person person = Person(); ?? 当前者为null时, 返回后者.
+exp ?? anotherExp 实例: 获取用户性别 当某个Person对象的gender(性别)属性为null时, 返回&rsquo;未知&#39;:
+方法一: 基础IF语句 我们可以用最基础的语句来写:
+String gender; if(person.gender!=null){ gender = person.gender; }else{ gender = &#39;未知&#39;; } 方法二: 三目运算 三目运算符相当好用:
+" />
+
+
+<meta name="keywords" content="Dart,Flutter">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Dart 中的 Null-aware (null感知运算符)">
+  <meta property="og:description" content="来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!
+背景 Dart的Null-aware来自于Dart 1.12正式版本:
+你也可以看看官网版本介绍 用途 存在即是合理. 既然有这样的新运算符, 说明它在一定程度上节省了我们的代码, 使代码更加简洁.
+既然它被称为Null-aware, 说明这个运算符是专门用于处理null值的. 将会提供空指针的相关操作.
+创建示例对象 我们来创建一个Person对象, 方便后续使用:
+class Person{ // 性别 String gender; // 变更性别为女性 void changeToFemale(){ gender = &#34;女性&#34;; } } Person person = Person(); ?? 当前者为null时, 返回后者.
+exp ?? anotherExp 实例: 获取用户性别 当某个Person对象的gender(性别)属性为null时, 返回’未知&#39;:
+方法一: 基础IF语句 我们可以用最基础的语句来写:
+String gender; if(person.gender!=null){ gender = person.gender; }else{ gender = &#39;未知&#39;; } 方法二: 三目运算 三目运算符相当好用:">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-09T00:00:00+00:00">
+    <meta property="article:tag" content="Dart">
+    <meta property="article:tag" content="Flutter">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dart 中的 Null-aware (null感知运算符)">
+  <meta name="twitter:description" content="来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!
+背景 Dart的Null-aware来自于Dart 1.12正式版本:
+你也可以看看官网版本介绍 用途 存在即是合理. 既然有这样的新运算符, 说明它在一定程度上节省了我们的代码, 使代码更加简洁.
+既然它被称为Null-aware, 说明这个运算符是专门用于处理null值的. 将会提供空指针的相关操作.
+创建示例对象 我们来创建一个Person对象, 方便后续使用:
+class Person{ // 性别 String gender; // 变更性别为女性 void changeToFemale(){ gender = &#34;女性&#34;; } } Person person = Person(); ?? 当前者为null时, 返回后者.
+exp ?? anotherExp 实例: 获取用户性别 当某个Person对象的gender(性别)属性为null时, 返回’未知&#39;:
+方法一: 基础IF语句 我们可以用最基础的语句来写:
+String gender; if(person.gender!=null){ gender = person.gender; }else{ gender = &#39;未知&#39;; } 方法二: 三目运算 三目运算符相当好用:">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Dart 中的 Null-aware (null感知运算符)">
+  <meta itemprop="description" content="来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!
+背景 Dart的Null-aware来自于Dart 1.12正式版本:
+你也可以看看官网版本介绍 用途 存在即是合理. 既然有这样的新运算符, 说明它在一定程度上节省了我们的代码, 使代码更加简洁.
+既然它被称为Null-aware, 说明这个运算符是专门用于处理null值的. 将会提供空指针的相关操作.
+创建示例对象 我们来创建一个Person对象, 方便后续使用:
+class Person{ // 性别 String gender; // 变更性别为女性 void changeToFemale(){ gender = &#34;女性&#34;; } } Person person = Person(); ?? 当前者为null时, 返回后者.
+exp ?? anotherExp 实例: 获取用户性别 当某个Person对象的gender(性别)属性为null时, 返回’未知&#39;:
+方法一: 基础IF语句 我们可以用最基础的语句来写:
+String gender; if(person.gender!=null){ gender = person.gender; }else{ gender = &#39;未知&#39;; } 方法二: 三目运算 三目运算符相当好用:">
+  <meta itemprop="datePublished" content="2020-05-09T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-05-09T00:00:00+00:00">
+  <meta itemprop="wordCount" content="140">
+  <meta itemprop="keywords" content="Dart,Flutter">
+
+      <header>
+        <h1 itemprop="headline">Dart 中的 Null-aware (null感知运算符)</h1>
+        <p class="text-sm">
+          
+            Saturday, May 9, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Saturday, May 9, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Dart%20%e4%b8%ad%e7%9a%84%20Null-aware%20%28null%e6%84%9f%e7%9f%a5%e8%bf%90%e7%ae%97%e7%ac%a6%29&amp;url=http://localhost:1313/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Dart%20%e4%b8%ad%e7%9a%84%20Null-aware%20%28null%e6%84%9f%e7%9f%a5%e8%bf%90%e7%ae%97%e7%ac%a6%29%20http://localhost:1313/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!</p>
+<h2 id="背景">背景</h2>
+<p>Dart的Null-aware来自于<code>Dart 1.12</code>正式版本:</p>
+<p><img src="images/01-2-1500x675.png" alt=""></p>
+
+
+
+  <blockquote>
+    <p>你也可以看看<a href="https://news.dartlang.org/2015/08/dart-112-released-with-null-aware.html" target="_blank">官网版本介绍</a>
+</p>
+  </blockquote>
+
+<h2 id="用途">用途</h2>
+<p>存在即是合理. 既然有这样的新运算符, 说明它在一定程度上<strong>节省了我们的代码</strong>, 使<strong>代码更加简洁</strong>.</p>
+<p>既然它被称为<code>Null-aware</code>, 说明这个运算符是专门<strong>用于处理<code>null</code>值</strong>的. 将会提供空指针的相关操作.</p>
+<p><img src="images/02-2.png" alt=""></p>
+<h2 id="创建示例对象">创建示例对象</h2>
+<p>我们来创建一个<code>Person</code>对象, 方便后续使用:</p>
+<pre tabindex="0"><code>class Person{
+  // 性别
+  String gender;
+
+  // 变更性别为女性
+  void changeToFemale(){
+    gender = &#34;女性&#34;;
+  }
+}
+
+Person person = Person();
+</code></pre><h2 id="heading">??</h2>
+<p>当前者为null时, 返回后者.</p>
+<pre tabindex="0"><code>exp ?? anotherExp
+</code></pre><h3 id="实例-获取用户性别">实例: 获取用户性别</h3>
+<p>当某个Person对象的gender(性别)属性为null时, 返回&rsquo;未知':</p>
+<h4 id="方法一-基础if语句">方法一: 基础IF语句</h4>
+<p>我们可以用最基础的语句来写:</p>
+<pre tabindex="0"><code>String gender;
+if(person.gender!=null){
+    gender = person.gender;
+}else{
+    gender = &#39;未知&#39;;
+}
+</code></pre><h4 id="方法二-三目运算">方法二: 三目运算</h4>
+<p>三目运算符相当好用:</p>
+<pre tabindex="0"><code>String gender = person.gender!=null ? person.gender : &#39;未知&#39;;
+</code></pre><p>一行搞定, 比if爽太多.</p>
+<h4 id="最佳方案-运算符">最佳方案: <code>??</code>运算符</h4>
+<p>使用刚学的<code>??</code>运算符处理:</p>
+<pre tabindex="0"><code>String gender = person.gender ?? &#39;未知&#39;;
+</code></pre><p>简洁爆了.</p>
+<h2 id="heading-1">??=</h2>
+<p>若obj为null, 把value赋值给obj.</p>
+<pre tabindex="0"><code>obj ??= value
+</code></pre><h3 id="实例-默认性别">实例: 默认性别</h3>
+<p>若Person对象的gender属性为null, 为其赋值为&quot;男性&quot;.</p>
+<p>这里就不举笨方法了, 直接上:</p>
+<pre tabindex="0"><code>person.gender ??= &#34;男性&#34;;
+</code></pre><h2 id="heading-2">?.</h2>
+<p>当obj不为null时, 调用<code>method</code>函数:</p>
+<pre tabindex="0"><code>obj?.method()
+</code></pre><h3 id="实例-变更性别">实例: 变更性别</h3>
+<p>当person不为null时, 变更性别为女性:</p>
+<pre tabindex="0"><code>person?.changeToFemale();
+</code></pre><h2 id="收工">收工!</h2>
+<p>若你跟随教程一切顺利, 那么恭喜你, 你又掌握了节省寿命的新方法!</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://medium.com/@thinkdigitalsoftware/null-aware-operators-in-dart-53ffb8ae80bb" target="_blank">Null-aware Operators in Dart - Jonathan White</a>
+</li>
+<li><a href="https://news.dartlang.org/2015/08/dart-112-released-with-null-aware.html" target="_blank">Dart1.12新闻</a>
+</li>
+<li><a href="https://www.pexels.com/zh-cn/photo/2736497/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+ 上的 <a href="https://www.pexels.com/zh-cn/@content-pixie-1405717?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Content Pixie</a>
+ 拍摄的照片</li>
+<li>(排名不分先后)</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

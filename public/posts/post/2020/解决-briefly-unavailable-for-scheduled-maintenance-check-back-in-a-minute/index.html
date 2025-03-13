@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决 Briefly unavailable for scheduled maintenance. Check back in a minute | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示Briefly unavailable for scheduled maintenance. Check back in a minute.好郁闷&hellip; 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.
+情景再现 先来看下阿航的报错, 是不是和你一样?
+解决方案 方案一: 耐心等待 遇到此种情况, 最好的解决方案就是等. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.
+如果等待无效, 请查看下面的方法.
+方案二: 删除 .maintenance 在WordPress进行更新/维护时, 会在目录下创建一个 .maintenance 文件. 当更新/维护结束时, 会自动删除它.
+所以我们只要手动删除即可解除更新/维护模式.
+进入WordPress安装目录, 找到.maintenance文件, 删除即可:
+再次刷新网站, 查看最终效果.
+感谢 wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute. " />
+
+
+<meta name="keywords" content="Wordpress">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="解决 Briefly unavailable for scheduled maintenance. Check back in a minute">
+  <meta property="og:description" content="阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示Briefly unavailable for scheduled maintenance. Check back in a minute.好郁闷… 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.
+情景再现 先来看下阿航的报错, 是不是和你一样?
+解决方案 方案一: 耐心等待 遇到此种情况, 最好的解决方案就是等. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.
+如果等待无效, 请查看下面的方法.
+方案二: 删除 .maintenance 在WordPress进行更新/维护时, 会在目录下创建一个 .maintenance 文件. 当更新/维护结束时, 会自动删除它.
+所以我们只要手动删除即可解除更新/维护模式.
+进入WordPress安装目录, 找到.maintenance文件, 删除即可:
+再次刷新网站, 查看最终效果.
+感谢 wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-07-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-07-06T00:00:00+00:00">
+    <meta property="article:tag" content="Wordpress">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="解决 Briefly unavailable for scheduled maintenance. Check back in a minute">
+  <meta name="twitter:description" content="阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示Briefly unavailable for scheduled maintenance. Check back in a minute.好郁闷… 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.
+情景再现 先来看下阿航的报错, 是不是和你一样?
+解决方案 方案一: 耐心等待 遇到此种情况, 最好的解决方案就是等. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.
+如果等待无效, 请查看下面的方法.
+方案二: 删除 .maintenance 在WordPress进行更新/维护时, 会在目录下创建一个 .maintenance 文件. 当更新/维护结束时, 会自动删除它.
+所以我们只要手动删除即可解除更新/维护模式.
+进入WordPress安装目录, 找到.maintenance文件, 删除即可:
+再次刷新网站, 查看最终效果.
+感谢 wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute.">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="解决 Briefly unavailable for scheduled maintenance. Check back in a minute">
+  <meta itemprop="description" content="阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示Briefly unavailable for scheduled maintenance. Check back in a minute.好郁闷… 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.
+情景再现 先来看下阿航的报错, 是不是和你一样?
+解决方案 方案一: 耐心等待 遇到此种情况, 最好的解决方案就是等. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.
+如果等待无效, 请查看下面的方法.
+方案二: 删除 .maintenance 在WordPress进行更新/维护时, 会在目录下创建一个 .maintenance 文件. 当更新/维护结束时, 会自动删除它.
+所以我们只要手动删除即可解除更新/维护模式.
+进入WordPress安装目录, 找到.maintenance文件, 删除即可:
+再次刷新网站, 查看最终效果.
+感谢 wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute.">
+  <meta itemprop="datePublished" content="2020-07-06T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-07-06T00:00:00+00:00">
+  <meta itemprop="wordCount" content="57">
+  <meta itemprop="keywords" content="Wordpress">
+
+      <header>
+        <h1 itemprop="headline">解决 Briefly unavailable for scheduled maintenance. Check back in a minute</h1>
+        <p class="text-sm">
+          
+            Monday, Jul 6, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Monday, Jul 6, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=%e8%a7%a3%e5%86%b3%20Briefly%20unavailable%20for%20scheduled%20maintenance.%20Check%20back%20in%20a%20minute&amp;url=http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=%e8%a7%a3%e5%86%b3%20Briefly%20unavailable%20for%20scheduled%20maintenance.%20Check%20back%20in%20a%20minute%20http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-briefly-unavailable-for-scheduled-maintenance-check-back-in-a-minute/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>阿航在更新WordPress插件时, 插件更新失败并返回了504错误. 并且再次访问网站时, 网站提示<code>Briefly unavailable for scheduled maintenance. Check back in a minute.</code>好郁闷&hellip; 折腾了一下终于搞定. 本篇文章就来记录下如何解决该问题.</p>
+<h2 id="情景再现">情景再现</h2>
+<p>先来看下阿航的报错, 是不是和你一样?</p>
+<p><img src="images/Briefly-unavailable-for-01.png" alt=""></p>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="方案一-耐心等待">方案一: 耐心等待</h3>
+<p>遇到此种情况, 最好的解决方案就是<strong>等</strong>. 因为WordPress在更新插件/主题时, 会暂停网站访问, 内部自动更新. 一般来讲, 耐心等待一段时间, 此报错就会自动解除.</p>
+<p>如果等待无效, 请查看下面的方法.</p>
+<h3 id="方案二-删除-maintenance">方案二: 删除 .maintenance</h3>
+<p>在WordPress进行更新/维护时, 会在目录下创建一个 <strong>.maintenance</strong> 文件. 当更新/维护结束时, 会自动删除它.</p>
+<p>所以我们只要手动删除即可解除更新/维护模式.</p>
+<p>进入WordPress安装目录, 找到<code>.maintenance</code>文件, 删除即可:</p>
+<p><img src="images/Briefly-unavailable-for-02.png" alt=""></p>
+<p>再次刷新网站, 查看最终效果.</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://www.cnblogs.com/ytkah/p/11097523.html" target="_blank">wordpress更新出现Briefly unavailable for scheduled maintenance. Check back in a minute.</a>
+</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

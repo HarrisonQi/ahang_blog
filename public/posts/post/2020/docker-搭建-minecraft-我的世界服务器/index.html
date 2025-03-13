@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker 搭建 Minecraft (我的世界)服务器 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.
+需具备的条件 本篇教程针对于以下人群:
+愿意为Minecraft而折腾的人. 了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读Docker官方文档 、Docker菜鸟教程 等. 拥有自己的云服务器(阿里云等). 了解常见终端语法. 使用PocketMine 在Docker Hub 中搜索关键字: pocketmine, 可以看到有好多相关镜像.
+在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&quot;没凉&quot;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!
+途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!
+点击, 进入circleeh/pocketmine详情页 .
+拉取镜像 选取版本 这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去这个Github网址 对照自己的版本!
+打开官方Github Release网址 , 可以看到:
+如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.
+回到circleeh/pocketmine详情页 , 点击Tags:
+" />
+
+
+<meta name="keywords" content="Docker,Minecraft">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Docker 搭建 Minecraft (我的世界)服务器">
+  <meta property="og:description" content="国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.
+需具备的条件 本篇教程针对于以下人群:
+愿意为Minecraft而折腾的人. 了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读Docker官方文档 、Docker菜鸟教程 等. 拥有自己的云服务器(阿里云等). 了解常见终端语法. 使用PocketMine 在Docker Hub 中搜索关键字: pocketmine, 可以看到有好多相关镜像.
+在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&#34;没凉&#34;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!
+途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!
+点击, 进入circleeh/pocketmine详情页 .
+拉取镜像 选取版本 这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去这个Github网址 对照自己的版本!
+打开官方Github Release网址 , 可以看到:
+如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.
+回到circleeh/pocketmine详情页 , 点击Tags:">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-04T00:00:00+00:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Minecraft">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker 搭建 Minecraft (我的世界)服务器">
+  <meta name="twitter:description" content="国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.
+需具备的条件 本篇教程针对于以下人群:
+愿意为Minecraft而折腾的人. 了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读Docker官方文档 、Docker菜鸟教程 等. 拥有自己的云服务器(阿里云等). 了解常见终端语法. 使用PocketMine 在Docker Hub 中搜索关键字: pocketmine, 可以看到有好多相关镜像.
+在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&#34;没凉&#34;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!
+途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!
+点击, 进入circleeh/pocketmine详情页 .
+拉取镜像 选取版本 这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去这个Github网址 对照自己的版本!
+打开官方Github Release网址 , 可以看到:
+如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.
+回到circleeh/pocketmine详情页 , 点击Tags:">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Docker 搭建 Minecraft (我的世界)服务器">
+  <meta itemprop="description" content="国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.
+需具备的条件 本篇教程针对于以下人群:
+愿意为Minecraft而折腾的人. 了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读Docker官方文档 、Docker菜鸟教程 等. 拥有自己的云服务器(阿里云等). 了解常见终端语法. 使用PocketMine 在Docker Hub 中搜索关键字: pocketmine, 可以看到有好多相关镜像.
+在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&#34;没凉&#34;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!
+途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!
+点击, 进入circleeh/pocketmine详情页 .
+拉取镜像 选取版本 这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去这个Github网址 对照自己的版本!
+打开官方Github Release网址 , 可以看到:
+如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.
+回到circleeh/pocketmine详情页 , 点击Tags:">
+  <meta itemprop="datePublished" content="2020-05-04T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-05-04T00:00:00+00:00">
+  <meta itemprop="wordCount" content="187">
+  <meta itemprop="keywords" content="Docker,Minecraft">
+
+      <header>
+        <h1 itemprop="headline">Docker 搭建 Minecraft (我的世界)服务器</h1>
+        <p class="text-sm">
+          
+            Monday, May 4, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Monday, May 4, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Docker%20%e6%90%ad%e5%bb%ba%20Minecraft%20%28%e6%88%91%e7%9a%84%e4%b8%96%e7%95%8c%29%e6%9c%8d%e5%8a%a1%e5%99%a8&amp;url=http://localhost:1313/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Docker%20%e6%90%ad%e5%bb%ba%20Minecraft%20%28%e6%88%91%e7%9a%84%e4%b8%96%e7%95%8c%29%e6%9c%8d%e5%8a%a1%e5%99%a8%20http://localhost:1313/posts/post/2020/docker-%E6%90%AD%E5%BB%BA-minecraft-%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>国内的某易代理简直是太好(la)用(ji)了. 这不最近想重拾一下青春.. 下载, 并打开国服 我的世界 Minecraft , 好家伙, 占了1g多的手机存储, 材质光影资源短缺, 界面卡到爆😓<br>
+回头一看官方版, 包大小只有98m.. 作为一个7年的MC老玩家简直不能忍! 回想起很久之前自己开服, 现在又掌握了Docker容器技术, 尝试一下自己开服.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>本篇教程针对于以下人群:</p>
+<ul>
+<li>愿意为Minecraft而折腾的人.</li>
+<li>了解Docker基本用法, 如果你对Docker还不太熟悉, 可以阅读<a href="https://www.docker.com/" target="_blank">Docker官方文档</a>
+、<a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank">Docker菜鸟教程</a>
+等.</li>
+<li>拥有自己的云服务器(阿里云等).</li>
+<li>了解常见终端语法.</li>
+</ul>
+<h2 id="使用pocketmine">使用PocketMine</h2>
+<p>在<a href="https://hub.docker.com/" target="_blank">Docker Hub</a>
+中搜索关键字: <code>pocketmine</code>, 可以看到有好多相关镜像.</p>
+
+
+
+  <blockquote>
+    <p>在选型中, 我们一般会选用活跃度高一些的镜像. 也就是&quot;没凉&quot;的镜像. 长时间不维护的镜像可能出现无法快速解决的Bug等!</p>
+  </blockquote>
+
+<p>途中最新的镜像距文章编写时间只有18个小时, 已经非常活跃了, 所以选用这个!</p>
+<p><img src="images/01-1500x812.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>点击, 进入<a href="https://hub.docker.com/r/circleeh/pocketmine" target="_blank">circleeh/pocketmine详情页</a>
+.</p>
+<h2 id="拉取镜像">拉取镜像</h2>
+<h3 id="选取版本">选取版本</h3>
+<p>这里一定要注意选择合适的版本, 若版本不兼容则会无法加入至服务器, 先来看一下自己的Minecraft版本号, 再去<a href="https://github.com/pmmp/PocketMine-MP/releases" target="_blank">这个Github网址</a>
+对照自己的版本!</p>
+<p>打开<a href="https://github.com/pmmp/PocketMine-MP/releases" target="_blank">官方Github Release网址</a>
+, 可以看到:</p>
+<p><img src="images/02-1500x745.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>如你所见, 大标题后面的是PocketMine版本号, 下面的副标题是对应的Minecraft版本号.</p>
+<p>回到<a href="https://hub.docker.com/r/circleeh/pocketmine" target="_blank">circleeh/pocketmine详情页</a>
+, 点击Tags:</p>
+<p><img src="images/03-1500x673.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>看到这个页面:</p>
+<p><img src="images/04-976x1500.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<p>如图所示, Image标签包含版本号, 后面对应了其拉取镜像的命令.</p>
+<h3 id="拉取镜像-1">拉取镜像</h3>
+<p><strong>确认版本号后</strong>, 进行拉取. 本文以<code>3.11.7-1792</code>版本为例, 在终端中输入:</p>
+<pre tabindex="0"><code>docker pull circleeh/pocketmine:3.11.7-1792
+</code></pre><p>等待拉取完毕.</p>
+<h3 id="启动容器">启动容器</h3>
+<p>接下来就是启动容器了, 先来看一下命令(下方有对应的说明):</p>
+<pre tabindex="0"><code>docker run --name=pocketmine \
+  -v /usr/local/PocketMine-Docker/config:/config \
+  -e PGID=0 -e PUID=0 \
+  -e TZ=Asia/Shanghai \
+  -p 19132:19132 \
+  -p 19132:19132/udp \
+  -p 25575:25575 \
+  circleeh/pocketmine:3.11.7-1792
+</code></pre><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>解释</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>--name=pocketmine</td>
+          <td>为容器起名</td>
+      </tr>
+      <tr>
+          <td>-v /usr/local/PocketMine-Docker/config:/config</td>
+          <td>将配置文件映射至宿主机(也就是你运行docker的主机)</td>
+      </tr>
+      <tr>
+          <td>-e PGID=0 -e PUID=0</td>
+          <td>在终端中输入<code>id &lt;运行docker的用户&gt;</code>, 比如你使用root运行的docker, 那么就输入<code>id root</code>. 终端会展示你的<code>PGID</code>以及<code>PUID</code></td>
+      </tr>
+      <tr>
+          <td>-e TZ=Asia/Shanghai \</td>
+          <td>时区, 中国一般选<code>Asia/Shanghai</code>. 若你在其他地区就改为你的所在地!</td>
+      </tr>
+      <tr>
+          <td>-p 19132:19132 \</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>-p 19132:19132/udp \</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>-p 25575:25575 \</td>
+          <td>映射端口, Minecraft通常为19132, 下面的udp映射也不要落下!</td>
+      </tr>
+      <tr>
+          <td>circleeh/pocketmine:3.11.7-1792</td>
+          <td>我们所使用的镜像名</td>
+      </tr>
+  </tbody>
+</table>
+<p>修改为自己的配置后, 启动.</p>
+<h2 id="开启云服务器外部端口">开启云服务器外部端口</h2>
+<p>别急, 还没完呢! 你还需要去云服务器开启你的端口! 这里以阿里云为例:</p>
+<p>开启两个端口:<br>
+1. UDP 19132/19132 (也就是你docker开启映射的端口)<br>
+2. TCP 19132/19132 (同上)</p>
+<p><img src="images/05-1500x658.png" alt="Docker 搭建 Minecraft (我的世界)服务器"></p>
+<h2 id="关闭白名单">关闭白名单</h2>
+<p>因为容器默认开启了白名单限制, 不在白名单内的IP将会被禁止进入. 所以我们来进入上面的配置映射目录<code>/usr/local/PocketMine-Docker/config</code>(如果你和文章不一致则修改为你自己设置的):</p>
+<pre tabindex="0"><code>cd /usr/local/PocketMine-Docker/config
+</code></pre><p>输入命令, 修改服务参数:</p>
+<pre tabindex="0"><code>vim etc/server.properties
+</code></pre><p>找到:</p>
+<pre tabindex="0"><code>white-list=on
+</code></pre><p>改为:</p>
+<pre tabindex="0"><code>white-list=off
+</code></pre><p>重启容器.</p>
+<h2 id="开始游戏">开始游戏</h2>
+<p>如果上述操作没有问题, 就可以打开我的世界, 输入云服务器IP及端口, 开始愉快的游戏了!</p>
+<h2 id="更多的服务器参数">更多的服务器参数</h2>
+<p>因为服务器可以控制的参数过多且PocketMine更新过快, 所以请大家访问<a href="https://pmmp.readthedocs.io/en/rtfd/configuration.html" target="_blank">官方配置文档</a>
+以进行额外的配置!</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="http://www.pocketmine.net/" target="_blank"><strong>PocketMine官方</strong></a>
+</li>
+<li><strong>Docker上<a href="https://hub.docker.com/u/circleeh" target="_blank">circleeh</a>
+的<a href="https://hub.docker.com/r/circleeh/pocketmine" target="_blank">pocketmine镜像</a>
+</strong></li>
+<li><strong><a href="https://www.pexels.com/zh-cn/photo/3815722/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+ 上的 <a href="https://www.pexels.com/zh-cn/@bongkarn-thanyakij-683719?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">bongkarn thanyakij</a>
+ 拍摄的照片</strong></li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

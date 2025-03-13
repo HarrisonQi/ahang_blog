@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 24 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL教程 01 什么是MySQL</title>
+      <link>http://localhost:1313/posts/post/2020/mysql%E6%95%99%E7%A8%8B-01-%E4%BB%80%E4%B9%88%E6%98%AFmysql/</link>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/mysql%E6%95%99%E7%A8%8B-01-%E4%BB%80%E4%B9%88%E6%98%AFmysql/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1eT4y1F7cp/&#34; target=&#34;_blank&#34;&gt;点击进入bilibili查看高清教程&lt;/a&gt;&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Access denied for user</title>
+      <link>http://localhost:1313/posts/post/2020/access-denied-for-user/</link>
+      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/access-denied-for-user/</guid>
+      <description>&lt;p&gt;在开发的过程中坎坷不断。今天在Spring Boot中碰到了这个异常：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`Caused by: com.mysql.cj.exceptions.CJException: Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: YES)`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;本篇文章就来记录下可能的情况以及解决方案。&lt;/p&gt;&#xA;&lt;h2 id=&#34;问题原因&#34;&gt;问题原因&lt;/h2&gt;&#xA;&lt;p&gt;问题的根源就在数据库登陆上。肯定是账号和密码有误，所以我们要仔细检查配置文件，有以下几个地方容易出错：&lt;/p&gt;&#xA;&lt;h3 id=&#34;情况一检查配置文件是否包含空格&#34;&gt;情况一：检查配置文件是否包含空格&lt;/h3&gt;&#xA;&lt;p&gt;因为application.yml似乎并不会给我们的配置文件进行去空格处理，所以我们来仔细检查。配置文件人模人样的，看起来没啥问题：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/Access-denied-for-user-01.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;结果一选中：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/Access-denied-for-user-02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;呵！其实不然。所以一定要&lt;strong&gt;去除多余的空格&lt;/strong&gt;！&lt;/p&gt;&#xA;&lt;h3 id=&#34;情况二检查username和password值是否写反&#34;&gt;情况二：检查username和password值是否写反&lt;/h3&gt;&#xA;&lt;p&gt;因为26个字母中&lt;code&gt;u&lt;/code&gt;在&lt;code&gt;p&lt;/code&gt;的后面，所以默认的yml排序中&lt;code&gt;username&lt;/code&gt;会在&lt;code&gt;password&lt;/code&gt;下面。阿航就是踩了这个坑！以为用户名在上方，导致写反！&lt;/p&gt;&#xA;&lt;h3 id=&#34;情况三检查ip是否正确&#34;&gt;情况三：检查IP是否正确&lt;/h3&gt;&#xA;&lt;p&gt;如果确定账户密码正确，我们就来看看IP是否有误吧。&lt;/p&gt;&#xA;&lt;p&gt;在数据库中输入以下SQL进行查询（这里以MySQL为例）：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;` SELECT &#x9;CONCAT( USER, &#39;@&#39;, HOST ) Result FROM &#x9;mysql.USER;`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;查看返回结果是否包含你的报错。如果不包含就说明你的IP未被创建。&lt;/p&gt;&#xA;&lt;h3 id=&#34;情况四检查数据库服务器配置&#34;&gt;情况四：检查数据库服务器配置&lt;/h3&gt;&#xA;&lt;p&gt;使用其他的软件连接你的数据库（如Navicat），使用相同的用户名和密码看看能否登陆。如果不能登陆则是数据库层的问题，与代码无关了。&lt;/p&gt;&#xA;&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;&#xA;&lt;p&gt;总之，解决方案就是细心。。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mybatis-Plus 更新字段数据为null</title>
+      <link>http://localhost:1313/posts/post/2020/mybatis-plus-%E6%9B%B4%E6%96%B0%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE%E4%B8%BAnull/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/mybatis-plus-%E6%9B%B4%E6%96%B0%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE%E4%B8%BAnull/</guid>
+      <description>&lt;p&gt;在使用Mybatis-Plus开发项目时, 需要将数据库某字段值设置为null. 但是仅将实体类的值赋值为null是不够的. 还需要为实体类的属性添加以下注解:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`@TableField(fill = FieldFill.UPDATE)`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;比如你需要设置某表的字段name为null, 则需要进入实体类, 在对应的属性上添加注解:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`@TableField(fill = FieldFill.UPDATE) private String name;`&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+  </channel>
+</rss>

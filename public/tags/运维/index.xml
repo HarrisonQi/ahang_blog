@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>运维 on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/%E8%BF%90%E7%BB%B4/</link>
+    <description>Recent content in 运维 on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E8%BF%90%E7%BB%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nginx 踩坑 413 Request Entity Too Large</title>
+      <link>http://localhost:1313/posts/post/2020/nginx-413-request-entity-too-large/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/nginx-413-request-entity-too-large/</guid>
+      <description>&lt;p&gt;在进行文件上传的操作时, Nginx 报错: 413 Request Entity Too Large&lt;/p&gt;&#xA;&lt;h2 id=&#34;问题展示&#34;&gt;问题展示&lt;/h2&gt;&#xA;&lt;p&gt;又是熟悉的踩坑环节😂! 看看今天阿航踩了啥坑吧:&lt;/p&gt;&#xA;&lt;p&gt;在尝试上传文件到服务器时, 碰到了大大的:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/nginx-413-595x154.png&#34; alt=&#34;Nginx 踩坑 413 Request Entity Too Large&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;原因&#34;&gt;原因&lt;/h2&gt;&#xA;&lt;p&gt;nginx的默认文件上传大小大于你上传文件的大小&lt;/p&gt;&#xA;&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;&#xA;&lt;h3 id=&#34;找到nginx配置文件&#34;&gt;找到nginx配置文件&lt;/h3&gt;&#xA;&lt;p&gt;找到nginx的配置文件(nginx/conf/nginx.conf)&lt;/p&gt;&#xA;&lt;h3 id=&#34;修改server的location的配置&#34;&gt;修改&lt;code&gt;server&lt;/code&gt;的&lt;code&gt;location&lt;/code&gt;的配置&lt;/h3&gt;&#xA;&lt;p&gt;找到你要修改的server, 比如:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;server {&#xA;    listen 80;&#xA;    server_name adb.abc.com;&#xA;    location / {&#xA;        root   html;&#xA;        index  index.html index.htm;&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在location块中添加一行配置:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;client_max_body_size  64m; # 改为你需要的大小!&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改后就变为了:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;server {&#xA;    listen 80;&#xA;    server_name adb.abc.com;&#xA;    location / {&#xA;        root   html;&#xA;        index  index.html index.htm;&#xA;        client_max_body_size  64m; # 改为你需要的大小!&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;保存并重启&#34;&gt;保存并重启&lt;/h3&gt;&#xA;&lt;p&gt;保存文件, 重启nginx(首个nginx替换为你安装的目录):&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

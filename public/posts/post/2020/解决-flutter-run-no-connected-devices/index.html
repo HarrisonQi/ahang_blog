@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决 flutter run: No connected devices | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-flutter-run-no-connected-devices/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="引言 今天在尝试启动flutter项目时碰到了这个问题：
+` flutter run No connected devices.` 本篇文章就来记录下解决方案。
+解决方案 方案一：检查配置 flutter是个仍在成长的框架，可能出现一些难以排查的bug。如果你之前没有踩过这个坑，在某天突然碰到了，适合进行如下操作。
+阿航解决疑难杂症的首选方式三部曲：
+运行flutter doctor，检查是否有出错的条目。 运行flutter clean，清除掉缓存等文件。 重启IDE（可以选择“清除缓存并重启”）。 重启电脑。 方案二： Android 真机 若要在Android设备上进行调试，Android设备版本需要在 4.1（API 16）以上。
+在设备上启动开发人员选项和USB调试。具体步骤请自行百度。
+用数据线连接手机和电脑，如果Android设备上出现提示，则授权计算机访问你的手机。
+在终端中运行flutter devices命令以验证Flutter是否可以识别你连接的Android设备。
+运行flutter run启动你的应用。
+安卓虚拟机 在计算机上启动VM加速。 启动Android Studio &gt; Tools &gt; Android &gt; AVD Manager and select Create Virtual Device. 选择要模拟的Android版本，然后下一步。 选择你想模拟的一个或多个系统镜像，建议使用x86或x86_64镜像 在 Emulated Performance 选择 Hardware - GLES 2.0 以启动硬件加速。 验证AVD配置是否正确，然后选择完成。 连接设备 选择IOS或安卓设备：
+" />
+
+
+<meta name="keywords" content="Collection-Box">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-flutter-run-no-connected-devices/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="解决 flutter run: No connected devices">
+  <meta property="og:description" content="引言 今天在尝试启动flutter项目时碰到了这个问题：
+` flutter run No connected devices.` 本篇文章就来记录下解决方案。
+解决方案 方案一：检查配置 flutter是个仍在成长的框架，可能出现一些难以排查的bug。如果你之前没有踩过这个坑，在某天突然碰到了，适合进行如下操作。
+阿航解决疑难杂症的首选方式三部曲：
+运行flutter doctor，检查是否有出错的条目。 运行flutter clean，清除掉缓存等文件。 重启IDE（可以选择“清除缓存并重启”）。 重启电脑。 方案二： Android 真机 若要在Android设备上进行调试，Android设备版本需要在 4.1（API 16）以上。
+在设备上启动开发人员选项和USB调试。具体步骤请自行百度。
+用数据线连接手机和电脑，如果Android设备上出现提示，则授权计算机访问你的手机。
+在终端中运行flutter devices命令以验证Flutter是否可以识别你连接的Android设备。
+运行flutter run启动你的应用。
+安卓虚拟机 在计算机上启动VM加速。 启动Android Studio &gt; Tools &gt; Android &gt; AVD Manager and select Create Virtual Device. 选择要模拟的Android版本，然后下一步。 选择你想模拟的一个或多个系统镜像，建议使用x86或x86_64镜像 在 Emulated Performance 选择 Hardware - GLES 2.0 以启动硬件加速。 验证AVD配置是否正确，然后选择完成。 连接设备 选择IOS或安卓设备：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-12-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-12-12T00:00:00+00:00">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="解决 flutter run: No connected devices">
+  <meta name="twitter:description" content="引言 今天在尝试启动flutter项目时碰到了这个问题：
+` flutter run No connected devices.` 本篇文章就来记录下解决方案。
+解决方案 方案一：检查配置 flutter是个仍在成长的框架，可能出现一些难以排查的bug。如果你之前没有踩过这个坑，在某天突然碰到了，适合进行如下操作。
+阿航解决疑难杂症的首选方式三部曲：
+运行flutter doctor，检查是否有出错的条目。 运行flutter clean，清除掉缓存等文件。 重启IDE（可以选择“清除缓存并重启”）。 重启电脑。 方案二： Android 真机 若要在Android设备上进行调试，Android设备版本需要在 4.1（API 16）以上。
+在设备上启动开发人员选项和USB调试。具体步骤请自行百度。
+用数据线连接手机和电脑，如果Android设备上出现提示，则授权计算机访问你的手机。
+在终端中运行flutter devices命令以验证Flutter是否可以识别你连接的Android设备。
+运行flutter run启动你的应用。
+安卓虚拟机 在计算机上启动VM加速。 启动Android Studio &gt; Tools &gt; Android &gt; AVD Manager and select Create Virtual Device. 选择要模拟的Android版本，然后下一步。 选择你想模拟的一个或多个系统镜像，建议使用x86或x86_64镜像 在 Emulated Performance 选择 Hardware - GLES 2.0 以启动硬件加速。 验证AVD配置是否正确，然后选择完成。 连接设备 选择IOS或安卓设备：">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="解决 flutter run: No connected devices">
+  <meta itemprop="description" content="引言 今天在尝试启动flutter项目时碰到了这个问题：
+` flutter run No connected devices.` 本篇文章就来记录下解决方案。
+解决方案 方案一：检查配置 flutter是个仍在成长的框架，可能出现一些难以排查的bug。如果你之前没有踩过这个坑，在某天突然碰到了，适合进行如下操作。
+阿航解决疑难杂症的首选方式三部曲：
+运行flutter doctor，检查是否有出错的条目。 运行flutter clean，清除掉缓存等文件。 重启IDE（可以选择“清除缓存并重启”）。 重启电脑。 方案二： Android 真机 若要在Android设备上进行调试，Android设备版本需要在 4.1（API 16）以上。
+在设备上启动开发人员选项和USB调试。具体步骤请自行百度。
+用数据线连接手机和电脑，如果Android设备上出现提示，则授权计算机访问你的手机。
+在终端中运行flutter devices命令以验证Flutter是否可以识别你连接的Android设备。
+运行flutter run启动你的应用。
+安卓虚拟机 在计算机上启动VM加速。 启动Android Studio &gt; Tools &gt; Android &gt; AVD Manager and select Create Virtual Device. 选择要模拟的Android版本，然后下一步。 选择你想模拟的一个或多个系统镜像，建议使用x86或x86_64镜像 在 Emulated Performance 选择 Hardware - GLES 2.0 以启动硬件加速。 验证AVD配置是否正确，然后选择完成。 连接设备 选择IOS或安卓设备：">
+  <meta itemprop="datePublished" content="2020-12-12T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-12-12T00:00:00+00:00">
+  <meta itemprop="wordCount" content="61">
+  <meta itemprop="keywords" content="Collection-Box">
+
+      <header>
+        <h1 itemprop="headline">解决 flutter run: No connected devices</h1>
+        <p class="text-sm">
+          
+            Saturday, Dec 12, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Saturday, Dec 12, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=%e8%a7%a3%e5%86%b3%20flutter%20run:%20No%20connected%20devices&amp;url=http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-flutter-run-no-connected-devices/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-flutter-run-no-connected-devices/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=%e8%a7%a3%e5%86%b3%20flutter%20run:%20No%20connected%20devices%20http://localhost:1313/posts/post/2020/%E8%A7%A3%E5%86%B3-flutter-run-no-connected-devices/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <h2 id="引言">引言</h2>
+<p>今天在尝试启动flutter项目时碰到了这个问题：</p>
+<pre><code>` flutter run   No connected devices.`
+</code></pre>
+<p>本篇文章就来记录下解决方案。</p>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="方案一检查配置">方案一：检查配置</h3>
+<p>flutter是个仍在成长的框架，可能出现一些难以排查的bug。如果你之前没有踩过这个坑，在某天突然碰到了，适合进行如下操作。</p>
+<p>阿航解决疑难杂症的首选方式三部曲：</p>
+<ol>
+<li>运行<code>flutter doctor</code>，检查是否有出错的条目。</li>
+<li>运行<code>flutter clean</code>，清除掉缓存等文件。</li>
+<li>重启IDE（可以选择“清除缓存并重启”）。</li>
+<li>重启电脑。</li>
+</ol>
+<h3 id="方案二">方案二：</h3>
+<h4 id="android-真机">Android 真机</h4>
+<p>若要在Android设备上进行调试，Android设备版本需要在 4.1（API 16）以上。</p>
+<p>在设备上启动开发人员选项和USB调试。具体步骤请自行百度。</p>
+<p>用数据线连接手机和电脑，如果Android设备上出现提示，则授权计算机访问你的手机。</p>
+<p>在终端中运行<code>flutter devices</code>命令以验证Flutter是否可以识别你连接的Android设备。</p>
+<p>运行<code>flutter run</code>启动你的应用。</p>
+<h4 id="安卓虚拟机">安卓虚拟机</h4>
+<ol>
+<li>在计算机上启动VM加速。</li>
+<li>启动Android Studio &gt; Tools &gt; Android &gt; AVD Manager and select Create Virtual Device.</li>
+<li>选择要模拟的Android版本，然后下一步。</li>
+<li>选择你想模拟的一个或多个系统镜像，建议使用x86或x86_64镜像</li>
+<li>在 Emulated Performance 选择 Hardware - GLES 2.0 以启动硬件加速。</li>
+<li>验证AVD配置是否正确，然后选择完成。</li>
+</ol>
+<h4 id="连接设备">连接设备</h4>
+<p>选择IOS或安卓设备：</p>
+<p><img src="images/image.png" alt=""></p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

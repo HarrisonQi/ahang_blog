@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter 游戏开发(flame) 03 界面和弹窗(3/5) | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-03-%E7%95%8C%E9%9D%A2%E5%92%8C%E5%BC%B9%E7%AA%973-5/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="引言 我们在这一章将为游戏编写不同的屏幕(界面)和对话框.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) Flame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章 Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程之前的全部要求👈 更多的资源包 - 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站Open Game Art . 我们将使用与前一部分相同的编码规范👩‍🏫
+如果你还没有阅读以前的部分, 你最好回顾下! 从第一章 开始.
+👉在Github 或码云 上查看本章的代码.
+新资源包 我们将使用此资源包, 其中包含游戏所需的第二组图片资源.
+点击下载资源包 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.
+这意味着您可以共享、复制或者重新分发资源.
+你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改. 你不得将资源用于商业目的. 如果混合, 转换或者构建资源, 则不能分发修改后的资源. 你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情. 点击此处了解有关 CC-BY-NC-ND 许可证的更多信息 " />
+
+
+<meta name="keywords" content="Flame,Flutter,游戏开发">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-03-%E7%95%8C%E9%9D%A2%E5%92%8C%E5%BC%B9%E7%AA%973-5/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)">
+  <meta property="og:description" content="引言 我们在这一章将为游戏编写不同的屏幕(界面)和对话框.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) Flame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章 Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程之前的全部要求👈 更多的资源包 - 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站Open Game Art . 我们将使用与前一部分相同的编码规范👩‍🏫
+如果你还没有阅读以前的部分, 你最好回顾下! 从第一章 开始.
+👉在Github 或码云 上查看本章的代码.
+新资源包 我们将使用此资源包, 其中包含游戏所需的第二组图片资源.
+点击下载资源包 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.
+这意味着您可以共享、复制或者重新分发资源.
+你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改. 你不得将资源用于商业目的. 如果混合, 转换或者构建资源, 则不能分发修改后的资源. 你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情. 点击此处了解有关 CC-BY-NC-ND 许可证的更多信息">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-17T00:00:00+00:00">
+    <meta property="article:tag" content="Flame">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="游戏开发">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)">
+  <meta name="twitter:description" content="引言 我们在这一章将为游戏编写不同的屏幕(界面)和对话框.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) Flame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章 Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程之前的全部要求👈 更多的资源包 - 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站Open Game Art . 我们将使用与前一部分相同的编码规范👩‍🏫
+如果你还没有阅读以前的部分, 你最好回顾下! 从第一章 开始.
+👉在Github 或码云 上查看本章的代码.
+新资源包 我们将使用此资源包, 其中包含游戏所需的第二组图片资源.
+点击下载资源包 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.
+这意味着您可以共享、复制或者重新分发资源.
+你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改. 你不得将资源用于商业目的. 如果混合, 转换或者构建资源, 则不能分发修改后的资源. 你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情. 点击此处了解有关 CC-BY-NC-ND 许可证的更多信息">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)">
+  <meta itemprop="description" content="引言 我们在这一章将为游戏编写不同的屏幕(界面)和对话框.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) Flame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章 Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程之前的全部要求👈 更多的资源包 - 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站Open Game Art . 我们将使用与前一部分相同的编码规范👩‍🏫
+如果你还没有阅读以前的部分, 你最好回顾下! 从第一章 开始.
+👉在Github 或码云 上查看本章的代码.
+新资源包 我们将使用此资源包, 其中包含游戏所需的第二组图片资源.
+点击下载资源包 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.
+这意味着您可以共享、复制或者重新分发资源.
+你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改. 你不得将资源用于商业目的. 如果混合, 转换或者构建资源, 则不能分发修改后的资源. 你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情. 点击此处了解有关 CC-BY-NC-ND 许可证的更多信息">
+  <meta itemprop="datePublished" content="2020-04-17T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-04-17T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1926">
+  <meta itemprop="keywords" content="Flame,Flutter,游戏开发">
+
+      <header>
+        <h1 itemprop="headline">Flutter 游戏开发(flame) 03 界面和弹窗(3/5)</h1>
+        <p class="text-sm">
+          
+            Friday, Apr 17, 2020
+          
+
+          | <span>10 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Friday, Apr 17, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2003%20%e7%95%8c%e9%9d%a2%e5%92%8c%e5%bc%b9%e7%aa%97%283/5%29&amp;url=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-03-%E7%95%8C%E9%9D%A2%E5%92%8C%E5%BC%B9%E7%AA%973-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-03-%E7%95%8C%E9%9D%A2%E5%92%8C%E5%BC%B9%E7%AA%973-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2003%20%e7%95%8c%e9%9d%a2%e5%92%8c%e5%bc%b9%e7%aa%97%283/5%29%20http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-03-%E7%95%8C%E9%9D%A2%E5%92%8C%E5%BC%B9%E7%AA%973-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <h2 id="引言">引言</h2>
+<p>我们在这一章将为游戏编写不同的屏幕(界面)和对话框.</p>
+<p>下面是我们本系列教程的文章目录:</p>
+<ul>
+<li><a href="https://www.bugcatt.com/archives/279" target="_blank">Flutter 游戏开发(flame) Flame介绍</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/292" target="_blank">Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)</a>
+</li>
+<li><a href="https://bugcatt.com/archives/560" target="_blank">Flutter 游戏开发(flame) 02 图形和动画(2/5)</a>
+</li>
+<li><strong>Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章</strong></li>
+<li><a href="https://bugcatt.com/archives/564" target="_blank">Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)</a>
+</li>
+<li><a href="https://bugcatt.com/archives/731" target="_blank">Flutter 游戏开发(flame) 05 收尾和打包(5/5)</a>
+</li>
+</ul>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ol>
+<li>本系列教程之前的<strong>全部要求</strong>👈</li>
+<li><strong>更多的资源包</strong> - 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站<a href="https://opengameart.org/" target="_blank">Open Game Art</a>
+.</li>
+</ol>
+<p>我们将使用与前一部分相同的<strong>编码规范</strong>👩‍🏫</p>
+<p>如果你还没有阅读以前的部分, 你最好回顾下! 从<a href="https://blog.bugcatt.com/archives/279" target="_blank">第一章</a>
+开始.</p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536" target="_blank">码云</a>
+上查看本章的代码.</strong></p>
+<h2 id="新资源包">新资源包</h2>
+<p>我们将使用此资源包, 其中包含游戏所需的第二组图片资源.</p>
+<p><img src="images/01.jpg" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p><a href="https://jap.alekhin.io/wp-content/uploads/2019/03/resource-pack-part-3.zip" target="_blank"><strong>点击下载资源包</strong></a>
+</p>
+<hr>
+<p>🔴 <strong>注意</strong>: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是<a href="https://github.com/japalekhin/langaw" target="_blank">Github上Langaw(原作者)</a>
+项目的一部分, 该项目获得<code>CC-BY-NC-ND</code>许可证的许可.</p>
+<p>这意味着您可以共享、复制或者重新分发资源.</p>
+<ul>
+<li>你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改.</li>
+<li>你不得将资源用于商业目的.</li>
+<li>如果混合, 转换或者构建资源, 则不能分发修改后的资源.</li>
+<li>你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情.</li>
+</ul>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode" target="_blank">点击此处了解有关 CC-BY-NC-ND 许可证的更多信息</a>
+</p>
+<p>阿航在这里提醒: 目前国内的版权保护做的不够好. 希望大家能够保护资源原作者辛苦的创作🙏🙏! 不能使用未经许可且无版权的资源, 向盗版说不👋!</p>
+<hr>
+<h2 id="开始">开始</h2>
+<p>本系列教程的<a href="https://blog.bugcatt.com/archives/731" target="_blank">终章</a>
+将会完成一个具有互动性、良好的图形和动画的游戏.</p>
+<p>现在是&quot;勉强能玩&quot;, 我们还需要给用户提供更熟悉的游戏体验.</p>
+<p>我们将新添加游戏的标志和图形 设置欢迎屏幕, 修改生成逻辑, 最后设置对话框, 显示&quot;游戏指南&quot;和致谢.</p>
+<h3 id="第一步-新的图像资源">第一步: 新的图像资源</h3>
+<p>下载上面资源包, 放入<code>./assets/images</code>.</p>
+<p>我们需要7张图片:</p>
+<table>
+  <thead>
+      <tr>
+          <th>图片名称</th>
+          <th>推荐纵横比</th>
+          <th>区块数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>游戏品牌标题</td>
+          <td>7:4</td>
+          <td>7 × 4</td>
+      </tr>
+      <tr>
+          <td>开始按钮</td>
+          <td>2:1</td>
+          <td>6 × 3</td>
+      </tr>
+      <tr>
+          <td>&ldquo;游戏失败&quot;涂鸦</td>
+          <td>7:5</td>
+          <td>7 × 5</td>
+      </tr>
+      <tr>
+          <td>&ldquo;得分&quot;对话框</td>
+          <td>3:2</td>
+          <td>12 × 8</td>
+      </tr>
+      <tr>
+          <td>&ldquo;帮助&quot;对话框</td>
+          <td>3:2</td>
+          <td>12 × 8</td>
+      </tr>
+      <tr>
+          <td>&ldquo;得分&quot;图标</td>
+          <td>1:1</td>
+          <td>1 × 1</td>
+      </tr>
+      <tr>
+          <td>&ldquo;帮助&quot;图标</td>
+          <td>1:1</td>
+          <td>1 × 1</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <blockquote>
+    <p>🟡 提示: 我们的游戏宽度为<code>9个区块</code>, 动态的高度取决于玩家的手机屏幕纵横比. 如果你想了解更多, 请回顾<a href="https://blog.bugcatt.com/archives/292" target="_blank">此章节</a>
+.</p>
+  </blockquote>
+
+<p>需要添加的资源如下:</p>
+<pre tabindex="0"><code>./assets/images/bg/lose-splash.png
+./assets/images/branding
+./assets/images/branding/title.png
+./assets/images/ui
+./assets/images/ui/dialog-credits.png
+./assets/images/ui/dialog-help.png
+./assets/images/ui/icon-credits.png
+./assets/images/ui/icon-help.png
+./assets/images/ui/start-button.png
+</code></pre><p>与上一章类似, 我们需要通知Flutter在打包时添加这些资源文件.在<code>./pubspec.yaml</code>中的<code>assets</code>中添加:</p>
+<pre tabindex="0"><code>    - assets/images/bg/lose-splash.png
+    - assets/images/branding/title.png
+    - assets/images/ui/dialog-credits.png
+    - assets/images/ui/dialog-help.png
+    - assets/images/ui/icon-credits.png
+    - assets/images/ui/icon-help.png
+    - assets/images/ui/start-button.png
+</code></pre>
+
+
+  <blockquote>
+    <p>🟡 提示: 注意<code>./pubspec.yaml</code>文件中的缩进哦!🕵️‍♂️</p>
+  </blockquote>
+
+<p>现在来预加载这些资源文件, 打开<code>./lib/main.dart</code>, 添加以下行在<code>Flame.images.loadAll</code>中, 加在之前预加载的后面:</p>
+<pre tabindex="0"><code>&#39;bg/lose-splash.png&#39;,
+&#39;branding/title.png&#39;,
+&#39;ui/dialog-credits.png&#39;,
+&#39;ui/dialog-help.png&#39;,
+&#39;ui/icon-credits.png&#39;,
+&#39;ui/icon-help.png&#39;,
+&#39;ui/start-button.png&#39;,
+</code></pre><p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/28c41081e0551dad343bf74ef9b3d9586f20f840" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/28c41081e0551dad343bf74ef9b3d9586f20f840" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第二步-界面">第二步: 界面</h3>
+<p>一个良好的游戏至少需要一个欢迎界面以及游戏界面. 在玩了一段时间后(输与赢)提供一个过渡界面比较好.</p>
+<p>玩家应该能够识别出当前屏幕或者界面是干嘛的, 为用户提供引导. 在我们的游戏中, 打小飞蝇之前应该先按下开始按钮.</p>
+<h4 id="准备游戏界面">准备游戏界面</h4>
+<table>
+  <thead>
+      <tr>
+          <th>界面名称</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>home(主界面/欢迎界面)</td>
+          <td>在首次打开游戏时显示, 它将在屏幕中央显示标题.</td>
+      </tr>
+      <tr>
+          <td>playing(游戏中)</td>
+          <td>玩家在游戏中显示的界面. 将隐藏游戏标题并开始生成小飞蝇.</td>
+      </tr>
+      <tr>
+          <td>you lost(游戏结束)</td>
+          <td>将在游戏失败时显示. 当玩家输掉游戏时, 将会在屏幕中央显示一个&quot;You lose&quot;的图片, 并附上开始游戏按钮供玩家重玩.</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <blockquote>
+    <p>🟡 提示: 对于所有的界面, 将显示相同的背景. 小飞蝇是可见的. 会使玩家觉得<code>playing</code>为主界面, <code>home</code>界面欢迎玩家进入游戏. 最后, <code>you lost</code>界面是玩家输掉时作为与<code>playing</code>界面的过渡.</p>
+  </blockquote>
+
+<p>游戏需要记录当前应该显示哪一个界面, 我们可以用整数0,1,2,3来编号, 也可用字符串等. 但是这些都是比较难以维护的. 所以我们使用专门干这个的: <code>enum</code> 枚举类型.</p>
+<p>创建<code>./lib/view.dart</code>, 内容:</p>
+<pre tabindex="0"><code>enum View {
+  home,
+  playing,
+  lost,
+}
+</code></pre><p>现在我们需要为我们的game类添加一个实例变量. 该实例变量为我们保留当前<code>view</code>的值.</p>
+<p>回到<code>./lib/langaw-game.dart</code>我们需要进行导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/view.dart&#39;;
+</code></pre><p>然后添加实例变量, 命名为<code>activeView</code>, 类型为<code>View</code>(之前定义的枚举类):</p>
+<pre tabindex="0"><code>View activeView = View.home;
+</code></pre><p>现在我们已经准备好处理每个界面啦!😝</p>
+<h4 id="home主界面">home(主界面)</h4>
+<p>已经多次提到&quot;界面&quot;这个概念. 那么到底什么是&quot;界面&rdquo;?😯😯</p>
+<p>在代码中, 界面只是另一个<code>component</code>, 就像游戏逻辑可以拥有自己的<code>componen</code>t. 它可以是一个虚拟的(嵌入到游戏逻辑中), 就像&quot;playing&quot;界面一样, 无论玩家当前在哪一个界面上, 它总是可见的.</p>
+<p>我们在定义主界面时将使用一个<code>component</code>. 像其他的component一样, 我们只需要从game loop中调用它的<code>render()</code> 和<code>update()</code>.</p>
+<p>创建目录<code>./lib/views</code>.<br>
+创建文件<code>./lib/views/home-view.dart</code>, 内容:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class HomeView {
+  final LangawGame game;
+  Rect titleRect;
+  Sprite titleSprite;
+
+  HomeView(this.game) {}
+
+  void render(Canvas c) {}
+
+  void update(double t) {}
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 如果你掌握了本系列之前的教程, 这个格式应该很熟悉了吧!😙</p>
+<p>首先导入需要使用的class和文件. 定义<code>HomeView</code>类. 该类有三个实例变量, 其中一个是<code>final</code>, 在创建该类时需要传入. 该类还有一个构造函数和将被game loop调用的两个函数<code>update()</code>和<code>render()</code></p>
+  </blockquote>
+
+<p><strong>在构造函数中</strong>, 我们初始化<code>titleRect</code>和<code>titleSprite</code>, 使它们可在<code>render()</code>中使用:</p>
+<pre tabindex="0"><code>titleRect = Rect.fromLTWH(
+  game.tileSize,
+  (game.screenSize.height / 2) - (game.tileSize * 4),
+  game.tileSize * 7,
+  game.tileSize * 4,
+);
+titleSprite = Sprite(&#39;branding/title.png&#39;);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 该代码块实际上只有两行, 分别为<code>titleRect</code>和<code>titleSprite</code>赋值.</p>
+<p><code>titleRect</code>使用<code>Rect</code>类型赋值, 该<code>Rect</code>垂直分布到尺寸线中. 中间的4行对应工厂构造函数<code>.fromLTWH</code>所需的参数.</p>
+<p>我们事先知道, 我们将在<code>7×4</code>矩形内显示标题图像. 这就是为什么我们将<code>game.tileSize * 7</code>和<code>game.tileSize * 4</code>传递到对应矩形的后两个参数<code>Width</code>和<code>Width</code>.</p>
+<p>对于<code>Left</code>参数, 我们从屏幕宽度(9个区块)中减去标题图像矩形宽度(7个区块), 然后剩下2个区块. 为了使图像居中, 我们将这2个额外的区块分布到每一侧(左和右), 使图像偏移1个区块. 这就是为什么我们传入<code>game.tileSize * 1</code>(也就是<code>game.tileSize</code>)的原因.</p>
+<p><code>Top</code>参数略有不同. 我们不希望标题图像完全居中, 只是垂直居中. 若要计算中心, 我们只需将屏幕高度除以2. 从中减去标题图像高度(4个区块)将为我们提供所需的适当偏移, 实现所需的居中效果.</p>
+  </blockquote>
+
+<p>在<code>render()</code>中, 添加:</p>
+<pre tabindex="0"><code>titleSprite.renderRect(c, titleRect);
+</code></pre><p><code>HomeView</code>类截图:</p>
+<p><img src="images/02-3.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>回到game类<code>./lib/langaw-game.dart</code>, 导入<code>HomeView</code>类:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/views/home-view.dart&#39;;
+</code></pre><p>添加<code>HomeView</code>类型实例变量<code>homeView</code>:</p>
+<pre tabindex="0"><code>HomeView homeView;
+</code></pre><p>我们需要在确定屏幕尺寸后初始化此变量. 在<code>initialize</code>中, <code>resize</code>后添加:</p>
+<pre tabindex="0"><code>homeView = HomeView(this);
+</code></pre><p>game类代码截图:</p>
+<p><img src="images/03-2-1024x794.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>最后, 我们希望将<code>HomeView</code>渲染在屏幕上. 因此在game类的<code>render</code>函数内部, 在<code>render()</code>底部调用<code>HomeView</code>:</p>
+<pre tabindex="0"><code>if (activeView == View.home) homeView.render(canvas);
+</code></pre>
+
+
+  <blockquote>
+    <p>🟡 提示: 渲染的顺序和代码顺序一致. 我们先要背景, 然后是小飞蝇, 最终是标题. 这将确保标题被置顶.</p>
+  </blockquote>
+
+
+
+
+  <blockquote>
+    <p>💡 代码解析: 我们先判断当前界面是否为home, 如果是就渲染<code>homeView</code>实例. 如果不是, <code>render()</code>就会跳过这行, <code>homeView</code>也不会被渲染.</p>
+  </blockquote>
+
+<p>🟢 运行游戏, 你应该会看到标题被渲染:</p>
+<p><img src="images/04-4-1024x812.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<h4 id="开始按钮component">开始按钮component</h4>
+<p>当进入game界面时, 玩家仍然可以击落小飞蝇. 但这对游戏没什么影响. 就像输掉比赛后小飞蝇又会重新生成. 此外, 玩家击落小飞蝇暂时不会增加分数. 后面将会讨论评分系统.</p>
+<p>所以如果想让游戏开始, 我们必须要有一个开始按钮. 首先让我们创建另一个component, 名为<code>StartButton</code>. 创建文件<code>./lib/components/start-button.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class StartButton {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  StartButton(this.game) {}
+
+  void render(Canvas c) {}
+
+  void update(double t) {}
+
+  void onTapDown() {}
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 类的定义和其他的一样(包括最近创建的<code>HomeView</code>). 这里需要额外关注的是<code>onTapDown</code>处理器. 这将包含&quot;启动游戏&quot;的代码.</p>
+  </blockquote>
+
+<p>进入构造函数, 初始化<code>rect</code>和<code>sprite</code>变量:</p>
+<pre tabindex="0"><code>rect = Rect.fromLTWH(
+  game.tileSize * 1.5,
+  (game.screenSize.height * .75) - (game.tileSize * 1.5),
+  game.tileSize * 6,
+  game.tileSize * 3,
+);
+sprite = Sprite(&#39;ui/start-button.png&#39;);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 这几乎和<code>HomeView</code>的构造函数一样.</p>
+<p>最主要的区别是, 除了尺寸为<code>6 × 3</code>个区块, 还有Left和Top的偏移量.</p>
+<p>开始按钮的宽度是<code>6</code>个区块, 屏幕的总宽度是<code>9</code>个区块, 那么剩下<code>3</code>个区块, 两侧各剩下<code>1.5</code>个区块. 因此我们Left参数传入<code>game.tileSize * 1.5</code>.</p>
+<p>对于Top参数, 此计算将使按钮的垂直中心正好位于屏幕高度(从上至下)的四分之三(<code>0.75</code>). 若你对此算法有疑问, 欢迎留言.</p>
+  </blockquote>
+
+<p>在进行初始化<code>rect</code>和<code>sprite</code>变量后. 我们需要在<code>render()</code>中通过下面的代码来渲染图像:</p>
+<pre tabindex="0"><code>sprite.renderRect(c, rect);
+</code></pre><p>现在的<code>./lib/components/start-button.dart</code>代码截图:</p>
+<p><img src="images/05-2-1024x797.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>我们现在必须添加一个<code>StartButton</code>的component实例到game类中, 打开<code>./lib/langaw-game.dart</code>, 先导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/start-button.dart&#39;;
+</code></pre><p>在其他实例变量下面添加:</p>
+<pre tabindex="0"><code>StartButton startButton;
+</code></pre><p>在确定屏幕尺寸后, 使用新的<code>StartButton</code>初始化<code>startButton</code>变量:</p>
+<pre tabindex="0"><code>startButton = StartButton(this);
+</code></pre><p>将下面的代码块添加至<code>render()</code>:</p>
+<pre tabindex="0"><code>if (activeView == View.home || activeView == View.lost) {
+  startButton.render(canvas);
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 聪明的你应该已经注意到了, 导入类、 创建该类的实例并将其存储在实例变量中, 并最终渲染该类这一套流程需要上面的四块代码. 这是渲染component的通用&quot;套路&rdquo;!🤩🤩🤩🤩</p>
+  </blockquote>
+
+<p>开始按钮将会同时在home界面和&quot;you lost&quot;界面被渲染. 这样, 玩家就可以从这两个界面开始游戏或重玩游戏.</p>
+<p>🟢 运行游戏, 现在应该可以看到开始按钮了!</p>
+<p><img src="images/06-2.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<h4 id="绑定开始按钮点击">绑定&quot;开始&quot;按钮点击</h4>
+<p>接下来我们需要让开始按钮响应玩家的点击.</p>
+<p>首先, 我们需要确保点击不会穿过对象. 比如点击了&quot;开始&quot;按钮, 同一位置的小飞蝇不会收到点击事件.</p>
+<p>在我们的game类的<code>onTapDown</code>的处理器中, 我们将创建一个变量, 该变量将保存是否调用了点击处理器.</p>
+<p>让我们将此变量称为<code>isHandled</code>. 我们在<code>onTapDown</code>处理器的开头创建并将其默认值设置为<code>false</code>.</p>
+<pre tabindex="0"><code>bool isHandled = false;
+</code></pre><p>在检查点击是否击中component范围内前, 我们先要检查<code>isHandled</code>的值是否仍为<code>false</code>, 为<code>false</code>才会调用component的点击处理器.</p>
+<pre tabindex="0"><code>if (!isHandled &amp;&amp; startButton.rect.contains(d.globalPosition)) {
+  if (activeView == View.home || activeView == View.lost) {
+    startButton.onTapDown();
+    isHandled = true;
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先, 检查<code>isHandled</code>, 确保点击事件未被处理过. 该判断还包含点击位置是否在<code>startButton</code>的<code>rect</code>内部. 如果判断通过, 再次判断玩家当前是否在home界面或lost（失败）界面.</p>
+<p>只有满足上述所有条件, game才会调用开始按钮的<code>onTapDown</code>处理器. 变量<code>isHandled</code>被重新赋值为<code>true</code>, 以便后面代码知道点击事件已被处理.</p>
+  </blockquote>
+
+
+
+
+  <blockquote>
+    <p>🟡 提示: 所有这些条件其实可以放在同一行<code>if</code>内进行判断, 但是为了可读性需要进行拆分. 实际上这么写代码非常丑…😑😑😑😑</p>
+  </blockquote>
+
+<p>下一步我们要使用<code>isHandled</code>判断来包裹当前的小飞蝇点击处理器:</p>
+<pre tabindex="0"><code>if (!isHandled) {
+  flies.forEach((Fly fly) {
+    if (fly.flyRect.contains(d.globalPosition)) {
+      fly.onTapDown();
+      isHandled = true;
+    }
+  });
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 它基本上与我们上次的代码块相同, 只有两处不同. 第一个是它被<code>if(isHandled)</code>所包住, 这样使代码块只有在点击事件还没有被处理时才允许(本例中通过start按钮, 因它是上面唯一的处理器).第二个是若至少有一只小飞蝇被击中, 则将<code>isHandled</code>变量改为true.</p>
+  </blockquote>
+
+
+
+
+  <blockquote>
+    <p>🟡 提示: 处理点击事件时, 首先检查最上面的对象. 这个与渲染的顺序截然相反. 我们应该检查最底层(首先渲染的一层)对象是否被点击. 因此, 我们首先检查最上面的对象(最后渲染的一层)的点击事件.</p>
+  </blockquote>
+
+<p><code>onTapDown</code>处理器代码截图:</p>
+<p><img src="images/07-2-977x1500.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>现在我们需要返回开始按钮文件(<code>./lib/components/start-button.dart</code>)</p>
+<p>并编写可以处理实际点击的代码.</p>
+<p>当调用开始按钮的<code>onTapHandler</code>时, 我们需要将游戏的<code>activeView</code>值设为<code>View.playing</code>. 因此, 我们需要导入<code>View</code>枚举类:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/view.dart&#39;;
+</code></pre><p>在<code>onTapHandler()</code>中, 以下代码行将game的<code>activeView</code>设为正确的值:</p>
+<pre tabindex="0"><code>game.activeView = View.playing;
+</code></pre><p><img src="images/08-2.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>🟢 运行游戏, 测试开始游戏按钮:</p>
+<p><img src="images/09-3.gif" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<h4 id="游戏失败条件">游戏失败条件</h4>
+<p>在我们创建了you lost界面前, 先来讨论下玩家怎么才会输掉游戏. 有两个条件: 第一个是玩家打偏了(未击中小飞蝇). 目前我们只来处理这种情况. 下一章会来处理第二个条件以及得分系统.</p>
+<p>若要检查是否打偏, 我们需要创建另一个布尔类型的变量, 当小飞蝇被击中时, 该变量将会作为标识. 此变量将在循环小飞蝇前定义, 便于判断命中.</p>
+<p>打开<code>./lib/langaw-game.dart</code>并将以下变量声明放在<code>onTapDown</code>处理器中, 循环小飞蝇前:</p>
+<pre tabindex="0"><code>bool didHitAFly = false;
+</code></pre><p>循环小飞蝇时, 将以下行放入<code>if</code>块中, 以测试点击是否成功. 最好在将<code>isHandled</code>复制为<code>true</code>前后:</p>
+<pre tabindex="0"><code>didHitAFly = true;
+</code></pre><p>然后在<code>forEach</code>循环后, 我们将判断当前是否在playing界面以及点击是否击中了小飞蝇:</p>
+<pre tabindex="0"><code>if (activeView == View.playing &amp;&amp; !didHitAFly) {
+  activeView = View.lost;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 在<code>if</code>中, 我们判断两件事. 第一个是当前是否在playing界面, 因为如果我们没在玩游戏就没有输赢的概念🤣🤣🤣. 另一个就是判断是否击中了小飞蝇.</p>
+<p>若同时满足这两个条件, 则将<code>activeView</code>的值设为<code>View.lost</code>, 该值对应you lost界面.</p>
+  </blockquote>
+
+<p>现在的<code>onTapDown</code>处理器截图(附注释):</p>
+<p><img src="images/10-1.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>🟢 运行游戏, 若输掉游戏(打偏), 会显示开始按钮. 若你还记得render函数, &ldquo;开始游戏&quot;按钮只会在主界面和you lost界面出现:</p>
+<p><img src="images/11.gif" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>因为标题不会在输掉游戏后显示, 你可以通过此判断代码的正确性!🤓</p>
+<h4 id="you-lost游戏失败-界面">you lost(游戏失败) 界面</h4>
+<p>最后一个界面几乎和主界面一模一样. 唯一的区别就是我们显示的图片不同.</p>
+<p>在<code>./lib/views</code>创建界面文件<code>lost-view.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class LostView {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  LostView(this.game) {
+    rect = Rect.fromLTWH(
+      game.tileSize,
+      (game.screenSize.height / 2) - (game.tileSize * 5),
+      game.tileSize * 7,
+      game.tileSize * 5,
+    );
+    sprite = Sprite(&#39;bg/lose-splash.png&#39;);
+  }
+
+  void render(Canvas c) {
+    sprite.renderRect(c, rect);
+  }
+
+  void update(double t) {}
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 如你所见, 几乎和home界面一模一样. 区别在于<code>Sprite</code>所加载的图像文件的文件名和图像的高度是5个区块.</p>
+  </blockquote>
+
+<p>就像home界面一样, 我们需要回到<code>./lib/langaw-game.dart</code>, 创建<code>LostView</code>类实例, 然后进行渲染.</p>
+<p>导入游戏失败界面:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/views/lost-view.dart&#39;;
+</code></pre><p>创建实例变量:</p>
+<pre tabindex="0"><code>LostView lostView;
+</code></pre><p>为<code>lostView</code>实例化一个<code>LostView</code>对象, 并将其分配至<code>initialize()</code>中, 确定屏幕尺寸后:</p>
+<pre tabindex="0"><code>lostView = LostView(this);
+</code></pre><p>之后在<code>render()</code>中进行渲染:</p>
+<pre tabindex="0"><code>if (activeView == View.lost) lostView.render(canvas);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 类似的, 这些代码块是将component或界面添加至game类的标配, 通用套路.</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/12.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>🟢 运行游戏, 点击开始按钮, 再打偏, 应该会看到<code>you lost</code>界面出现:</p>
+<p><img src="images/13.gif" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/29daf2c2d66d94a4e0169d10d73fccf94f3e49c7" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/29daf2c2d66d94a4e0169d10d73fccf94f3e49c7" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第三步-重构小飞蝇生成控制器">第三步: 重构小飞蝇生成控制器</h3>
+<p>在上一部分的结尾, 我已经提到了游戏中有bug存在. 其中一个就是小飞蝇的生成方式, 有两方面:</p>
+<p>技术层面, 使用<code>forEach</code>遍历集合时, 代码不应修改<code>list</code>(也就是添加或删除list中的项目).</p>
+<p>实际上, 这其实不能算是传统意义的bug, 我们要直接换掉它的逻辑😅😅😅</p>
+<p>小飞蝇的生成应该基于时间, 而不是玩家的点击!</p>
+<h4 id="小飞蝇生成器controller">小飞蝇生成器controller</h4>
+<p>我们为此创建一个小飞蝇生成器controller. 我们最开始提到过, controller只是一个没有位置和图像的component.</p>
+<p>在<code>./lib</code>中创建目录<code>controllers</code>. 然后在此目录中创建文件<code>./lib/controllers/spawner.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/langaw-game.dart&#39;;
+
+class FlySpawner {
+  final LangawGame game;
+
+  FlySpawner(this.game) {}
+
+  void start() {}
+
+  void killAll() {}
+
+  void update(double t) {}
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 你现在应该很熟悉结构了. 唯一的区别就是没有<code>render()</code>函数. 因为此component(它是一个控制器)在屏幕上不会有图像展示.</p>
+  </blockquote>
+
+<p>像其他component和界面一样, 我们在名为game的final变量保留对<code>LangawGame</code>实例的引用, 并要求该变量的值作为构造函数的参数.</p>
+<p>首先, 让我们编写<code>killAll()</code>, 先导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/fly.dart&#39;;
+</code></pre><p>然后在<code>killAll()</code>内部, 添加此行:</p>
+<pre tabindex="0"><code>game.flies.forEach((Fly fly) =&gt; fly.isDead = true);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 这样会循环game中所有的小飞蝇, 并将<code>true</code>赋给<code>isDead</code>, 从而让现存的全部小飞蝇死掉.</p>
+  </blockquote>
+
+<p>再来准备一些常量. 将如下final实例变量添加至类:</p>
+<pre tabindex="0"><code>final int maxSpawnInterval = 3000;
+final int minSpawnInterval = 250;
+final int intervalChange = 3;
+final int maxFliesOnScreen = 7;
+</code></pre><p>然后在它们下面, 添加两个变量:</p>
+<pre tabindex="0"><code>int currentInterval;
+int nextSpawn;
+</code></pre><p>等下的代码解析中会解释常量的值以及变量的用途. 现在我们来编写<code>start()</code>函数. 每当玩家点击开始按钮时, 都会调用此函数.</p>
+<pre tabindex="0"><code>void start() {
+  killAll();
+  currentInterval = maxSpawnInterval;
+  nextSpawn = DateTime.now().millisecondsSinceEpoch + currentInterval;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 从第一个常量<code>maxSpawnInterval</code>开始. 此常量是生成小飞蝇的间隔时间上限. 游戏开始时, 将<code>currentInterval</code>设置为<code>maxSpawnInterval</code>的值. 为3000毫秒(也就是3秒).</p>
+<p>第二个常量<code>minSpawnInterval</code>与其完全相反. 每次生成一个小飞蝇时, 都会减少<code>currentInterval</code>常量, 但只会降低到下限<code>250</code>毫秒(也就是<code>1/4秒</code>).</p>
+<p>第三个常量<code>intervalChange</code>是每次生成小飞蝇时从<code>currentInterval</code>减少的数量. 因此, 从第3秒开始, 小飞蝇每次生成的速率就会越来越快, 最低至<code>1/4</code>秒. 就算有总数限制, 当玩家达到了这一步, 屏幕上将会有好多小飞蝇.</p>
+<p>最后一个常量<code>maxFilesOnScreen</code>. 即使小飞蝇生成的速度极快, 但只要有7只小飞蝇还活着, 就不会生成更多.</p>
+<p><code>currentInterval</code>用于保存下一次生成时从当前时间添加的时间的量.</p>
+<p><code>nextSpawn</code>表示下一次生成的实际时间(时间戳).</p>
+  </blockquote>
+
+<p>在构造函数中, 添加如下行:</p>
+<pre tabindex="0"><code>start();
+game.spawnFly();
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 第一行将计划在创建此控制器后的三秒中生成一只小飞蝇. 第二行仅用于生成小飞蝇.</p>
+  </blockquote>
+
+<p>这是按照顺序完成的, 因为如果我们先生成小飞蝇, 则<code>start()</code>将调用<code>killAll()</code>, 并且只会杀死第一只小飞蝇.</p>
+<p>现在在<code>update()</code>函数内部, 我们将会拥有大量的生成逻辑. 将以下代码块放入<code>update()</code>中:</p>
+<pre tabindex="0"><code>int nowTimestamp = DateTime.now().millisecondsSinceEpoch;
+
+int livingFlies = 0;
+game.flies.forEach((Fly fly) {
+  if (!fly.isDead) livingFlies += 1;
+});
+
+if (nowTimestamp &gt;= nextSpawn &amp;&amp; livingFlies &lt; maxFliesOnScreen) {
+  game.spawnFly();
+  if (currentInterval &gt; minSpawnInterval) {
+    currentInterval -= intervalChange;
+    currentInterval -= (currentInterval * .02).toInt();
+  }
+  nextSpawn = nowTimestamp + currentInterval;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 第一行代码存储当前时间戳.</p>
+<p>下一块计算list中(<code>game.flies</code>)存活的小飞蝇的数量. 代码只是循环遍历list, 若小飞蝇没死掉, 则将其添加至<code>livingFlies</code>.</p>
+<p>接下来, 我们有一个更大的代码块, 进入<code>if</code>块, 判断当前时间是否超过<code>nextSpawn</code>值, 以及活着的小飞蝇数量是否小于<code>maxFliesOnScreen</code>常量.</p>
+<p>若满足条件, 我们将生成一只小飞蝇. 此后, 仅当<code>currentInterval</code>大于最小间隔(<code>minSpawnInterval</code>)时, 我们才将<code>interceptChange</code>常量中的值减去<code>currentInterval</code>值的2%来减少<code>currentInterval</code>的值.</p>
+<p>最后, 我们使用当前时间来安排下一个的生成, 并在其中添加<code>currentInterval</code>的值.</p>
+  </blockquote>
+
+<p><img src="images/14-1.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<h4 id="将controller集成至game类">将controller集成至game类</h4>
+<p>若要将生成控制器集成至game类, 首先要删除旧的对<code>spawnFly</code>的调用.</p>
+<p>在<code>./lib/langaw-game.dart</code>中, <strong>删除</strong><code>initialize()</code>中的以下行:</p>
+<pre tabindex="0"><code>spawnFly();
+</code></pre><p>在<code>./lib/components/fly.dart</code>中, <strong>删除</strong><code>onTapDown</code>处理器的以下行:</p>
+<pre tabindex="0"><code>game.spawnFly();
+</code></pre><p>这样应该会解决掉上面讨论的技术错误.</p>
+<p>返回至<code>./lib/langaw-game.dart</code>, 我们创建了生成小飞蝇controller的实例并将其存储在实例变量中. 接下来的过程应该像是S.O.P.(Standard Operating Procedures, 标准作业程序. 你也可以理解为&quot;例行公事&rdquo;)</p>
+<p>首先进行导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/controllers/spawner.dart&#39;;
+</code></pre><p>然后创建实例变量:</p>
+<pre tabindex="0"><code>FlySpawner spawner;
+</code></pre><p>在<code>initialize()</code>中, 我们创建实例并将其存储在实例变量中. 在确定屏幕尺寸后添加以下行:</p>
+<pre tabindex="0"><code>spawner = FlySpawner(this);
+</code></pre><p>最后在<code>update()</code>内:</p>
+<pre tabindex="0"><code>spawner.update(t);
+</code></pre><p>在game loop中使用component和controller的主要区别在于, 我们调用的主要函数是<code>update</code>.这是因为渲染图形不是大多数controller的主要目的.</p>
+<p>我们必须解决最后的难题: 调用生成器的<code>start</code>函数.</p>
+<p>打开<code>./lib/components/start-button.dart</code>, 在<code>onTapDown</code>处理器中添加以下行:</p>
+<pre tabindex="0"><code>game.spawner.start();
+</code></pre><h4 id="测试游戏">测试游戏!</h4>
+<p>🟢 运行游戏, 点击&quot;开始游戏&quot;按钮并输掉游戏. 现在你应该有了一个<strong>完整的游戏循环周期的游戏</strong>: 有了开始游戏, 游戏失败和重玩游戏(这个不是game loop, 别弄混啦!)</p>
+<p><img src="images/15.gif" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/d908d2ead44a6c09f880eb9944deddd30d6682ef" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/d908d2ead44a6c09f880eb9944deddd30d6682ef" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第四步-对话框">第四步: 对话框</h3>
+<p>我们的游戏进展一切顺利!🤩🤩现在我们需要让用户了解游戏并且知道游戏规则. 我们也需要添加&quot;感谢&rdquo;.</p>
+<p>我们需要使用对话框完成此操作. 实际上在幕后, 对话框只是另一种&quot;界面&rdquo;.</p>
+<h4 id="从按钮开始">从按钮开始</h4>
+<p>我们需要创建两个按钮component并把它们放在屏幕底部. 一个在左边, 另一个在右边.</p>
+<p>在枚举View中新增两个枚举, 分别对应教程和感谢界面:</p>
+<pre tabindex="0"><code>enum View {
+  home,
+  playing,
+  lost,
+  help,
+  credits
+}
+</code></pre><p>创建以下component:</p>
+<p><code>./lib/components/help-button.dart</code></p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+import &#39;package:langaw/view.dart&#39;;
+
+class HelpButton {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  HelpButton(this.game) {
+    rect = Rect.fromLTWH(
+      game.tileSize * .25,
+      game.screenSize.height - (game.tileSize * 1.25),
+      game.tileSize,
+      game.tileSize,
+    );
+    sprite = Sprite(&#39;ui/icon-help.png&#39;);
+  }
+
+  void render(Canvas c) {
+    sprite.renderRect(c, rect);
+  }
+
+  void onTapDown() {
+    game.activeView = View.help;
+  }
+}
+</code></pre><p><code>./lib/components/credits-button.dart</code></p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+import &#39;package:langaw/view.dart&#39;;
+
+class CreditsButton {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  CreditsButton(this.game) {
+    rect = Rect.fromLTWH(
+      game.screenSize.width - (game.tileSize * 1.25),
+      game.screenSize.height - (game.tileSize * 1.25),
+      game.tileSize,
+      game.tileSize,
+    );
+    sprite = Sprite(&#39;ui/icon-credits.png&#39;);
+  }
+
+  void render(Canvas c) {
+    sprite.renderRect(c, rect);
+  }
+
+  void onTapDown() {
+    game.activeView = View.credits;
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 又是熟悉的场景. 我们刚刚定义了相当标准的component. 这里要注意的是我们如何为每个按钮定义<code>Rect</code>.</p>
+<p>我们希望help(教程)按钮位于屏幕的左下角, 这就是为什么将<strong>Left</strong>设置为从屏幕的左边起<code>game.tileSize * .25</code>(区块大小的1/4)距离的原因. <strong>Top</strong>设置为屏幕高度减去<code>game.tileSize * 1.25</code>(区块大小的1又1/4). 这会将按钮的底部放置在距离屏幕底部正好1/4的位置.</p>
+<p>感谢按钮对<strong>Top</strong>和<strong>Left</strong>使用类似的算法. 除了<strong>Left</strong>使用屏幕的宽度外, 将按钮定位在屏幕的右下角.</p>
+<p>两个按钮的尺寸均为一个区块的正方形.</p>
+<p>这里要注意的另一件事是<code>onTapDown</code>处理器. 调用这些处理器后, game类的<code>activeView</code>属性的值将设置为正确的值.<code>View.help</code>(教程对话框)和<code>View.credits</code>(感谢对话框).</p>
+  </blockquote>
+
+<p>现在, 我们需要通过导入两个按钮类文件, 将这些按钮添加至game类(<code>./lib/langaw-game.dart</code>)中:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/credits-button.dart&#39;;
+import &#39;package:langaw/components/help-button.dart&#39;;
+</code></pre><p>创建实例变量:</p>
+<pre tabindex="0"><code>HelpButton helpButton;
+CreditsButton creditsButton;
+</code></pre><p>在<code>initialize()</code>中, 为刚创建的实例变量实例化一个教程和感谢按钮:</p>
+<pre tabindex="0"><code>helpButton = HelpButton(this);
+creditsButton = CreditsButton(this);
+</code></pre><p>我们需要渲染这些按钮, 所以在<code>render()</code>中添加下面的代码块. 必须放在<code>if</code>中, 检查<code>activeView</code>是否设为<code>View.home</code>或<code>View.lost</code>(在渲染开始按钮的上方或下方):</p>
+<pre tabindex="0"><code>helpButton.render(canvas);
+creditsButton.render(canvas);
+</code></pre><p>最后, 通过将以下代码块放入game类的<code>onTapDown</code>处理器中, 为<code>onTapDown</code>处理器添加处理:</p>
+<pre tabindex="0"><code>// 教程按钮
+if (!isHandled &amp;&amp; helpButton.rect.contains(d.globalPosition)) {
+  if (activeView == View.home || activeView == View.lost) {
+    helpButton.onTapDown();
+    isHandled = true;
+  }
+}
+
+// 感谢按钮
+if (!isHandled &amp;&amp; creditsButton.rect.contains(d.globalPosition)) {
+  if (activeView == View.home || activeView == View.lost) {
+    creditsButton.onTapDown();
+    isHandled = true;
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 检查三个条件:</p>
+<p>1. 尚未处理过点击事件(<code>!isHandled</code>)<br>
+2. 点击位置在按钮的<code>rect</code>范围内.<br>
+3. <code>activeView</code>必须设置为<code>View.help</code>或<code>View.credits</code>.</p>
+  </blockquote>
+
+<p>满足这些条件后, 我们将调用按钮的<code>onTapDown</code>处理器, 并将<code>isHandled</code>值变为true, 用以通知下个处理器该点击已被处理.</p>
+<p>若现在运行游戏, 应该看到两个按钮了:</p>
+<p><img src="images/16-1.png" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p>点击这些按钮将会展现对应的界面, 但现在这几个界面暂时不显示任何东西.</p>
+<h4 id="对话框">对话框</h4>
+<p>显示对话框, 我们将使用类似home和you lost界面的方式.</p>
+<p>创建以下界面:</p>
+<p><code>./lib/views/help-view.dart</code></p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class HelpView {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  HelpView(this.game) {
+    rect = Rect.fromLTWH(
+      game.tileSize * .5,
+      (game.screenSize.height / 2) - (game.tileSize * 6),
+      game.tileSize * 8,
+      game.tileSize * 12,
+    );
+    sprite = Sprite(&#39;ui/dialog-help.png&#39;);
+  }
+
+  void render(Canvas c) {
+    sprite.renderRect(c, rect);
+  }
+}
+</code></pre><p><code>./lib/views/credits-view.dart</code></p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class CreditsView {
+  final LangawGame game;
+  Rect rect;
+  Sprite sprite;
+
+  CreditsView(this.game) {
+    rect = Rect.fromLTWH(
+      game.tileSize * .5,
+      (game.screenSize.height / 2) - (game.tileSize * 6),
+      game.tileSize * 8,
+      game.tileSize * 12,
+    );
+    sprite = Sprite(&#39;ui/dialog-credits.png&#39;);
+  }
+
+  void render(Canvas c) {
+    sprite.renderRect(c, rect);
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 如你所见, 这些代码和我们在本部分开头的代码十分相似.</p>
+<p>两个对话框的大小均为<code>8 × 12</code>个区块. 因此为了使对话框居中, 我们将Left参数值设为半个区块. Top参数值设为屏幕高度的一半减去半个区块.</p>
+  </blockquote>
+
+<p>距离胜利不远啦! 我们只需要将这些view添加到game类中即可. 轻车熟路, 先导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/views/help-view.dart&#39;;
+import &#39;package:langaw/views/credits-view.dart&#39;;
+</code></pre><p>创建view实例变量:</p>
+<pre tabindex="0"><code>HelpView helpView;
+CreditsView creditsView;
+</code></pre><p>在<code>initialize</code>中, 实例化上面的变量:</p>
+<pre tabindex="0"><code>helpView = HelpView(this);
+creditsView = CreditsView(this);
+</code></pre><p>然后在<code>render</code>函数中, 添加以下代码块. 记住渲染的顺序和代码顺序一致. 对话框需要渲染在顶部, 所以将它们放在末尾:</p>
+<pre tabindex="0"><code>if (activeView == View.help) helpView.render(canvas);
+if (activeView == View.credits) creditsView.render(canvas);
+</code></pre><p>在<code>onTapDown</code>处理器中, 我们检查点击是否尚未被处理, 然后检查是否在教程或感谢界面中, 若为是, 将界面设置为home, 并将<code>isHandled</code>变量设为<code>true</code>, 保证后续代码不会执行:</p>
+<pre tabindex="0"><code>if (!isHandled) {
+  if (activeView == View.help || activeView == View.credits) {
+    activeView = View.home;
+    isHandled = true;
+  }
+}
+</code></pre><p>game类过长不便截图, 这里展示<code>./lib/langaw-game.dart</code>的全部代码:</p>
+<pre tabindex="0"><code>import &#39;dart:math&#39;;
+import &#39;dart:ui&#39;;
+
+import &#39;package:flame/flame.dart&#39;;
+import &#39;package:flame/game.dart&#39;;
+import &#39;package:flutter/gestures.dart&#39;;
+import &#39;package:langaw/components/agile-fly.dart&#39;;
+import &#39;package:langaw/components/backyard.dart&#39;;
+import &#39;package:langaw/components/credits-button.dart&#39;;
+import &#39;package:langaw/components/drooler-fly.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/components/help-button.dart&#39;;
+import &#39;package:langaw/components/house-fly.dart&#39;;
+import &#39;package:langaw/components/hungry-fly.dart&#39;;
+import &#39;package:langaw/components/macho-fly.dart&#39;;
+import &#39;package:langaw/components/start-button.dart&#39;;
+import &#39;package:langaw/controllers/spawner.dart&#39;;
+import &#39;package:langaw/view.dart&#39;;
+import &#39;package:langaw/views/home-view.dart&#39;;
+import &#39;package:langaw/views/lost-view.dart&#39;;
+import &#39;package:langaw/views/help-view.dart&#39;;
+import &#39;package:langaw/views/credits-view.dart&#39;;
+
+class LangawGame extends Game {
+  Size screenSize;
+  double tileSize;
+  List flies;
+  Random rnd;
+  Backyard background;
+  View activeView = View.home;
+  HomeView homeView;
+  StartButton startButton;
+  LostView lostView;
+  FlySpawner spawner;
+  HelpButton helpButton;
+  CreditsButton creditsButton;
+  HelpView helpView;
+  CreditsView creditsView;
+
+  LangawGame() {
+    initialize();
+  }
+
+  void initialize() async {
+    flies = List();
+    resize(await Flame.util.initialDimensions());
+
+    background = Backyard(this);
+    homeView = HomeView(this);
+    startButton = StartButton(this);
+    rnd = Random();
+    lostView = LostView(this);
+    spawner = FlySpawner(this);
+
+    helpButton = HelpButton(this);
+    creditsButton = CreditsButton(this);
+
+    helpView = HelpView(this);
+    creditsView = CreditsView(this);
+  }
+
+  void spawnFly() {
+    double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
+    double y = rnd.nextDouble() * (screenSize.height - (tileSize * 2.025));
+
+    switch (rnd.nextInt(5)) {
+      case 0:
+        flies.add(HouseFly(this, x, y));
+        break;
+      case 1:
+        flies.add(DroolerFly(this, x, y));
+        break;
+      case 2:
+        flies.add(AgileFly(this, x, y));
+        break;
+      case 3:
+        flies.add(MachoFly(this, x, y));
+        break;
+      case 4:
+        flies.add(HungryFly(this, x, y));
+        break;
+    }
+  }
+
+  void render(Canvas canvas) {
+    background.render(canvas);
+
+    flies.forEach((Fly fly) =&gt; fly.render(canvas));
+
+    if (activeView == View.home) homeView.render(canvas);
+
+    if (activeView == View.home || activeView == View.lost) {
+      startButton.render(canvas);
+      helpButton.render(canvas);
+      creditsButton.render(canvas);
+    }
+
+    if (activeView == View.lost) lostView.render(canvas);
+
+    if (activeView == View.help) helpView.render(canvas);
+    if (activeView == View.credits) creditsView.render(canvas);
+  }
+
+  void update(double t) {
+    flies.forEach((Fly fly) =&gt; fly.update(t));
+    flies.removeWhere((Fly fly) =&gt; fly.isOffScreen);
+
+    spawner.update(t);
+  }
+
+  void resize(Size size) {
+    screenSize = size;
+    tileSize = screenSize.width / 9;
+  }
+
+  void onTapDown(TapDownDetails d) {
+    bool isHandled = false;
+
+    // 弹窗
+    if (!isHandled) {
+      if (activeView == View.help || activeView == View.credits) {
+        activeView = View.home;
+        isHandled = true;
+      }
+    }
+
+    // &#34;开始游戏&#34;按钮
+    if (!isHandled &amp;&amp; startButton.rect.contains(d.globalPosition)) {
+      if (activeView == View.home || activeView == View.lost) {
+        startButton.onTapDown();
+        isHandled = true;
+      }
+    }
+
+    // 小飞蝇
+    if (!isHandled) {
+      bool didHitAFly = false;
+      flies.forEach((Fly fly) {
+        if (fly.flyRect.contains(d.globalPosition)) {
+          fly.onTapDown();
+          isHandled = true;
+          didHitAFly = true;
+        }
+      });
+      if (activeView == View.playing &amp;&amp; !didHitAFly) {
+        activeView = View.lost;
+      }
+    }
+
+    // 教程按钮
+    if (!isHandled &amp;&amp; helpButton.rect.contains(d.globalPosition)) {
+      if (activeView == View.home || activeView == View.lost) {
+        helpButton.onTapDown();
+        isHandled = true;
+      }
+    }
+
+    // 感谢按钮
+    if (!isHandled &amp;&amp; creditsButton.rect.contains(d.globalPosition)) {
+      if (activeView == View.home || activeView == View.lost) {
+        creditsButton.onTapDown();
+        isHandled = true;
+      }
+    }
+  }
+}
+</code></pre><p>🟢 运行游戏, 看看效果:</p>
+<p><img src="images/17-1.gif" alt="Flutter 游戏开发(flame) 03 界面和弹窗(3/5)"></p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536" target="_blank">码云</a>
+上查看本章的代码.</strong></p>
+<h2 id="测试游戏-1">测试游戏!</h2>
+<p>运行你的游戏, 看看我们的成果吧!</p>
+<h2 id="结语">结语</h2>
+<p>又经过了一个干货满满的教程, 我们随着游戏的进展, 通过几个小步骤使游戏变得更加完整了.</p>
+<p>如果你出现了不懂的地方, 不要犹豫, 欢迎在评论区留言! 也欢迎你加入<a href="https://jq.qq.com/?_wv=1027&amp;k=5ETLFm3" target="_blank">我的Flame交流群(QQ)</a>
+</p>
+<h2 id="下一步会干什么">下一步会干什么?</h2>
+<p>在下一章,我们将会处理一些新颖的东西.</p>
+<p>音乐和音效.</p>
+<p>不仅如此, 我们还会添加得分机制, 一个简单的游戏积分. 当然, 还会记录最高分.</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li>本篇文章参考原作<a href="https://jap.alekhin.io/views-dialog-boxes-tutorial-flame-flutter-part-3" target="_blank">《Views and Dialog Boxes Tutorial – Step by Step with Flame and Flutter (Part 3 of 5)》</a>
+.</li>
+<li>flame <a href="https://github.com/flame-engine/flame" target="_blank">github仓库地址</a>
+</li>
+<li>pub.dev <a href="https://pub.flutter-io.cn/packages/flame" target="_blank">官方网址</a>
+</li>
+<li><a href="http://www.ewenk.com/" target="_blank">Impart</a>
+ 发现了文章问题</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

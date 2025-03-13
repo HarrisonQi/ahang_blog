@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiting for another flutter command to release the startup lock... | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:
+Waiting for another flutter command to release the startup lock… 字面意思是: 正在等待另一个正在执行的Flutter命令完成&hellip; 本篇文章就来记录一下如何如何解决这种问题.
+出现原因 非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.
+解决方案 所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!
+这里阿航给大家提供了若干方法, 大家可以按需选择.
+方法一: 安全地等待执行结束 这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter&hellip; 如果真变成这样就糟透了😭😭😭
+当然, 有时我们不想等, 那么就需要下面的方法了.
+方法二: taskkill 打开Flutter安装目录, 复制dart.exe的路径(一般会在flutter安装目录\bin\cache\dart-sdk\bin).
+打开Powershell或CMD.
+若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:
+D: CD进入刚才复制的路径:
+cd flutter安装目录\bin\cache\dart-sdk\bin 使用taskkill关闭进程:
+taskkill /F /IM dart.exe 如果返回类似这样的信息即是成功:
+taskkill /F /IM dart.exe 成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。 [epcl_box type=&ldquo;success&rdquo;]这是目前最便捷的强行关闭方式![/epcl_box]
+方法三: 任务管理器关闭dart进程 打开任务管理器, 点击详细信息:
+" />
+
+
+<meta name="keywords" content="Dart,Flutter">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Waiting for another flutter command to release the startup lock...">
+  <meta property="og:description" content="又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:
+Waiting for another flutter command to release the startup lock… 字面意思是: 正在等待另一个正在执行的Flutter命令完成… 本篇文章就来记录一下如何如何解决这种问题.
+出现原因 非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.
+解决方案 所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!
+这里阿航给大家提供了若干方法, 大家可以按需选择.
+方法一: 安全地等待执行结束 这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter… 如果真变成这样就糟透了😭😭😭
+当然, 有时我们不想等, 那么就需要下面的方法了.
+方法二: taskkill 打开Flutter安装目录, 复制dart.exe的路径(一般会在flutter安装目录\bin\cache\dart-sdk\bin).
+打开Powershell或CMD.
+若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:
+D: CD进入刚才复制的路径:
+cd flutter安装目录\bin\cache\dart-sdk\bin 使用taskkill关闭进程:
+taskkill /F /IM dart.exe 如果返回类似这样的信息即是成功:
+taskkill /F /IM dart.exe 成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。 [epcl_box type=“success”]这是目前最便捷的强行关闭方式![/epcl_box]
+方法三: 任务管理器关闭dart进程 打开任务管理器, 点击详细信息:">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-26T00:00:00+00:00">
+    <meta property="article:tag" content="Dart">
+    <meta property="article:tag" content="Flutter">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Waiting for another flutter command to release the startup lock...">
+  <meta name="twitter:description" content="又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:
+Waiting for another flutter command to release the startup lock… 字面意思是: 正在等待另一个正在执行的Flutter命令完成… 本篇文章就来记录一下如何如何解决这种问题.
+出现原因 非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.
+解决方案 所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!
+这里阿航给大家提供了若干方法, 大家可以按需选择.
+方法一: 安全地等待执行结束 这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter… 如果真变成这样就糟透了😭😭😭
+当然, 有时我们不想等, 那么就需要下面的方法了.
+方法二: taskkill 打开Flutter安装目录, 复制dart.exe的路径(一般会在flutter安装目录\bin\cache\dart-sdk\bin).
+打开Powershell或CMD.
+若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:
+D: CD进入刚才复制的路径:
+cd flutter安装目录\bin\cache\dart-sdk\bin 使用taskkill关闭进程:
+taskkill /F /IM dart.exe 如果返回类似这样的信息即是成功:
+taskkill /F /IM dart.exe 成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。 [epcl_box type=“success”]这是目前最便捷的强行关闭方式![/epcl_box]
+方法三: 任务管理器关闭dart进程 打开任务管理器, 点击详细信息:">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Waiting for another flutter command to release the startup lock...">
+  <meta itemprop="description" content="又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:
+Waiting for another flutter command to release the startup lock… 字面意思是: 正在等待另一个正在执行的Flutter命令完成… 本篇文章就来记录一下如何如何解决这种问题.
+出现原因 非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.
+解决方案 所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!
+这里阿航给大家提供了若干方法, 大家可以按需选择.
+方法一: 安全地等待执行结束 这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter… 如果真变成这样就糟透了😭😭😭
+当然, 有时我们不想等, 那么就需要下面的方法了.
+方法二: taskkill 打开Flutter安装目录, 复制dart.exe的路径(一般会在flutter安装目录\bin\cache\dart-sdk\bin).
+打开Powershell或CMD.
+若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:
+D: CD进入刚才复制的路径:
+cd flutter安装目录\bin\cache\dart-sdk\bin 使用taskkill关闭进程:
+taskkill /F /IM dart.exe 如果返回类似这样的信息即是成功:
+taskkill /F /IM dart.exe 成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。 [epcl_box type=“success”]这是目前最便捷的强行关闭方式![/epcl_box]
+方法三: 任务管理器关闭dart进程 打开任务管理器, 点击详细信息:">
+  <meta itemprop="datePublished" content="2020-05-26T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-05-26T00:00:00+00:00">
+  <meta itemprop="wordCount" content="110">
+  <meta itemprop="keywords" content="Dart,Flutter">
+
+      <header>
+        <h1 itemprop="headline">Waiting for another flutter command to release the startup lock...</h1>
+        <p class="text-sm">
+          
+            Tuesday, May 26, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Tuesday, May 26, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Waiting%20for%20another%20flutter%20command%20to%20release%20the%20startup%20lock...&amp;url=http://localhost:1313/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Waiting%20for%20another%20flutter%20command%20to%20release%20the%20startup%20lock...%20http://localhost:1313/posts/post/2020/waiting-for-another-flutter-command-to-release-the-startup-lock/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>又是开发APP的一天, 但是在执行Flutter命令时, 终端中返回:</p>
+<pre tabindex="0"><code>Waiting for another flutter command to release the startup lock…
+</code></pre><p>字面意思是: 正在等待另一个正在执行的Flutter命令完成&hellip; 本篇文章就来记录一下如何如何解决这种问题.</p>
+<h2 id="出现原因">出现原因</h2>
+<p>非常明显, 它告诉了我们已经有另一个Flutter命令正在执行! 一方面因为国内网络的原因, 有些命令执行相当慢. 导致可能很久之前执行的命令到现在也没完成. 亦或者是Flutter自己在后台执行了一些命令.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>所以, 要解决这个问题, 我们的目标就确定了. 那就是关闭掉当前执行的Flutter命令进程!</p>
+<p>这里阿航给大家提供了若干方法, 大家可以按需选择.</p>
+<h3 id="方法一-安全地等待执行结束">方法一: 安全地等待执行结束</h3>
+<p>这个是最省心, 也是最安全的方式. 因为强行停止某个进程可能会出现各种异常, 甚至会导致需要重新安装Flutter&hellip; 如果真变成这样就糟透了😭😭😭</p>
+<p>当然, 有时我们不想等, 那么就需要下面的方法了.</p>
+<h3 id="方法二-taskkill">方法二: taskkill</h3>
+<p>打开Flutter安装目录, 复制<code>dart.exe</code>的路径(一般会在<code>flutter安装目录\bin\cache\dart-sdk\bin</code>).</p>
+<p>打开Powershell或CMD.</p>
+<p>若盘符不一致, 需要先切换盘符, 比如当前在C盘, 切换至D盘:</p>
+<pre tabindex="0"><code>D:
+</code></pre><p>CD进入刚才复制的路径:</p>
+<pre tabindex="0"><code>cd flutter安装目录\bin\cache\dart-sdk\bin
+</code></pre><p>使用taskkill关闭进程:</p>
+<pre tabindex="0"><code>taskkill /F /IM dart.exe
+</code></pre><p>如果返回类似这样的信息即是成功:</p>
+<pre tabindex="0"><code>taskkill /F /IM dart.exe
+成功: 已终止进程 &#34;dart.exe&#34;，其 PID 为 9804。
+</code></pre><p>[epcl_box type=&ldquo;success&rdquo;]这是目前最便捷的强行关闭方式![/epcl_box]</p>
+<h3 id="方法三-任务管理器关闭dart进程">方法三: 任务管理器关闭dart进程</h3>
+<p>打开任务管理器, 点击详细信息:</p>
+<p><img src="images/Waiting-for-another-flutter-command%E2%80%A6-02.png" alt=""></p>
+<p>向下拉, 找到<code>dart.exe</code>进程, 结束它:</p>
+<p><img src="images/Waiting-for-another-flutter-command%E2%80%A6-04.png" alt=""></p>
+<h3 id="方法四-移除lockfile">方法四: 移除lockfile</h3>
+<p>[epcl_box type=&ldquo;notice&rdquo;]本方法有时不会生效. 因为某些情况下Windows无法删除被占用的文件.[/epcl_box]</p>
+<p>进入<code>flutter安装目录/bin/cache</code>目录, 删除<code>lockfile</code>文件:</p>
+<p><img src="images/Waiting-for-another-flutter-command%E2%80%A6-01.png" alt="Waiting for another flutter command…-01"></p>
+<h3 id="方法五-关机-并重新开机">方法五: 关机, 并重新开机</h3>
+<p>有部分MacOS系统在使用了上述方法后仍然无效. 所以给大家提供另一个崭新的思路.</p>
+<p>那就是关机, 再开机(<strong>不是重新启动</strong>).</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/51679269/waiting-for-another-flutter-command-to-release-the-startup-lock" target="_blank">《Waiting for another flutter command to release the startup lock》-</a>
+ Stackoverflow</li>
+<li>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank">Markus Spiske</a>
+ on <a href="https://unsplash.com/s/photos/knife?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank">Unsplash</a>
+</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

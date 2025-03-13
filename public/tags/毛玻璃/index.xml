@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>毛玻璃 on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/%E6%AF%9B%E7%8E%BB%E7%92%83/</link>
+    <description>Recent content in 毛玻璃 on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E6%AF%9B%E7%8E%BB%E7%92%83/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flutter 实现毛玻璃/磨砂效果</title>
+      <link>http://localhost:1313/posts/post/2020/flutter-%E5%AE%9E%E7%8E%B0%E6%AF%9B%E7%8E%BB%E7%92%83-%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C/</link>
+      <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2020/flutter-%E5%AE%9E%E7%8E%B0%E6%AF%9B%E7%8E%BB%E7%92%83-%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C/</guid>
+      <description>&lt;p&gt;还记得之前风靡一时的Windows 7的毛玻璃效果吗? 虽然过去了好多年, 但毛玻璃效果一直没有过时👨‍🎓. 本篇文章就来记录下如何使用Flutter实现毛玻璃/磨砂效果.&lt;/p&gt;&#xA;&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;&#xA;&lt;p&gt;有图有真相, 先来看下我们要实现的最终效果:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;images/Flutter-%E5%AE%9E%E7%8E%B0%E6%AF%9B%E7%8E%BB%E7%92%83%E7%A3%A8%E7%A0%82%E6%95%88%E6%9E%9C-05.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;环境需具备的条件&#34;&gt;环境&amp;amp;需具备的条件&lt;/h2&gt;&#xA;&lt;p&gt;本篇文章的开发环境:&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;若想顺利阅读本篇教程, 你需要具备:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;计算机已安装Flutter开发环境&lt;/li&gt;&#xA;&lt;li&gt;掌握Flutter基础&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;实战开始&#34;&gt;实战开始&lt;/h2&gt;&#xA;&lt;h3 id=&#34;创建项目-清理代码&#34;&gt;创建项目, 清理代码&lt;/h3&gt;&#xA;&lt;p&gt;先来创建一个空项目, 直接用IDE创建或在终端中输入:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;flutter create my_frosted&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;删除&lt;code&gt;./test&lt;/code&gt;目录. 并替换&lt;code&gt;./lib/main.dart&lt;/code&gt;为:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import &amp;#39;package:flutter/material.dart&amp;#39;;&#xA;&#xA;void main() =&amp;gt; runApp(MyApp());&#xA;&#xA;class MyApp extends StatelessWidget {&#xA;  @override&#xA;  Widget build(BuildContext context) {&#xA;    return MaterialApp(&#xA;      title: &amp;#39;My Frosted Demo&amp;#39;,&#xA;      theme: ThemeData(&#xA;        primarySwatch: Colors.blue,&#xA;      ),&#xA;      home: MyFrosted(),&#xA;    );&#xA;  }&#xA;}&#xA;&#xA;class MyFrosted extends StatelessWidget {&#xA;  @override&#xA;  Widget build(BuildContext context) {&#xA;    return Scaffold(&#xA;      body: Stack(&#xA;        children: [],&#xA;      ),&#xA;    );&#xA;  }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;🟢 运行项目, 可以看到白白的一片, 啥也没有:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

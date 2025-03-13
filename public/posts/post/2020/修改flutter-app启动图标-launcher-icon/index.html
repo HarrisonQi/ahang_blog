@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改Flutter APP启动图标/Launcher Icon | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/%E4%BF%AE%E6%94%B9flutter-app%E5%90%AF%E5%8A%A8%E5%9B%BE%E6%A0%87-launcher-icon/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="开门见山 为了简化修改Flutter启动图标的过程, Flutter Launcher Icons诞生了.
+开始 访问 Flutter Launcher Icons 库网址 . 访问慢的同学可以使用国内镜像 .
+修改你的pubspec.yaml文件(版本号替换为最新的):
+` dev_dependencies: flutter_launcher_icons: ^0.8.1` 在资源目录中创建你的icon文件, 比如路径assets/icon/icon.png.
+然后再次修改pubspec.yaml:
+` flutter_icons: android: &quot;launcher_icon&quot; ios: true image_path: &quot;assets/icon/icon.png&quot;` 在终端中分别运行以下命令:
+`flutter pub get` `flutter pub run flutter_launcher_icons:main` 其他资源 点击此处 查看完整示例项目 如果使用该库出现任何问题, 请提issue " />
+
+
+<meta name="keywords" content="Flutter">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/%E4%BF%AE%E6%94%B9flutter-app%E5%90%AF%E5%8A%A8%E5%9B%BE%E6%A0%87-launcher-icon/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="修改Flutter APP启动图标/Launcher Icon">
+  <meta property="og:description" content="开门见山 为了简化修改Flutter启动图标的过程, Flutter Launcher Icons诞生了.
+开始 访问 Flutter Launcher Icons 库网址 . 访问慢的同学可以使用国内镜像 .
+修改你的pubspec.yaml文件(版本号替换为最新的):
+` dev_dependencies: flutter_launcher_icons: ^0.8.1` 在资源目录中创建你的icon文件, 比如路径assets/icon/icon.png.
+然后再次修改pubspec.yaml:
+` flutter_icons: android: &#34;launcher_icon&#34; ios: true image_path: &#34;assets/icon/icon.png&#34;` 在终端中分别运行以下命令:
+`flutter pub get` `flutter pub run flutter_launcher_icons:main` 其他资源 点击此处 查看完整示例项目 如果使用该库出现任何问题, 请提issue">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-12-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-12-10T00:00:00+00:00">
+    <meta property="article:tag" content="Flutter">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="修改Flutter APP启动图标/Launcher Icon">
+  <meta name="twitter:description" content="开门见山 为了简化修改Flutter启动图标的过程, Flutter Launcher Icons诞生了.
+开始 访问 Flutter Launcher Icons 库网址 . 访问慢的同学可以使用国内镜像 .
+修改你的pubspec.yaml文件(版本号替换为最新的):
+` dev_dependencies: flutter_launcher_icons: ^0.8.1` 在资源目录中创建你的icon文件, 比如路径assets/icon/icon.png.
+然后再次修改pubspec.yaml:
+` flutter_icons: android: &#34;launcher_icon&#34; ios: true image_path: &#34;assets/icon/icon.png&#34;` 在终端中分别运行以下命令:
+`flutter pub get` `flutter pub run flutter_launcher_icons:main` 其他资源 点击此处 查看完整示例项目 如果使用该库出现任何问题, 请提issue">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="修改Flutter APP启动图标/Launcher Icon">
+  <meta itemprop="description" content="开门见山 为了简化修改Flutter启动图标的过程, Flutter Launcher Icons诞生了.
+开始 访问 Flutter Launcher Icons 库网址 . 访问慢的同学可以使用国内镜像 .
+修改你的pubspec.yaml文件(版本号替换为最新的):
+` dev_dependencies: flutter_launcher_icons: ^0.8.1` 在资源目录中创建你的icon文件, 比如路径assets/icon/icon.png.
+然后再次修改pubspec.yaml:
+` flutter_icons: android: &#34;launcher_icon&#34; ios: true image_path: &#34;assets/icon/icon.png&#34;` 在终端中分别运行以下命令:
+`flutter pub get` `flutter pub run flutter_launcher_icons:main` 其他资源 点击此处 查看完整示例项目 如果使用该库出现任何问题, 请提issue">
+  <meta itemprop="datePublished" content="2020-12-10T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-12-10T00:00:00+00:00">
+  <meta itemprop="wordCount" content="43">
+  <meta itemprop="keywords" content="Flutter">
+
+      <header>
+        <h1 itemprop="headline">修改Flutter APP启动图标/Launcher Icon</h1>
+        <p class="text-sm">
+          
+            Thursday, Dec 10, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Thursday, Dec 10, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=%e4%bf%ae%e6%94%b9Flutter%20APP%e5%90%af%e5%8a%a8%e5%9b%be%e6%a0%87/Launcher%20Icon&amp;url=http://localhost:1313/posts/post/2020/%E4%BF%AE%E6%94%B9flutter-app%E5%90%AF%E5%8A%A8%E5%9B%BE%E6%A0%87-launcher-icon/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/%E4%BF%AE%E6%94%B9flutter-app%E5%90%AF%E5%8A%A8%E5%9B%BE%E6%A0%87-launcher-icon/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=%e4%bf%ae%e6%94%b9Flutter%20APP%e5%90%af%e5%8a%a8%e5%9b%be%e6%a0%87/Launcher%20Icon%20http://localhost:1313/posts/post/2020/%E4%BF%AE%E6%94%B9flutter-app%E5%90%AF%E5%8A%A8%E5%9B%BE%E6%A0%87-launcher-icon/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <h2 id="开门见山">开门见山</h2>
+<p>为了简化修改Flutter启动图标的过程, <code>Flutter Launcher Icons</code>诞生了.</p>
+<h2 id="开始">开始</h2>
+<p>访问 <a href="https://pub.dev/packages/flutter_launcher_icons" target="_blank">Flutter Launcher Icons 库网址</a>
+ . 访问慢的同学可以使用<a href="https://pub.flutter-io.cn/packages/flutter_launcher_icons" target="_blank">国内镜像</a>
+.</p>
+<p>修改你的<code>pubspec.yaml</code>文件(版本号替换为最新的):</p>
+<pre><code>` dev_dependencies:   flutter_launcher_icons: ^0.8.1`
+</code></pre>
+<p>在资源目录中创建你的icon文件, 比如路径<code>assets/icon/icon.png</code>.</p>
+<p>然后再次修改<code>pubspec.yaml</code>:</p>
+<pre><code>` flutter_icons:   android: &quot;launcher_icon&quot;   ios: true   image_path: &quot;assets/icon/icon.png&quot;`
+</code></pre>
+<p>在终端中分别运行以下命令:</p>
+<pre><code>`flutter pub get`
+
+`flutter pub run flutter_launcher_icons:main`
+</code></pre>
+<h2 id="其他资源">其他资源</h2>
+<ul>
+<li><a href="https://github.com/fluttercommunity/flutter_launcher_icons/tree/master/example" target="_blank">点击此处</a>
+查看完整示例项目</li>
+<li>如果使用该库出现任何问题, 请<a href="https://github.com/fluttercommunity/flutter_launcher_icons/issues" target="_blank">提issue</a>
+</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

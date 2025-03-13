@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git统计指定时间日期范围内代码量、代码行数 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/git%E7%BB%9F%E8%AE%A1%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4%E5%86%85%E4%BB%A3%E7%A0%81%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="因为要写周工作报告, 自己希望将本周的工作量化出来. 所以想到: &ldquo;能不能统计一下本周我的代码总行数呢?&rdquo;. 本篇文章就来记录下Git统计代码量、代码行数.
+应用场景 量化工作报告(就像阿航的需求) 项目统计 小组工作占比统计 环境&amp;需具备的条件 本篇博客环境:
+环境 版本 操作系统 Windows 10 家庭版 Git 2.25.0.windows.1 本篇博客假定你具备以下条件:
+计算机已部署git环境 熟悉git基本命令 实战开始 本篇教程相当简单. 几步搞定.
+打开git终端 首先, 进入你的项目目录, 右键打开git bash:
+会出现一个比较可爱的窗口:
+输入统计命令 重点来了! 输入git统计时间段内命令:
+[epcl_box type=&ldquo;notice&rdquo;]这里不能使用Windows的CMD替代git bash进行操作. 会报各种奇葩的错误![/epcl_box]
+git log --since=&#34;2020-06-01&#34; --before=&#34;2020-06-05&#34; --author=&#34;阿航&#34; \ --pretty=tformat: --numstat | awk &#39;{ add &#43;= $1; subs &#43;= $2; loc &#43;= $1 - $2 } END { printf &#34;新增行数: %s, 移除行数: %s, 总行数: %s\n&#34;, add, subs, loc }&#39; 参数 含义 --since=&ldquo;2020-06-01&rdquo; 统计起始日期 --before=&ldquo;2020-06-05&rdquo; 统计结束日期 --author=&ldquo;阿航&rdquo; 需要统计的开发者 将以上参数替换为自己的!
+" />
+
+
+<meta name="keywords" content="Git,效率">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/git%E7%BB%9F%E8%AE%A1%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4%E5%86%85%E4%BB%A3%E7%A0%81%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Git统计指定时间日期范围内代码量、代码行数">
+  <meta property="og:description" content="因为要写周工作报告, 自己希望将本周的工作量化出来. 所以想到: “能不能统计一下本周我的代码总行数呢?”. 本篇文章就来记录下Git统计代码量、代码行数.
+应用场景 量化工作报告(就像阿航的需求) 项目统计 小组工作占比统计 环境&amp;需具备的条件 本篇博客环境:
+环境 版本 操作系统 Windows 10 家庭版 Git 2.25.0.windows.1 本篇博客假定你具备以下条件:
+计算机已部署git环境 熟悉git基本命令 实战开始 本篇教程相当简单. 几步搞定.
+打开git终端 首先, 进入你的项目目录, 右键打开git bash:
+会出现一个比较可爱的窗口:
+输入统计命令 重点来了! 输入git统计时间段内命令:
+[epcl_box type=“notice”]这里不能使用Windows的CMD替代git bash进行操作. 会报各种奇葩的错误![/epcl_box]
+git log --since=&#34;2020-06-01&#34; --before=&#34;2020-06-05&#34; --author=&#34;阿航&#34; \ --pretty=tformat: --numstat | awk &#39;{ add &#43;= $1; subs &#43;= $2; loc &#43;= $1 - $2 } END { printf &#34;新增行数: %s, 移除行数: %s, 总行数: %s\n&#34;, add, subs, loc }&#39; 参数 含义 --since=“2020-06-01” 统计起始日期 --before=“2020-06-05” 统计结束日期 --author=“阿航” 需要统计的开发者 将以上参数替换为自己的!">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-06T00:00:00+00:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="效率">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Git统计指定时间日期范围内代码量、代码行数">
+  <meta name="twitter:description" content="因为要写周工作报告, 自己希望将本周的工作量化出来. 所以想到: “能不能统计一下本周我的代码总行数呢?”. 本篇文章就来记录下Git统计代码量、代码行数.
+应用场景 量化工作报告(就像阿航的需求) 项目统计 小组工作占比统计 环境&amp;需具备的条件 本篇博客环境:
+环境 版本 操作系统 Windows 10 家庭版 Git 2.25.0.windows.1 本篇博客假定你具备以下条件:
+计算机已部署git环境 熟悉git基本命令 实战开始 本篇教程相当简单. 几步搞定.
+打开git终端 首先, 进入你的项目目录, 右键打开git bash:
+会出现一个比较可爱的窗口:
+输入统计命令 重点来了! 输入git统计时间段内命令:
+[epcl_box type=“notice”]这里不能使用Windows的CMD替代git bash进行操作. 会报各种奇葩的错误![/epcl_box]
+git log --since=&#34;2020-06-01&#34; --before=&#34;2020-06-05&#34; --author=&#34;阿航&#34; \ --pretty=tformat: --numstat | awk &#39;{ add &#43;= $1; subs &#43;= $2; loc &#43;= $1 - $2 } END { printf &#34;新增行数: %s, 移除行数: %s, 总行数: %s\n&#34;, add, subs, loc }&#39; 参数 含义 --since=“2020-06-01” 统计起始日期 --before=“2020-06-05” 统计结束日期 --author=“阿航” 需要统计的开发者 将以上参数替换为自己的!">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Git统计指定时间日期范围内代码量、代码行数">
+  <meta itemprop="description" content="因为要写周工作报告, 自己希望将本周的工作量化出来. 所以想到: “能不能统计一下本周我的代码总行数呢?”. 本篇文章就来记录下Git统计代码量、代码行数.
+应用场景 量化工作报告(就像阿航的需求) 项目统计 小组工作占比统计 环境&amp;需具备的条件 本篇博客环境:
+环境 版本 操作系统 Windows 10 家庭版 Git 2.25.0.windows.1 本篇博客假定你具备以下条件:
+计算机已部署git环境 熟悉git基本命令 实战开始 本篇教程相当简单. 几步搞定.
+打开git终端 首先, 进入你的项目目录, 右键打开git bash:
+会出现一个比较可爱的窗口:
+输入统计命令 重点来了! 输入git统计时间段内命令:
+[epcl_box type=“notice”]这里不能使用Windows的CMD替代git bash进行操作. 会报各种奇葩的错误![/epcl_box]
+git log --since=&#34;2020-06-01&#34; --before=&#34;2020-06-05&#34; --author=&#34;阿航&#34; \ --pretty=tformat: --numstat | awk &#39;{ add &#43;= $1; subs &#43;= $2; loc &#43;= $1 - $2 } END { printf &#34;新增行数: %s, 移除行数: %s, 总行数: %s\n&#34;, add, subs, loc }&#39; 参数 含义 --since=“2020-06-01” 统计起始日期 --before=“2020-06-05” 统计结束日期 --author=“阿航” 需要统计的开发者 将以上参数替换为自己的!">
+  <meta itemprop="datePublished" content="2020-06-06T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-06-06T00:00:00+00:00">
+  <meta itemprop="wordCount" content="96">
+  <meta itemprop="keywords" content="Git,效率">
+
+      <header>
+        <h1 itemprop="headline">Git统计指定时间日期范围内代码量、代码行数</h1>
+        <p class="text-sm">
+          
+            Saturday, Jun 6, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Saturday, Jun 6, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Git%e7%bb%9f%e8%ae%a1%e6%8c%87%e5%ae%9a%e6%97%b6%e9%97%b4%e6%97%a5%e6%9c%9f%e8%8c%83%e5%9b%b4%e5%86%85%e4%bb%a3%e7%a0%81%e9%87%8f%e3%80%81%e4%bb%a3%e7%a0%81%e8%a1%8c%e6%95%b0&amp;url=http://localhost:1313/posts/post/2020/git%E7%BB%9F%E8%AE%A1%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4%E5%86%85%E4%BB%A3%E7%A0%81%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/git%E7%BB%9F%E8%AE%A1%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4%E5%86%85%E4%BB%A3%E7%A0%81%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Git%e7%bb%9f%e8%ae%a1%e6%8c%87%e5%ae%9a%e6%97%b6%e9%97%b4%e6%97%a5%e6%9c%9f%e8%8c%83%e5%9b%b4%e5%86%85%e4%bb%a3%e7%a0%81%e9%87%8f%e3%80%81%e4%bb%a3%e7%a0%81%e8%a1%8c%e6%95%b0%20http://localhost:1313/posts/post/2020/git%E7%BB%9F%E8%AE%A1%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E8%8C%83%E5%9B%B4%E5%86%85%E4%BB%A3%E7%A0%81%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>因为要写周工作报告, 自己希望将本周的工作量化出来. 所以想到: &ldquo;能不能统计一下本周我的代码总行数呢?&rdquo;. 本篇文章就来记录下Git统计代码量、代码行数.</p>
+<h2 id="应用场景">应用场景</h2>
+<ul>
+<li>量化工作报告(就像阿航的需求)</li>
+<li>项目统计</li>
+<li>小组工作占比统计</li>
+</ul>
+<h2 id="环境需具备的条件">环境&amp;需具备的条件</h2>
+<p>本篇博客环境:</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>操作系统</td>
+          <td>Windows 10 家庭版</td>
+      </tr>
+      <tr>
+          <td>Git</td>
+          <td>2.25.0.windows.1</td>
+      </tr>
+  </tbody>
+</table>
+<p>本篇博客假定你具备以下条件:</p>
+<ol>
+<li>计算机已部署git环境</li>
+<li>熟悉git基本命令</li>
+</ol>
+<h2 id="实战开始">实战开始</h2>
+<p>本篇教程相当简单. 几步搞定.</p>
+<h3 id="打开git终端">打开git终端</h3>
+<p>首先, 进入你的项目目录, 右键打开git bash:</p>
+<p><img src="images/Git%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E9%87%8F%E3%80%81%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0-01.png" alt=""></p>
+<p>会出现一个比较可爱的窗口:</p>
+<p><img src="images/Git%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E9%87%8F%E3%80%81%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0-02.png" alt=""></p>
+<h3 id="输入统计命令">输入统计命令</h3>
+<p>重点来了! 输入git统计时间段内命令:</p>
+<p>[epcl_box type=&ldquo;notice&rdquo;]这里不能使用Windows的CMD替代git bash进行操作. 会报各种奇葩的错误![/epcl_box]</p>
+<pre tabindex="0"><code>git log --since=&#34;2020-06-01&#34; --before=&#34;2020-06-05&#34; --author=&#34;阿航&#34; \
+--pretty=tformat: --numstat | awk &#39;{ add += $1; subs += $2; loc += $1 - $2 } END { printf &#34;新增行数: %s, 移除行数: %s, 总行数: %s\n&#34;, add, subs, loc }&#39;
+</code></pre><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>--since=&ldquo;2020-06-01&rdquo;</td>
+          <td>统计起始日期</td>
+      </tr>
+      <tr>
+          <td>--before=&ldquo;2020-06-05&rdquo;</td>
+          <td>统计结束日期</td>
+      </tr>
+      <tr>
+          <td>--author=&ldquo;阿航&rdquo;</td>
+          <td>需要统计的开发者</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>将以上参数替换为自己的!</strong></p>
+<p>如果上述信息没有问题, 运行命令. 你会分别看到<strong>新增行数</strong>、<strong>移除行数</strong>以及<strong>总行数</strong>.</p>
+<p><img src="images/Git%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E9%87%8F%E3%80%81%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0-03.png" alt=""></p>
+<p>[epcl_box type=&ldquo;success&rdquo;]至此, 我们已经成功实现了我们的功能! [/epcl_box]</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://www.cnblogs.com/east7/p/10237269.html" target="_blank">Git 常用命令和统计代码量</a>
+</p>
+<h2 id="结语">结语</h2>
+<p>我们成功的实现了Git统计指定时间日期范围内代码量、代码行数! 快去丰富你的报告吧!</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

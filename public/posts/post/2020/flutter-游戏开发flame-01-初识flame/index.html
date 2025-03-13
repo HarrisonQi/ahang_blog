@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter 游戏开发(flame) 00 Flame介绍 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%88%9D%E8%AF%86flame/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="如果你对Flutter有一定的了解, 那么应该知道它可以同时转为Android、IOS APP. 并且会在后续的版本支持Web、Mac以及Windows设备.
+那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.
+我在《Flutter可以开发游戏啦! Flame游戏开发框架测评 》中简单的对Flutter的Flame框架进行了测评.
+有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.
+如果对博客有任何问题, 欢迎在下方留言, 阿航会尽力、尽快回复🙂.
+开发环境 本博客的环境一览:
+环境 版本号 Flutter 1.14.6 beta Dart 2.8.0-dev.5.0 Android Studio 3.5.2 🔴注意: 检查你的环境和文中的差异, 以避免出现不兼容的情况
+需具备的条件 本文将假设您已是一名有一定经验的开发人员, 且拥有了&quot;程序员思维&quot;. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名&quot;游戏开发者&quot;.
+你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.
+Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.
+要顺利阅读本文, 假定您已经具备以下条件:
+IDE (Android Studio 或者 Microsoft Visual Studio), 以及其所需的Flutter和dart插件 Android SDK. 这是开发Android应用的必备条件. Flutter SDK. 本篇将使用Flutter以及Flame进行游戏开发. 请阅读Flutter官方文档 , 完成圈内的教程 " />
+
+
+<meta name="keywords" content="Flame,Flutter,游戏开发">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%88%9D%E8%AF%86flame/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter 游戏开发(flame) 00 Flame介绍">
+  <meta property="og:description" content="如果你对Flutter有一定的了解, 那么应该知道它可以同时转为Android、IOS APP. 并且会在后续的版本支持Web、Mac以及Windows设备.
+那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.
+我在《Flutter可以开发游戏啦! Flame游戏开发框架测评 》中简单的对Flutter的Flame框架进行了测评.
+有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.
+如果对博客有任何问题, 欢迎在下方留言, 阿航会尽力、尽快回复🙂.
+开发环境 本博客的环境一览:
+环境 版本号 Flutter 1.14.6 beta Dart 2.8.0-dev.5.0 Android Studio 3.5.2 🔴注意: 检查你的环境和文中的差异, 以避免出现不兼容的情况
+需具备的条件 本文将假设您已是一名有一定经验的开发人员, 且拥有了&#34;程序员思维&#34;. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名&#34;游戏开发者&#34;.
+你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.
+Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.
+要顺利阅读本文, 假定您已经具备以下条件:
+IDE (Android Studio 或者 Microsoft Visual Studio), 以及其所需的Flutter和dart插件 Android SDK. 这是开发Android应用的必备条件. Flutter SDK. 本篇将使用Flutter以及Flame进行游戏开发. 请阅读Flutter官方文档 , 完成圈内的教程">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-16T00:00:00+00:00">
+    <meta property="article:tag" content="Flame">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="游戏开发">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter 游戏开发(flame) 00 Flame介绍">
+  <meta name="twitter:description" content="如果你对Flutter有一定的了解, 那么应该知道它可以同时转为Android、IOS APP. 并且会在后续的版本支持Web、Mac以及Windows设备.
+那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.
+我在《Flutter可以开发游戏啦! Flame游戏开发框架测评 》中简单的对Flutter的Flame框架进行了测评.
+有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.
+如果对博客有任何问题, 欢迎在下方留言, 阿航会尽力、尽快回复🙂.
+开发环境 本博客的环境一览:
+环境 版本号 Flutter 1.14.6 beta Dart 2.8.0-dev.5.0 Android Studio 3.5.2 🔴注意: 检查你的环境和文中的差异, 以避免出现不兼容的情况
+需具备的条件 本文将假设您已是一名有一定经验的开发人员, 且拥有了&#34;程序员思维&#34;. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名&#34;游戏开发者&#34;.
+你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.
+Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.
+要顺利阅读本文, 假定您已经具备以下条件:
+IDE (Android Studio 或者 Microsoft Visual Studio), 以及其所需的Flutter和dart插件 Android SDK. 这是开发Android应用的必备条件. Flutter SDK. 本篇将使用Flutter以及Flame进行游戏开发. 请阅读Flutter官方文档 , 完成圈内的教程">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter 游戏开发(flame) 00 Flame介绍">
+  <meta itemprop="description" content="如果你对Flutter有一定的了解, 那么应该知道它可以同时转为Android、IOS APP. 并且会在后续的版本支持Web、Mac以及Windows设备.
+那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.
+我在《Flutter可以开发游戏啦! Flame游戏开发框架测评 》中简单的对Flutter的Flame框架进行了测评.
+有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.
+如果对博客有任何问题, 欢迎在下方留言, 阿航会尽力、尽快回复🙂.
+开发环境 本博客的环境一览:
+环境 版本号 Flutter 1.14.6 beta Dart 2.8.0-dev.5.0 Android Studio 3.5.2 🔴注意: 检查你的环境和文中的差异, 以避免出现不兼容的情况
+需具备的条件 本文将假设您已是一名有一定经验的开发人员, 且拥有了&#34;程序员思维&#34;. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名&#34;游戏开发者&#34;.
+你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.
+Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.
+要顺利阅读本文, 假定您已经具备以下条件:
+IDE (Android Studio 或者 Microsoft Visual Studio), 以及其所需的Flutter和dart插件 Android SDK. 这是开发Android应用的必备条件. Flutter SDK. 本篇将使用Flutter以及Flame进行游戏开发. 请阅读Flutter官方文档 , 完成圈内的教程">
+  <meta itemprop="datePublished" content="2020-04-16T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-04-16T00:00:00+00:00">
+  <meta itemprop="wordCount" content="689">
+  <meta itemprop="keywords" content="Flame,Flutter,游戏开发">
+
+      <header>
+        <h1 itemprop="headline">Flutter 游戏开发(flame) 00 Flame介绍</h1>
+        <p class="text-sm">
+          
+            Thursday, Apr 16, 2020
+          
+
+          | <span>4 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Thursday, Apr 16, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2000%20Flame%e4%bb%8b%e7%bb%8d&amp;url=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%88%9D%E8%AF%86flame/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%88%9D%E8%AF%86flame/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2000%20Flame%e4%bb%8b%e7%bb%8d%20http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%88%9D%E8%AF%86flame/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>如果你对Flutter有一定的了解, 那么应该知道它可以同时转为Android、IOS APP. 并且会在后续的版本支持Web、Mac以及Windows设备.</p>
+<p>那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.</p>
+
+
+
+  <blockquote>
+    <p>我在《<a href="https://www.bugcatt.com/archives/4" target="_blank">Flutter可以开发游戏啦! Flame游戏开发框架测评</a>
+》中简单的对Flutter的Flame框架进行了测评.</p>
+  </blockquote>
+
+<p>有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.</p>
+<p>如果对博客有任何问题, 欢迎在下方留言, 阿航会尽力、尽快回复🙂.</p>
+<h2 id="开发环境">开发环境</h2>
+<p>本博客的环境一览:</p>
+<table>
+  <thead>
+      <tr>
+          <th>环境</th>
+          <th>版本号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Flutter</td>
+          <td>1.14.6 beta</td>
+      </tr>
+      <tr>
+          <td>Dart</td>
+          <td>2.8.0-dev.5.0</td>
+      </tr>
+      <tr>
+          <td>Android Studio</td>
+          <td>3.5.2</td>
+      </tr>
+  </tbody>
+</table>
+<p>🔴注意: 检查你的环境和文中的差异, 以避免出现不兼容的情况</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>本文将假设您已是一名有一定经验的开发人员, 且拥有了&quot;程序员思维&quot;. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名&quot;游戏开发者&quot;.</p>
+<p>你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.</p>
+<p>Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.</p>
+<p>要顺利阅读本文, 假定您已经具备以下条件:</p>
+<ol>
+<li>IDE (Android Studio 或者 Microsoft Visual Studio), 以及其所需的Flutter和dart插件</li>
+<li>Android SDK. 这是开发Android应用的必备条件.</li>
+<li>Flutter SDK. 本篇将使用Flutter以及Flame进行游戏开发. 请阅读<a href="https://flutterchina.club/get-started/install/" target="_blank">Flutter官方文档</a>
+, 完成圈内的教程</li>
+</ol>
+<!-- raw HTML omitted -->
+<p><img src="images/Flutter%E5%AE%98%E7%BD%91%E6%88%AA%E5%9B%BE-1024x399.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<!-- raw HTML omitted -->
+<p>条件3: 完成Flutter官方文档中的前三步</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<hr>
+<h2 id="手游制作开始">手游制作开始</h2>
+<p>我们将会从入门开始教学(非常简单). 我们要制作的游戏为黑色背景, 中间有一个白色方块, 点击方块, 方块颜色将变为绿色并获得游戏胜利.</p>
+<p>我们不会为此游戏使用任何外部的资源文件(图片)</p>
+<p>本教程的全部代码都将存储在Github以及Gitee上, 你可以随时查看和下载.</p>
+<h2 id="创建一个flutter-app">创建一个Flutter APP</h2>
+<h3 id="创建flutter项目boxgame">创建Flutter项目:boxgame</h3>
+<p>打开终端(CMD/命令提示符), 输入:</p>
+<pre tabindex="0"><code>flutter create boxgame
+</code></pre><p>你也可以使用除boxgame外其他的名称. 但确保将所有boxgame替换为你自己的名称.</p>
+<h3 id="运行boxgame">运行boxgame</h3>
+<p>使用你的IDE打开刚生成的boxgame目录, 或者输入以下命令立刻运行你的APP:</p>
+<pre tabindex="0"><code>cd boxgame
+</code></pre><pre tabindex="0"><code>flutter run
+</code></pre><p>首次运行新创建的应用可能需要一段时间, 当APP运行时, 应该看到如下内容:</p>
+<p><img src="images/2020-04-15_095531-1019x757.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+
+
+
+  <blockquote>
+    <p>🟡提示: 你需要使用安卓模拟器, 或者启用了USB调试的安卓设备运行APP</p>
+  </blockquote>
+
+<h3 id="本步骤代码创建flutter-app">本步骤代码(创建Flutter APP)</h3>
+<p>在<a href="https://github.com/HarrisonQi/flame-tutorial-boxgame/tree/6d6d957f6a412e62a3571546315fdda91c62ee4f" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-boxgame/tree/6d6d957f6a412e62a3571546315fdda91c62ee4f" target="_blank">码云</a>
+查看本阶段的代码.</p>
+<h2 id="安装flame插件-清理代码">安装Flame插件, 清理代码</h2>
+
+
+
+  <blockquote>
+    <p>🟡提示: 从现在开始, 我们将项目目录称为 <code>./</code>.<br>
+比如你的项目目录为<code>/home/handsomeme/boxgame</code>,<br>
+<code>./lib/main.dart</code>则是指<code>/home/handsomeme/boxgame/lib/main.dart</code></p>
+  </blockquote>
+
+<p>启动你的IDE, 打开我们创建的boxgame项目.</p>
+<p>我们即将使用<strong>Flame</strong>插件, 所以我们需要将其添加到依赖中. 找到 <code>./pubspec.yaml</code> 在<code>cupertino_icons</code>下添加以下行(注意缩进):</p>
+<pre tabindex="0"><code>flame: ^0.18.1
+</code></pre><!-- raw HTML omitted -->
+<p><img src="images/2020-04-15_145055-818x416.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<!-- raw HTML omitted -->
+<p>添加flame第三方库</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>🟢进行 <code>packages get</code></p>
+
+
+
+  <blockquote>
+    <p>🟡提示: 如果你的IDE是VSCode,IDE会在你保存文件时自动安装第三方库. Android Studio: 点击上方的<code>packages get</code>按钮进行包更新. 其他情况: 在终端中输入<code>flutter packages get</code>进行包更新</p>
+<p>后续的<code>packages get</code>将不再赘述!</p>
+  </blockquote>
+
+<p>我们接下来清理flutter的预设文件内容, 替换<code>./lib/main.dart</code>为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() {}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 可以看到我们只留了一行: void main() {}, 除此之外保留了import语句, 因为我们后面将会使用material.</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/2020-04-15_115134-955x458.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<p>我们同样需要删除<code>./test</code>目录, 因为我们暂时用不上.</p>
+<h3 id="本步骤代码安装flame及清理代码">本步骤代码(安装Flame及清理代码)</h3>
+<p>在<a href="https://github.com/HarrisonQi/flame-tutorial-boxgame/tree/e0dc1d271aa5f3ad4ff26a92d591d044a4e1ef86" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-boxgame/tree/e0dc1d271aa5f3ad4ff26a92d591d044a4e1ef86" target="_blank">码云</a>
+查看本阶段的代码.</p>
+<h2 id="创建game-loop游戏循环">创建game loop(游戏循环)</h2>
+<h3 id="何为game-loop">何为game loop?</h3>
+<p>game loop是一款游戏的本质, 一组反复运行的代码.</p>
+<p>有一个很常见的叫法:<strong>FPS</strong>. 它代表每秒的帧数, 这意味着, 若你的游戏是60fps, 那么game loop将在每秒循环60次!</p>
+<p>简而言之: 一帧 = 一次game loop</p>
+<p>一个基本的game loop由两部分组成, <code>update</code>(更新)和<code>render</code>(渲染)</p>
+<p>这里引用了官方的图片, 阿航对此进行了翻译, 便于各位理解:</p>
+<p><img src="images/%E5%9B%BE%E7%89%872-1024x399.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<p>update部分用于处理对象(比如玩家的角色, 敌人, 障碍物, 地图)和其他需要更新的东西(比如计时器)的动作. 大多数动作都会在这里发生. 比如计算敌人是否被子弹打中, 或计算敌人是否碰到了玩家角色(玩家通常会不喜欢的🤣).</p>
+<h3 id="渲染前同步执行代码">渲染前同步执行代码</h3>
+<p>渲染部分在屏幕上绘制所有对象, 这是一个独立的进程, 因此所有内容都可以synchronized(同步/顺序)进行.</p>
+<p>那么, 为何需要synchronized?<br>
+如果你了解前端开发, 应该会很快了解. 前端的大部分动作都是asynchronous(异步)进行的. 但是到需要强调运行顺序(比如调用网络接口, 获取数据后再渲染)时, 就需要synchronized进行.</p>
+<p>我们需要先计算所有需要计算的内容, 计算完成后, 再渲染屏幕.</p>
+<h3 id="使用flame替我们处理同步">使用Flame替我们处理同步✌</h3>
+<p><strong>Flame</strong>框架已经有处理同步的代码, 所以我们只需要专注于update以及render的过程!</p>
+<h3 id="全屏处理锁定屏幕旋转">全屏处理/锁定屏幕旋转</h3>
+<p>在首行导入:</p>
+<pre tabindex="0"><code>import &#39;package:flame/util.dart&#39;;
+import &#39;package:flutter/services.dart&#39;;
+</code></pre><p>在<code>main()</code>中, 创建一个<code>Flame</code>的<code>Util</code> class. 调用它的<code>fullscreen</code>和<code>setOrientation</code>函数, 并加上<code>await</code>关键字, 让其同步进行.</p>
+<pre tabindex="0"><code>WidgetsFlutterBinding.ensureInitialized();
+Util flameUtil = Util(); 
+await flameUtil.fullScreen(); 
+await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+</code></pre>
+
+
+  <blockquote>
+    <p>🟡提示: Future、async和await都是你在一个进程中, 需要等待某函数完成的关键字, 但不会阻塞其他进程. 如果你想详细了解, 可以访问<a href="https://www.dartlang.org/tutorials/language/futures" target="_blank">Dart官网</a>
+</p>
+  </blockquote>
+
+<p>除此以外, 我们还需要为main()添加asyn关键字, 使内部的函数同步进行:</p>
+<pre tabindex="0"><code>void main() async {
+</code></pre><p>代码截图:</p>
+<p><img src="images/2020-04-15_141757-987x508.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="创建game-loop">创建game loop</h3>
+<p>若要使用Flame提供的game loop脚手架, 我们必须创建Flame的<code>Game</code>类的子类. 为此, 在 <code>./lib</code>下创建名为<code>box-game.dart</code>的文件.</p>
+<p>创建一个名为<code>BoxGame</code>的class, 并继承<code>flame</code>的Game:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+
+import &#39;package:flame/game.dart&#39;;
+
+class BoxGame extends Game {
+  void render(Canvas canvas) {
+    // TODO: implement render
+  }
+
+  void update(double t) {
+    // TODO: implement update
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先导入Dart的<code>ui</code>库, 以便使用<code>Canvas</code>类, 然后再使用<code>Size</code>类. 然后我们导入Flame的<code>game</code>库, 其中包括我们要扩展的<code>Game类</code>. 其他就是我们从父类(或超类)中继承的两个函数: <code>update()</code>和<code>render()</code>. 这些函数会覆盖同名的父类函数(也就是重写).</p>
+  </blockquote>
+
+<p>🟡 <code>@override</code>注解在Dart 2中不是必需的. new 关键字也是非必须的.<br>
+所以我们在这里没有写出来.</p>
+<h3 id="完成游戏骨架">完成游戏骨架</h3>
+<p>下一步就是来创建<code>BoxGame</code>的类实例, 并将其<code>widget</code>属性传递给<code>runApp</code>.</p>
+<p>返回<code>./lib/main.dart</code>, 在文件顶部导入:</p>
+<pre tabindex="0"><code>import &#39;package:boxgame/box-game.dart&#39;;
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 该行确保可以在<strong>main.dart</strong>中使用<strong>BoxGame</strong>类.</p>
+  </blockquote>
+
+<p>接下来创建<code>BoxGame</code>的类实例, 并将其<code>widget</code>属性传递给runApp(). 在<code>main()</code>中的末尾(在&quot;}&ldquo;前)插入:</p>
+<pre tabindex="0"><code>BoxGame game = BoxGame();
+runApp(game.widget);
+</code></pre><p>某些版本直接运行会报错<code>Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized.</code></p>
+<p>所以在main()首行添加:</p>
+<pre tabindex="0"><code>WidgetsFlutterBinding.ensureInitialized();
+</code></pre><p>麻雀虽小, 五脏俱全. 现在<strong>我们的项目可以称之为游戏了</strong>.</p>
+<p>如果你尝试运行app, 界面应该是黑色的. 因为我们还没有render任何东西呢!</p>
+<p>main.dart代码截图:</p>
+<p><img src="images/2020-04-15_145421-945x365.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="本步骤代码game-loop">本步骤代码(game loop)</h3>
+<p>在<a href="https://github.com/HarrisonQi/flame-tutorial-boxgame/tree/e974dab3d7696c45d5b3a326323c9df59a56b30a" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-boxgame/tree/e974dab3d7696c45d5b3a326323c9df59a56b30a" target="_blank">码云</a>
+查看本阶段的代码.</p>
+<p>🔴 在新版的Flutter中变更了main(), 若出现问题, 我们可以变更代码行顺序解决这个问题:</p>
+<pre tabindex="0"><code>void main() {
+  BoxGame game = BoxGame();
+  runApp(game.widget);
+
+  Util flameUtil = Util();
+  flameUtil.fullscreen();
+  flameUtil.setOrientation(DeviceOrientation.portraitUp);
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 这样, 就不需要使用await关键字了. 也可以顺便移除async关键字.</p>
+  </blockquote>
+
+<h2 id="绘制屏幕">绘制屏幕</h2>
+<p>在绘制前, 我们需要知道屏幕的尺寸. Flutter在屏幕上绘制时会使用逻辑像素, 所以目前不必担心调整游戏对象尺寸的大小.</p>
+<p>1英寸的设备大约包含96个逻辑像素. 多数主流手机的尺寸类似, 加上我们的游戏比较简单, 所以我们不必担心尺寸的问题.</p>
+<p>Flame基于这个尺寸系统上. Game类提供了可供重写的调整尺寸的函数, 此函数接受Size作为参数, 我们根据此参数确定屏幕尺寸(单位是逻辑像素).</p>
+<p>首先, 在class中声明一个变量, 此变量(也称作实例变量)将保存屏幕尺寸, 且仅在屏幕尺寸变更时重新赋值(对于我们的游戏仅发生一次). 这也是屏幕上绘制对象的基础. 此变量的类型应该为Size. 与传递给resize()的内容相似:</p>
+<pre tabindex="0"><code>class BoxGame extends Game {
+  Size screenSize;
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: screenSize将被初始化为null. 这么写对后续检查我们是否知道渲染期间屏幕的大小时有帮助. 后面会详细介绍.</p>
+  </blockquote>
+
+<p>接下来在<code>./lib/box-game.dart</code>中重写<code>resize()</code>:</p>
+<pre tabindex="0"><code>void resize(Size size) {
+  screenSize = size;
+  super.resize(size);
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析1: 父类的resize()实际上是空的, 如果我们不打算完全重写该功能, 需要调用一次父类的函数.</p>
+  </blockquote>
+
+
+
+
+  <blockquote>
+    <p>💡 代码解析2: 实例变量是可从该类的所有函数中访问的变量. 比如我们可以调整它的大小, 并在render时获取该值.</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/2020-04-15_153842-745x485.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="canvas和背景">Canvas和背景</h3>
+<p>至此, Game loop已创建完成, 可以开始进行绘制了. 如果不需要更新某些数据, 不用管update函数.</p>
+<p>在render函数内部, 我们需要访问Canvas. Flame已经为我们提供了对Canvas的支持.</p>
+<p>在绘制canvas时, <strong>记住: 要一直优先绘制最底部的对象.</strong> 后续绘制的对象将覆盖在已有的对象上面.</p>
+<h3 id="绘制背景">绘制背景</h3>
+<p>首先我们在屏幕上绘制一个简单的黑色背景.</p>
+<p><code>render()</code>中添加:</p>
+<pre tabindex="0"><code>Rect bgRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
+Paint bgPaint = Paint();
+bgPaint.color = Color(0xff000000);
+canvas.drawRect(bgRect, bgPaint);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 第1行定义了一个和屏幕同等大小的矩形, 并且边距为0. 第2、3行定义了一个Paint对象, 并且为其分配了16进制且带透明度的颜色. 最后一行使用了在前几行定义的Rect和Paint实例, 并在画布上绘制.</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/2020-04-16_095227-992x508.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<p>🟢 尝试运行项目, 若你的代码没有问题, 会展示一个全黑的屏幕, 你也可以尝试不同的背景色!</p>
+<h3 id="绘制target-box目标方块">绘制target box(目标方块)</h3>
+<p>仍然在<code>render()</code>中. 接下来我们在屏幕中央绘制一个目标方块:</p>
+<pre tabindex="0"><code>double screenCenterX = screenSize.width / 2;
+double screenCenterY = screenSize.height / 2;
+Rect boxRect = Rect.fromLTWH(
+  screenCenterX - 75,
+  screenCenterY - 75,
+  150,
+  150
+);
+Paint boxPaint = Paint();
+boxPaint.color = Color(0xffffffff);
+canvas.drawRect(boxRect, boxPaint);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 前两行通过计算使坐标放在屏幕正中央. 接下来的六行只声明一个大小为150×150像素（逻辑）的矩形，其原点（左上角）位于屏幕中心，但向左偏移75像素，向上偏移75像素.</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/2020-04-16_100653-964x762.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<p>运行APP, 可以看到中间出现了白色小方块:</p>
+<p><img src="images/2020-04-16_100941-917x623.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="本步骤代码绘制屏幕">本步骤代码(绘制屏幕)</h3>
+<p>在<a href="https://github.com/HarrisonQi/flame-tutorial-boxgame/tree/c2fcacbd3d07be8fb75d41786840d3b947b5c965" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-boxgame/tree/c2fcacbd3d07be8fb75d41786840d3b947b5c965" target="_blank">码云</a>
+查看本阶段的代码.</p>
+<h2 id="处理用户输入动作以及游戏胜利条件">处理&quot;用户输入动作&quot;以及&quot;游戏胜利&quot;条件</h2>
+<p>距完成仅剩一步, 我们只需要处理用户的输入动作. 这里要使用Flutter的gestures包.</p>
+<h3 id="定义处理用户动作函数">定义处理用户动作函数</h3>
+<p>首先, 我们在<code>lib/box-game.dart</code>中导入:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/gestures.dart&#39;;
+</code></pre><p>之后, 定义一个处理用户按下动作的函数:</p>
+<pre tabindex="0"><code>void onTapDown(TapDownDetails d) {
+  // handle taps here
+}
+</code></pre><h3 id="注册gesturerecognizer">注册GestureRecognizer</h3>
+<p>进入<code>lib/main.dart</code>, 我们需要在其中注册一个<code>GestureRecognizer</code>, 并且与我们上面定义的<code>onTapDown</code>进行关联.</p>
+<p>导入:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/gestures.dart&#39;;
+</code></pre><p>在<code>BoxGame</code>之后, 定义<code>TapGestureRecognizer</code>, 并且指定它的<code>onTapDown</code>到我们定义的<code>onTapDown</code>处理函数上</p>
+<pre tabindex="0"><code>BoxGame game = BoxGame();
+TapGestureRecognizer tapper = TapGestureRecognizer();
+tapper.onTapDown = game.onTapDown;
+flameUtil.addGestureRecognizer(tapper);
+</code></pre><p>代码截图:</p>
+<p><img src="images/2020-04-16_102302-872x519.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="处理游戏胜利">处理&quot;游戏胜利&rdquo;</h3>
+<p>返回<code>./lib/box-game.dart</code></p>
+<p>添加一个实例变量, 用于处理&quot;游戏胜利&quot;. 一个简单的bool类型就可以, 默认为false:</p>
+<pre tabindex="0"><code>bool hasWon = false;
+</code></pre><p>在render函数中, 我们添加一个判断: 若游戏胜利, 方块变为绿色. 反之为白色</p>
+<pre tabindex="0"><code>// 替换掉之前定义的 boxPaint.color = Color(0xffffffff);
+if (hasWon) {
+  boxPaint.color = Color(0xff00ff00);
+} else {
+  boxPaint.color = Color(0xffffffff);
+}
+</code></pre><p><img src="images/2020-04-16_102526-954x1044.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<p>我们来制定游戏规则: 如果用户点击到了方块范围, 则判定为胜利!</p>
+<p>在<code>onTapDown</code>中添加:</p>
+<pre tabindex="0"><code>double screenCenterX = screenSize.width / 2;
+double screenCenterY = screenSize.height / 2;
+if (d.globalPosition.dx &gt;= screenCenterX - 75
+  &amp;&amp; d.globalPosition.dx &lt;= screenCenterX + 75
+  &amp;&amp; d.globalPosition.dy &gt;= screenCenterY - 75
+  &amp;&amp; d.globalPosition.dy &lt;= screenCenterY + 75
+) {
+  hasWon = true;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 这段代码在计算点击位置是否在方格范围内</p>
+  </blockquote>
+
+<p>此时, 如果用户点击了方块范围内, <code>render</code>将会更新变量<code>hasWon</code>的值</p>
+<p><code>onTapDown</code>函数截图:</p>
+<p><img src="images/2020-04-16_102902-962x1130.png" alt="Flutter 游戏开发(flame) 00 Flame介绍"></p>
+<h3 id="大功告成">大功告成</h3>
+<p>我们已经成功的完成了一个游戏! 运行项目, 看看效果吧!</p>
+
+
+
+  <blockquote>
+    <p>💡 觉得这个游戏太简单了? 拜托! 你还只是个新手好吧. 我们后面会有游戏玩法足够丰富的游戏. 等你学会了, 就可以随心所欲开发属于自己的游戏咯!</p>
+  </blockquote>
+
+<h2 id="仓库地址">仓库地址</h2>
+<p>在<a href="https://github.com/HarrisonQi/flame-tutorial-boxgame" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-boxgame" target="_blank">码云</a>
+查看本篇文章的全部代码</p>
+<h2 id="结语">结语</h2>
+<p>如果你出现了不懂的地方, 不要犹豫, 欢迎在评论区留言! 也欢迎你加入<a href="https://jq.qq.com/?_wv=1027&amp;k=5ETLFm3" target="_blank">我的Flame交流群(QQ)</a>
+</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li>本章内容灵感部分来源于官方文档<a href="https://jap.alekhin.io/create-mobile-game-flutter-flame-beginner-tutorial" target="_blank">《Create a Mobile Game with Flutter and Flame – Beginner Tutorial》</a>
+</li>
+<li>flame <a href="https://github.com/flame-engine/flame" target="_blank">github仓库地址</a>
+</li>
+<li>pub.dev <a href="https://pub.flutter-io.cn/packages/flame" target="_blank">官方网址</a>
+</li>
+<li><strong><a href="https://www.pexels.com/zh-cn/photo/1484759/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+</strong> 上的 <strong><a href="https://www.pexels.com/zh-cn/@steve?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Steve Johnson</a>
+</strong> 拍摄的照片</li>
+</ul>
+<p>最新、更多、更好的教程/博客/资讯, 欢迎访问我的官网: <a href="https://blog.bugcatt.com" target="_blank">阿航的技术小站</a>
+</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

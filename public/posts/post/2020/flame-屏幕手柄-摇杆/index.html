@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flame 屏幕手柄/摇杆 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:
+[caption id=&ldquo;attachment_1286&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;] League of Legends Mobile (英雄联盟手游)[/caption]
+[caption id=&ldquo;attachment_1284&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;] PUBG Mobile (和平精英)[/caption]
+[caption id=&ldquo;attachment_1288&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;] Minecraft PE(我的世界手机版)[/caption]
+以上游戏都在当前手游榜(2020.04)排名前五.
+[epcl_box type=&ldquo;information&rdquo;]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]
+所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!
+我们要做的项目名称为Lame Tank 360(Lame坦克360).
+本项目将完整支持360°的旋转. 并将坦克的&quot;炮塔&quot;与&quot;坦克身体&quot;分开. 因此, 我们必须建立两个摇杆.
+需具备的条件 若想顺利学习本篇教程, 你需要具备:
+掌握Flutter的基础用法. 已完整学习Flame系列教程. [epcl_box type=&ldquo;notice&rdquo;]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读《Flutter游戏开发-Flame教程》 ![/epcl_box]
+开始 创建Flutter项目 flutter create lame_tank_360 [epcl_box type=&ldquo;information&rdquo;]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]
+初始化项目设置 现在项目是可以运行的, 但是只是Flutter默认生成的
+" />
+
+
+<meta name="keywords" content="Flame,Flutter,游戏开发">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flame 屏幕手柄/摇杆">
+  <meta property="og:description" content="可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:
+[caption id=“attachment_1286” align=“aligncenter” width=“700”] League of Legends Mobile (英雄联盟手游)[/caption]
+[caption id=“attachment_1284” align=“aligncenter” width=“700”] PUBG Mobile (和平精英)[/caption]
+[caption id=“attachment_1288” align=“aligncenter” width=“700”] Minecraft PE(我的世界手机版)[/caption]
+以上游戏都在当前手游榜(2020.04)排名前五.
+[epcl_box type=“information”]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]
+所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!
+我们要做的项目名称为Lame Tank 360(Lame坦克360).
+本项目将完整支持360°的旋转. 并将坦克的&#34;炮塔&#34;与&#34;坦克身体&#34;分开. 因此, 我们必须建立两个摇杆.
+需具备的条件 若想顺利学习本篇教程, 你需要具备:
+掌握Flutter的基础用法. 已完整学习Flame系列教程. [epcl_box type=“notice”]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读《Flutter游戏开发-Flame教程》 ![/epcl_box]
+开始 创建Flutter项目 flutter create lame_tank_360 [epcl_box type=“information”]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]
+初始化项目设置 现在项目是可以运行的, 但是只是Flutter默认生成的">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-20T00:00:00+00:00">
+    <meta property="article:tag" content="Flame">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="游戏开发">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flame 屏幕手柄/摇杆">
+  <meta name="twitter:description" content="可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:
+[caption id=“attachment_1286” align=“aligncenter” width=“700”] League of Legends Mobile (英雄联盟手游)[/caption]
+[caption id=“attachment_1284” align=“aligncenter” width=“700”] PUBG Mobile (和平精英)[/caption]
+[caption id=“attachment_1288” align=“aligncenter” width=“700”] Minecraft PE(我的世界手机版)[/caption]
+以上游戏都在当前手游榜(2020.04)排名前五.
+[epcl_box type=“information”]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]
+所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!
+我们要做的项目名称为Lame Tank 360(Lame坦克360).
+本项目将完整支持360°的旋转. 并将坦克的&#34;炮塔&#34;与&#34;坦克身体&#34;分开. 因此, 我们必须建立两个摇杆.
+需具备的条件 若想顺利学习本篇教程, 你需要具备:
+掌握Flutter的基础用法. 已完整学习Flame系列教程. [epcl_box type=“notice”]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读《Flutter游戏开发-Flame教程》 ![/epcl_box]
+开始 创建Flutter项目 flutter create lame_tank_360 [epcl_box type=“information”]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]
+初始化项目设置 现在项目是可以运行的, 但是只是Flutter默认生成的">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flame 屏幕手柄/摇杆">
+  <meta itemprop="description" content="可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:
+[caption id=“attachment_1286” align=“aligncenter” width=“700”] League of Legends Mobile (英雄联盟手游)[/caption]
+[caption id=“attachment_1284” align=“aligncenter” width=“700”] PUBG Mobile (和平精英)[/caption]
+[caption id=“attachment_1288” align=“aligncenter” width=“700”] Minecraft PE(我的世界手机版)[/caption]
+以上游戏都在当前手游榜(2020.04)排名前五.
+[epcl_box type=“information”]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]
+所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!
+我们要做的项目名称为Lame Tank 360(Lame坦克360).
+本项目将完整支持360°的旋转. 并将坦克的&#34;炮塔&#34;与&#34;坦克身体&#34;分开. 因此, 我们必须建立两个摇杆.
+需具备的条件 若想顺利学习本篇教程, 你需要具备:
+掌握Flutter的基础用法. 已完整学习Flame系列教程. [epcl_box type=“notice”]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读《Flutter游戏开发-Flame教程》 ![/epcl_box]
+开始 创建Flutter项目 flutter create lame_tank_360 [epcl_box type=“information”]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]
+初始化项目设置 现在项目是可以运行的, 但是只是Flutter默认生成的">
+  <meta itemprop="datePublished" content="2020-05-20T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-05-20T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1809">
+  <meta itemprop="keywords" content="Flame,Flutter,游戏开发">
+
+      <header>
+        <h1 itemprop="headline">Flame 屏幕手柄/摇杆</h1>
+        <p class="text-sm">
+          
+            Wednesday, May 20, 2020
+          
+
+          | <span>9 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Wednesday, May 20, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flame%20%e5%b1%8f%e5%b9%95%e6%89%8b%e6%9f%84/%e6%91%87%e6%9d%86&amp;url=http://localhost:1313/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flame%20%e5%b1%8f%e5%b9%95%e6%89%8b%e6%9f%84/%e6%91%87%e6%9d%86%20http://localhost:1313/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:</p>
+<p>[caption id=&ldquo;attachment_1286&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-02-700x390.jpg" alt="Flutter Flame 摇杆-02"> League of Legends Mobile (英雄联盟手游)[/caption]</p>
+<p>[caption id=&ldquo;attachment_1284&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-01-700x341.jpg" alt="Flutter Flame 摇杆-01"> PUBG Mobile (和平精英)[/caption]</p>
+<p>[caption id=&ldquo;attachment_1288&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-03-700x376.jpg" alt="Flutter Flame 摇杆-03"> Minecraft PE(我的世界手机版)[/caption]</p>
+<p>以上游戏都在当前手游榜(2020.04)排名前五.</p>
+<p>[epcl_box type=&ldquo;information&rdquo;]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]</p>
+<p>所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!</p>
+<p>我们要做的项目名称为<strong>Lame Tank 360</strong>(Lame坦克360).</p>
+<p>本项目将完整支持360°的旋转. 并将坦克的&quot;炮塔&quot;与&quot;坦克身体&quot;分开. 因此, 我们必须建立两个摇杆.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>若想顺利学习本篇教程, 你需要具备:</p>
+<ol>
+<li>掌握Flutter的基础用法.</li>
+<li>已完整学习Flame系列教程.</li>
+</ol>
+<p>[epcl_box type=&ldquo;notice&rdquo;]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读<a href="https://www.bugcatt.com/archives/279" target="_blank">《Flutter游戏开发-Flame教程》</a>
+![/epcl_box]</p>
+<h2 id="开始">开始</h2>
+<h3 id="创建flutter项目">创建Flutter项目</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>flutter create lame_tank_360
+</span></span></code></pre></div><p>[epcl_box type=&ldquo;information&rdquo;]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]</p>
+<h3 id="初始化项目设置">初始化项目设置</h3>
+<p>现在项目是可以运行的, 但是只是Flutter默认生成的</p>
+<p>清空<code>./lib/main.dart</code>, 并添加以下内容:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flutter/material.dart&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flutter/services.dart&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Future main() <span style="color:#66d9ef">async</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  WidgetsFlutterBinding.ensureInitialized();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 设置屏幕方向(设置屏幕方向为横向)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">await</span> SystemChrome.setPreferredOrientations([
+</span></span><span style="display:flex;"><span>    DeviceOrientation.landscapeLeft,
+</span></span><span style="display:flex;"><span>    DeviceOrientation.landscapeRight,
+</span></span><span style="display:flex;"><span>  ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 禁止所有UI层(设置全屏)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">await</span> SystemChrome.setEnabledSystemUIOverlays([]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 删除了初始的其他内容, 导入所需的库, 将<code>main()</code>转为<code>async</code>, 将APP锁定为横向, 最后, 隐藏所有UI叠加层, APP因此变为全屏显示.</p>
+  </blockquote>
+
+<p>因为本教程不会通过测试驱动开发, 所以你同样要删除<code>./test</code>目录.</p>
+<p>让我们为游戏准备所需的Widget树. Widget树将会由一个<code>Stack</code>组成, 其子级是游戏的各层.</p>
+<p>这些层分别是:</p>
+<ol>
+<li>游戏本身(绘制草坪、坦克和子弹的区域)</li>
+<li>UI层(绘制游戏手柄以及按钮)</li>
+</ol>
+<p>当然, 游戏层会在UI层下面.</p>
+<p>为此, 在将APP设置为全屏的代码下面添加以下代码块:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 运行APP
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>runApp(
+</span></span><span style="display:flex;"><span>  Directionality(
+</span></span><span style="display:flex;"><span>    textDirection: TextDirection.ltr,
+</span></span><span style="display:flex;"><span>    child: Stack(
+</span></span><span style="display:flex;"><span>      children: [
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 为游戏提供占位符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Container(
+</span></span><span style="display:flex;"><span>          color: Color(<span style="color:#ae81ff">0xff27ae60</span>),
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 摇杆层
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Container(),
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>  ),
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 快速解析: 某些功能(例如<code>Stack</code>)需要确定方向, 这就是为什么我们必须在其中以<strong>LTR</strong>(从左至右)的方向对其定义的原因. <code>Stack</code>的子级的渲染顺序与列表中定义的顺序一致, 因此, 游戏将先被渲染, 然后渲染<code>joypad</code>进行覆盖, 使其渲染到游戏的顶部.</p>
+  </blockquote>
+
+<h3 id="创建joypad摇杆小部件">创建joypad(摇杆)小部件</h3>
+<p>由于我们将使用两个摇杆, 一个用于坦克主体, 另一个用于炮塔, 因此我们将创建一个可重复使用的<code>widget</code>. widget通常是其他小部件的集合, 但有时它具有一个自定义的绘制工具, 可以进行widget的实时渲染.</p>
+<h4 id="创建新的widget类">创建新的widget类</h4>
+<p>下面即将提供<code>Joypad</code>widget的代码. 通常我<strong>不鼓励盲目的复制粘贴网上的代码</strong>, 最好阅读并理解其内容并手动打进项目中, 并在需要的时候进行修改.</p>
+<p><strong>但是&hellip;</strong></p>
+<p>由于Flutter Widget的格式就很大, 因此将以下代码放入<code>./lib/widgets/joypad.dart</code>, 我会在代码下面进行解释:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;dart:math&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flutter/material.dart&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Joypad</span> <span style="color:#66d9ef">extends</span> StatefulWidget {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> Function(Offset) onChange;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> Joypad({
+</span></span><span style="display:flex;"><span>    Key key,
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#66d9ef">required</span> <span style="color:#66d9ef">this</span>.onChange,
+</span></span><span style="display:flex;"><span>  }) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  JoypadState createState() <span style="color:#f92672">=&gt;</span> JoypadState();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JoypadState</span> <span style="color:#66d9ef">extends</span> State<span style="color:#f92672">&lt;</span>Joypad<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>  Offset delta <span style="color:#f92672">=</span> Offset.zero;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> updateDelta(Offset newDelta) {
+</span></span><span style="display:flex;"><span>    widget.onChange(newDelta);
+</span></span><span style="display:flex;"><span>    setState(() {
+</span></span><span style="display:flex;"><span>      delta <span style="color:#f92672">=</span> newDelta;
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> calculateDelta(Offset offset) {
+</span></span><span style="display:flex;"><span>    Offset newDelta <span style="color:#f92672">=</span> offset <span style="color:#f92672">-</span> Offset(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">60</span>);
+</span></span><span style="display:flex;"><span>    updateDelta(
+</span></span><span style="display:flex;"><span>      Offset.fromDirection(
+</span></span><span style="display:flex;"><span>        newDelta.direction,
+</span></span><span style="display:flex;"><span>        min(<span style="color:#ae81ff">30</span>, newDelta.distance),
+</span></span><span style="display:flex;"><span>      ),
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Widget build(BuildContext context) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> SizedBox(
+</span></span><span style="display:flex;"><span>      height: <span style="color:#ae81ff">120</span>,
+</span></span><span style="display:flex;"><span>      width: <span style="color:#ae81ff">120</span>,
+</span></span><span style="display:flex;"><span>      child: Container(
+</span></span><span style="display:flex;"><span>        decoration: BoxDecoration(
+</span></span><span style="display:flex;"><span>          borderRadius: BorderRadius.circular(<span style="color:#ae81ff">60</span>),
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        child: GestureDetector(
+</span></span><span style="display:flex;"><span>          child: Container(
+</span></span><span style="display:flex;"><span>            decoration: BoxDecoration(
+</span></span><span style="display:flex;"><span>              color: Color(<span style="color:#ae81ff">0x88ffffff</span>),
+</span></span><span style="display:flex;"><span>              borderRadius: BorderRadius.circular(<span style="color:#ae81ff">60</span>),
+</span></span><span style="display:flex;"><span>            ),
+</span></span><span style="display:flex;"><span>            child: Center(
+</span></span><span style="display:flex;"><span>              child: Transform.translate(
+</span></span><span style="display:flex;"><span>                offset: delta,
+</span></span><span style="display:flex;"><span>                child: SizedBox(
+</span></span><span style="display:flex;"><span>                  height: <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>                  width: <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>                  child: Container(
+</span></span><span style="display:flex;"><span>                    decoration: BoxDecoration(
+</span></span><span style="display:flex;"><span>                      color: Color(<span style="color:#ae81ff">0xccffffff</span>),
+</span></span><span style="display:flex;"><span>                      borderRadius: BorderRadius.circular(<span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>                    ),
+</span></span><span style="display:flex;"><span>                  ),
+</span></span><span style="display:flex;"><span>                ),
+</span></span><span style="display:flex;"><span>              ),
+</span></span><span style="display:flex;"><span>            ),
+</span></span><span style="display:flex;"><span>          ),
+</span></span><span style="display:flex;"><span>          onPanDown: onDragDown,
+</span></span><span style="display:flex;"><span>          onPanUpdate: onDragUpdate,
+</span></span><span style="display:flex;"><span>          onPanEnd: onDragEnd,
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>      ),
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> onDragDown(DragDownDetails d) {
+</span></span><span style="display:flex;"><span>    calculateDelta(d.localPosition);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> onDragUpdate(DragUpdateDetails d) {
+</span></span><span style="display:flex;"><span>    calculateDelta(d.localPosition);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> onDragEnd(DragEndDetails d) {
+</span></span><span style="display:flex;"><span>    updateDelta(Offset.zero);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>💡 代码解析:</p>
+<ul>
+<li>Flutter widget有两种类型, 分别是<code>StatelessWidgets</code>和<code>StatefulWidgets</code>.Stateless是简单的widget, 不管理动态数据. 它们通常一生都不会改变. 另一边, Stateful widget可以是动态的, 并且它们的外观、位置和其他属性取决于可能更改的数据.</li>
+<li>我们正在使用<code>StatefulWidget</code>作为摇杆. <code>StatefulWidget</code>由widget和State(状态)组成.</li>
+<li>创建时, 我们需要一个函数作为<code>onChange</code>的参数. 传递的函数本身必须接收<code>Offset</code>, 这样可以知道widget的当前增量.</li>
+<li><code>build</code>函数中包含包含摇杆本身的完整布局.</li>
+<li>在<code>build</code>函数内部, 有一个<code>GestureDetector</code>可以侦听三个事件(向下拖动, 拖动更新, 结束拖动).</li>
+<li>向下拖动(玩家触摸摇杆的那一刻)和拖动更新(按下手指的每次移动)时, 增量将在<code>calculateDelta()</code>中重新计算. 然后将计算出的增加传递给<code>updateDelta()</code>.</li>
+<li>在<code>updateDelta()</code>内部, 调用<code>onChange</code>内部的函数将新的(更新的)delta传递给它. 然后, 函数调用<code>setState</code>, 它触发Flutter再次调用这个widget的<code>build</code>函数, 有效的更新了<code>joypad</code>的外观.</li>
+</ul>
+<p>[epcl_box type=&ldquo;information&rdquo;]如果你对此widget有任何疑问, 欢迎在下方评论区讨论! 或者加入<a href="https://jq.qq.com/?_wv=1027&amp;k=5ETLFm3" target="_blank">我的Flame交流群(QQ)</a>
+.[/epcl_box]</p>
+<h4 id="在game中添加摇杆">在game中添加摇杆</h4>
+<p>现在我们有了一个摇杆widget, 让我们来为game构建UI层.</p>
+<p>我们的目标:</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-04-700x330.png" alt="Flutter Flame 摇杆-04"></p>
+<p>返回<code>./lib/main.dart</code>. 第一步就是要导入Joypad的widget:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:lame_tank_360/widgets/joypad.dart&#39;</span>;
+</span></span></code></pre></div><p>然后找到UI层:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 摇杆层
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Container(),
+</span></span></code></pre></div><p>替换为:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 摇杆层
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Column(
+</span></span><span style="display:flex;"><span>  children: [
+</span></span><span style="display:flex;"><span>    Spacer(),
+</span></span><span style="display:flex;"><span>    Row(
+</span></span><span style="display:flex;"><span>      children: [
+</span></span><span style="display:flex;"><span>        SizedBox(width: <span style="color:#ae81ff">48</span>),
+</span></span><span style="display:flex;"><span>        Joypad(
+</span></span><span style="display:flex;"><span>          onChange: (Offset delta) <span style="color:#f92672">=&gt;</span> print(delta),
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        Spacer(),
+</span></span><span style="display:flex;"><span>        Joypad(
+</span></span><span style="display:flex;"><span>          onChange: (Offset delta) <span style="color:#f92672">=&gt;</span> print(delta),
+</span></span><span style="display:flex;"><span>        ),
+</span></span><span style="display:flex;"><span>        SizedBox(width: <span style="color:#ae81ff">48</span>),
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>    SizedBox(height: <span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>),
+</span></span></code></pre></div><p>[epcl_box type=&ldquo;notice&rdquo;]你现在应该熟悉<code>Column</code>和<code>Row</code>的widget了. 如果没有, 建议先去看看<a href="https://flutterchina.club/widgets/layout/" target="_blank">《Flutter官方文档 - 布局》</a>
+[/epcl_box]</p>
+<p>[epcl_box type=&ldquo;information&rdquo;]目前为止, 我们只是在<code>delta</code>中打印每次在摇杆中变更的值. 我们稍后会将其链接至game[/epcl_box]</p>
+<h3 id="360-坦克">360° 坦克</h3>
+<p>是时候将APP转化为游戏了! 和往常一样, 我们将会使用Flame游戏开发引擎.</p>
+<h4 id="安装flame">安装Flame</h4>
+<p>你可以在pub上找到Flame, 并且可以直接在<code>./pubspec.yaml</code>的<code>dependencies:</code>选项下方引入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">flame</span>: <span style="color:#ae81ff">^0.16.0</span>
+</span></span></code></pre></div><p>[epcl_box type=&ldquo;notice&rdquo;]一定要注意缩进(<strong>在</strong><code>flame</code><strong>前的两个空格</strong>), 并且确定把它放在正确的位置(在<code>dependencies</code>内)[/epcl_box]</p>
+<p>运行IDE自带的`Packages get`或在终端中输入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>flutter pub get
+</span></span></code></pre></div><p>下一步, 我们来创建包含game loop的game类. 创建文件<code>./lib/lame-tank-360.dart</code>并录入以下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;dart:ui&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flame/game.dart&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LameTank360</span> <span style="color:#66d9ef">extends</span> Game {
+</span></span><span style="display:flex;"><span>  Size screenSize;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> render(Canvas c) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> update(<span style="color:#66d9ef">double</span> t) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> resize(Size size) {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 这仅是一个相当简单的game类文件, 继承自Flame的<code>Game</code>类. Flame已经替我们处理了所有的运行游戏所需的核心代码🤭🤭🤭</p>
+  </blockquote>
+
+<p>我们需要写代码来填充这些功能(<code>resize</code>, <code>update</code>以及<code>render</code>)用以扩展game类. 从<code>resize</code>开始:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> resize(Size size) {
+</span></span><span style="display:flex;"><span>  screenSize <span style="color:#f92672">=</span> size;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面的代码虽然非常简单, 但我也想跟大家解释下为何要这么做. 现在某些手机支持动态分辨率. 用户可以变更(降低)分辨率以节约电量, 也可以提高分辨率增加清晰度(看高清视频和玩高清游戏).</p>
+<p>所以当玩家在玩游戏时, 分辨率可能会改变.</p>
+<p>由于Flutter使用逻辑像素, 因此应用的分辨率在这种情况下会发生变化. 逻辑像素由Flutter计算得出, 因此无论物理尺寸和分辨率如何变化, 所以设备中的200个逻辑像素的大小始终相同.</p>
+<p>向侧面旋转手机时, 也可能触发<code>resize</code>函数, 并且你的游戏同时允许纵向和横向(Lame Tank 360不允许).</p>
+<p>在继续并实际渲染游戏画布上的内容之前, 让我们确保<code>update</code>和<code>render</code>只有在游戏至少从Flutter收到一次尺寸后才会运行.</p>
+<p>将以下代码块**同时放入<code>update</code>和<code>render</code>**中:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (screenSize <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 如果screenSize为null, 直接结束执行即可.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span>; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>当前的<code>lame-tank-360.dart</code>文件的全部代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;dart:ui&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flame/game.dart&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LameTank360</span> <span style="color:#66d9ef">extends</span> Game {
+</span></span><span style="display:flex;"><span>  Size screenSize;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> render(Canvas c) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (screenSize <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 如果screenSize为null, 直接结束执行即可.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> update(<span style="color:#66d9ef">double</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (screenSize <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 如果screenSize为null, 直接结束执行即可.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@</span>override
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> resize(Size size) {
+</span></span><span style="display:flex;"><span>    screenSize <span style="color:#f92672">=</span> size;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="添加game类至flutter的widget树">添加game类至Flutter的widget树</h4>
+<p>为了确保在渲染APP时Flutter包含我们的game类, 我们创建实例并放入widget树中.</p>
+<p>打开<code>./lib/main.dart</code>, 导入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:lame_tank_360/lame-tank-360.dart&#39;</span>;
+</span></span></code></pre></div><p>紧接着创建一个game类实例. 只需放在调用<code>runApp</code>上方.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span>  <span style="color:#75715e">// 先初始化game
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> LameTank360 game <span style="color:#f92672">=</span> LameTank360();
+</span></span></code></pre></div><p>下一步只需要将<code>game</code>的.<code>widget</code>参数放入widget树即可. 我们可以通过替换以下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 为游戏提供占位符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Container(
+</span></span><span style="display:flex;"><span>  color: Color(<span style="color:#ae81ff">0xff27ae60</span>),
+</span></span><span style="display:flex;"><span>),
+</span></span></code></pre></div><p>为:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 为游戏提供占位符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>game.widget,
+</span></span></code></pre></div><p>现在, 我们准备继续开发game类.</p>
+<h4 id="草坪">草坪</h4>
+<p>如果你现在运行游戏, 你应该会看到:</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-05-700x337.png" alt="Flutter Flame 摇杆-05"></p>
+<p>游戏是空的, 所以渲染出来的是黑色的. 让我们通过添加&quot;草坪&quot;来解决此问题. 为此, 我们将绘制一个与屏幕一般大的绿色矩形.</p>
+<p>返回<code>./lib/lame-tank-360.dart</code>, 在<code>render</code>函数内部, 在判断<code>screenSize</code>是否为<code>null</code>以后, 放入以下代码块:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 绘制草坪
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    screenSize.width,
+</span></span><span style="display:flex;"><span>    screenSize.height,
+</span></span><span style="display:flex;"><span>  ),
+</span></span><span style="display:flex;"><span>  Paint()..color <span style="color:#f92672">=</span> Color(<span style="color:#ae81ff">0xff27ae60</span>),
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 这将绘制一个绿色(<code>#27ae60</code>)矩形, 该矩形始于屏幕左上角(<code>0,0</code>), 并且与屏幕等高、等宽.</p>
+  </blockquote>
+
+<p>现在运行游戏, 你会发现绿色草坪:</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-06-700x337.png" alt="Flutter Flame 摇杆-06"></p>
+<h4 id="坦克">坦克</h4>
+<p>让我们继续绘制坦克. 我们将其分离为单独的类.</p>
+<p>创建文件<code>./lib/components/tank.dart</code>, 并录入以下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;dart:ui&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:lame_tank_360/lame-tank-360.dart&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tank</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> LameTank360 game;
+</span></span><span style="display:flex;"><span>  Offset position <span style="color:#f92672">=</span> Offset.zero;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">double</span> bodyAngle <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">double</span> turretAngle <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Tank(<span style="color:#66d9ef">this</span>.game, {<span style="color:#66d9ef">this</span>.position});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> render(Canvas c) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> update(<span style="color:#66d9ef">double</span> t) {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 仍然是一个基本的游戏component类, 其中包含了空的函数, 当然我们会尽快填充这些函数. 变量<code>position</code>将是坦克主体和炮塔的中心. <code>bodyAngle</code>和<code>turretAngle</code>分别是坦克主体和炮塔的当前方向.</p>
+  </blockquote>
+
+<p>下一步来绘制坦克. 在<code>render</code>函数内部添加代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 准备Paint对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Paint lightPaint <span style="color:#f92672">=</span> Paint()..color <span style="color:#f92672">=</span> Color(<span style="color:#ae81ff">0xffdddddd</span>);
+</span></span><span style="display:flex;"><span>Paint darkPaint <span style="color:#f92672">=</span> Paint()..color <span style="color:#f92672">=</span> Color(<span style="color:#ae81ff">0xff777777</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 将canvas的原点设置在坦克的坐标上
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c.save();
+</span></span><span style="display:flex;"><span>c.translate(position.dx, position.dy);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 绘制坦克主体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>  lightPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 绘制轮子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#f92672">-</span><span style="color:#ae81ff">24</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">8</span>),
+</span></span><span style="display:flex;"><span>  darkPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#f92672">-</span><span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">8</span>),
+</span></span><span style="display:flex;"><span>  darkPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 绘制炮塔
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">24</span>),
+</span></span><span style="display:flex;"><span>  darkPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>  darkPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>c.drawRect(
+</span></span><span style="display:flex;"><span>  Rect.fromLTWH(<span style="color:#ae81ff">36</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>  darkPaint,
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c.restore();
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先准备两种颜色的<code>Paint</code>对象, 并在下面绘制若干矩形来组成一个&quot;坦克&quot;.</p>
+  </blockquote>
+
+<p>最终, 创建tank实例并添加进入<code>game</code>类中. 返回<code>./lib/lame-tank-360.dart</code>, 导入tank:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:lame_tank_360/components/tank.dart&#39;</span>;
+</span></span></code></pre></div><p>添加tank实例:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span>Tank tank;
+</span></span></code></pre></div><p>然后在<code>resize</code>中进行判断, 若未进行过初始化, 则初始化一个实例:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (tank <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>  tank <span style="color:#f92672">=</span> Tank(
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>    position: Offset(
+</span></span><span style="display:flex;"><span>      screenSize.width <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>      screenSize.height <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 判断<code>tank</code>是否为<code>null</code>可确保此代码块仅执行一次. 创建<code>Tank</code>类的新实例赋值给<code>tank</code>变量. 若手机(或APP)的分辨率再次变更, 则会再次调用<code>resize</code>函数, 因为经过判断, 所以不会创建新的tank.</p>
+  </blockquote>
+
+<p>最终, 通过从game类自己的<code>render()</code>中调用tank的<code>render()</code>来确保tank已被渲染.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#75715e">// 绘制坦克
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>tank.render(c);
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 渲染将会按照代码顺序执行. 因此, 请确保在调用草坪的<code>render</code>下面添加上面的代码块. 如果顺序出错, 草坪将覆盖坦克, 使我们看不到!</p>
+  </blockquote>
+
+<p>[epcl_box type=&ldquo;success&rdquo;]现在运行代码, 屏幕应该是这样的:[/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-07-700x337.png" alt="Flutter Flame 摇杆-07"></p>
+<h3 id="绑定旋转">绑定旋转</h3>
+<p>现在到了比较有趣的环节, 让我们将左边的摇杆与坦克进行绑定. 换句话说, 我们使坦克对左摇杆产生回应. 打开<code>./lib/components/tank.dart</code>.</p>
+<p>我们需要访问<code>pi</code>(数学中的<code>π</code>)常量和一些数学计算操作, 所以我们先导入:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;dart:math&#39;</span>;
+</span></span></code></pre></div><p>然后在绘制tank之前, 我们需要根据坦克主体的预估角度来旋转canvas, 通过以下代码完成:</p>
+<p>[epcl_box type=&ldquo;notice&rdquo;]记住要在坦克主体渲染前旋转canvas ![/epcl_box]</p>
+<p>我们不仅要立即根据摇杆的角度更改<code>bodyAngle</code>, 还要做到使坦克以固定的速率向摇杆的角度转动.</p>
+<p>为此, 我们需要一个变量来保存目标的角度值, 坦克将会尝试转向该角度.</p>
+<p>我们将此变量命名为<code>targetBodyAngle</code>, 把它放在其他实例变量旁边:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> targetBodyAngle;
+</span></span></code></pre></div><p>[epcl_box type=&ldquo;notice&rdquo;]要记得, 任何未经初始化的实例变量的值都为null哦[/epcl_box]</p>
+<p>下一步, 我们来编写代码时坦克主体角度转向目标角度. 更新<code>update</code>函数为:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> update(<span style="color:#66d9ef">double</span> t) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">double</span> rotationRate <span style="color:#f92672">=</span> pi <span style="color:#f92672">*</span> t;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (targetBodyAngle <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&lt;</span> targetBodyAngle) { <span style="color:#66d9ef">if</span> ((targetBodyAngle <span style="color:#f92672">-</span> bodyAngle).abs() <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>        bodyAngle <span style="color:#f92672">=</span> bodyAngle <span style="color:#f92672">-</span> rotationRate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>pi) { bodyAngle <span style="color:#f92672">+=</span> pi <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>; } } <span style="color:#66d9ef">else</span> { bodyAngle <span style="color:#f92672">=</span> bodyAngle <span style="color:#f92672">+</span> rotationRate; <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&gt;</span> targetBodyAngle) {
+</span></span><span style="display:flex;"><span>          bodyAngle <span style="color:#f92672">=</span> targetBodyAngle;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&gt;</span> targetBodyAngle) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> ((targetBodyAngle <span style="color:#f92672">-</span> bodyAngle).abs() <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>        bodyAngle <span style="color:#f92672">=</span> bodyAngle <span style="color:#f92672">+</span> rotationRate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>          bodyAngle <span style="color:#f92672">-=</span> pi <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        bodyAngle <span style="color:#f92672">=</span> bodyAngle <span style="color:#f92672">-</span> rotationRate;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (bodyAngle <span style="color:#f92672">&lt;</span> targetBodyAngle) {
+</span></span><span style="display:flex;"><span>          bodyAngle <span style="color:#f92672">=</span> targetBodyAngle;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 这一块的代码量比较多. 首先, 我们声明一个<code>rotationRate</code>常量, 其值<code>pi</code>乘以当前时间增量(<code>t</code>). 然后根据当前<code>bodyAngle</code>和<code>targetBodyAngle</code>之间的关系, 我们减去或添加一个<code>rotaionRate</code>的值</p>
+  </blockquote>
+
+<p>[epcl_box type=&ldquo;information&rdquo;]因为目前我还没有想出上面的代码如何更简约的写出. 所以目前先使用上述代码, 如果对此有疑问, 欢迎讨论.[/epcl_box]</p>
+<p>回到 <code>./lib/lame-tank-360.dart</code>, 在<code>update()</code>内部, 保证tank的<code>update</code>函数已被调用. 在判断<code>screenSize</code>是否为<code>null</code>下方添加代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span>tank.update(t);
+</span></span></code></pre></div><p>创建一个新的函数, 用作摇杆值变更的处理器.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> onLeftJoypadChange(Offset offset) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (offset <span style="color:#f92672">==</span> Offset.zero) {
+</span></span><span style="display:flex;"><span>    tank.targetBodyAngle <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    tank.targetBodyAngle <span style="color:#f92672">=</span> offset.direction;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>最终, 在 <code>./lib/main.dart</code>中替换左边的摇杆处理器:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span>Joypad(
+</span></span><span style="display:flex;"><span>  onChange: (Offset delta) <span style="color:#f92672">=&gt;</span> print(delta),
+</span></span><span style="display:flex;"><span>),
+</span></span></code></pre></div><p>为:</p>
+<pre tabindex="0"><code>Joypad(
+  onChange: game.onLeftJoypadChange,
+),
+</code></pre>
+
+
+  <blockquote>
+    <p>这样一来, 每次<code>onChange</code>在摇杆上触发时, 也会调用<code>onLeftJoypadChange</code>处理器, 并将摇杆的<code>OffSet</code>传递给它.</p>
+  </blockquote>
+
+<p>[epcl_box type=&ldquo;success&rdquo;]如果上面的代码没有问题, 运行项目, 查看类似如下的效果![/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-08.gif" alt="Flutter Flame 摇杆-08"></p>
+<h4 id="炮台独立旋转">炮台独立旋转</h4>
+<p>接下来是右侧的摇杆. 我们需要将其变化绑定至炮台上, 使其与坦克主体分开旋转.</p>
+<p>回到<code>./lib/components/tank.dart</code>中, 我们需要一个炮台的目标角度, 炮台要&quot;追赶&quot;这个目标角度. 所以我们先添加这个实例变量:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> targetTurretAngle;
+</span></span></code></pre></div><p>接下来, 修改<code>update</code>函数, 并根据目标角度计算炮台角度, 同时考虑坦克主体的角度. 在计算主体角度下面编写以下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dart" data-lang="dart"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (targetTurretAngle <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">double</span> localTargetTurretAngle <span style="color:#f92672">=</span> targetTurretAngle <span style="color:#f92672">-</span> bodyAngle;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&lt;</span> localTargetTurretAngle) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((localTargetTurretAngle <span style="color:#f92672">-</span> turretAngle).abs() <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>      turretAngle <span style="color:#f92672">=</span> turretAngle <span style="color:#f92672">-</span> rotationRate;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>pi) {
+</span></span><span style="display:flex;"><span>        turretAngle <span style="color:#f92672">+=</span> pi <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      turretAngle <span style="color:#f92672">=</span> turretAngle <span style="color:#f92672">+</span> rotationRate;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&gt;</span> localTargetTurretAngle) {
+</span></span><span style="display:flex;"><span>        turretAngle <span style="color:#f92672">=</span> localTargetTurretAngle;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&gt;</span> localTargetTurretAngle) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((localTargetTurretAngle <span style="color:#f92672">-</span> turretAngle).abs() <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>      turretAngle <span style="color:#f92672">=</span> turretAngle <span style="color:#f92672">+</span> rotationRate;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&gt;</span> pi) {
+</span></span><span style="display:flex;"><span>        turretAngle <span style="color:#f92672">-=</span> pi <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      turretAngle <span style="color:#f92672">=</span> turretAngle <span style="color:#f92672">-</span> rotationRate;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (turretAngle <span style="color:#f92672">&lt;</span> localTargetTurretAngle) {
+</span></span><span style="display:flex;"><span>        turretAngle <span style="color:#f92672">=</span> localTargetTurretAngle;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+
+  <blockquote>
+    <p>💡 代码解析: 几乎与&quot;计算坦克主体角度&quot;部分完全一样, 但是它在处理角度之前, 会先从目标角度先减去坦克主体角度. 这个差值就成为了炮台即将追赶的目标角度. 在渲染期间, 这两个旋转最终会被添加进来，给炮塔一个合适的角度。</p>
+  </blockquote>
+
+<p>然后, 确保渲染炮台时将其旋转到适当的角度. 在绘制坦克的&quot;车轮&quot;下面, 添加以下代码:</p>
+<pre tabindex="0"><code>// 旋转炮台
+c.rotate(turretAngle);
+</code></pre>
+
+
+  <blockquote>
+    <p>此旋转应用于坦克主体旋转的顶部, 所以是加法.</p>
+  </blockquote>
+
+<p>之后, 跳转到game类(<code>./lib/lame-tank-360.dart</code>)并为右侧摇杆添加此函数:</p>
+<pre tabindex="0"><code>void onRightJoypadChange(Offset offset) {
+  if (offset == Offset.zero) {
+    tank.targetTurretAngle = null;
+  } else {
+    tank.targetTurretAngle = offset.direction;
+  }
+}
+</code></pre><p>最终, 替换<code>./lib/main.dart</code>中右侧游戏手柄的<code>onChange</code>属性的值, 修改:</p>
+<pre tabindex="0"><code>Joypad(
+  onChange: (Offset delta) =&gt; print(delta),
+),
+</code></pre><p>为:</p>
+<pre tabindex="0"><code>Joypad(
+  onChange: game.onRightJoypadChange,
+),
+</code></pre><p>[epcl_box type=&ldquo;success&rdquo;]现在运行项目, 应该可以类似这样的效果:[/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-09.gif" alt="Flutter Flame 摇杆-09"></p>
+<p>只是原地转圈太无聊了, <strong>我们想让它动起来!</strong></p>
+<p>返回<code>./lib/components/tank.dart</code>, <code>update()</code>内, 在判断<code>targetBodyAngle</code>是否不为<code>null</code>的内部添加:</p>
+<pre tabindex="0"><code>if (bodyAngle == targetBodyAngle) {
+  position = position + Offset.fromDirection(bodyAngle, 100 * t);
+} else {
+  position = position + Offset.fromDirection(bodyAngle, 50 * t);
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 坦克在旋转时应该移动的较慢(<code>50</code>个逻辑像素), 直线运动时为正常速度(<code>100</code>个逻辑像素). 这就是<code>if</code>判断的意义所在.</p>
+  </blockquote>
+
+<p>[epcl_box type=&ldquo;success&rdquo;]运行项目, 查看效果! 现在应该可以看到坦克的移动啦![/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-10.gif" alt="Flutter Flame 摇杆-10"></p>
+<p>[epcl_box type=&ldquo;information&rdquo;]挑战一: 如果你愿意, 可以接受这个挑战. 与其保持恒定的移速, 不如尝试加速度. 从0开始, 逐渐增加速度到最大速度![/epcl_box]</p>
+<p>[epcl_box type=&ldquo;notice&rdquo;]挑战二: 如果你进行了加速, 何不试试减速呢?[/epcl_box]</p>
+<h3 id="按钮和子弹">按钮和子弹</h3>
+<p>坦克怎能不会开炮? 让我们来让这个坦克从炮筒内发射炮弹.</p>
+<p>我们将添加两个按钮, 每个按钮都在摇杆上方. 这样是为了方便玩家, 可使用任意的拇指进行开炮.</p>
+<h4 id="按钮widget">按钮widget</h4>
+<p>由于我们将使用两个外观和功能相同的按钮, 我们来创建单独的widget来复用, 以多次使用, 减少重复代码.</p>
+<p>创建文件<code>./lib/widgets/button.dart</code>, 输入以下内容:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+class Button extends StatelessWidget {
+  final void Function() onTap;
+
+  const Button({
+    Key key,
+    @required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 64,
+      width: 64,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: GestureDetector(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0x88ffffff),
+              borderRadius: BorderRadius.circular(32),
+            ),
+          ),
+          onTap: onTap,
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 它只是一个圆形白色半透明的<code>Container</code>, 放在一个<code>GestureDetector</code>(手势检测器)中, 形状是圆形的(受另一个圆形<code>Container</code>的限制). 在其构造函数中, <code>onTap</code>属性是必选的参数, 并且需要传入一个函数. 这个函数在被点击时由<code>GestureDetector</code>进行调用.</p>
+  </blockquote>
+
+<h4 id="将按钮添加至ui层">将按钮添加至UI层</h4>
+<p>我们跳转到<code>./lib/lame-tank-360.dart</code>添加一个点击按钮的处理器, 先定义, 等下我们来填充函数:</p>
+<pre tabindex="0"><code>void onButtonTap() {}
+</code></pre><p>最后我们打开<code>./lib/main.dart</code>, 先导入:</p>
+<pre tabindex="0"><code>import &#39;package:lame_tank_360/widgets/button.dart&#39;;
+</code></pre><p>将这些按钮添加至布局内, 在摇杆层添加以下代码块. 将它们放在包含<code>Joypads</code>的<code>Row</code>上的<code>Column</code>层上.</p>
+<pre tabindex="0"><code>Row(
+  children: [
+    SizedBox(width: 48),
+    Button(
+      onTap: game.onButtonTap,
+    ),
+    Spacer(),
+    Button(
+      onTap: game.onButtonTap,
+    ),
+    SizedBox(width: 48),
+  ],
+),
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 和<code>Joypad</code>列类似, 左右两侧都有<code>SizedBox</code>作为分隔符, 而一个<code>Spacer</code>widget将充满它们之间的空间.</p>
+  </blockquote>
+
+<p>将以下行添加到按钮row和摇杆row之间:</p>
+<pre tabindex="0"><code>SizedBox(height: 20),
+</code></pre><p>整个摇杆层的代码:</p>
+<pre tabindex="0"><code>// 摇杆层
+          Column(
+            children: [
+              Spacer(),
+              Row(
+                children: [
+                  SizedBox(width: 48),
+                  Button(
+                    onTap: game.onButtonTap,
+                  ),
+                  Spacer(),
+                  Button(
+                    onTap: game.onButtonTap,
+                  ),
+                  SizedBox(width: 48),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(width: 48),
+                  Joypad(
+                    onChange: game.onLeftJoypadChange,
+                  ),
+                  Spacer(),
+                  Joypad(
+                    onChange: game.onRightJoypadChange,
+                  ),
+                  SizedBox(width: 48),
+                ],
+              ),
+              SizedBox(height: 24),
+            ],
+          ),
+</code></pre><p>[epcl_box type=&ldquo;success&rdquo;]运行项目, 屏幕上应该像这样, 多了两个按钮:[/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-11.png" alt="Flutter Flame 摇杆-11"></p>
+<h4 id="子弹component">子弹component</h4>
+<p>创建<code>./lib/components/bullet.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:lame_tank_360/lame-tank-360.dart&#39;;
+
+class Bullet {
+  final LameTank360 game;
+  final double speed = 300;
+  Offset position;
+  double angle = 0;
+  bool isOffscreen = false;
+
+  Bullet(this.game, {this.position, this.angle});
+
+  void render(Canvas c) {
+  }
+
+  void update(double t) {
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 我们再次创建了一个简单的component. <code>speed</code>使用<code>final</code>来修饰使其变为常量, 并将其用于移动子弹. 我们还跟踪子弹的位置和角度(两者均在创建时提供).</p>
+  </blockquote>
+
+<p>继续编写class, 让我们来编写<code>render()</code>的内容:</p>
+<pre tabindex="0"><code>void render(Canvas c) {
+  c.save();
+  c.translate(position.dx, position.dy);
+
+  // rotate the canvas
+  c.rotate(angle);
+
+  c.drawRect(
+    Rect.fromLTWH(-10, -3, 16, 6),
+    Paint()..color = Color(0xffff0000),
+  );
+
+  c.restore();
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先以子弹的当前角度旋转canvas, 然后绘制红色Rect</p>
+  </blockquote>
+
+<p>然后编写<code>update()</code>:</p>
+<pre tabindex="0"><code>void update(double t) {
+  if (isOffscreen) {
+    return;
+  }
+
+  position = position + Offset.fromDirection(angle, speed * t);
+  if (position.dx &lt; -50) {
+    isOffscreen = true;
+  }
+  if (position.dx &gt; game.screenSize.width + 50) {
+    isOffscreen = true;
+  }
+  if (position.dy &lt; -50) {
+    isOffscreen = true;
+  }
+  if (position.dy &gt; game.screenSize.height + 50) {
+    isOffscreen = true;
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 我们通过添加<code>Offset</code>(偏移量)来更新子弹的位置, 该偏移量是通过<code>speed</code>常量乘以时间增量(<code>t</code>)在给定角度下产生的, 用以确保无论FPS是多少, 子弹一直以恒等速度进行移动. 然后我们检查子弹是否从屏幕的四个边界超出50像素. 如果是, 则将其标记为&quot;屏幕外&quot;(<code>isOffscreen = true;</code>)</p>
+  </blockquote>
+
+<p>最终, 整个子弹component:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:lame_tank_360/lame-tank-360.dart&#39;;
+
+class Bullet {
+  final LameTank360 game;
+  final double speed = 300;
+  Offset position;
+  double angle = 0;
+  bool isOffscreen = false;
+
+  Bullet(this.game, {this.position, this.angle});
+
+  void render(Canvas c) {
+    c.save();
+    c.translate(position.dx, position.dy);
+
+    // rotate the canvas
+    c.rotate(angle);
+
+    c.drawRect(
+      Rect.fromLTWH(-10, -3, 16, 6),
+      Paint()..color = Color(0xffff0000),
+    );
+
+    c.restore();
+  }
+
+  void update(double t) {
+    if (isOffscreen) {
+      return;
+    }
+
+    position = position + Offset.fromDirection(angle, speed * t);
+    if (position.dx &lt; -50) {
+      isOffscreen = true;
+    }
+    if (position.dx &gt; game.screenSize.width + 50) {
+      isOffscreen = true;
+    }
+    if (position.dy &lt; -50) {
+      isOffscreen = true;
+    }
+    if (position.dy &gt; game.screenSize.height + 50) {
+      isOffscreen = true;
+    }
+  }
+}
+</code></pre><h3 id="发射子弹">发射子弹</h3>
+<p>这些按钮已经和game的<code>onTapHandler</code>进行关联, 因此我们只需编写添加子弹的代码即可.</p>
+<p>首先我们需要在tank类中使用两个辅助功能, 以获取从坦克炮塔中射出的子弹的位置及方向.</p>
+<p>打开<code>./lib/components/tank.dart</code>, 添加:</p>
+<pre tabindex="0"><code>Offset getBulletOffset() {
+  return position +
+      Offset.fromDirection(
+        getBulletAngle(),
+        36,
+      );
+}
+
+double getBulletAngle() {
+  double bulletAngle = bodyAngle + turretAngle;
+  while (bulletAngle &gt; pi) {
+    bulletAngle -= pi * 2;
+  }
+  while (bulletAngle &lt; -pi) {
+    bulletAngle += pi * 2;
+  }
+  return bulletAngle;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: <code>getBulletOffset()</code>返回坦克的位置以及炮塔的角度和长度创建的新<code>Offset</code>. 子弹的角度就是坦克主体角度和炮塔角度的总和. 两个<code>while</code>循环以确保这个角度不超过<code>pi</code>或不低于负<code>pi</code>.</p>
+  </blockquote>
+
+<p>然后, 返回<code>./lib/lame-tank-360.dart</code>. 在任何给定的点, 可能会有多个子弹飞来飞去, 为了保存它们, 我们将创建<code>List</code>, 专门用于保存这些<code>Bullet</code>.</p>
+<p>首先导入子弹:</p>
+<pre tabindex="0"><code>import &#39;package:lame_tank_360/components/bullet.dart&#39;;
+</code></pre><p>然后添加一个保存子弹集合的实例变量:</p>
+<pre tabindex="0"><code>List&lt;Bullet&gt; bullets;
+</code></pre><p>在<code>resize</code>函数中, 我们要确保list已被初始化. 在tank初始化下方添加:</p>
+<pre tabindex="0"><code>if (bullets == null) {
+  bullets = List();
+}
+</code></pre><p>然后我们需要确保bullets随game类一起更新. 在<code>update()</code>底部添加代码:</p>
+<pre tabindex="0"><code>// 让子弹飞
+    bullets.forEach((Bullet b) {
+      b.update(t);
+    });
+
+    // 移除飞出屏幕的子弹
+    bullets.removeWhere((Bullet b) {
+      return b.isOffscreen;
+    });
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 第一个块循环list中所有现有子弹并进行更新. 第二个块用于移除飞出屏幕的子弹.</p>
+  </blockquote>
+
+<p>我们还要确保子弹被绘制完成. 在<code>render()</code>中添加:</p>
+<pre tabindex="0"><code>// 绘制子弹
+    bullets.forEach((Bullet b) {
+      b.render(c);
+    });
+</code></pre><p>现在剩下的就是创建一个新的子弹并在每次触发该按钮的点击处理器时将其添加至list中. 修改<code>onButtonTap</code>处理器, 如下:</p>
+<pre tabindex="0"><code>void onButtonTap() {
+  bullets.add(
+    Bullet(
+      this,
+      position: tank.getBulletOffset(),
+      angle: tank.getBulletAngle(),
+    ),
+  );
+}
+</code></pre><p>[epcl_box type=&ldquo;success&rdquo;]如果上面的步骤没有问题, 运行游戏, 应该可以发射子弹了:[/epcl_box]</p>
+<p><img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-12.gif" alt="Flutter Flame 摇杆-12"></p>
+<h2 id="源码下载">源码下载</h2>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-joypad-lame-tank-360" target="_blank">Github</a>
+或<a href="https://gitee.com/HarrisonQI/flame-tutorial-joypad-lame-tan-360" target="_blank">码云</a>
+上查看全部代码.</strong></p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://jap.alekhin.io/onscreen-joystick-joypad-controller-flame-game" target="_blank">《On-screen joystick/joypad game controller with Flame》 - JapAlekhin</a>
+</li>
+<li><a href="https://wallhaven.cc/" target="_blank">WallHaven</a>
+上<a href="https://wallhaven.cc/user/ezhik" target="_blank">ezhik</a>
+提供的图片</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>通过创建摇杆, 你应该可以做出更多可玩性较好的游戏了!</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

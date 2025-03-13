@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Map on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/map/</link>
+    <description>Recent content in Map on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 08 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过FastJson将对象Object转为Map</title>
+      <link>http://localhost:1313/posts/post/2021/%E9%80%9A%E8%BF%87fastjson%E5%B0%86%E5%AF%B9%E8%B1%A1object%E8%BD%AC%E4%B8%BAmap/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2021/%E9%80%9A%E8%BF%87fastjson%E5%B0%86%E5%AF%B9%E8%B1%A1object%E8%BD%AC%E4%B8%BAmap/</guid>
+      <description>&lt;p&gt;本次开发的任务是比对两个对象的属性, 查看有哪些地方不一致. 为了长期考虑, 决定将它们分别转为Map对象, 再遍历该Map, 分别比较键值对来达到效果. 本篇文章记录下如何通过FastJson将对象Object转为Map.&lt;/p&gt;&#xA;&lt;h2 id=&#34;开始&#34;&gt;开始&lt;/h2&gt;&#xA;&lt;h3 id=&#34;引入fastjson&#34;&gt;引入FastJson&lt;/h3&gt;&#xA;&lt;p&gt;将&lt;code&gt;version&lt;/code&gt;替换为合适的版本.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt;     &amp;lt;version&amp;gt;1.2.69&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;对象转map函数&#34;&gt;对象转map函数&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;`/**  * 对象转Map  * @param object 要转换的对象  * @return 转换后的Map  */ private Map&amp;lt;String, Object&amp;gt; object2Map(Object object) {     JSONObject jsonObject = (JSONObject) JSON.toJSON(object);     Set&amp;lt;Map.Entry&amp;lt;String, Object&amp;gt;&amp;gt; entrySet = jsonObject.entrySet();     Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;();     for (Map.Entry&amp;lt;String, Object&amp;gt; entry : entrySet) {         map.put(entry.getKey(), entry.getValue());     }     return map; }`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;函数--运行测试&#34;&gt;函数 + 运行测试&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;`import com.alibaba.fastjson.JSON; import com.alibaba.fastjson.JSONObject;  import java.util.HashMap; import java.util.Map; import java.util.Set;  public class FastJsonTest {      public static void main(String[] args) {         // 创建对象         Person person = new Person();         person.setName(&amp;quot;阿航&amp;quot;);         person.setAge(18);         // 转换为Map         Map&amp;lt;String, Object&amp;gt; map = new FastJsonTest().object2Map(person);         // 打印         System.out.println(map.toString());     }      private Map&amp;lt;String, Object&amp;gt; object2Map(Object object) {         JSONObject jsonObject = (JSONObject) JSON.toJSON(object);         Set&amp;lt;Map.Entry&amp;lt;String, Object&amp;gt;&amp;gt; entrySet = jsonObject.entrySet();         Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;();         for (Map.Entry&amp;lt;String, Object&amp;gt; entry : entrySet) {             map.put(entry.getKey(), entry.getValue());         }         return map;     }      private static class Person {         private String name;         private Integer age;          public String getName() {             return name;         }          public void setName(String name) {             this.name = name;         }          public Integer getAge() {             return age;         }          public void setAge(Integer age) {             this.age = age;         }     } }`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;运行后打印到控制台:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

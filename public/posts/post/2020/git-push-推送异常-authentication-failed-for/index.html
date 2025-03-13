@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git push 推送异常 : &#34;Authentication failed for&#34; | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(Push failed). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.
+问题分析 先来看一下完整报错:
+Invocation failed Server returned invalid Response. java.lang.RuntimeException: Invocation failed Server returned invalid Response. at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) ... 1 more remote: No anonymous write access. Authentication failed for &#39;https://github.com/XXX&#39; 可以看到关键字:
+No anonymous write access. 👆这句话的字面意思是&quot;没有匿名写入权限&quot;. 但是他也没提示我登录啊? 不清不楚
+Authentication failed for &#39;https://github.com/XXX&#39; 👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.
+" />
+
+
+<meta name="keywords" content="Git,Github">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Git push 推送异常 : &#34;Authentication failed for&#34;">
+  <meta property="og:description" content="今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(Push failed). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.
+问题分析 先来看一下完整报错:
+Invocation failed Server returned invalid Response. java.lang.RuntimeException: Invocation failed Server returned invalid Response. at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) ... 1 more remote: No anonymous write access. Authentication failed for &#39;https://github.com/XXX&#39; 可以看到关键字:
+No anonymous write access. 👆这句话的字面意思是&#34;没有匿名写入权限&#34;. 但是他也没提示我登录啊? 不清不楚
+Authentication failed for &#39;https://github.com/XXX&#39; 👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-23T00:00:00+00:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="Github">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Git push 推送异常 : &#34;Authentication failed for&#34;">
+  <meta name="twitter:description" content="今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(Push failed). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.
+问题分析 先来看一下完整报错:
+Invocation failed Server returned invalid Response. java.lang.RuntimeException: Invocation failed Server returned invalid Response. at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) ... 1 more remote: No anonymous write access. Authentication failed for &#39;https://github.com/XXX&#39; 可以看到关键字:
+No anonymous write access. 👆这句话的字面意思是&#34;没有匿名写入权限&#34;. 但是他也没提示我登录啊? 不清不楚
+Authentication failed for &#39;https://github.com/XXX&#39; 👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Git push 推送异常 : &#34;Authentication failed for&#34;">
+  <meta itemprop="description" content="今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(Push failed). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.
+问题分析 先来看一下完整报错:
+Invocation failed Server returned invalid Response. java.lang.RuntimeException: Invocation failed Server returned invalid Response. at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) ... 1 more remote: No anonymous write access. Authentication failed for &#39;https://github.com/XXX&#39; 可以看到关键字:
+No anonymous write access. 👆这句话的字面意思是&#34;没有匿名写入权限&#34;. 但是他也没提示我登录啊? 不清不楚
+Authentication failed for &#39;https://github.com/XXX&#39; 👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.">
+  <meta itemprop="datePublished" content="2020-05-23T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-05-23T00:00:00+00:00">
+  <meta itemprop="wordCount" content="123">
+  <meta itemprop="keywords" content="Git,Github">
+
+      <header>
+        <h1 itemprop="headline">Git push 推送异常 : &#34;Authentication failed for&#34;</h1>
+        <p class="text-sm">
+          
+            Saturday, May 23, 2020
+          
+
+          | <span>1 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Saturday, May 23, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Git%20push%20%e6%8e%a8%e9%80%81%e5%bc%82%e5%b8%b8%20:%20%22Authentication%20failed%20for%22&amp;url=http://localhost:1313/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Git%20push%20%e6%8e%a8%e9%80%81%e5%bc%82%e5%b8%b8%20:%20%22Authentication%20failed%20for%22%20http://localhost:1313/posts/post/2020/git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-authentication-failed-for/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <p>今天依旧是贡献代码的一天. 但是在使用IDEA进行Git 推送时, 右下角提示推送失败(<code>Push failed</code>). 就很纳闷, 平时好好的, 今天突然就不好使了? 一番折腾, 终于解决.</p>
+<h2 id="问题分析">问题分析</h2>
+<p>先来看一下完整报错:</p>
+<pre tabindex="0"><code>Invocation failed Server returned invalid Response. java.lang.RuntimeException: 
+Invocation failed Server returned invalid Response. 
+  at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:50) 
+  at org.jetbrains.git4idea.http.GitAskPassApp.main(GitAskPassApp.java:64) Caused by: java.io.IOException: Server returned invalid Response. 
+  at org.apache.xmlrpc.LiteXmlRpcTransport.sendRequest(LiteXmlRpcTransport.java:242) 
+  at org.apache.xmlrpc.LiteXmlRpcTransport.sendXmlRpc(LiteXmlRpcTransport.java:90) 
+  at org.apache.xmlrpc.XmlRpcClientWorker.execute(XmlRpcClientWorker.java:72) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:194) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:185) 
+  at org.apache.xmlrpc.XmlRpcClient.execute(XmlRpcClient.java:178) 
+  at org.jetbrains.git4idea.http.GitAskPassXmlRpcClient.askUsername(GitAskPassXmlRpcClient.java:47) 
+... 1 more remote: No anonymous write access. 
+Authentication failed for &#39;https://github.com/XXX&#39;
+</code></pre><p>可以看到关键字:</p>
+<pre tabindex="0"><code>No anonymous write access.
+</code></pre><p>👆这句话的字面意思是&quot;没有匿名写入权限&quot;. 但是他也没提示我登录啊? 不清不楚</p>
+<pre tabindex="0"><code>Authentication failed for &#39;https://github.com/XXX&#39;
+</code></pre><p>👆这句就很简单了, 鉴权失败. 也许是之前的匿名的原因.</p>
+<p>[epcl_box type=&ldquo;information&rdquo;]可以看出, 返回的错误信息并没有什么卵用&hellip;[/epcl_box]</p>
+<h2 id="可能的原因">可能的原因</h2>
+<p>阿航目前总结了几点原因(不代表全部):</p>
+<ol>
+<li>远程仓库(如Github)更换密码, 本地没有及时修改</li>
+<li>本地仓库与远程仓库数据有差异</li>
+<li>本地某些软件误删了远程仓库(如Github)的账户.</li>
+</ol>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="方法一-重置远程仓库信息">方法一: 重置远程仓库信息</h3>
+<p>打开终端(或CMD), 依次输入以下命令:</p>
+<p>先查看远程仓库:</p>
+<pre tabindex="0"><code>git remote -v
+</code></pre><p>移除远程仓库:</p>
+<pre tabindex="0"><code>git remote remove origin
+</code></pre><p>重新关联远程仓库:</p>
+<pre tabindex="0"><code>git remote add origin 你的仓库地址.git
+</code></pre><p>这也是阿航的最终解决方案. 方便快捷.</p>
+<h3 id="方法二-windows设置远程仓库github账户">方法二: Windows设置远程仓库(Github)账户</h3>
+<p>点击开始键, 输入&quot;凭据&quot;关键字, 点击<strong>凭据管理器</strong>:</p>
+<p><img src="images/Git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-01.png" alt="Git push 推送异常-01"></p>
+<p>点击&quot;Windows凭据&quot;, 选择你要处理的远程仓库账户(一般以<code>git</code>开头), 删除它.</p>
+<p><img src="images/Git-push-%E6%8E%A8%E9%80%81%E5%BC%82%E5%B8%B8-02.png" alt="Git push 推送异常-02"></p>
+<p>下次推送时就会要求你重新输入账号和密码了.</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://www.pexels.com/zh-cn/photo/2395253/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+ 上的 <a href="https://www.pexels.com/zh-cn/@evie-shaffer-1259279?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Evie Shaffer</a>
+ 拍摄的照片</p>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

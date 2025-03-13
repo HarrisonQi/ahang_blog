@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hexo on 阿航的技术小站</title>
+    <link>http://localhost:1313/tags/hexo/</link>
+    <description>Recent content in Hexo on 阿航的技术小站</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 22 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux 出现 too many open files 的处理办法</title>
+      <link>http://localhost:1313/posts/post/2021/linux-%E5%87%BA%E7%8E%B0-too-many-open-files-%E7%9A%84%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/</link>
+      <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/post/2021/linux-%E5%87%BA%E7%8E%B0-too-many-open-files-%E7%9A%84%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/</guid>
+      <description>&lt;p&gt;今天在使用Hexo generate时出现了&lt;code&gt;oo many open files&lt;/code&gt;这个问题, 在此记录下过程以及解决方案.&lt;/p&gt;&#xA;&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;&#xA;&lt;p&gt;CentOS&lt;/p&gt;&#xA;&lt;h2 id=&#34;排查步骤&#34;&gt;排查步骤&lt;/h2&gt;&#xA;&lt;p&gt;使用此命令获取当前系统打开文件数量:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`lsof | wc -l`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;使用此命令获取打开文件数量上限:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`ulimit -a`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;会返回类似:&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;`ulimit -a core file size          (blocks, -c) 0 data seg size           (kbytes, -d) unlimited scheduling priority             (-e) 0 file size               (blocks, -f) unlimited pending signals                 (-i) 7268 max locked memory       (kbytes, -l) 64 max memory size         (kbytes, -m) unlimited open files                      (-n) 1024 pipe size            (512 bytes, -p) 8 POSIX message queues     (bytes, -q) 819200 real-time priority              (-r) 0 stack size              (kbytes, -s) 8192 cpu time               (seconds, -t) unlimited max user processes              (-u) 7268 virtual memory          (kbytes, -v) unlimited file locks                      (-x) unlimited`&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其中, &lt;code&gt;open files&lt;/code&gt;的值就为上限. 上方的例子为 1024.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

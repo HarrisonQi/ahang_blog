@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/tags/flutter/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/tags/flutter/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">Flutter</h1>
+    <p class="text-sm">40 articles</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/tags/404/" class="badge h-6 no-underline hover:badge-primary">
+        404
+      </a>
+      
+      
+      
+      <a href="/tags/adobe-xd/" class="badge h-6 no-underline hover:badge-primary">
+        Adobe-Xd
+      </a>
+      
+      
+      
+      <a href="/tags/app%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        App开发
+      </a>
+      
+      
+      
+      <a href="/tags/bbs/" class="badge h-6 no-underline hover:badge-primary">
+        Bbs
+      </a>
+      
+      
+      
+      <a href="/tags/centos/" class="badge h-6 no-underline hover:badge-primary">
+        Centos
+      </a>
+      
+      
+      
+      <a href="/tags/curl/" class="badge h-6 no-underline hover:badge-primary">
+        Curl
+      </a>
+      
+      
+      
+      <a href="/tags/dart/" class="badge h-6 no-underline hover:badge-primary">
+        Dart
+      </a>
+      
+      
+      
+      <a href="/tags/discourse/" class="badge h-6 no-underline hover:badge-primary">
+        Discourse
+      </a>
+      
+      
+      
+      <a href="/tags/ditto/" class="badge h-6 no-underline hover:badge-primary">
+        Ditto
+      </a>
+      
+      
+      
+      <a href="/tags/dns/" class="badge h-6 no-underline hover:badge-primary">
+        Dns
+      </a>
+      
+      
+      
+      <a href="/tags/docker/" class="badge h-6 no-underline hover:badge-primary">
+        Docker
+      </a>
+      
+      
+      
+      <a href="/tags/fastjson/" class="badge h-6 no-underline hover:badge-primary">
+        Fastjson
+      </a>
+      
+      
+      
+      <a href="/tags/flame/" class="badge h-6 no-underline hover:badge-primary">
+        Flame
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        Flutter
+      </span>
+      
+      
+      
+      <a href="/tags/flutter-web/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter-Web
+      </a>
+      
+      
+      
+      <a href="/tags/fork/" class="badge h-6 no-underline hover:badge-primary">
+        Fork
+      </a>
+      
+      
+      
+      <a href="/tags/git/" class="badge h-6 no-underline hover:badge-primary">
+        Git
+      </a>
+      
+      
+      
+      <a href="/tags/github/" class="badge h-6 no-underline hover:badge-primary">
+        Github
+      </a>
+      
+      
+      
+      <a href="/tags/hexo/" class="badge h-6 no-underline hover:badge-primary">
+        Hexo
+      </a>
+      
+      
+      
+      <a href="/tags/homebrew/" class="badge h-6 no-underline hover:badge-primary">
+        Homebrew
+      </a>
+      
+      
+      
+      <a href="/tags/idea/" class="badge h-6 no-underline hover:badge-primary">
+        Idea
+      </a>
+      
+      
+      
+      <a href="/tags/jar/" class="badge h-6 no-underline hover:badge-primary">
+        Jar
+      </a>
+      
+      
+      
+      <a href="/tags/java/" class="badge h-6 no-underline hover:badge-primary">
+        Java
+      </a>
+      
+      
+      
+      <a href="/tags/json/" class="badge h-6 no-underline hover:badge-primary">
+        Json
+      </a>
+      
+      
+      
+      <a href="/tags/just-for-fun/" class="badge h-6 no-underline hover:badge-primary">
+        Just-for-Fun
+      </a>
+      
+      
+      
+      <a href="/tags/kotlin/" class="badge h-6 no-underline hover:badge-primary">
+        Kotlin
+      </a>
+      
+      
+      
+      <a href="/tags/linux/" class="badge h-6 no-underline hover:badge-primary">
+        Linux
+      </a>
+      
+      
+      
+      <a href="/tags/macos/" class="badge h-6 no-underline hover:badge-primary">
+        Macos
+      </a>
+      
+      
+      
+      <a href="/tags/map/" class="badge h-6 no-underline hover:badge-primary">
+        Map
+      </a>
+      
+      
+      
+      <a href="/tags/maven/" class="badge h-6 no-underline hover:badge-primary">
+        Maven
+      </a>
+      
+      
+      
+      <a href="/tags/microsoft%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/" class="badge h-6 no-underline hover:badge-primary">
+        Microsoft应用商店
+      </a>
+      
+      
+      
+      <a href="/tags/minecraft/" class="badge h-6 no-underline hover:badge-primary">
+        Minecraft
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis-plus/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis-Plus
+      </a>
+      
+      
+      
+      <a href="/tags/mysql/" class="badge h-6 no-underline hover:badge-primary">
+        Mysql
+      </a>
+      
+      
+      
+      <a href="/tags/nginx/" class="badge h-6 no-underline hover:badge-primary">
+        Nginx
+      </a>
+      
+      
+      
+      <a href="/tags/node/" class="badge h-6 no-underline hover:badge-primary">
+        Node
+      </a>
+      
+      
+      
+      <a href="/tags/npm/" class="badge h-6 no-underline hover:badge-primary">
+        Npm
+      </a>
+      
+      
+      
+      <a href="/tags/null/" class="badge h-6 no-underline hover:badge-primary">
+        Null
+      </a>
+      
+      
+      
+      <a href="/tags/nvm/" class="badge h-6 no-underline hover:badge-primary">
+        Nvm
+      </a>
+      
+      
+      
+      <a href="/tags/object/" class="badge h-6 no-underline hover:badge-primary">
+        Object
+      </a>
+      
+      
+      
+      <a href="/tags/php/" class="badge h-6 no-underline hover:badge-primary">
+        Php
+      </a>
+      
+      
+      
+      <a href="/tags/pip/" class="badge h-6 no-underline hover:badge-primary">
+        Pip
+      </a>
+      
+      
+      
+      <a href="/tags/pr/" class="badge h-6 no-underline hover:badge-primary">
+        Pr
+      </a>
+      
+      
+      
+      <a href="/tags/python/" class="badge h-6 no-underline hover:badge-primary">
+        Python
+      </a>
+      
+      
+      
+      <a href="/tags/react/" class="badge h-6 no-underline hover:badge-primary">
+        React
+      </a>
+      
+      
+      
+      <a href="/tags/spring/" class="badge h-6 no-underline hover:badge-primary">
+        Spring
+      </a>
+      
+      
+      
+      <a href="/tags/springboot/" class="badge h-6 no-underline hover:badge-primary">
+        Springboot
+      </a>
+      
+      
+      
+      <a href="/tags/sql/" class="badge h-6 no-underline hover:badge-primary">
+        Sql
+      </a>
+      
+      
+      
+      <a href="/tags/stack-overflow/" class="badge h-6 no-underline hover:badge-primary">
+        Stack-Overflow
+      </a>
+      
+      
+      
+      <a href="/tags/swagger/" class="badge h-6 no-underline hover:badge-primary">
+        Swagger
+      </a>
+      
+      
+      
+      <a href="/tags/ubuntu/" class="badge h-6 no-underline hover:badge-primary">
+        Ubuntu
+      </a>
+      
+      
+      
+      <a href="/tags/unicode/" class="badge h-6 no-underline hover:badge-primary">
+        Unicode
+      </a>
+      
+      
+      
+      <a href="/tags/vim/" class="badge h-6 no-underline hover:badge-primary">
+        Vim
+      </a>
+      
+      
+      
+      <a href="/tags/vue/" class="badge h-6 no-underline hover:badge-primary">
+        Vue
+      </a>
+      
+      
+      
+      <a href="/tags/win10/" class="badge h-6 no-underline hover:badge-primary">
+        Win10
+      </a>
+      
+      
+      
+      <a href="/tags/windows/" class="badge h-6 no-underline hover:badge-primary">
+        Windows
+      </a>
+      
+      
+      
+      <a href="/tags/wordpress/" class="badge h-6 no-underline hover:badge-primary">
+        Wordpress
+      </a>
+      
+      
+      
+      <a href="/tags/yum/" class="badge h-6 no-underline hover:badge-primary">
+        Yum
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B8%8A%E7%BA%BF%E5%87%86%E5%A4%87/" class="badge h-6 no-underline hover:badge-primary">
+        上线准备
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%B5%84%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        书籍资源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" class="badge h-6 no-underline hover:badge-primary">
+        关联查询
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%87%BA%E7%94%9F%E6%97%A5%E6%9C%9F/" class="badge h-6 no-underline hover:badge-primary">
+        出生日期
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        前端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%8E%92%E7%89%88/" class="badge h-6 no-underline hover:badge-primary">
+        博客排版
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%90%8E%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        后端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E5%86%85%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        国内加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        国际化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BE%E5%83%8F/" class="badge h-6 no-underline hover:badge-primary">
+        图像
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E6%AE%B5/" class="badge h-6 no-underline hover:badge-primary">
+        字段
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/" class="badge h-6 no-underline hover:badge-primary">
+        字符编码
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89/" class="badge h-6 no-underline hover:badge-primary">
+        字符转义
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AE%B9%E5%99%A8/" class="badge h-6 no-underline hover:badge-primary">
+        容器
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="badge h-6 no-underline hover:badge-primary">
+        常用操作
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6/" class="badge h-6 no-underline hover:badge-primary">
+        常用组件
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E8%AF%86/" class="badge h-6 no-underline hover:badge-primary">
+        常识
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        序列化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BC%80%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        开源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        快速开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF%E4%B9%A6%E7%B1%8D/" class="badge h-6 no-underline hover:badge-primary">
+        技术书籍
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%90%9C%E7%8B%97/" class="badge h-6 no-underline hover:badge-primary">
+        搜狗
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" class="badge h-6 no-underline hover:badge-primary">
+        支付宝
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%88%E7%8E%87/" class="badge h-6 no-underline hover:badge-primary">
+        效率
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/" class="badge h-6 no-underline hover:badge-primary">
+        教程
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        数据库
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91/" class="badge h-6 no-underline hover:badge-primary">
+        文件编辑
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%97%B6%E5%8C%BA/" class="badge h-6 no-underline hover:badge-primary">
+        时区
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%9E%81%E5%AE%A2%E7%94%A8%E8%AF%AD/" class="badge h-6 no-underline hover:badge-primary">
+        极客用语
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%AF%9B%E7%8E%BB%E7%92%83/" class="badge h-6 no-underline hover:badge-primary">
+        毛玻璃
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        游戏开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="badge h-6 no-underline hover:badge-primary">
+        环境部署
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%94%9F%E6%97%A5/" class="badge h-6 no-underline hover:badge-primary">
+        生日
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%A9%BA%E6%A0%BC/" class="badge h-6 no-underline hover:badge-primary">
+        空格
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BC%93%E5%AD%98/" class="badge h-6 no-underline hover:badge-primary">
+        缓存
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="badge h-6 no-underline hover:badge-primary">
+        网络配置
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AE%BF%E9%97%AE%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        访问加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AF%8D%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        词库
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        踩坑
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" class="badge h-6 no-underline hover:badge-primary">
+        输入法
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BF%90%E7%BB%B4/" class="badge h-6 no-underline hover:badge-primary">
+        运维
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%97%B2%E9%B1%BC/" class="badge h-6 no-underline hover:badge-primary">
+        闲鱼
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" class="badge h-6 no-underline hover:badge-primary">
+        阿里巴巴
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%A1%B9%E7%9B%AE%E4%BF%A1%E6%81%AF/" class="badge h-6 no-underline hover:badge-primary">
+        项目信息
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+      <div class="dream-grid">
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flame-%E5%B1%8F%E5%B9%95%E6%89%8B%E6%9F%84-%E6%91%87%E6%9D%86/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flame 屏幕手柄/摇杆</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, May 20, 2020
+    
+    </p>
+
+    <p>可以看到, 目前最主流的手机游戏都使用屏上手柄/摇杆进行控制, 比如:</p>
+<p>[caption id=&ldquo;attachment_1286&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-02-700x390.jpg" alt="Flutter Flame 摇杆-02"> League of Legends Mobile (英雄联盟手游)[/caption]</p>
+<p>[caption id=&ldquo;attachment_1284&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-01-700x341.jpg" alt="Flutter Flame 摇杆-01"> PUBG Mobile (和平精英)[/caption]</p>
+<p>[caption id=&ldquo;attachment_1288&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;700&rdquo;]<img src="images/Flutter-Flame-%E6%91%87%E6%9D%86-03-700x376.jpg" alt="Flutter Flame 摇杆-03"> Minecraft PE(我的世界手机版)[/caption]</p>
+<p>以上游戏都在当前手游榜(2020.04)排名前五.</p>
+<p>[epcl_box type=&ldquo;information&rdquo;]看得出来, 目前的核心玩法、操作交互都离不开手柄/摇杆![/epcl_box]</p>
+<p>所以, 本篇文章就来教大家在使用Flame框架时, 在屏幕上展示摇杆, 并控制某些component!</p>
+<p>我们要做的项目名称为<strong>Lame Tank 360</strong>(Lame坦克360).</p>
+<p>本项目将完整支持360°的旋转. 并将坦克的&quot;炮塔&quot;与&quot;坦克身体&quot;分开. 因此, 我们必须建立两个摇杆.</p>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>若想顺利学习本篇教程, 你需要具备:</p>
+<ol>
+<li>掌握Flutter的基础用法.</li>
+<li>已完整学习Flame系列教程.</li>
+</ol>
+<p>[epcl_box type=&ldquo;notice&rdquo;]如果你没有满足上述条件, 你将无法顺利完成这篇教程. 建议先阅读<a href="https://www.bugcatt.com/archives/279" target="_blank">《Flutter游戏开发-Flame教程》</a>
+![/epcl_box]</p>
+<h2 id="开始">开始</h2>
+<h3 id="创建flutter项目">创建Flutter项目</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>flutter create lame_tank_360
+</span></span></code></pre></div><p>[epcl_box type=&ldquo;information&rdquo;]阿航的教程, 只要涉及到创建项目、命名的相关操作, 身为读者的你可以用阿航教程提供的, 你也可以自己起名! 别忘了替换代码中牵扯的名称为你自己的![/epcl_box]</p>
+<h3 id="初始化项目设置">初始化项目设置</h3>
+<p>现在项目是可以运行的, 但是只是Flutter默认生成的</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>9 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E9%A1%B9%E7%9B%AE%E9%80%9F%E5%BA%A6%E6%98%BE%E8%91%97%E6%8F%90%E9%AB%98-flutter%E5%AE%98%E6%96%B9%E5%AE%A3%E5%B8%83%E5%A2%9E%E5%8A%A0adobe-xd%E7%9A%84%E6%94%AF%E6%8C%81/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">项目速度显著提高! Flutter官方宣布增加Adobe XD的支持!</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, May 19, 2020
+    
+    </p>
+
+    <p><code>Flutter</code>作为近两年年来的新型APP开发语言, 其受欢迎程度甚至和<code>React Native</code>不相上下. 最近, Flutter发表了一篇振奋人心的文章, 那就是新增了对<code>Adobe XD</code>的支持.</p>
+<h2 id="sketch和adobe-xd">Sketch和Adobe XD</h2>
+<p>如果你涉足过设计领域, 那么一定知道两个设计工具, 分别是<code>Sketch</code>以及<code>Adobe XD</code>. 大多数互联网公司的设计稿输出, 都是靠它们来进行. 当然, <code>Sketch</code>有着一个比较致命的限制, 那就是目前并不支持Windows系统.</p>
+<p>作为设计师, 你应该碰到过将设计稿交给开发人员后, 做出的效果差强人意. 即使开发人员保证了所有的位置、距离、长度均准确无误, 但是你却怎么看怎么别扭😥😥.</p>
+<h2 id="令人头大的positionpx">令人头大的position、px</h2>
+<p>作为前端开发人员, 你一定为这个问题头疼了无数次——布局! 没错, 你明明完全按照设计师给出的设计稿上标注的尺寸去做了, 但是效果就是不咋地! 要做出类似的效果, 你还要慢慢的调整! 累!</p>
+<h2 id="是时候解决双方的苦恼了">是时候解决双方的苦恼了</h2>
+<p>终于, 在2020年5月13日, Flutter官方宣布了<code>Adobe XD</code>对其的支持, 那么, 到底有何变化呢?</p>
+<h3 id="从adobe-xd导出flutter代码">从Adobe XD导出Flutter代码</h3>
+<p>使用XD可以在几分钟内导出Flutter代码. 你可以导出单个图形, 也可以导出整张画板!</p>
+<p>你不需要将设计稿转化为一个又一个的区块了! 直接微调就可以了!</p>
+<h3 id="减少浪费时间的布局调整">减少浪费时间的布局调整</h3>
+<p>最让人头疼的就是数字了, 上面的生成代码, 同样会生成布局所需的各种数值!</p>
+<h2 id="原文译文">原文译文</h2>
+<p>上面只列出了重点功能, 阿航给大家翻译了原文:</p>
+<p>Flutter的目标是为创意表达提供丰富的画布。借助iOS和Android上的硬件性能，对屏幕上渲染的每个像素的完全控制以及通过有状态的热重载进行快速迭代的能力，我们希望释放设计师和开发人员的潜力，建立不受人为技术边界限制的舒适体验.</p>
+<p>去年在<a href="https://www.youtube.com/watch?v=HjZxyTJzvYg&amp;feature=emb_logo" target="_blank">Flutter Interact活动上</a>
+，我们将焦点放在使用Flutter进行探索和实验的创作者身上。我们听到了像<a href="https://www.youtube.com/watch?v=DEppSs_ko48" target="_blank">Robert Felker</a>
+这样的数字艺术家的声音，他们使用Flutter通过生成算法构建空灵形式。我们介绍<a href="https://flutter.gskinner.com/" target="_blank">了gskinner之类的创意机构的工作</a>
+，他们创建了一系列创新的短片来展示Flutter的潜力。我们还看到了Adobe的演示，该演示<a href="https://www.youtube.com/watch?v=ukLBCRBlIkk&amp;feature=youtu.be&amp;t=3652" target="_blank">是Adobe XD插件</a>
+的<a href="https://www.youtube.com/watch?v=ukLBCRBlIkk&amp;feature=youtu.be&amp;t=3652" target="_blank">早期原型，该插件</a>
+直接从其工具中导出Flutter代码。</p>
+<p><img src="images/%E9%A1%B9%E7%9B%AE%E9%80%9F%E5%BA%A6%E6%98%BE%E8%91%97%E6%8F%90%E9%AB%98-Flutter%E5%AE%98%E6%96%B9%E5%AE%A3%E5%B8%83%E5%A2%9E%E5%8A%A0Adobe-XD%E7%9A%84%E6%94%AF%E6%8C%81-01.png" alt="项目速度显著提高! Flutter官方宣布增加Adobe XD的支持!-01"></p>
+<p>(Flutter是用于创意表达的丰富画布：这是一种不受传统技术界限限制的美丽原生体验的工具包。（由Flutter制作的生成艺术品，由Robert Felker提供。))</p>
+<p>今天，<strong>我们很高兴与Adobe一起宣布他们的XD to Flutter插件</strong><a href="https://adobe.com/go/xd_plugins_discover_plugin?pluginId=6eaf77ea" target="_blank"><strong>现在可以作为</strong></a>
+更广泛的公共测试的<a href="https://adobe.com/go/xd_plugins_discover_plugin?pluginId=6eaf77ea" target="_blank"><strong>初步试用</strong></a>
+。<a href="https://www.adobe.com/products/xd.html" target="_blank">Adobe XD</a>
+是一个UI / UX设计和协作工具，可帮助团队为网站，应用程序，语音界面，游戏等创建和共享设计。XD 是Adobe同类领先的<a href="https://www.adobe.com/creativecloud.html" target="_blank">Creative Cloud的一部分</a>
+，它使设计师可以将矢量艺术，文本，图像，微交互和动画转换为行为类似的工作软件产品的交互式原型。将设计导出到Flutter的能力进一步减少了创意与产品开发之间的等待时间，因为XD原型现在可以在数分钟内成为Flutter代码。Adobe XD支持Windows或macOS上的设计，并包括<a href="https://www.adobe.com/products/xd/compare-plans.html" target="_blank">免费的入门计划</a>
+，可助您启动并运行。</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E4%BF%AE%E6%94%B9flutter%E7%9A%84app%E5%9B%BE%E6%A0%87%E5%90%AF%E5%8A%A8%E5%99%A8%E5%9B%BE%E6%A0%87/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">修改Flutter的APP图标、启动器图标</h2>
+
+    <p class="date text-base-content/60">
+    
+      Thursday, May 14, 2020
+    
+    </p>
+
+    <p>在APP上线前, 我们肯定需要修改APP的启动图标. APP图标代表了它的品牌, 增加了辨识度. 让用户可以在手机的APP列表内快速找到你的APP. 所以本篇博客将记录修改Flutter 的APP图标/启动器图标的全过程.</p>
+<h2 id="android图标">Android图标</h2>
+<h3 id="查看初始图标">查看初始图标</h3>
+<p>打开目录<code>./android/app/src/main/res</code>, 你会发现有如下几个目录:</p>
+<pre tabindex="0"><code>mipmap-hdpi
+mipmap-mdpi
+mipmap-xhdpi
+mipmap-xxhdpi
+mipmap-xxxhdpi
+</code></pre><p>如图:</p>
+<p><img src="images/01-4.png" alt="修改Flutter的APP图标 启动器图标"></p>
+<p>当你打开每个文件, 会发现每个图标都是这张初始图片:</p>
+<p><img src="images/02-5.png" alt="修改Flutter的APP图标 启动器图标"></p>
+<h3 id="图标尺寸规范">图标尺寸规范</h3>
+<p>我们需要准备以下图片:</p>
+<table>
+  <thead>
+      <tr>
+          <th>对应目录</th>
+          <th>尺寸</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mipmap-mdpi</td>
+          <td>48×48</td>
+      </tr>
+      <tr>
+          <td>mipmap-hdpi</td>
+          <td>72×72</td>
+      </tr>
+      <tr>
+          <td>mipmap-xhdpi</td>
+          <td>96×96</td>
+      </tr>
+      <tr>
+          <td>mipmap-xxhdpi</td>
+          <td>144×144</td>
+      </tr>
+      <tr>
+          <td>mipmap-xxxhdpi</td>
+          <td>192×192</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="图标命名规范">图标命名规范</h3>
+<p>它们的文件名通通是<code>ic_launcher.png</code>!</p>
+<h3 id="图标目录结构">图标目录结构</h3>
+<p>目录结构:</p>
+<pre tabindex="0"><code>./android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+./android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+./android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+./android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+./android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+</code></pre><p>替换完成后, 重新运行你的Flutter项目. 看看你的调试设备的APP启动图标, 你应该就可以看到修改的结果了!</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://www.pexels.com/zh-cn/photo/267389/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+ 上的 <a href="https://www.pexels.com/zh-cn/@pixabay?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pixabay</a>
+ 拍摄的照片</p>
+<h2 id="结语">结语</h2>
+<p>如果你对本篇文章有任何问题, 欢迎在下方评论区, 进行讨论, 或加入<a href="https://jq.qq.com/?_wv=1027&amp;k=egT9rjgu" target="_blank">阿航的技术小站交流群</a>
+</p>
+<p>欢迎访问<a href="https://www.bugcatt.com" target="_blank">阿航的技术小站</a>
+官网, 获取更多技术干货!</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E5%9C%A8flutter%E4%B8%AD%E4%BD%BF%E7%94%A816%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
+      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">在Flutter中使用16进制颜色</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, May 13, 2020
+    
+    </p>
+
+    <p>使用16进制表示颜色是较为主流的方式, 那么在本篇文章中将简单讲讲如何在Flutter中使用16进制颜色.</p>
+<h2 id="方法一-使用原生方法">方法一: 使用原生方法</h2>
+<p>Flutter中, <code>Color</code>类仅接收整数作为参数. 你也可以使用<code>fromARGB</code>或者<code>fromRGBO</code>.</p>
+<p>比如拿到了一个16进制颜色<code>#b74093</code>. 因为<code>Color</code>还需要传入透明度, <code>255</code>就是最大值(也就是不透明), 转为16进制就是<code>0xFF</code>, 所以我们只需这样表示:</p>
+<pre tabindex="0"><code>const color = Color(0xffb74093);
+</code></pre><p>正规一点的写法(可选, 因为大小写不敏感):</p>
+<pre tabindex="0"><code>const color = Color(0xFFB74093);
+</code></pre><h2 id="方法二-接收字符串格式-转为color">方法二: 接收字符串格式, 转为Color</h2>
+<p>创建一个<code>HexColor</code>类:</p>
+<pre tabindex="0"><code>class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll(&#34;#&#34;, &#34;&#34;);
+    if (hexColor.length == 6) {
+      hexColor = &#34;FF&#34; + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+}
+</code></pre><p>然后进行调用:</p>
+<pre tabindex="0"><code>Color color1 = HexColor(&#34;b74093&#34;);
+Color color2 = HexColor(&#34;#b74093&#34;);
+Color color3 = HexColor(&#34;#88b74093&#34;);
+</code></pre><h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/50081213/how-do-i-use-hexadecimal-color-strings-in-flutter" target="_blank">How do I use hexadecimal color strings in Flutter? - Stack Overflow</a>
+</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>如果你对本篇文章有任何问题, 欢迎在下方评论区, 进行讨论, 或加入<a href="https://jq.qq.com/?_wv=1027&amp;k=egT9rjgu" target="_blank">阿航的技术小站QQ交流群</a>
+</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/%E7%A7%BB%E9%99%A4flutter%E5%8F%B3%E4%B8%8A%E8%A7%92%E7%9A%84debug%E6%A0%87%E8%AF%86/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">移除Flutter右上角的DEBUG标识</h2>
+
+    <p class="date text-base-content/60">
+    
+      Tuesday, May 12, 2020
+    
+    </p>
+
+    <p>在使用Flutter进行开发时, 右上角会出现一个DEBUG的标识. 测试的时候倒是无所谓, 但是APP上线前肯定要将其去掉. 证明其是一个开发完成的、完整的APP. 这篇非常简短的博客将会记录如何去掉Flutter右上角的DEBUG标识. 一共有两种方式, 你可以按需来选择!</p>
+<h2 id="自动移除">自动移除</h2>
+<p>别担心, 你在为Flutter打正式包的时候, 这个标志将会自动消失. 但有的时候我们想在开发过程中直接去掉, 那么你会需要下面的手动移除.</p>
+<h2 id="方法一-代码修改">方法一: 代码修改</h2>
+<p>找到你的<code>MaterialApp</code>(建议直接使用关键字进行全局搜索), 为其添加一个属性即可去掉:</p>
+<pre tabindex="0"><code>MaterialApp(
+ debugShowCheckedModeBanner: false
+ ...
+)
+</code></pre><p>如图:</p>
+<p><img src="images/01-3.png" alt=""></p>
+<h2 id="方法二-android-studio修改">方法二: Android Studio修改</h2>
+<p>如果你用的是Android Studio, 那么你可以不修改代码, 通过鼠标来移除:</p>
+<p>第一步: 点击界面右侧侧边栏的<code>Flutter Inspector</code>, 如图:</p>
+<p><img src="images/02-4.png" alt=""></p>
+<p>第二步: 点击弹出界面的&quot;More Actions&quot;的下拉选(这个按钮字比较小, 比较隐蔽):</p>
+<p><img src="images/03-3.png" alt=""></p>
+<p>第三步: 点击下拉选项的&quot;Hide Debug Mode Banner&quot;:</p>
+<p><img src="images/04-2.png" alt=""></p>
+<p>搞定!</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li><a href="https://www.pexels.com/zh-cn/photo/5412/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Pexels</a>
+ 上的 <a href="https://www.pexels.com/zh-cn/@jaymantri?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels" target="_blank">Jaymantri</a>
+ 拍摄的照片</li>
+<li><a href="https://stackoverflow.com/questions/48893935/how-to-remove-debug-banner-in-flutter-on-android-emulator" target="_blank">How to remove debug banner in flutter on android emulator? - Stack Overflow</a>
+</li>
+<li>(排名不分先后)</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>两种方式都可以进行修改, 唯一的区别就是方法一影响代码, 方法二不会变动代码. 你可以按实际情况选择你需要的方式!</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/dart-%E4%B8%AD%E7%9A%84-null-aware-null%E6%84%9F%E7%9F%A5%E8%BF%90%E7%AE%97%E7%AC%A6/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default2_hu_c96b8a8cc3f55f81.webp" type="image/webp" />
+      <img src="/images/default2.jpg" alt="/images/default2.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Dart 中的 Null-aware (null感知运算符)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Saturday, May 9, 2020
+    
+    </p>
+
+    <p>来到这篇文章, 说明你一定想在 Dart 的语法上更进一步(不出意外的话, 你在学 Flutter 🤭🤭). 工欲善其事, 必先利其器. 一个优秀的程序员应该掌握可以节省代码量的高级语法, 不论是节约时间还是提升水平. 本篇文章就来讲讲Dart语言中的 Null-aware ( null感知运算符 )吧!</p>
+<h2 id="背景">背景</h2>
+<p>Dart的Null-aware来自于<code>Dart 1.12</code>正式版本:</p>
+<p><img src="images/01-2-1500x675.png" alt=""></p>
+
+
+
+  <blockquote>
+    <p>你也可以看看<a href="https://news.dartlang.org/2015/08/dart-112-released-with-null-aware.html" target="_blank">官网版本介绍</a>
+</p>
+  </blockquote>
+
+<h2 id="用途">用途</h2>
+<p>存在即是合理. 既然有这样的新运算符, 说明它在一定程度上<strong>节省了我们的代码</strong>, 使<strong>代码更加简洁</strong>.</p>
+<p>既然它被称为<code>Null-aware</code>, 说明这个运算符是专门<strong>用于处理<code>null</code>值</strong>的. 将会提供空指针的相关操作.</p>
+<p><img src="images/02-2.png" alt=""></p>
+<h2 id="创建示例对象">创建示例对象</h2>
+<p>我们来创建一个<code>Person</code>对象, 方便后续使用:</p>
+<pre tabindex="0"><code>class Person{
+  // 性别
+  String gender;
+
+  // 变更性别为女性
+  void changeToFemale(){
+    gender = &#34;女性&#34;;
+  }
+}
+
+Person person = Person();
+</code></pre><h2 id="heading">??</h2>
+<p>当前者为null时, 返回后者.</p>
+<pre tabindex="0"><code>exp ?? anotherExp
+</code></pre><h3 id="实例-获取用户性别">实例: 获取用户性别</h3>
+<p>当某个Person对象的gender(性别)属性为null时, 返回&rsquo;未知':</p>
+<h4 id="方法一-基础if语句">方法一: 基础IF语句</h4>
+<p>我们可以用最基础的语句来写:</p>
+<pre tabindex="0"><code>String gender;
+if(person.gender!=null){
+    gender = person.gender;
+}else{
+    gender = &#39;未知&#39;;
+}
+</code></pre><h4 id="方法二-三目运算">方法二: 三目运算</h4>
+<p>三目运算符相当好用:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E6%B8%85%E7%90%86%E7%BC%96%E8%AF%91%E7%BC%93%E5%AD%98/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 清理编译缓存</h2>
+
+    <p class="date text-base-content/60">
+    
+      Thursday, Apr 23, 2020
+    
+    </p>
+
+    <p>在使用Flutter进行开发时, 经常会产生很多的编译缓存文件, 比如:</p>
+<p><img src="images/01-2.png" alt="Flutter 清理编译缓存"></p>
+<p>这样可以加快下次的编译速度. 但有时会出现一些我们神奇的报错, 很有可能是缓存不兼容所造成的! 有时出现的无解bug, 重启一下IDE或模拟器, 清理一下缓存就会被解决&hellip; 别问, 问就是阿航踩过好几次坑😢😢😢😢</p>
+<p>这一篇就会讲如何清理flutter的编译缓存. (不是APP的数据缓存, 别弄混!)</p>
+<h2 id="方法一-ide自带清理按钮">方法一: IDE自带清理按钮</h2>
+<p>这里拿官方推荐的<code>Android Studio</code>举例:</p>
+<p><img src="images/02-2.png" alt="Flutter 清理编译缓存"></p>
+<h2 id="方法二-使用命令行清理">方法二: 使用命令行清理</h2>
+<p>使用终端(cmd)进入项目目录.</p>
+<p>输入清理命令:</p>
+<pre tabindex="0"><code>flutter clean
+</code></pre><h2 id="清理完成">清理完成</h2>
+<p>清理完成后, 可以看到之前的<code>.dart_tool</code>以及<code>build</code>目录被清理干净, 下次编译会从0开始. 也可能顺便解决你的一些未知bug😜</p>
+<h2 id="结语">结语</h2>
+<p>本篇文章来自<a href="https://blog.bugcatt.com" target="_blank">阿航的技术小站</a>
+.</p>
+<p>对文章有任何问题, 欢迎在下方评论区进行讨论. 阿航会尽力回复.</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E5%9B%BD%E9%99%85%E5%8C%96-%E5%A4%9A%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86easy-localization/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default1_hu_33478ca164b4fce4.webp" type="image/webp" />
+      <img src="/images/default1.jpg" alt="/images/default1.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 国际化: 多语言处理(Easy localization)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Wednesday, Apr 22, 2020
+    
+    </p>
+
+    <p>语言不互通是困扰了人类几千年的大难题🤐. 许多国外优秀的文学作品、 APP因为没有进行多国语言的处理, 导致发展缓慢甚至停滞. 虽然现在的各大翻译软件已经非常强大了. 但是想象一下: 一个用户一边拿着翻译机一边使用某个软件. 这样恐怕会逼疯用户, 可能会很快的放弃😭😭.</p>
+<p>如果你的APP有相当一部分用户是来自全球各地, 那么对APP的国际化就是刚需💪.</p>
+<p>对APP的国际化可以直线提升外国友人用户体验, 顺便会提高你的APP的&quot;逼格&quot;, 用最简单的方式给用户一种&quot;你们的APP很大很强&quot;的感觉😏😏😏.</p>
+<h2 id="最终效果">最终效果</h2>
+<p>老规矩, 有图有真相. 先来看看我们最终会实现的效果:</p>
+<p><img src="images/09-2.gif" alt="Flutter 国际化: 多语言处理(Easy localization)"></p>
+<h2 id="需求">需求</h2>
+<p>在做一个事情之前, 我们先来简单的规划一下, 我们的目标是什么, 我们要怎么做:</p>
+<ol>
+<li>提供多种语言处理, 对每部分文本进行单独的翻译.</li>
+<li>用户可以随时切换语言</li>
+</ol>
+<h2 id="开始">开始</h2>
+<h3 id="第一步-创建flutter-app">第一步: 创建Flutter APP</h3>
+<p>这一步不再赘述, 相当基础的东西啦!</p>
+<h3 id="第二步-清理项目">第二步: 清理项目</h3>
+<h4 id="删除测试目录">删除测试目录</h4>
+<p>删除<code>./lib/test</code>目录, 因为我们暂时用不上.</p>
+<h4 id="清理maindart">清理main.dart</h4>
+<p>因为新的Flutter项目中的main会给我们很多用不上的代码, 所以进行替换<code>./lib/main.dart</code>为:</p>
+<pre tabindex="0"><code>import &#39;package:flutter/material.dart&#39;;
+
+void main() =&gt; runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter 国际化: 多语言处理&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: &#39;Hi, 国际化!&#39;),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() =&gt; _MyHomePageState();
+}
+
+class _MyHomePageState extends State {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              &#39;你好!&#39;,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre><p>🟢 运行项目, 应该如图所示:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>2 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-05-%E6%94%B6%E5%B0%BE%E5%92%8C%E6%89%93%E5%8C%85/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
+      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 游戏开发(flame) 05 收尾和打包(5/5)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Sunday, Apr 19, 2020
+    
+    </p>
+
+    <p>完成一个项目是世界上最爽的感觉之一. 你呕心沥血的做某件事, 最终想法变成了现实.</p>
+<p>最后, 欢迎来到本系列的终章. 当然, 只有你一步一步跟随阿航的教程, 终章才有意义.</p>
+<p>如果你还没有看过之前的章节, 还请你循序渐进, &ldquo;一章一个脚印&rdquo;!</p>
+<p>下面是我们本系列教程的文章目录:</p>
+<ul>
+<li><a href="https://www.bugcatt.com/archives/279" target="_blank">Flutter 游戏开发(flame) Flame介绍</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/292" target="_blank">Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/560" target="_blank">Flutter 游戏开发(flame) 02 图形和动画(2/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/562" target="_blank">Flutter 游戏开发(flame) 03 界面和弹窗(3/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/564" target="_blank">Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)</a>
+</li>
+<li><strong>Flutter 游戏开发(flame) 05 收尾和打包(5/5) 本章</strong></li>
+</ul>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ol>
+<li>本系列教程之前的<strong>全部要求</strong>👈</li>
+<li><strong>更多的资源包</strong> – 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站<a href="https://opengameart.org/" target="_blank">Open Game Art</a>
+.</li>
+</ol>
+<p>我们将使用与前一部分相同的<strong>编码规范</strong>👩‍🏫</p>
+<h2 id="最终的资源包">最终的资源包</h2>
+<p>这个最后的资源仅有一个图像, 但是它有5种不同的尺寸. 当游戏安装在设备上时, 图像将作为玩家APP目录的启动图标.</p>
+<p><a href="https://jap.alekhin.io/wp-content/uploads/2019/04/resource-pack-part-5.zip" target="_blank"><img src="images/01-1.jpg" alt=""></a>
+</p>
+<p><a href="https://jap.alekhin.io/wp-content/uploads/2019/04/resource-pack-part-5.zip" target="_blank">点击图片或者此链接下载资源包!</a>
+</p>
+<hr>
+<p>🔴 <strong>注意</strong>: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是<a href="https://github.com/japalekhin/langaw" target="_blank">Github上Langaw(原作者)</a>
+项目的一部分, 该项目获得<code>CC-BY-NC-ND</code>许可证的许可.</p>
+<p>这意味着您可以共享、复制或者重新分发资源.</p>
+<ul>
+<li>你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改.</li>
+<li>你不得将资源用于商业目的.</li>
+<li>如果混合, 转换或者构建资源, 则不能分发修改后的资源.</li>
+<li>你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情.</li>
+</ul>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode" target="_blank">点击此处了解有关 CC-BY-NC-ND 许可证的更多信息</a>
+</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>5 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-01-%E5%BC%80%E5%8F%912d%E4%BC%91%E9%97%B2%E6%B8%B8%E6%88%8F%E6%B6%88%E7%81%AD%E5%B0%8F%E9%A3%9E%E8%9D%871-5/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default3_hu_599e07ea93afc07d.webp" type="image/webp" />
+      <img src="/images/default3.jpg" alt="/images/default3.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)</h2>
+
+    <p class="date text-base-content/60">
+    
+      Friday, Apr 17, 2020
+    
+    </p>
+
+    <h2 id="引言">引言</h2>
+<p>曾想过开发一款自己的电子游戏吗? 来对地方了. 本系列教程就是教你如何开发一个属于自己的2D休闲游戏.</p>
+<p>本教程是<a href="https://blog.bugcatt.com/archives/279" target="_blank">第一章</a>
+的延续, 是针对任何水平的指南. 在这一章我们将会做一个&quot;打鸟&quot;类型的游戏.</p>
+<p>这个游戏起名为&quot;<strong>Langaw</strong>&quot;, 翻译过来就是&quot;小飞蝇&quot;. 玩家的任务就是在小飞蝇到达垃圾堆前尽可能的多消灭小飞蝇(阿航在这里不得不吐槽下原作者, 我们为啥要保护垃圾啊真是的😒).</p>
+<p>玩家只需要在屏幕上简单的点击就可实现击杀的效果(别用榔头砸手机🤣).这一章中, 我们暂时不会渲染图片, 所以暂时将小飞蝇展示为绿色方块, 当击中小飞蝇后, 变为红色方块并坠落至屏幕底部.</p>
+<p>你可以在文章底部查看效果视频.</p>
+<p>下面是我们本系列教程的文章目录:</p>
+<ul>
+<li><a href="https://www.bugcatt.com/archives/560" target="_blank">Flutter 游戏开发(flame) Flame介绍</a>
+</li>
+<li><strong>Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) 本章</strong></li>
+<li><a href="https://www.bugcatt.com/archives/560" target="_blank">Flutter 游戏开发(flame) 02 图形和动画(2/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/562" target="_blank">Flutter 游戏开发(flame) 03 界面和弹窗(3/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/564" target="_blank">Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/731" target="_blank">Flutter 游戏开发(flame) 05 收尾和打包(5/5)</a>
+</li>
+</ul>
+<h2 id="需具备的条件">需具备的条件</h2>
+<p>如果你完整的学习了<a href="https://blog.bugcatt.com/archives/279" target="_blank">第一章</a>
+, 那么你应该已经准备好进行开发了🤩.</p>
+<p>以防万一, 在这里重复一下:</p>
+<p>本文将假设您已是一名有一定经验的开发人员, 且拥有了”程序员思维”. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名”游戏开发者”✌✌.</p>
+<p>你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.</p>
+<p>Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 开发完成后, 你可以运行不同的build, 使你也可以在IOS上玩游戏.</p>
+<p>要顺利阅读本文, 假定您已经具备以下条件👇:</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>6 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+      </div>
+    
+
+    
+    <div class="flex justify-center pt-8">
+      <div class="join grid grid-cols-2">
+  
+  <a href="/tags/flutter/page/2/" title=Previous&#32;page class="join-item btn btn-outline btn-sm">
+    Previous page
+  </a>
+  
+  
+  <a href="/tags/flutter/page/4/" title="Next page" class="join-item btn btn-outline btn-sm">
+    Next page
+  </a>
+  
+</div>
+
+    </div>
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

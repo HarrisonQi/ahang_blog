@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件编辑 | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="文件编辑">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="文件编辑">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+     
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+
+
+<div class="flex flex-col md:flex-row mt-4">
+
+  <div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert">
+    <h1 class="text-2xl">文件编辑</h1>
+    <p class="text-sm">1 article</p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      
+
+      
+      
+      <a href="/tags/404/" class="badge h-6 no-underline hover:badge-primary">
+        404
+      </a>
+      
+      
+      
+      <a href="/tags/adobe-xd/" class="badge h-6 no-underline hover:badge-primary">
+        Adobe-Xd
+      </a>
+      
+      
+      
+      <a href="/tags/app%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        App开发
+      </a>
+      
+      
+      
+      <a href="/tags/bbs/" class="badge h-6 no-underline hover:badge-primary">
+        Bbs
+      </a>
+      
+      
+      
+      <a href="/tags/centos/" class="badge h-6 no-underline hover:badge-primary">
+        Centos
+      </a>
+      
+      
+      
+      <a href="/tags/curl/" class="badge h-6 no-underline hover:badge-primary">
+        Curl
+      </a>
+      
+      
+      
+      <a href="/tags/dart/" class="badge h-6 no-underline hover:badge-primary">
+        Dart
+      </a>
+      
+      
+      
+      <a href="/tags/discourse/" class="badge h-6 no-underline hover:badge-primary">
+        Discourse
+      </a>
+      
+      
+      
+      <a href="/tags/ditto/" class="badge h-6 no-underline hover:badge-primary">
+        Ditto
+      </a>
+      
+      
+      
+      <a href="/tags/dns/" class="badge h-6 no-underline hover:badge-primary">
+        Dns
+      </a>
+      
+      
+      
+      <a href="/tags/docker/" class="badge h-6 no-underline hover:badge-primary">
+        Docker
+      </a>
+      
+      
+      
+      <a href="/tags/fastjson/" class="badge h-6 no-underline hover:badge-primary">
+        Fastjson
+      </a>
+      
+      
+      
+      <a href="/tags/flame/" class="badge h-6 no-underline hover:badge-primary">
+        Flame
+      </a>
+      
+      
+      
+      <a href="/tags/flutter/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter
+      </a>
+      
+      
+      
+      <a href="/tags/flutter-web/" class="badge h-6 no-underline hover:badge-primary">
+        Flutter-Web
+      </a>
+      
+      
+      
+      <a href="/tags/fork/" class="badge h-6 no-underline hover:badge-primary">
+        Fork
+      </a>
+      
+      
+      
+      <a href="/tags/git/" class="badge h-6 no-underline hover:badge-primary">
+        Git
+      </a>
+      
+      
+      
+      <a href="/tags/github/" class="badge h-6 no-underline hover:badge-primary">
+        Github
+      </a>
+      
+      
+      
+      <a href="/tags/hexo/" class="badge h-6 no-underline hover:badge-primary">
+        Hexo
+      </a>
+      
+      
+      
+      <a href="/tags/homebrew/" class="badge h-6 no-underline hover:badge-primary">
+        Homebrew
+      </a>
+      
+      
+      
+      <a href="/tags/idea/" class="badge h-6 no-underline hover:badge-primary">
+        Idea
+      </a>
+      
+      
+      
+      <a href="/tags/jar/" class="badge h-6 no-underline hover:badge-primary">
+        Jar
+      </a>
+      
+      
+      
+      <a href="/tags/java/" class="badge h-6 no-underline hover:badge-primary">
+        Java
+      </a>
+      
+      
+      
+      <a href="/tags/json/" class="badge h-6 no-underline hover:badge-primary">
+        Json
+      </a>
+      
+      
+      
+      <a href="/tags/just-for-fun/" class="badge h-6 no-underline hover:badge-primary">
+        Just-for-Fun
+      </a>
+      
+      
+      
+      <a href="/tags/kotlin/" class="badge h-6 no-underline hover:badge-primary">
+        Kotlin
+      </a>
+      
+      
+      
+      <a href="/tags/linux/" class="badge h-6 no-underline hover:badge-primary">
+        Linux
+      </a>
+      
+      
+      
+      <a href="/tags/macos/" class="badge h-6 no-underline hover:badge-primary">
+        Macos
+      </a>
+      
+      
+      
+      <a href="/tags/map/" class="badge h-6 no-underline hover:badge-primary">
+        Map
+      </a>
+      
+      
+      
+      <a href="/tags/maven/" class="badge h-6 no-underline hover:badge-primary">
+        Maven
+      </a>
+      
+      
+      
+      <a href="/tags/microsoft%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/" class="badge h-6 no-underline hover:badge-primary">
+        Microsoft应用商店
+      </a>
+      
+      
+      
+      <a href="/tags/minecraft/" class="badge h-6 no-underline hover:badge-primary">
+        Minecraft
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis
+      </a>
+      
+      
+      
+      <a href="/tags/mybatis-plus/" class="badge h-6 no-underline hover:badge-primary">
+        Mybatis-Plus
+      </a>
+      
+      
+      
+      <a href="/tags/mysql/" class="badge h-6 no-underline hover:badge-primary">
+        Mysql
+      </a>
+      
+      
+      
+      <a href="/tags/nginx/" class="badge h-6 no-underline hover:badge-primary">
+        Nginx
+      </a>
+      
+      
+      
+      <a href="/tags/node/" class="badge h-6 no-underline hover:badge-primary">
+        Node
+      </a>
+      
+      
+      
+      <a href="/tags/npm/" class="badge h-6 no-underline hover:badge-primary">
+        Npm
+      </a>
+      
+      
+      
+      <a href="/tags/null/" class="badge h-6 no-underline hover:badge-primary">
+        Null
+      </a>
+      
+      
+      
+      <a href="/tags/nvm/" class="badge h-6 no-underline hover:badge-primary">
+        Nvm
+      </a>
+      
+      
+      
+      <a href="/tags/object/" class="badge h-6 no-underline hover:badge-primary">
+        Object
+      </a>
+      
+      
+      
+      <a href="/tags/php/" class="badge h-6 no-underline hover:badge-primary">
+        Php
+      </a>
+      
+      
+      
+      <a href="/tags/pip/" class="badge h-6 no-underline hover:badge-primary">
+        Pip
+      </a>
+      
+      
+      
+      <a href="/tags/pr/" class="badge h-6 no-underline hover:badge-primary">
+        Pr
+      </a>
+      
+      
+      
+      <a href="/tags/python/" class="badge h-6 no-underline hover:badge-primary">
+        Python
+      </a>
+      
+      
+      
+      <a href="/tags/react/" class="badge h-6 no-underline hover:badge-primary">
+        React
+      </a>
+      
+      
+      
+      <a href="/tags/spring/" class="badge h-6 no-underline hover:badge-primary">
+        Spring
+      </a>
+      
+      
+      
+      <a href="/tags/springboot/" class="badge h-6 no-underline hover:badge-primary">
+        Springboot
+      </a>
+      
+      
+      
+      <a href="/tags/sql/" class="badge h-6 no-underline hover:badge-primary">
+        Sql
+      </a>
+      
+      
+      
+      <a href="/tags/stack-overflow/" class="badge h-6 no-underline hover:badge-primary">
+        Stack-Overflow
+      </a>
+      
+      
+      
+      <a href="/tags/swagger/" class="badge h-6 no-underline hover:badge-primary">
+        Swagger
+      </a>
+      
+      
+      
+      <a href="/tags/ubuntu/" class="badge h-6 no-underline hover:badge-primary">
+        Ubuntu
+      </a>
+      
+      
+      
+      <a href="/tags/unicode/" class="badge h-6 no-underline hover:badge-primary">
+        Unicode
+      </a>
+      
+      
+      
+      <a href="/tags/vim/" class="badge h-6 no-underline hover:badge-primary">
+        Vim
+      </a>
+      
+      
+      
+      <a href="/tags/vue/" class="badge h-6 no-underline hover:badge-primary">
+        Vue
+      </a>
+      
+      
+      
+      <a href="/tags/win10/" class="badge h-6 no-underline hover:badge-primary">
+        Win10
+      </a>
+      
+      
+      
+      <a href="/tags/windows/" class="badge h-6 no-underline hover:badge-primary">
+        Windows
+      </a>
+      
+      
+      
+      <a href="/tags/wordpress/" class="badge h-6 no-underline hover:badge-primary">
+        Wordpress
+      </a>
+      
+      
+      
+      <a href="/tags/yum/" class="badge h-6 no-underline hover:badge-primary">
+        Yum
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B8%8A%E7%BA%BF%E5%87%86%E5%A4%87/" class="badge h-6 no-underline hover:badge-primary">
+        上线准备
+      </a>
+      
+      
+      
+      <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%B5%84%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        书籍资源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2/" class="badge h-6 no-underline hover:badge-primary">
+        关联查询
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%87%BA%E7%94%9F%E6%97%A5%E6%9C%9F/" class="badge h-6 no-underline hover:badge-primary">
+        出生日期
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        前端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%8E%92%E7%89%88/" class="badge h-6 no-underline hover:badge-primary">
+        博客排版
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%90%8E%E7%AB%AF/" class="badge h-6 no-underline hover:badge-primary">
+        后端
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E5%86%85%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        国内加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        国际化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%9B%BE%E5%83%8F/" class="badge h-6 no-underline hover:badge-primary">
+        图像
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E6%AE%B5/" class="badge h-6 no-underline hover:badge-primary">
+        字段
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/" class="badge h-6 no-underline hover:badge-primary">
+        字符编码
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AD%97%E7%AC%A6%E8%BD%AC%E4%B9%89/" class="badge h-6 no-underline hover:badge-primary">
+        字符转义
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%AE%B9%E5%99%A8/" class="badge h-6 no-underline hover:badge-primary">
+        容器
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="badge h-6 no-underline hover:badge-primary">
+        常用操作
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6/" class="badge h-6 no-underline hover:badge-primary">
+        常用组件
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%B8%B8%E8%AF%86/" class="badge h-6 no-underline hover:badge-primary">
+        常识
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" class="badge h-6 no-underline hover:badge-primary">
+        序列化
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BC%80%E6%BA%90/" class="badge h-6 no-underline hover:badge-primary">
+        开源
+      </a>
+      
+      
+      
+      <a href="/tags/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        快速开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF%E4%B9%A6%E7%B1%8D/" class="badge h-6 no-underline hover:badge-primary">
+        技术书籍
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%90%9C%E7%8B%97/" class="badge h-6 no-underline hover:badge-primary">
+        搜狗
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" class="badge h-6 no-underline hover:badge-primary">
+        支付宝
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%88%E7%8E%87/" class="badge h-6 no-underline hover:badge-primary">
+        效率
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/" class="badge h-6 no-underline hover:badge-primary">
+        教程
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        数据库
+      </a>
+      
+      
+      
+      <span class="badge h-6 badge-primary">
+        文件编辑
+      </span>
+      
+      
+      
+      <a href="/tags/%E6%97%B6%E5%8C%BA/" class="badge h-6 no-underline hover:badge-primary">
+        时区
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%9E%81%E5%AE%A2%E7%94%A8%E8%AF%AD/" class="badge h-6 no-underline hover:badge-primary">
+        极客用语
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%AF%9B%E7%8E%BB%E7%92%83/" class="badge h-6 no-underline hover:badge-primary">
+        毛玻璃
+      </a>
+      
+      
+      
+      <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" class="badge h-6 no-underline hover:badge-primary">
+        游戏开发
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="badge h-6 no-underline hover:badge-primary">
+        环境部署
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%94%9F%E6%97%A5/" class="badge h-6 no-underline hover:badge-primary">
+        生日
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%A9%BA%E6%A0%BC/" class="badge h-6 no-underline hover:badge-primary">
+        空格
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BC%93%E5%AD%98/" class="badge h-6 no-underline hover:badge-primary">
+        缓存
+      </a>
+      
+      
+      
+      <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="badge h-6 no-underline hover:badge-primary">
+        网络配置
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AE%BF%E9%97%AE%E5%8A%A0%E9%80%9F/" class="badge h-6 no-underline hover:badge-primary">
+        访问加速
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%AF%8D%E5%BA%93/" class="badge h-6 no-underline hover:badge-primary">
+        词库
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%B8%A9%E5%9D%91/" class="badge h-6 no-underline hover:badge-primary">
+        踩坑
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/" class="badge h-6 no-underline hover:badge-primary">
+        输入法
+      </a>
+      
+      
+      
+      <a href="/tags/%E8%BF%90%E7%BB%B4/" class="badge h-6 no-underline hover:badge-primary">
+        运维
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%97%B2%E9%B1%BC/" class="badge h-6 no-underline hover:badge-primary">
+        闲鱼
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/" class="badge h-6 no-underline hover:badge-primary">
+        阿里巴巴
+      </a>
+      
+      
+      
+      <a href="/tags/%E9%A1%B9%E7%9B%AE%E4%BF%A1%E6%81%AF/" class="badge h-6 no-underline hover:badge-primary">
+        项目信息
+      </a>
+      
+      
+    </div>
+  </div>
+  
+  <div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div>
+  
+  <div class="flex-1">
+    
+
+    
+      <div class="dream-grid">
+        
+          <div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column">
+            <a class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href="/posts/post/2020/docker%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89vim%E5%91%BD%E4%BB%A4%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+  
+  <figure>
+    
+    
+    <picture>
+      <source srcset="/images/default4_hu_ae815e0f1649c253.webp" type="image/webp" />
+      <img src="/images/default4.jpg" alt="/images/default4.jpg" />
+    </picture>
+    
+  </figure>
+  
+
+  <div class="card-body">
+    <h2 class="card-title">Docker容器没有vim命令的解决方案</h2>
+
+    <p class="date text-base-content/60">
+    
+      Friday, Jul 10, 2020
+    
+    </p>
+
+    <p>今天在尝试修改Docker容器内文件时, 发现容器内并没有vim命令, 返回了:</p>
+<pre><code>`vim my.cnf bash: vim: command not found`
+</code></pre>
+<p>本篇文章就来记录下如何解决此问题.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>仍然在docker容器内部, 首先运行以下命令, 并耐心等待一会儿:</p>
+<pre><code>`apt-get update`
+</code></pre>
+<p>完成后运行:</p>
+<pre><code>`apt-get install vim`
+</code></pre>
+<p>等待安装完成后, 运行以下命令, 验证是否安装成功:</p>
+<pre><code>`vim`
+</code></pre>
+<p>如果返回了类似以下界面则证明vim安装成功:</p>
+<!-- raw HTML omitted -->
+<p><img src="images/Docker%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89vim%E5%91%BD%E4%BB%A4%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-01.png" alt="VIM安装成功返回"></p>
+<!-- raw HTML omitted -->
+<p>VIM安装成功返回</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>[epcl_box type=&ldquo;success&rdquo;]成功搞定. 继续你的文本编辑操作吧![/epcl_box]</p>
+
+    
+    <div class="card-actions justify-between items-center mt-4">
+      
+
+      <div class="flex items-center">
+        <ion-icon name="time" class="mr-1"></ion-icon>
+        <span>1 minute read</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+          </div>
+        
+      </div>
+    
+
+    
+  </div>
+</div>
+
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

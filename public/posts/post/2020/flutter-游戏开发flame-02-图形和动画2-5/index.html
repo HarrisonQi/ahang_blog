@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter 游戏开发(flame) 02 图形和动画(2/5) | 阿航的技术小站</title>
+
+    
+
+<link rel="canonical" href="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-02-%E5%9B%BE%E5%BD%A2%E5%92%8C%E5%8A%A8%E7%94%BB2-5/" />
+
+
+
+<meta name="author" content="" />
+<meta name="description" content="引言 在本系列教程的这一章, 我们将会把重心放在图形和动画上. 我们在上一章《开发2D休闲游戏：消灭小飞蝇》 中创建了一款拥有交互的休闲手游.
+游戏的核心不变, 但是我们需要为其增加更多的位移和更好的图像.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) F l ame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) 本章 Flutter 游戏开发(flame) 03 界面和弹窗(3/5) Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程第一部分 的全部要求. 图像资源文件- 图像资源可在网上的游戏资源网站找到(比如Open Game Art ), 但是要确保感谢原作者. 代码的规则和此前的章节一致.
+图像资源 正如你在上一章中看到的上图, 我们实际上已经为小飞蝇准备好了图像资源. 这是一张来自于Open Game Art的小飞蝇图片 . 它被授权为CC0意思是可用于公共域, 也就是随便用.
+但是我们不会用上面的那个, 而是用这些:
+点击下载 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.
+" />
+
+
+<meta name="keywords" content="Flame,Flutter,游戏开发">
+
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-02-%E5%9B%BE%E5%BD%A2%E5%92%8C%E5%8A%A8%E7%94%BB2-5/">
+  <meta property="og:site_name" content="阿航的技术小站">
+  <meta property="og:title" content="Flutter 游戏开发(flame) 02 图形和动画(2/5)">
+  <meta property="og:description" content="引言 在本系列教程的这一章, 我们将会把重心放在图形和动画上. 我们在上一章《开发2D休闲游戏：消灭小飞蝇》 中创建了一款拥有交互的休闲手游.
+游戏的核心不变, 但是我们需要为其增加更多的位移和更好的图像.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) F l ame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) 本章 Flutter 游戏开发(flame) 03 界面和弹窗(3/5) Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程第一部分 的全部要求. 图像资源文件- 图像资源可在网上的游戏资源网站找到(比如Open Game Art ), 但是要确保感谢原作者. 代码的规则和此前的章节一致.
+图像资源 正如你在上一章中看到的上图, 我们实际上已经为小飞蝇准备好了图像资源. 这是一张来自于Open Game Art的小飞蝇图片 . 它被授权为CC0意思是可用于公共域, 也就是随便用.
+但是我们不会用上面的那个, 而是用这些:
+点击下载 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-17T00:00:00+00:00">
+    <meta property="article:tag" content="Flame">
+    <meta property="article:tag" content="Flutter">
+    <meta property="article:tag" content="游戏开发">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flutter 游戏开发(flame) 02 图形和动画(2/5)">
+  <meta name="twitter:description" content="引言 在本系列教程的这一章, 我们将会把重心放在图形和动画上. 我们在上一章《开发2D休闲游戏：消灭小飞蝇》 中创建了一款拥有交互的休闲手游.
+游戏的核心不变, 但是我们需要为其增加更多的位移和更好的图像.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) F l ame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) 本章 Flutter 游戏开发(flame) 03 界面和弹窗(3/5) Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程第一部分 的全部要求. 图像资源文件- 图像资源可在网上的游戏资源网站找到(比如Open Game Art ), 但是要确保感谢原作者. 代码的规则和此前的章节一致.
+图像资源 正如你在上一章中看到的上图, 我们实际上已经为小飞蝇准备好了图像资源. 这是一张来自于Open Game Art的小飞蝇图片 . 它被授权为CC0意思是可用于公共域, 也就是随便用.
+但是我们不会用上面的那个, 而是用这些:
+点击下载 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<style>
+  pre {
+    padding: 1em;
+    overflow: auto;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav class="mt-4 lg:mt-8 py-4">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="Flip it!">
+        <div class="h-10 rounded-full">
+          <img src="/" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="Archives">
+    <ion-icon name="archive"></ion-icon>
+    Archives
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="All Categories">
+    <ion-icon name="grid"></ion-icon>
+    All Categories
+  </a>
+</li>
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="All Tags">
+    <ion-icon name="pricetags"></ion-icon>
+    All Tags
+  </a>
+</li>
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+
+      
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+
+
+
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/posts" title="Archives">
+  <ion-icon class="group-hover:text-primary-content" name="archive"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/categories" title="All Categories">
+  <ion-icon class="group-hover:text-primary-content" name="grid"></ion-icon>
+</a>
+
+
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/tags" title="All Tags">
+  <ion-icon class="group-hover:text-primary-content" name="pricetags"></ion-icon>
+</a>
+
+
+      
+
+      
+
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="Flutter 游戏开发(flame) 02 图形和动画(2/5)">
+  <meta itemprop="description" content="引言 在本系列教程的这一章, 我们将会把重心放在图形和动画上. 我们在上一章《开发2D休闲游戏：消灭小飞蝇》 中创建了一款拥有交互的休闲手游.
+游戏的核心不变, 但是我们需要为其增加更多的位移和更好的图像.
+下面是我们本系列教程的文章目录:
+Flutter 游戏开发(flame) F l ame介绍 Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) Flutter 游戏开发(flame) 02 图形和动画(2/5) 本章 Flutter 游戏开发(flame) 03 界面和弹窗(3/5) Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) Flutter 游戏开发(flame) 05 收尾和打包(5/5) 需具备的条件 本系列教程第一部分 的全部要求. 图像资源文件- 图像资源可在网上的游戏资源网站找到(比如Open Game Art ), 但是要确保感谢原作者. 代码的规则和此前的章节一致.
+图像资源 正如你在上一章中看到的上图, 我们实际上已经为小飞蝇准备好了图像资源. 这是一张来自于Open Game Art的小飞蝇图片 . 它被授权为CC0意思是可用于公共域, 也就是随便用.
+但是我们不会用上面的那个, 而是用这些:
+点击下载 🔴 注意: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是Github上Langaw(原作者) 项目的一部分, 该项目获得CC-BY-NC-ND许可证的许可.">
+  <meta itemprop="datePublished" content="2020-04-17T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-04-17T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1461">
+  <meta itemprop="keywords" content="Flame,Flutter,游戏开发">
+
+      <header>
+        <h1 itemprop="headline">Flutter 游戏开发(flame) 02 图形和动画(2/5)</h1>
+        <p class="text-sm">
+          
+            Friday, Apr 17, 2020
+          
+
+          | <span>7 minute read</span>
+
+          
+          | <span>Updated at
+            
+              Friday, Apr 17, 2020
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2002%20%e5%9b%be%e5%bd%a2%e5%92%8c%e5%8a%a8%e7%94%bb%282/5%29&amp;url=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-02-%E5%9B%BE%E5%BD%A2%E5%92%8C%E5%8A%A8%E7%94%BB2-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-02-%E5%9B%BE%E5%BD%A2%E5%92%8C%E5%8A%A8%E7%94%BB2-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on Facebook">
+      <ion-icon class="group-hover:text-primary-content" name="logo-facebook"></ion-icon>
+    </a>
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://wa.me/?text=Flutter%20%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91%28flame%29%2002%20%e5%9b%be%e5%bd%a2%e5%92%8c%e5%8a%a8%e7%94%bb%282/5%29%20http://localhost:1313/posts/post/2020/flutter-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91flame-02-%E5%9B%BE%E5%BD%A2%E5%92%8C%E5%8A%A8%E7%94%BB2-5/" target="_blank" rel="noopener noreferrer"
+      title="Share on WhatsApp">
+      <ion-icon class="group-hover:text-primary-content" name="logo-whatsapp"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+
+        <h2 id="引言">引言</h2>
+<p>在本系列教程的这一章, 我们将会把重心放在图形和动画上. 我们在上一章<a href="https://www.bugcatt.com/archives/292" target="_blank">《开发2D休闲游戏：消灭小飞蝇》</a>
+中创建了一款拥有交互的休闲手游.</p>
+<p>游戏的核心不变, 但是我们需要为其增加更多的位移和更好的图像.</p>
+<p>下面是我们本系列教程的文章目录:</p>
+<ul>
+<li><a href="https://blog.bugcatt.com/archives/279" target="_blank">Flutter 游戏开发(flame) F</a>
+<a href="https://www.bugcatt.com/archives/279" target="_blank">l</a>
+<a href="https://blog.bugcatt.com/archives/279" target="_blank">ame介绍</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/292" target="_blank">Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)</a>
+</li>
+<li><strong>Flutter 游戏开发(flame) 02 图形和动画(2/5) 本章</strong></li>
+<li><a href="https://www.bugcatt.com/archives/562" target="_blank">Flutter 游戏开发(flame) 03 界面和弹窗(3/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/564" target="_blank">Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)</a>
+</li>
+<li><a href="https://www.bugcatt.com/archives/731" target="_blank">Flutter 游戏开发(flame) 05 收尾和打包(5/5)</a>
+</li>
+</ul>
+<h2 id="需具备的条件">需具备的条件</h2>
+<ol>
+<li>本系列教程<a href="https://blog.bugcatt.com/archives/292" target="_blank">第一部分</a>
+的<strong>全部要求</strong>.</li>
+<li><strong>图像资源文件</strong>- 图像资源可在网上的游戏资源网站找到(比如<a href="https://opengameart.org/" target="_blank">Open Game Art</a>
+), 但是要确保感谢原作者.</li>
+</ol>
+<p>代码的规则和此前的章节一致.</p>
+<h2 id="图像资源">图像资源</h2>
+<p><img src="images/011.jpg" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>正如你在上一章中看到的上图, 我们实际上已经为小飞蝇准备好了图像资源. 这是一张<a href="https://opengameart.org/content/green-fly-flying-enemy-game-character" target="_blank">来自于Open Game Art的小飞蝇图片</a>
+. 它被授权为<code>CC0</code>意思是可用于公共域, 也就是随便用.</p>
+<p>但是我们不会用上面的那个, 而是用这些:</p>
+<p><img src="images/01.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p><a href="https://jap.alekhin.io/wp-content/uploads/2019/03/resource-pack-part-2.zip" target="_blank">点击下载</a>
+</p>
+<hr>
+<p>🔴 <strong>注意</strong>: 如果你遵循本教程, 则可以使用上述资源包. 本资源包是<a href="https://github.com/japalekhin/langaw" target="_blank">Github上Langaw(原作者)</a>
+项目的一部分, 该项目获得<code>CC-BY-NC-ND</code>许可证的许可.</p>
+<p>这意味着您可以共享、复制或者重新分发资源.</p>
+<ul>
+<li>你必须在感谢中提到, 提供许可证的链接, 并标明你是否进行了更改.</li>
+<li>你不得将资源用于商业目的.</li>
+<li>如果混合, 转换或者构建资源, 则不能分发修改后的资源.</li>
+<li>你不得应用法律条款或技术措施, 在法律上限制他人做许可证允许的任何事情.</li>
+</ul>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/2.0/legalcode" target="_blank">点击此处了解有关 CC-BY-NC-ND 许可证的更多信息</a>
+</p>
+<hr>
+<p>阿航在这里提醒: 目前国内的版权保护做的不够好. 希望大家能够保护资源原作者辛苦的创作🙏🙏! 不能使用未经许可且无版权的资源, 向盗版说不👋!</p>
+<h2 id="继续构建游戏">继续构建游戏</h2>
+<p>我们在上一章实现了: 点击一只小飞蝇, 其被击落并且会生成一只新的小飞蝇.</p>
+<p>本章不会添加太多功能, 但是界面会有大突破. 一个好看的界面会直线提升一个游戏的乐趣.</p>
+<h3 id="第一步-添加图形资源">第一步: 添加图形资源</h3>
+<p>首先, <a href="https://jap.alekhin.io/wp-content/uploads/2019/03/resource-pack-part-2.zip" target="_blank">下载图形资源包</a>
+. (如果没下载的话)</p>
+<p>或者你也可以用自己的资源文件, 或者从资源网站上(比如<a href="https://opengameart.org/" target="_blank">OpenGameArt.org</a>
+)获取.</p>
+
+
+
+  <blockquote>
+    <p>🟡 注意: 如果你打开资源包, 将会注意到有5种不同类型的小飞蝇, 且每个小飞蝇都有三个与其相关联的文件. 这是因为我们以后会有五种不同类型的、拥有不同能力的小飞蝇. 会在后面详解这部分内容.</p>
+  </blockquote>
+
+<h4 id="添加资源文件至flame">添加资源文件至Flame</h4>
+<p>在项目根目录创建目录, 命名为<code>assets</code>.</p>
+<p>并在这个新目录<code>./assets</code>下再创建一个<code>images</code>目录.</p>
+<p>Flame要求我们必须把资源文件放在<code>./assets/images</code>下.</p>
+<p>基于这个规定, 我们可以将资源文件任意放置. 我们可以把它们都乱糟糟的放在那, 但这不是一个好的代码习惯👨‍🏫!</p>
+<p>我们来整理一下, 把fly目录放在<code>./assets/images/flies</code>下, 然后把background目录放在<code>./assets/images/bg</code>下.</p>
+<p>我们的<code>./assets/images</code>下应该存在以下文件:</p>
+<pre tabindex="0"><code>./assets
+./assets/images
+./assets/images/bg
+./assets/images/bg/backyard.png
+./assets/images/flies
+./assets/images/flies/agile-fly-1.png
+./assets/images/flies/agile-fly-2.png
+./assets/images/flies/agile-fly-dead.png
+./assets/images/flies/drooler-fly-1.png
+./assets/images/flies/drooler-fly-2.png
+./assets/images/flies/drooler-fly-dead.png
+./assets/images/flies/house-fly-1.png
+./assets/images/flies/house-fly-2.png
+./assets/images/flies/house-fly-dead.png
+./assets/images/flies/hungry-fly-1.png
+./assets/images/flies/hungry-fly-2.png
+./assets/images/flies/hungry-fly-dead.png
+./assets/images/flies/macho-fly-1.png
+./assets/images/flies/macho-fly-2.png
+./assets/images/flies/macho-fly-dead.png
+</code></pre><h4 id="注册资源文件至flutter">注册资源文件至Flutter</h4>
+<p>在我们使用这些资源文件前, 我们需要通知Flutter我们需要将这些文件打包到APP内. 所以我们需要进入</p>
+<p><code>./pubspec.yaml</code>, 找到<code>flutter</code>下的<code>assets</code>中添加:</p>
+<pre tabindex="0"><code>flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/bg/backyard.png
+    - assets/images/flies/agile-fly-1.png
+    - assets/images/flies/agile-fly-2.png
+    - assets/images/flies/agile-fly-dead.png
+    - assets/images/flies/drooler-fly-1.png
+    - assets/images/flies/drooler-fly-2.png
+    - assets/images/flies/drooler-fly-dead.png
+    - assets/images/flies/house-fly-1.png
+    - assets/images/flies/house-fly-2.png
+    - assets/images/flies/house-fly-dead.png
+    - assets/images/flies/hungry-fly-1.png
+    - assets/images/flies/hungry-fly-2.png
+    - assets/images/flies/hungry-fly-dead.png
+    - assets/images/flies/macho-fly-1.png
+    - assets/images/flies/macho-fly-2.png
+    - assets/images/flies/macho-fly-dead.png
+</code></pre>
+
+
+  <blockquote>
+    <p>🟡 一定要注意<code>pubspec.yaml</code>的文件格式. 每级中间会有两个空格. 最好导入文件后运行一下APP, 确保没有问题. 若有问题, 编译器则会报错.</p>
+  </blockquote>
+
+<h4 id="游戏开始前预加载资源文件">游戏开始前预加载资源文件</h4>
+<p>如果你是在开发一个大型的游戏, 玩家每进入另一个房间之前, 都要预加载一些资源文件.</p>
+<p>我们的教程的游戏比较简单, 在游戏开始前加载所有的资源文件就可以了.</p>
+<p>打开<code>./lib/main.dart</code>, 导入:</p>
+<pre tabindex="0"><code>import &#39;package:flame/flame.dart&#39;;
+</code></pre><p>在<code>main</code>函数中, 在设置全屏和锁定屏幕方向后面添加:</p>
+<pre tabindex="0"><code>Flame.images.loadAll([
+  &#39;bg/backyard.png&#39;,
+  &#39;flies/agile-fly-1.png&#39;,
+  &#39;flies/agile-fly-2.png&#39;,
+  &#39;flies/agile-fly-dead.png&#39;,
+  &#39;flies/drooler-fly-1.png&#39;,
+  &#39;flies/drooler-fly-2.png&#39;,
+  &#39;flies/drooler-fly-dead.png&#39;,
+  &#39;flies/house-fly-1.png&#39;,
+  &#39;flies/house-fly-2.png&#39;,
+  &#39;flies/house-fly-dead.png&#39;,
+  &#39;flies/hungry-fly-1.png&#39;,
+  &#39;flies/hungry-fly-2.png&#39;,
+  &#39;flies/hungry-fly-dead.png&#39;,
+  &#39;flies/macho-fly-1.png&#39;,
+  &#39;flies/macho-fly-2.png&#39;,
+  &#39;flies/macho-fly-dead.png&#39;,
+]);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 看起来代码很长, 实际上只有一行. 我们把资源文件作为一个List传入了<code>images.loadAll()</code>里面了.</p>
+  </blockquote>
+
+<p>这些资源文件将缓存在Flame的静态变量中, 便于我们后续重复使用.</p>
+<p>👉<strong>在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/8ef72fd9c8e342bde6a46ef2dad847a08ab96082" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/8ef72fd9c8e342bde6a46ef2dad847a08ab96082" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第二步-修改背景图">第二步: 修改背景图</h3>
+<p>当前的背景是很单调的纯色, 虽然颜色挺好看的, 但是游戏背景应该更绚丽多彩.</p>
+<p>我们在这一步将把背景换成这个:</p>
+<p><img src="images/02-760x1024.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>这是资源包中的<code>backyad.png</code>图片.</p>
+<p>如你所见, 图片很高. 因为我们只关心宽度(上一章讲过). 手机会尽可能合理的安排背景铺满整个屏幕.</p>
+<h4 id="添加背景component">添加背景Component</h4>
+<p>将背景的逻辑与其组件分离出来比较好.</p>
+<p>所以, 创建一个component文件<code>./lib/components/backyard.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class Backyard {
+  final LangawGame game;
+  Sprite bgSprite;
+
+  Backyard(this.game) {
+    bgSprite = Sprite(&#39;bg/backyard.png&#39;);
+  }
+
+  void render(Canvas c) {}
+
+  void update(double t) {}
+}
+</code></pre><p>此文件声明了<code>Backyad</code>类, 该类具有构造函数和另外两个函数(和game loop以及fly component类似). 我们暂时用不到这些函数, 但也要留在那里方便后续使用.</p>
+<p>此类包含final的<code>LangawGame</code>实例变量, 它将指向包含此component的game实例(和<code>./lib/components/fly.dart</code>十分相似).</p>
+<p>另一个类型为<code>Sprite</code>的<code>bgSprite</code>变量用于保存等下会用到的sprite数据.</p>
+<p>在构造函数内部, 我们通过创建一个新的<code>Sprite</code>初始化<code>bgSprite</code>变量, 并传递要使用的资源文件名. 该文件已加载至<code>./lib/main.dart</code>, 因此可以立即使用, 无需等待.</p>
+
+
+
+  <blockquote>
+    <p>🟡 与项目中其他文件一样, 我们在顶部导入所需要的包. 导入<code>dart:ui</code>以使用<code>Canvas</code>类. 导入<code>flame</code>的<code>sprite.dart</code>以使用<code>Sprite</code>. 最后, 导入<code>langaw-game.dart</code>以使用我们的<code>LangawGame</code>类.</p>
+  </blockquote>
+
+<h4 id="尺寸说明">尺寸说明</h4>
+<p>如果你查看了图片的详细属性, 会发现它的分辨率是<code>1080×2760</code>的.</p>
+<p>我们在使用Flutter时, 不需要被物理像素所困扰, 甚至不用担忧逻辑像素. 我们只需要关心<strong>我们的背景图片是9个区块的宽度</strong>.</p>
+<p><code>1080 像素 ÷ 9 区块 = 120 像素/区块</code></p>
+<p><code>2760 像素 ÷ 120 像素/区块 = 23 区块</code></p>
+<p>如上面的公式所示, 这个图像的<strong>宽度为9个区块, 高度为23个区块</strong>.</p>
+<h4 id="绘制背景">绘制背景</h4>
+<p>是时候绘制背景了. 我们将背景图的底部的锚点定在手机屏幕的底部.</p>
+<p>为此, 我们需要定义一个矩形, 用来保存背景的尺寸. 我们需要正确计算尺寸, 以便在渲染过程中保留背景的纵横比.</p>
+<p>我们添加一个实例变量, 类型为<code>Rect</code>的<code>bgRect</code>:</p>
+<pre tabindex="0"><code>Rect bgRect;
+</code></pre><p>在构造函数中, 在初始化<code>bgSprite</code>属性的下方添加:</p>
+<pre tabindex="0"><code>bgRect = Rect.fromLTWH(
+  0,
+  game.screenSize.height - (game.tileSize * 23),
+  game.tileSize * 9,
+  game.tileSize * 23,
+);
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 这其实也只是一行代码, 垂直排下来只是为了可读性. 4个参数分别对应左(<code>x</code>), 上(<code>y</code>), 宽和高的值.</p>
+  </blockquote>
+
+<p>我们以完整的宽度来绘制背景, 因此背景从左(<code>x</code>)的<code>0</code>开始, 扩展至<code>game.tileSize * 9</code>的宽度. 我们也可以用<code>game.screenSize.width</code>, 因为<code>game.tileSize</code>等于<code>game.screenSize.width</code>除以9.</p>
+<p>我们知道背景图是<code>9×23</code>的(单位是&quot;区块&quot;). 因此, 要绘制整个图像, 我们只需传递<code>game.tileSize * 23</code>作为高度.</p>
+<p><img src="images/03.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>最后, 顶部(<code>y</code>)是背景图片高度减去屏幕高度的负数.</p>
+<p>如果玩家的屏幕的纵横比为<code>9:16</code>, 屏幕的高度将会是<code>16 区块大小</code>. 我们从中减去<code>23 区块大小</code>, 就会得到<code>-7 区块大小</code>. 这意味着绘制背景时, 图片顶部要比屏幕顶部高7个区块.</p>
+<p>通过此公式, 背景图将始终固定在屏幕底部.</p>
+<p>我们在调用此component的<code>render</code>方法时绘制背景图像：</p>
+<pre tabindex="0"><code>bgSprite.renderRect(c, bgRect);
+</code></pre><p>代码截图:</p>
+<p><img src="images/04-2.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<h4 id="将背景添加至游戏">将背景添加至游戏</h4>
+<p>现在, 我们的背景component已经完成了, 我们来将其添加到我们的游戏逻辑中. 打开<code>./lib/langaw-game.dart</code>.</p>
+<p>因为需要使用<code>Backyard</code>类, 导入:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/backyard.dart&#39;;
+</code></pre><p>然后添加类型为<code>Backyard</code>的变量<code>background</code>:</p>
+<pre tabindex="0"><code>Backyard background;
+</code></pre><p>在<code>initialize()</code>中, 实例化一个新的<code>Backyard</code>类型的对象至<code>background</code>实例变量. 必须在确定屏幕大小之后进行:</p>
+<pre tabindex="0"><code>background = Backyard(this);
+</code></pre><p>就像创建小飞蝇一样, 我们通过<code>this</code>关键字来传递当前的<code>LangawGame</code>实例.</p>
+<p>代码截图:</p>
+<p><img src="images/05.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>然后在<code>render</code>函数内部, 我们调用<code>background</code>的<code>render</code>函数, 并传入<code>Canvas</code>.</p>
+<p>我们目前只用了四条线绘制了一个纯色的矩形. 我们需要将其替换:</p>
+<pre tabindex="0"><code>Rect bgRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
+Paint bgPaint = Paint();
+bgPaint.color = Color(0xff576574);
+canvas.drawRect(bgRect, bgPaint);
+
+// 替换为
+background.render(canvas);
+</code></pre><p>🟢 运行游戏, 应该可以看到背景了:</p>
+<p><img src="images/06-1024x589.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>看起来蛮顺利的!😜😜</p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/6733fc5b1ee53a9732c534533c95159129c90f14" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/6733fc5b1ee53a9732c534533c95159129c90f14" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第三步-变更小飞蝇图片">第三步: 变更小飞蝇图片</h3>
+<p>我们将会有五种不同的小飞蝇. 现在我们来关注它们的图片差异, 但也要为它们的不同功能做好准备.</p>
+<p>这里我们会用到<strong>继承</strong>的概念. 即创建一个子类, 扩展现有的父类(超类).</p>
+<h4 id="调整小飞蝇sprite尺寸">调整小飞蝇sprite尺寸</h4>
+<p>在资源包中的文件的尺寸是确定的, 命中区域(<code>flyRect</code>)的矩形比整个图片小一圈.</p>
+<p><img src="images/07-1024x555.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>如上图所示, sprite将会在蓝框内绘制(我们称其为sprite区域), 但若想击中需要在红框内(命中区域, 代码中为<code>flyRect</code>).</p>
+<h4 id="准备小飞蝇父类">准备小飞蝇父类</h4>
+<p>在创建首个子类前, 我们要保证我们的父类准备好被扩展.</p>
+<p>我们将使用已存在的<code>Fly</code>作为父类, 所以打开<code>./lib/components/fly.dart</code>. 所有的小飞蝇将会共享在<code>Fly</code>中的通用功能.</p>
+<p>首先删除<code>drawRect</code>, 因为我们不再绘制矩形了. 清空<code>render()</code>, 像这样:</p>
+<pre tabindex="0"><code>void render(Canvas c) {}
+</code></pre><p>然后, 删除所有对<code>flyPaint</code>的引用. 因为该对象只是用来绘制矩形的. 移除实例变量:</p>
+<pre tabindex="0"><code>// 移除它!
+Paint flyPaint;
+</code></pre><p>然后在构造函数中删除:</p>
+<pre tabindex="0"><code>// 移除这两行!
+flyPaint = Paint();
+flyPaint.color = Color(0xff6ab04c);
+</code></pre><p>再然后, 删除<code>onTapDown</code>处理器的:</p>
+<pre tabindex="0"><code>// 移除这行!
+flyPaint.color = Color(0xffff4757);
+</code></pre><p><code>flyRect</code>留在这里, 因为我们将其作为命中矩形.</p>
+<h4 id="添加sprites">添加sprites</h4>
+<p><code>Fly</code>类中的每个实例, 我们都需要添加两组<code>Sprite</code>:</p>
+<ul>
+<li>其中一组由2个Sprite组成, 它们将一个接一个的显示, 提供飞行动画(因为煽动翅膀的动画不止由一张图片组成). 将使用<code>List</code>类型.</li>
+<li>另一组只有1个Sprite, 将显示死掉的小飞蝇.</li>
+</ul>
+<p>我们还需要一个实例变量, 该变量将存储哪些Sprite将显示飞行动画.</p>
+<p>导入Flame的<code>sprite.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+</code></pre><p>在实例变量中添加:</p>
+<pre tabindex="0"><code>List flyingSprite;
+Sprite deadSprite;
+double flyingSpriteIndex = 0;
+</code></pre>
+
+
+  <blockquote>
+    <p>🟡 提示: sprite变量不会在这里进行初始化, 因为每个子类都会使用不同的sprite.</p>
+  </blockquote>
+
+<p>在<code>render()</code>中, 我们来根据小飞蝇的状态(活着/死掉)渲染其sprite:</p>
+<pre tabindex="0"><code>void render(Canvas c) {
+  if (isDead) {
+    deadSprite.renderRect(c, flyRect.inflate(2));
+  } else {
+    flyingSprite[flyingSpriteIndex.toInt()].renderRect(c, flyRect.inflate(2));
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: <code>render</code>函数通过<code>isDead</code>的值来判断显示哪一个sprite. 如果死掉, 显示<code>deadSprite</code>, 若没死, 显示<code>flyingSprite</code>集合的第一项.</p>
+  </blockquote>
+
+<p>至于为什么要进行<code>flyingSpriteIndex.toInt()</code>, 是因为<code>List</code>的下标都是integer类型. 我们的<code>flyingSpriteIndex</code>是double类型, 所以我们要将其转换为int. 你问阿航为什么它是double类型的?因为我们将使用<code>update</code>函数中的时间增量(double类型)的值来与其相加, 等下你会看到.</p>
+<p>最后一部分, <code>.inflate(2)</code>, 只是创建了一个矩形的副本, 该矩形被调用, 但从中心开始被放大(在本例中 × 2). 还记得上面的那张蓝框(sprite)和红框(命中区)图吗? 那就是我们使用2作为值的原因.</p>
+<h4 id="创建首个子类">创建首个子类</h4>
+<p>让我们创建第一个<code>Fly</code>实现类, 最简单也最常见, 我们称其为<code>HouseFly</code>(家蝇).</p>
+<p>在<code>./lib/components</code>下创建文件<code>house-fly.dart</code>.</p>
+<p>我们打开新创建的<code>./lib/components/house-fly.dart</code>, 创建我们的基本component类, 但是这次是<strong>扩展<code>Fly</code>类</strong>:</p>
+<pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class HouseFly extends Fly {
+  HouseFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/house-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/house-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/house-fly-dead.png&#39;);
+  }
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 导入所需的依赖. 然后我们声明一个类, 并让其继承<code>Fly</code>类. 这样就有效的创建了一个子类.</p>
+  </blockquote>
+
+<p>子类可以方位和重写父类(超类)的变量和函数.</p>
+<p>我们的构造函数调用<code>super</code>, 它告诉程序在运行构造函数内的代码前先运行父类的构造函数. 构造函数只是镜像了超类构造函数所需的参数, 并在调用<code>super</code>时将其转发.</p>
+<p>在构造函数内部, 我们创建新的<code>List&lt;Sprite&gt;</code>初始化<code>flyingSprite</code>. 将两个<code>sprite</code>分别添加到List中, 它们分别对应飞行动画的2个帧.</p>
+<p>然后我们把家蝇死去的图片加载至<code>Sprite</code>中, 并将其分配给<code>deadSprite</code>.</p>
+<p>我们没有重写<code>render</code>和<code>update</code>函数, 因为这种小飞蝇没有特殊的属性. 目前, 所有功能将与其他小飞蝇一致.</p>
+<h4 id="生成新的小飞蝇">生成新的小飞蝇</h4>
+<p>我们来修改<code>spawnFly</code>函数, 让它生成<code>HouseFly</code>而不是父类<code>Fly</code>. 打开<code>./lib/langaw-game.dart</code>.</p>
+<p>在<code>import</code>区域(文件顶部), 让我们导入上面创建的子类:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/house-fly.dart&#39;;
+</code></pre><p>然后生成<code>HouseFly</code>, 替换之前的生成<code>Fly</code>:</p>
+<pre tabindex="0"><code>// 替换
+flies.add(Fly(this, x, y));
+
+// 为
+flies.add(HouseFly(this, x, y));
+</code></pre><p>代码截图:</p>
+<p><img src="images/08.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>🟢 运行游戏, 查看效果:</p>
+<p><img src="images/09-1024x594.gif" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/27b79bb11b74bf56079a1a44a7c914c3893f285f" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/27b79bb11b74bf56079a1a44a7c914c3893f285f" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第四步-创建更多类型的小飞蝇">第四步: 创建更多类型的小飞蝇</h3>
+<p>这一部分就轻车熟路了, 我们为每个类型的小飞蝇创建相应的子类.</p>
+
+
+
+  <blockquote>
+    <p>🟡 提示: 在这一部分, 不会过多的做代码解析. 因为它们与<code>HouseFly</code>基本相同. 唯一的区别就是引用不同的文件名.</p>
+  </blockquote>
+
+<h4 id="口水蝇">口水蝇🤤</h4>
+<p>创建<code>./lib/components/drooler-fly.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class DroolerFly extends Fly {
+  DroolerFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/drooler-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/drooler-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/drooler-fly-dead.png&#39;);
+  }
+}
+</code></pre><h4 id="迅捷蝇">迅捷蝇🐱‍🏍</h4>
+<p>创建<code>./lib/components/agile-fly.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class AgileFly extends Fly {
+  AgileFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/agile-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/agile-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/agile-fly-dead.png&#39;);
+  }
+}
+</code></pre><h4 id="肌肉蝇">肌肉蝇💪</h4>
+<p>创建<code>./lib/components/macho-fly.dart</code>:</p>
+<pre tabindex="0"><code class="language-jscript" data-lang="jscript">import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+class MachoFly extends Fly {
+  MachoFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/macho-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/macho-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/macho-fly-dead.png&#39;);
+  }
+}
+</code></pre><pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class MachoFly extends Fly {
+  MachoFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/macho-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/macho-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/macho-fly-dead.png&#39;);
+  }
+}
+</code></pre><h4 id="饥饿蝇">饥饿蝇🥴</h4>
+<p>创建<code>./lib/components/hungry-fly.dart</code>:</p>
+<pre tabindex="0"><code>import &#39;package:flame/sprite.dart&#39;;
+import &#39;package:langaw/components/fly.dart&#39;;
+import &#39;package:langaw/langaw-game.dart&#39;;
+
+class HungryFly extends Fly {
+  HungryFly(LangawGame game, double x, double y) : super(game, x, y) {
+    flyingSprite = List();
+    flyingSprite.add(Sprite(&#39;flies/hungry-fly-1.png&#39;));
+    flyingSprite.add(Sprite(&#39;flies/hungry-fly-2.png&#39;));
+    deadSprite = Sprite(&#39;flies/hungry-fly-dead.png&#39;);
+  }
+}
+</code></pre><h4 id="随机生成小飞蝇">随机生成小飞蝇</h4>
+<p>现在我们有了5种不同的小飞蝇, 我们来使每次生成小飞蝇时, 生成5种中的随机一种.</p>
+<p>在<code>./lib/langaw-game.dart</code>中导入其他所有小飞蝇, 保证我们可以使用它们:</p>
+<pre tabindex="0"><code>import &#39;package:langaw/components/agile-fly.dart&#39;;
+import &#39;package:langaw/components/drooler-fly.dart&#39;;
+import &#39;package:langaw/components/hungry-fly.dart&#39;;
+import &#39;package:langaw/components/macho-fly.dart&#39;;
+</code></pre><p>在<code>spawnFly</code>函数中, 进行替换:</p>
+<p>替换:</p>
+<pre tabindex="0"><code>flies.add(HouseFly(this, x, y));
+</code></pre><p>为:</p>
+<pre tabindex="0"><code>switch (rnd.nextInt(5)) {
+  case 0:
+    flies.add(HouseFly(this, x, y));
+    break;
+  case 1:
+    flies.add(DroolerFly(this, x, y));
+    break;
+  case 2:
+    flies.add(AgileFly(this, x, y));
+    break;
+  case 3:
+    flies.add(MachoFly(this, x, y));
+    break;
+  case 4:
+    flies.add(HungryFly(this, x, y));
+    break;
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 解析: 我们首先从<code>rnd</code>的<code>nextInt</code>函数中获取一个随机整数. <code>5</code>代表了生成的随机数在<strong>小于五的整数</strong>. 多数语言从0开始计数, 所以可能的数字有:<code>[0, 1, 2, 3, 4]</code>.</p>
+<p>然后将随机数传入到<code>switch</code>中. <code>switch</code>将根据传入的数字执行不同的行. 比如传入了<code>2</code>就会执行<code>flies.add(AgileFly(this, x, y));</code>, 生成一个<code>AgileFly</code>.</p>
+<p><code>break</code>关键字是为了确保程序不继续向下运行. 想学习更多有关<code>switch</code>的知识, 请翻阅: <a href="https://www.dartcn.com/guides/language/language-tour#switch-%E5%92%8C-case" target="_blank">Dart中文官方文档-switch 和 case</a>
+</p>
+  </blockquote>
+
+<p>代码截图:</p>
+<p><img src="images/10.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/eb302f0b420f02a2c96fecc2bda1bacbcacee004" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/eb302f0b420f02a2c96fecc2bda1bacbcacee004" target="_blank">码云</a>
+上查看这部分的代码.</strong></p>
+<h3 id="第五步-使小飞蝇飞来飞去">第五步: 使小飞蝇&quot;飞来飞去&quot;</h3>
+<p>目前为止, 一切顺利! 我们拥有了一个具有较好的界面以及变化足够的游戏, 可以使玩家乐在其中.</p>
+<p>但是我们还要做更多!😠😠</p>
+<h4 id="使小飞蝇动起来">使小飞蝇动起来</h4>
+<p>小飞蝇不应该像是被禁锢了一样静止在半空中, 应该动起来.</p>
+<p>我们使用的资源包已经为我们提供了处理小飞蝇动画的所有帧. 我们已经加载了它们, 并为每个实例中的sprite做好了准备.</p>
+<p>为了使小飞蝇活动, 我们需要打开<code>./lib/components/fly.dart</code>. 在<code>update()</code>中, 在<code>if(isDead)</code>末尾拼接上一个else块<code>else{}</code>.</p>
+<p>在<code>else</code>块中添加:</p>
+<pre tabindex="0"><code>flyingSpriteIndex += 30 * t;
+if (flyingSpriteIndex &gt;= 2) {
+  flyingSpriteIndex -= 2;
+}
+</code></pre><p><strong>大段文字预警</strong>! <strong>耐心点哦!</strong> 😜😜😜</p>
+
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先, 我们将<code>flyingSpriteIndex</code>的值乘以<code>30</code>乘以时间增量. 记住, 此变量在渲染过程中被转换为<code>int</code>, 且其<code>int</code>值用于确定要显示的帧(下标<code>0</code>或<code>1</code>).</p>
+  </blockquote>
+
+<p>我们尝试实现每秒<strong>拍动15次</strong>(15个动画周期). 由于每个周期有2帧动画, 所以每秒会显示30帧.</p>
+<p>假设游戏以每秒<code>60</code>帧的速度运行. <code>update()</code>约每16.6毫秒(时间增量t的值)运行一次. <code>flyingSpriteIndex</code>的初始值为0.</p>
+<p>对于第一帧, <code>30 * 0.0166</code>将被添加到<code>flyingSpriteIndex</code>中. <code>flyingSpriteIndex</code>的值现在为<code>0.498</code>. 若对其运行<code>.toInt()</code>, 会被取整为<code>0</code>, 显示第一张图像.</p>
+<p>在第二帧上, <code>flyingSpriteIndex</code>又添加了<code>30 * 0.0166</code>, 使其值为<code>0.996</code>. 如果对此值进行<code>.toInt()</code>, 仍然会得到<code>0</code>, 将显示第一张图像.</p>
+<p>在第三帧上再加<code>30 * 0.0166</code>, 该值将变为<code>1.494</code>. 在此值上运行<code>.toInt()</code>将返回<code>1</code>, 显示第二个图像.</p>
+<p>当达到第四帧时, 再次加上<code>30 * 0.0166</code>, 该值将变为<code>1.992</code>. 进行<code>.toInt()</code>返回<code>1</code>, 因此仍显示第二张图像.</p>
+<p>到第五帧时, 再加上<code>30 * 0.0166</code>, 得到<code>2.49</code>.</p>
+<p>我们有一个<code>if</code>块, 当其值大于或等于<code>2</code>时, 重置<code>flyingSpriteIndex</code>值, 因为我们没有第三张图片(下标为2).</p>
+<p>我们现在的值为<code>2.49</code>.</p>
+<p>我们从中减2, 使其变为<code>0.49</code>, 该值<code>.toInt()</code>为0, 再次显示第一张图像.</p>
+<p>这种情况在两个帧之间重复循环, 速度为15次/秒.</p>
+<p>🟡 注意: 根据计算, 我们最终会有一次失误, 会出现3帧显示同一张图像. 实际上并非如此, 因为它的值并不是精确到. <code>1秒 ÷ 60帧/秒</code>不等于<code>0.0166</code>, 而是一个无限循环小数<code>0.016666...</code>. 如果乘以<code>30</code>, 总和将为<code>0.5</code>. 并且时间增量也不总是完美的<code>0.016666...</code>(上面提到过原因). 将会使整个算法真正与每秒拍动翅膀15次同步. 就算我们真的失误了, 每秒60帧的速度, 也几乎不会被注意到.</p>
+<p>如果你对这个算法有疑问, 欢迎在评论区讨论.</p>
+<p><img src="images/11.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>🟢 运行游戏, 你会发现小飞蝇的翅膀在动!</p>
+<!-- raw HTML omitted -->
+<p><img src="images/12.gif" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<!-- raw HTML omitted -->
+<p>(小飞蝇的翅膀终于动起来了)</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h4 id="使小飞蝇尺寸一致">使小飞蝇尺寸一致</h4>
+<p>现在我们已经有了包含动画的小飞蝇了, 你应该注意到区块尺寸已经失效了. 那是因为这是一个&quot;概念证明&quot;(Poc)规则, 可以解释屏幕尺寸, 宽高比, 尺寸, 以及区块系统.</p>
+
+
+
+  <blockquote>
+    <p>&ldquo;概念证明&rdquo;(Poc)这个概念阿航不好翻译🤔, 但如果不写又怕漏掉了原作者的概念.. 大家不要纠结, 继续向下看就好了!</p>
+  </blockquote>
+
+<p>我们需要调整尺寸, 使小飞蝇本身具有一致的感觉和大小. 为此, 我们需要修改<code>./lib/components/fly.dart</code>, 删除对<code>flyRect</code>的初始化, 然后将其转移到每个子类中, 因为每个小飞蝇都有着自己的尺寸.</p>
+<p>在构造函数中移除这行:</p>
+<pre tabindex="0"><code>flyRect = Rect.fromLTWH(x, y, game.tileSize, game.tileSize);
+</code></pre><p>在Dart中, 若你的构造函数体是空的, 那么可以省略括号, 直接以分号结束:</p>
+<pre tabindex="0"><code>Fly(this.game, double x, double y);
+</code></pre><p>实际上, 我们将不再使用入参<code>x</code>和<code>y</code>. 因为矩形将不在这里进行初始化, 变更我们的构造函数为:</p>
+<pre tabindex="0"><code>Fly(this.game);
+</code></pre><p>打开<code>./lib/components/house-fly.dart</code>, 修改<code>super</code>函数, 因为我们在父类<code>Fly</code>中移除了<code>x</code>和<code>y</code>. <code>HouseFly</code>构造函数首行改为:</p>
+<pre tabindex="0"><code>HouseFly(LangawGame game, double x, double y) : super(game) {
+</code></pre><p>导入下一步要用的<code>Rect</code>所需的包:</p>
+<pre tabindex="0"><code>import &#39;dart:ui&#39;;
+</code></pre><p>然后在构造函数中, 我们添加我们刚从<code>Fly</code>中移除的构造函数.</p>
+<pre tabindex="0"><code>flyRect = Rect.fromLTWH(x, y, game.tileSize, game.tileSize);
+</code></pre><p><img src="images/13-1024x555.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>家蝇, 口水蝇, 迅捷蝇的尺寸一致. 但我们确实需要放大它们.</p>
+<p>因此, 对于这些不同的小飞蝇(<code>./lib/components/house-fly.dart</code>, <code>./lib/components/drooler-fly.dart</code>, 以及 <code>./lib/components/agile-fly.dart</code>), 我们改变它们的构造函数, 在其中初始化<code>flyRect</code>, 像这样:</p>
+<pre tabindex="0"><code>flyRect = Rect.fromLTWH(x, y, game.tileSize * 1.5, game.tileSize * 1.5);
+</code></pre><p>这样, 我们的命中区域和<code>game.tileSize</code>不再相同了, 现在增大了1.5倍. 这是我们的基本尺寸.</p>
+<p>sprite框会在它后面, 因为sprite框会扩充命中区域并使其膨胀.</p>
+<p>对于肌肉蝇MachoFly(<code>./lib/components/macho-fly.dart</code>), 是其他小飞蝇的<code>1.35</code>倍.</p>
+<p><code>1.5 × 1.35 = 2.025</code></p>
+<p>修改<code>flyRect</code>构造函数:</p>
+<pre tabindex="0"><code>flyRect = Rect.fromLTWH(x, y, game.tileSize * 2.025, game.tileSize * 2.025);
+</code></pre><p>为饥饿蝇<code>HungryFly</code>(<code>./lib/components/hungry-fly.dart</code>)做相同的处理, 唯一的区别是它的计算公式为<code>1.5 x 1.1 = 1.65</code>:</p>
+<pre tabindex="0"><code>flyRect = Rect.fromLTWH(x, y, game.tileSize * 1.65, game.tileSize * 1.65);
+</code></pre><p>我们的最大的小飞蝇是<code>game.tileSize</code>的<code>2.025</code>倍. 所以跳转至<code>./lib/langaw-game.dart</code>, 同时修改<code>spawnFly()</code>中的<code>x</code>和<code>y</code>:</p>
+<pre tabindex="0"><code>double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
+double y = rnd.nextDouble() * (screenSize.height - (tileSize * 2.025));
+</code></pre><p>🟢 运行游戏, 你应该可以注意到小飞蝇变大了!</p>
+<p><img src="images/14-1024x750.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>我们已经为下一次变更做好了准备.</p>
+<p><strong>尝试随意调整下大小!</strong></p>
+<h4 id="动来动去的小飞蝇">动来动去的小飞蝇</h4>
+<p>现实生活中, 小飞蝇并非固定在某个位置, 而是乱飞让我们感到讨厌😡.</p>
+<p>我们将尝试模仿这种行为, 让我们的小飞蝇飞来飞去😈.</p>
+<p>首先我们需要添加一个</p>
+<p>名为<code>speed</code>的属性. 它将作为小飞蝇的移动速度. 大多数小飞蝇移动速度一致, 但是总会有例外.</p>
+<p><strong>属性</strong>只是实例变量的别称. 在我们的例子里, 唯一的区别是我们如何定义和使用它们. 我们将通过定义<strong>getter</strong>来创建属性.</p>
+<p>打开<code>./lib/components/fly.dart</code>. 添加<code>speed</code>属性:</p>
+<pre tabindex="0"><code>double get speed =&gt; game.tileSize * 3;
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 我们将为其的默认值设置为<code>game.tileSize * 3</code>, 这样小飞蝇可以在2秒内横跨屏幕.</p>
+  </blockquote>
+
+<p>你也可以尝试不同的速度哦😄😄!</p>
+<p>在我们开始使用<code>update()</code>移动小飞蝇前, 我们需要计算它们的前进方向. 当然, 每次<code>update()</code>运行时, 我们都可以做一个随机值. 但这会使小飞蝇随机晃动.</p>
+<p>这些小飞蝇应该有一个目标. 在更改方向之前到到达的点.</p>
+<p>让我们添加另一个名为<code>targetLocation</code>的实例变量, 其类型为<code>Offset</code>. 使用这个类型的原因是它提供了好用的功能, 比如计算方向, 距离, 缩放等.</p>
+<pre tabindex="0"><code>Offset targetLocation;
+</code></pre><p>让我们来定义一个可重用的函数来变更<code>targetLocation</code>:</p>
+<pre tabindex="0"><code>void setTargetLocation() {
+  double x = game.rnd.nextDouble() * (game.screenSize.width - (game.tileSize * 2.025));
+  double y = game.rnd.nextDouble() * (game.screenSize.height - (game.tileSize * 2.025));
+  targetLocation = Offset(x, y);
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 就像<code>./lib/langaw-game</code>中的<code>spawnFly</code>一样, 我们定义最大值, 生成随机数初始化两个值(<code>x</code>和<code>y</code>). 小飞蝇只能到达允许它到达的位置.</p>
+  </blockquote>
+
+<p>然后在构造函数中, 我们来调用此函数, 以便小飞蝇实例创建时我们有一个非<code>null</code>的<code>targetLocation</code>:</p>
+<pre tabindex="0"><code>Fly(this.game) {
+  setTargetLocation();
+}
+</code></pre><p><img src="images/15-1024x711.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>现在我们来处理它们的实际动作. 在<code>update()</code>中, 并且在小飞蝇没死(isDead=false)的条件下, 我们按照时间增量值将小飞蝇移动向其目标点. 若达到目标点, 调用<code>setTargetLocation</code>随机分配目标点.</p>
+<p>在<code>update()</code>中, 在<code>flyingSpriteIndex</code>:</p>
+<pre tabindex="0"><code>flyingSpriteIndex += 30 * t;
+if (flyingSpriteIndex &gt;= 2) {
+	flyingSpriteIndex -= 2;
+}
+</code></pre><p>下添加:</p>
+<pre tabindex="0"><code>double stepDistance = speed * t;
+Offset toTarget = targetLocation - Offset(flyRect.left, flyRect.top);
+if (stepDistance &lt; toTarget.distance) {
+  Offset stepToTarget = Offset.fromDirection(toTarget.direction, stepDistance);
+  flyRect = flyRect.shift(stepToTarget);
+} else {
+  flyRect = flyRect.shift(toTarget);
+  setTargetLocation();
+}
+</code></pre>
+
+
+  <blockquote>
+    <p>💡 代码解析: 首先, 我们定义<code>stepDistance</code>变量, 该变量将存储我们应该移动的距离. 如果<code>speed</code>决定了小飞蝇在1秒钟的移动距离, 我们将其乘以时间增量(t, 也就是自<code>update()</code>运行以来的时间), 从而得出小飞蝇从那时起应移动的距离.</p>
+<p>然后, 我们创建一个新的<code>Offset</code>来计算从小飞蝇当前位置到目标位置的偏移量. 我们这里使用<code>Offset</code>的减法进行计算, 它内置在<code>Offset</code>类中.</p>
+<p>比如小飞蝇当前的位置为<code>50, 50</code>, 且目标位置为<code>120, 70</code>, 则<code>toTarget</code>的值将为<code>(120 - 50)</code>, <code>(70 - 50)</code>, 等于<code>70, 20</code>.</p>
+<p>然后我们检查<code>stepDistance</code>是否小于<code>toTarget</code>偏移量中的<code>.distance</code>(<code>Offset</code>的一个实用的属性, 我们可以不必手动计算所有数值). 如果是, 则表示我们离目标位置还有很远, 因此我们继续移动小飞蝇.</p>
+<p>为了移动小飞蝇, 我们使用<code>fromDirection</code>工厂创建一个新的<code>Offset</code>. 该工厂使用一个方向和一个可选的距离(默认为1). 对于方向, 我们只需输入<code>Target</code>的<code>direction</code>属性(<code>Offset</code>类的另一个实用属性, 因此我们不用管三角函数直接就可以计算角度). 对于距离, 我们传入已经算好的<code>stepDistance</code>值.</p>
+<p>若<code>stepDistance</code>大于或等于<code>Target</code>的<code>distance</code>属性, 则意味着小飞蝇离目标位置很近, 说明其到达了目标点. 因此, 我们只需使用<code>toTarget</code>的值将小飞蝇移动至目标, 该值是从小飞蝇到<code>targetLocation</code>的实际距离. 最终,我们调用<code>setTargetLocation()</code>给小飞蝇提供一个新目标</p>
+  </blockquote>
+
+<p>现在的<code>update</code>函数应该是这样:</p>
+<p><img src="images/16-1024x863.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>🟢 运行游戏, 你应该可以看到小飞蝇的移动!</p>
+<p><img src="images/17.gif" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<h4 id="不同的小飞蝇-不同的样式">不同的小飞蝇, 不同的样式</h4>
+<p>我们已经完成了这部分的大部分. 我们做一些微调, 让一些小飞蝇拥有独特的能力.</p>
+<p>对于迅捷蝇<code>AgileFly</code>(<code>./lib/components/agile-fly.dart</code>), 重写<code>speed</code>属性, 并且赋值为5. 你问为啥速度这么快? 因为它们是迅捷蝇啊!🤪🤪🤪</p>
+<pre tabindex="0"><code>double get speed =&gt; game.tileSize * 5;
+</code></pre><p>代码截图:</p>
+<p><img src="images/18.png" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<p>口水蝇🤤<code>DroolerFly</code>(<code>./lib/components/drooler-fly.dart</code>)比较懒, 它的移动速度只有家蝇的一半:</p>
+<pre tabindex="0"><code>double get speed =&gt; game.tileSize * 1.5;
+</code></pre><p>肌肉蝇💪<code>MachoFly</code>(<code>./lib/components/macho-fly.dart</code>)有很多肌肉, 所以将其速度定为<code>2.5</code>, 略慢于家蝇:</p>
+<pre tabindex="0"><code>double get speed =&gt; game.tileSize * 2.5;
+</code></pre><p><strong>👉在<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/3a3e55583793f36eab2c655fcf65522ba55bee72" target="_blank">Github</a>
+或<a href="https://github.com/HarrisonQi/flame-tutorial-langaw/tree/3a3e55583793f36eab2c655fcf65522ba55bee72" target="_blank">码云</a>
+上查看本章全部代码.</strong></p>
+<h2 id="测试游戏">测试游戏!</h2>
+<p>是时候看看我们的成果了, 运行我们的游戏, 看看效果!</p>
+<p><img src="images/19.gif" alt="Flutter 游戏开发(flame) 02 图形和动画(2/5)"></p>
+<h2 id="结语">结语</h2>
+<p>我们成功的把&quot;有交互但是枯燥&quot;的游戏升级为我们可以拿得出手的游戏,</p>
+<p>使用好看的图像, 动画, 移动和变化. 从简单的&quot;点击时使小方块下落&quot;到现在.</p>
+<p>希望你可以乐在其中, 并可以开放思维, 添加一些你喜欢的元素.</p>
+<p>如果你出现了不懂的地方, 不要犹豫, 欢迎在评论区留言! 也欢迎你加入<a href="https://jq.qq.com/?_wv=1027&amp;k=5ETLFm3" target="_blank">我的Flame交流群(QQ)</a>
+</p>
+<h2 id="下一章会干什么">下一章会干什么?</h2>
+<p>在<a href="https://www.bugcatt.com/archives/562" target="_blank">下一章</a>
+, 我们会有不同的界面, 比如&quot;欢迎&quot;界面, &ldquo;游戏失败&quot;界面和一些常见的弹窗(帮助、感谢).</p>
+<p>我们同样会添加更多图像和品牌标志.</p>
+<p>下一章再见!</p>
+<h2 id="感谢">感谢</h2>
+<ul>
+<li>本篇文章参考原作<a href="https://jap.alekhin.io/game-graphics-and-animation-tutorial-flame-flutter-part-2" target="_blank">《Game Graphics and Animation Tutorial – Step by Step with Flame and Flutter (Part 2 of 5)》</a>
+.</li>
+<li>flame <a href="https://github.com/flame-engine/flame" target="_blank">github仓库地址</a>
+</li>
+<li>pub.dev <a href="https://pub.flutter-io.cn/packages/flame" target="_blank">官方网址</a>
+</li>
+</ul>
+
+
+        
+      </section>
+
+      
+
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>© 2025 阿航的技术小站</p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme =  null 
+  window.darkTheme =  null 
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
