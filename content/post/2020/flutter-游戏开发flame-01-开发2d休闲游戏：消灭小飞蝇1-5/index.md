@@ -15,7 +15,7 @@ coverImage: "flame特色图片1官方.png"
 
 曾想过开发一款自己的电子游戏吗? 来对地方了. 本系列教程就是教你如何开发一个属于自己的2D休闲游戏.
 
-本教程是[第一章](https://blog.bugcatt.com/archives/279)的延续, 是针对任何水平的指南. 在这一章我们将会做一个"打鸟"类型的游戏.
+本教程是[第一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)的延续, 是针对任何水平的指南. 在这一章我们将会做一个"打鸟"类型的游戏.
 
 这个游戏起名为"**Langaw**", 翻译过来就是"小飞蝇". 玩家的任务就是在小飞蝇到达垃圾堆前尽可能的多消灭小飞蝇(阿航在这里不得不吐槽下原作者, 我们为啥要保护垃圾啊真是的😒).
 
@@ -25,20 +25,20 @@ coverImage: "flame特色图片1官方.png"
 
 下面是我们本系列教程的文章目录:
 
-- [Flutter 游戏开发(flame) Flame介绍](https://www.bugcatt.com/archives/560)
+- [Flutter 游戏开发(flame) Flame介绍](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
 - **Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5) 本章**
-- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](https://www.bugcatt.com/archives/560)
-- [Flutter 游戏开发(flame) 03 界面和弹窗(3/5)](https://www.bugcatt.com/archives/562)
-- [Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)](https://www.bugcatt.com/archives/564)
-- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](https://www.bugcatt.com/archives/731)
+- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
+- [Flutter 游戏开发(flame) 03 界面和弹窗(3/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
+- [Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
+- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
 
 ## 需具备的条件
 
-如果你完整的学习了[第一章](https://blog.bugcatt.com/archives/279), 那么你应该已经准备好进行开发了🤩.
+如果你完整的学习了[第一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/), 那么你应该已经准备好进行开发了🤩.
 
 以防万一, 在这里重复一下:
 
-本文将假设您已是一名有一定经验的开发人员, 且拥有了”程序员思维”. 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名”游戏开发者”✌✌.
+本文将假设您已是一名有一定经验的开发人员, 且拥有了"程序员思维". 如果你是小白, 没关系! 本篇教程非常入门. 只要兴趣足够, 你也将成为一名"游戏开发者"✌✌.
 
 你也需要一个配置足够的电脑, 可以运行IDE、编译并运行Android模拟器. 如果你的电脑配置不够高, 你也可以直接连接Android手机, 在真机上运行和调试.
 
@@ -56,7 +56,7 @@ Flutter可以同时构建Android和IOS APP. 本文将围绕Android进行开发. 
 
 ## 开始
 
-我们先来规范一些事项, 使本文更容易理解😉. 首先, 我不会赘述[第一章](https://blog.bugcatt.com/archives/279)讨论的概念、步骤以及代码. **我会详细的解释, 但不会偏离**我们要制作游戏的目标. 话虽如此, 还请您仔细阅读一下[第一章](https://blog.bugcatt.com/archives/279)🙏!
+我们先来规范一些事项, 使本文更容易理解😉. 首先, 我不会赘述[第一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)讨论的概念、步骤以及代码. **我会详细的解释, 但不会偏离**我们要制作游戏的目标. 话虽如此, 还请您仔细阅读一下[第一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)🙏!
 
 文件目录将会使用相对路径表示.
 
@@ -86,7 +86,7 @@ flutter create langaw
 
 创建完成后, 使用IDE打开项目目录.
 
-与[第一章](https://blog.bugcatt.com/archives/279)类似, 进行清理代码. 我们不会执行测试. 所以删除`./test`目录.
+与[第一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)类似, 进行清理代码. 我们不会执行测试. 所以删除`./test`目录.
 
 <figure>
 
@@ -404,7 +404,7 @@ Component(或称为对象或者游戏对象), **是在游戏中做了某些事�
 
 #### 为什么要使用Component
 
-[上一章](https://blog.bugcatt.com/archives/279)讲过, game loop是游戏的核心. 没有game loop就没有游戏. 那么, component呢?
+[上一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)讲过, game loop是游戏的核心. 没有game loop就没有游戏. 那么, component呢?
 
 回想下你玩过的大型游戏, 有好多的事件会同时发生. 想象一下, 若所有的内容都存放在同一个文件中, 那么game类(`./lib/langaw-game.dart`)将会有多乱. 我们将会有几千行代码, 如果这么写将相当不利于维护.
 
@@ -794,7 +794,7 @@ flies.add(Fly(this, x, y));
 
 #### 接收点击动作
 
-这部分在[上一章](https://blog.bugcatt.com/archives/279)讲过, 所以这里不跟大家墨迹. 首先在game类中有处理函数. 我们将会处理`onTapDown`事件, 该事件接收`TapDownDetails`作为参数. 为此, 我们需要Flutter的`gesture`手势库. 所以, 进入`./lib/langaw-game.dart`, 导入:
+这部分在[上一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)讲过, 所以这里不跟大家墨迹. 首先在game类中有处理函数. 我们将会处理`onTapDown`事件, 该事件接收`TapDownDetails`作为参数. 为此, 我们需要Flutter的`gesture`手势库. 所以, 进入`./lib/langaw-game.dart`, 导入:
 
 ```
 import 'package:flutter/gestures.dart';
@@ -963,7 +963,7 @@ bool isDead = false;
 
 现在我们需要改动`Fly`类的`update()`. 我们检查小飞蝇是否死掉, 如果死掉了, 我们改变它的边界矩形, 在它的`top`属性中添加一个特定的值, 使其向下移动.
 
-> 🟡 提示: `Fly`的边界矩形实际上是一个**不可变**的`Rect`, 因此它的属性是不可变的. 使用`final`修饰的变量无法变更, 所以我们需要使用`Rect`的`shift`以及`translate`函数重构`Rect`.
+> 🟡 提示: `Fly`的边界矩形实际上是一个**不可变**的`Rect`, 因此它的属性是不可变的. 使用`Rect`的`shift`以及`translate`函数重构`Rect`.
 
 在`onTapDown`处理器上, 因为小飞蝇被点击后会死掉, 所以翻转`isDead`的值为`true`:
 
@@ -1151,7 +1151,7 @@ flies.removeWhere((Fly fly) => fly.isOffScreen);
 
 ## 下一章将会干什么?
 
-[下一章](https://www.bugcatt.com/archives/560), 我们将会用图片来表示对象, 并执行更多的动画!
+[下一章](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)中, 我们将会用图片来表示对象, 并执行更多的动画!
 
 ## 感谢
 

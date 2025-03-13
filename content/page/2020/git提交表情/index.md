@@ -5,7 +5,7 @@ date: "2020-05-22"
 
 有了代码情趣, 就会顺便提高工作效率😏😏😏. 这里记录阿航从[gitmoji](https://gitmoji.carloscuesta.me/)上整理并翻译的所有git提交可用表情, 大家可以直接按`CTRL+F`在页面上进行搜索, 复制代码并提交!
 
-\[epcl\_box type="information"\]如果你对Git提交表情还不太熟悉, 可以先看看阿航写的这篇教程: [《为你的Git提交日志添加emoji表情》](https://www.bugcatt.com/archives/1491)\[/epcl\_box\]
+\[epcl\_box type="information"\]如果你对Git提交表情还不太熟悉, 可以先看看阿航写的这篇教程: [《为你的Git提交日志添加emoji表情》](/post/2020/为你的git提交日志添加emoji表情/)\[/epcl\_box\]
 
 \[epcl\_col width="100"\]
 

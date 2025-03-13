@@ -15,7 +15,7 @@ coverImage: "photo-of-white-wall-1484759.png"
 
 那么, 用Flutter开发游戏似乎是一件很棒的事情😝😝.
 
-> 我在《[Flutter可以开发游戏啦! Flame游戏开发框架测评](https://www.bugcatt.com/archives/4)》中简单的对Flutter的Flame框架进行了测评.
+> 我在《[Flutter可以开发游戏啦! Flame游戏开发框架测评](/post/2020/flutter可以开发游戏啦-flame游戏开发框架测评/)》中简单的对Flutter的Flame框架进行了测评.
 
 有些朋友希望进一步在Flutter上发展, 并且创建属于自己的游戏. 若你是这一类人, 那么本博客应该是你不错的选择. 本教程将会把重心放在概念上, 而不是立刻制作一个精美、可上线的游戏.
 
@@ -501,6 +501,6 @@ if (d.globalPosition.dx >= screenCenterX - 75
 - 本章内容灵感部分来源于官方文档[《Create a Mobile Game with Flutter and Flame – Beginner Tutorial》](https://jap.alekhin.io/create-mobile-game-flutter-flame-beginner-tutorial)
 - flame [github仓库地址](https://github.com/flame-engine/flame)
 - pub.dev [官方网址](https://pub.flutter-io.cn/packages/flame)
-- **[Pexels](https://www.pexels.com/zh-cn/photo/1484759/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)** 上的 **[Steve Johnson](https://www.pexels.com/zh-cn/@steve?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)** 拍摄的照片
+- **[Pexels](https://www.pexels.com/zh-cn/photo/1484759/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)** 上的 **[Steve Johnson](https://www.pexels.com/zh-cn/@steve?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)** 拍摄的照片
 
-最新、更多、更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](https://blog.bugcatt.com)
+最新、更多、更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](/)

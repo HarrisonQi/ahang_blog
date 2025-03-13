@@ -13,7 +13,7 @@ tags:
 
 本篇教程将用一个简单的小Demo, 让你完全掌握 数据存储之SharedPreferences 的用法.
 
-> 若图片展示异常, 请访问我的[官方博客](https://blog.bugcatt.com/archives/165)
+> 若图片展示异常, 请访问我的[官方博客](/post/2020/flutter-数据存储-sharedpreferences/)
 
 ## 效果
 
@@ -67,7 +67,7 @@ SharedPreferences最终效果
 
 创建一个新的Flutter项目, 命名为`my_shared_preferences_demo`(您可以随意起名, 但是在下面也要替换名字为您自己的).
 
-> 注意: Flutter项目名不要和引入的某个第三方库重名, 否则会报: `A package may not list itself as a dependency` 详见[这里](https://blog.bugcatt.com/archives/208)
+> 注意: Flutter项目名不要和引入的某个第三方库重名, 否则会报: `A package may not list itself as a dependency` 详见[这里](/post/2020/flutter-a-package-may-not-list-itself-as-a-dependency/)
 
 代码截图:
 
@@ -436,6 +436,6 @@ SharedPreferences 最终效果
 - [Github](https://github.com/HarrisonQi/flutter-actual-combat-demo/tree/master/my_shared_preferences_demo)
 - [码云](https://gitee.com/HarrisonQI/flutter-actual-combat-demo/tree/master/my_shared_preferences_demo)
 
-对文章若有任何问题、异议以及改进建议, 欢迎在下方进行评论. 作者将尽快回复! 若图片展示异常, 欢迎阅读[官方博客](https://blog.bugcatt.com/archives/165).
+对文章若有任何问题、异议以及改进建议, 欢迎在下方进行评论. 作者将尽快回复! 若图片展示异常, 欢迎阅读[官方博客](/post/2020/flutter-数据存储-sharedpreferences/).
 
-更多更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](https://blog.bugcatt.com).
+更多更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](/)

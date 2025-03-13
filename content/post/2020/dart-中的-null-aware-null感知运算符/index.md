@@ -133,5 +133,7 @@ person?.changeToFemale();
 
 - [Null-aware Operators in Dart - Jonathan White](https://medium.com/@thinkdigitalsoftware/null-aware-operators-in-dart-53ffb8ae80bb)
 - [Dart1.12新闻](https://news.dartlang.org/2015/08/dart-112-released-with-null-aware.html)
-- [Pexels](https://www.pexels.com/zh-cn/photo/2736497/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 上的 [Content Pixie](https://www.pexels.com/zh-cn/@content-pixie-1405717?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 拍摄的照片
+- [Pexels](https://www.pexels.com/zh-cn/photo/2736497/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 上的 [Content Pixie](https://www.pexels.com/zh-cn/@content-pixie-1405717?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 拍摄的照片
 - (排名不分先后)
+
+IIRC并不是唯一基于现实世界短语的缩写词。其他流行的语言包括 [TBH](/post/2020/tbh是什么意思/) 和 FWIW，它们可以是您的互联网词汇的有力补充。

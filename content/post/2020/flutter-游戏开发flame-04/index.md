@@ -25,17 +25,17 @@ coverImage: "flame特色图片4官方.jpg"
 
 下面是我们本系列教程的文章目录:
 
-- [Flutter 游戏开发(flame) Flame介绍](https://www.bugcatt.com/archives/279)
-- [Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)](https://www.bugcatt.com/archives/292)
-- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](https://www.bugcatt.com/archives/560)
-- [Flutter 游戏开发(flame) 03 界面和弹窗(3/5)](https://www.bugcatt.com/archives/562)
+- [Flutter 游戏开发(flame) Flame介绍](/post/2020/flutter-游戏开发flame-01-初识flame/)
+- [Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
+- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](/post/2020/flutter-游戏开发flame-02-图形和动画2-5/)
+- [Flutter 游戏开发(flame) 03 界面和弹窗(3/5)](/post/2020/flutter-游戏开发flame-03-界面和弹窗3-5/)
 - **Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5) 本章**
-- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](https://www.bugcatt.com/archives/731)
+- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](/post/2020/flutter-游戏开发flame-05-收尾和打包/)
 
 ## 需具备的条件
 
 1. 本系列教程之前的**全部要求**👈
-2. **更多的资源包** – 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站[Open Game Art](https://opengameart.org/).
+2. **更多的资源包** – 本教程提供了资源包, 但你也可以使用自己的. 推荐资源网站[Open Game Art](https://opengameart.org/).
 3. **音效和音乐资源** - 这些也可以在游戏资源网站上找到, 比如[Open Game Art](https://opengameart.org/). 还有专门的音频资源比如[BenSound.com](https://www.bensound.com/). 同样, 你必须查看许可并在游戏中表示感谢.
 
 我们将使用与前一部分相同的**编码规范**👩‍🏫
@@ -207,7 +207,7 @@ void update(double t) {
 
 对于整个表达式, 如果未设置`painter`的`text`属性, 则整个`painter.text?.text`返回`null`. 由于其后跟随了一个`??`, 因此if的返回值是一个空字符串. 最终的值是与`game.score.toString()`进行比较的结果. 另一方面, 如果没有设置`painter`的`text`属性, 则会返回当前的实际分数.
 
-你可以在这篇[《Dart 中的 Null-aware (null感知运算符)》](https://www.bugcatt.com/archives/1025)获取Null-aware运算符(Null感知运算符)的更多信息!
+你可以在这篇[《Dart 中的 Null-aware (null感知运算符)》](/post/2020/dart-中的-null-aware-null感知运算符/)获取Null-aware运算符(Null感知运算符)的更多信息!
 
 现在如果`painter`的text与当前分数不一致, 我们用一个新的`TextSpan`的实例来更新它的text属性, 该实例将获取游戏中`score`变量和可重复使用的`textStyle`变量的当前值. 然后调用`layout`函数, 以便`TextPainter`可以计算刚刚分配的新文本的尺寸.
 
@@ -613,7 +613,7 @@ if (game.activeView == View.playing) {
 
 这个简单的任务可以通过`shared_preferences`第三方库来解决. 这个库包含`SharedPreferences`, 它可以处理简单的数据(数字、字符串以及布尔值). 它还在内部处理根据不同操作系统(IOS和Android)来保存数据.
 
-> 若想了解`SharedPreference`更多内容, 欢迎阅读阿航的这篇[《Flutter 数据存储 SharedPreferences》](https://www.bugcatt.com/archives/165). 里面包含超详细讲解.
+> 若想了解`SharedPreference`更多内容, 欢迎阅读阿航的这篇[《Flutter 数据存储 SharedPreferences》](/post/2020/flutter-数据存储-sharedpreferences/). 里面包含超详细讲解.
 
 #### 准备数据存储
 
@@ -1172,7 +1172,7 @@ game.playPlayingBGM();
 
 > 🟡 提示: 如果出现音乐播放异常, 先检查代码是否有误.
 > 
-> 若保证代码无误, 可以尝试一下清理缓存、重新安装游戏至虚拟机. 有关清理Flutter缓存, 欢迎查看这篇[《Flutter 清理编译缓存》](https://www.bugcatt.com/archives/881)
+> 若保证代码无误, 可以尝试一下清理缓存、重新安装游戏至虚拟机. 有关清理Flutter缓存, 欢迎查看这篇[《Flutter 清理编译缓存》](/post/2020/flutter-清理编译缓存/)
 
 **👉在[Github](https://github.com/HarrisonQi/flame-tutorial-langaw/tree/87b114b4e9bed58df986fdfbe0dd64e1fa1fd9e3)或[码云](https://github.com/HarrisonQi/flame-tutorial-langaw/tree/87b114b4e9bed58df986fdfbe0dd64e1fa1fd9e3)上查看这部分的代码.**
 
@@ -1432,6 +1432,6 @@ if (game.soundButton.isEnabled) {
 ## 感谢
 
 - 本篇文章参考原作[《Scoring, Storage, and Sound Tutorial – Step by Step with Flame and Flutter (Part 4 of 5)》](https://jap.alekhin.io/scoring-storage-sound-tutorial-flame-flutter-part-4).
-- flame [github仓库地址](https://github.com/flame-engine/flame)
-- pub.dev [官方网址](https://pub.flutter-io.cn/packages/flame)
+- flame [github仓库地址](https://github.com/flame-engine/flame)
+- pub.dev [官方网址](https://pub.flutter-io.cn/packages/flame)
 - [andyli386](https://github.com/andyli386)的[PR](https://github.com/HarrisonQi/flame-tutorial-langaw/pull/2)

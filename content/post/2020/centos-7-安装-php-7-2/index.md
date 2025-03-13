@@ -72,7 +72,7 @@ php -v
 
 输入以下命令进行安装:
 
-如果下面的yum安装过慢, 可以查看这篇文章进行加速: [《yum下载太慢? 使用国内源加速!》](https://blog.bugcatt.com/archives/981)
+如果下面的yum安装过慢, 可以查看这篇文章进行加速: [《yum下载太慢? 使用国内源加速!》](/post/2020/yum下载太慢-使用国内源加速/)
 
 ```
 yum -y install php72w php72w-cli php72w-fpm php72w-common php72w-devel

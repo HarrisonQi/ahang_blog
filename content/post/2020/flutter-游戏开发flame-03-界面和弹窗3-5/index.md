@@ -17,12 +17,12 @@ coverImage: "flame特色图片3官方-1.jpg"
 
 下面是我们本系列教程的文章目录:
 
-- [Flutter 游戏开发(flame) Flame介绍](https://www.bugcatt.com/archives/279)
-- [Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)](https://www.bugcatt.com/archives/292)
-- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](https://bugcatt.com/archives/560)
+- [Flutter 游戏开发(flame) Flame介绍](/post/2020/flutter-游戏开发flame-01-初识flame/)
+- [Flutter 游戏开发(flame) 01 开发2D休闲游戏：消灭小飞蝇(1/5)](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/)
+- [Flutter 游戏开发(flame) 02 图形和动画(2/5)](/post/2020/flutter-游戏开发flame-02-图形和动画2-5/)
 - **Flutter 游戏开发(flame) 03 界面和弹窗(3/5) 本章**
-- [Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)](https://bugcatt.com/archives/564)
-- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](https://bugcatt.com/archives/731)
+- [Flutter 游戏开发(flame) 04 分数, 存档和音效(4/5)](/post/2020/flutter-游戏开发flame-04/)
+- [Flutter 游戏开发(flame) 05 收尾和打包(5/5)](/post/2020/flutter-游戏开发flame-05-收尾和打包/)
 
 ## 需具备的条件
 
@@ -31,7 +31,7 @@ coverImage: "flame特色图片3官方-1.jpg"
 
 我们将使用与前一部分相同的**编码规范**👩‍🏫
 
-如果你还没有阅读以前的部分, 你最好回顾下! 从[第一章](https://blog.bugcatt.com/archives/279)开始.
+如果你还没有阅读以前的部分, 你最好回顾下! 从[第一章](/post/2020/flutter-游戏开发flame-01-初识flame/)开始.
 
 **👉在[Github](https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536)或[码云](https://github.com/HarrisonQi/flame-tutorial-langaw/tree/277749ae54484b45e0ac5be6020eef463f8e4536)上查看本章的代码.**
 
@@ -62,7 +62,7 @@ coverImage: "flame特色图片3官方-1.jpg"
 
 ## 开始
 
-本系列教程的[终章](https://blog.bugcatt.com/archives/731)将会完成一个具有互动性、良好的图形和动画的游戏.
+本系列教程的[终章](/post/2020/flutter-游戏开发flame-05-收尾和打包/)将会完成一个具有互动性、良好的图形和动画的游戏.
 
 现在是"勉强能玩", 我们还需要给用户提供更熟悉的游戏体验.
 
@@ -84,7 +84,7 @@ coverImage: "flame特色图片3官方-1.jpg"
 | "得分"图标 | 1:1 | 1 × 1 |
 | "帮助"图标 | 1:1 | 1 × 1 |
 
-> 🟡 提示: 我们的游戏宽度为`9个区块`, 动态的高度取决于玩家的手机屏幕纵横比. 如果你想了解更多, 请回顾[此章节](https://blog.bugcatt.com/archives/292).
+> 🟡 提示: 我们的游戏宽度为`9个区块`, 动态的高度取决于玩家的手机屏幕纵横比. 如果你想了解更多, 请回顾[此章节](/post/2020/flutter-游戏开发flame-01-开发2d休闲游戏：消灭小飞蝇1-5/).
 
 需要添加的资源如下:
 

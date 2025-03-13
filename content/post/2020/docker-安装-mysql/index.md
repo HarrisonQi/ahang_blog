@@ -13,7 +13,7 @@ coverImage: "2020-04-17_163315-1-e1587112972240.png"
 
 本文为 docker 安装 mysql 容器的完整详细教程.
 
-> 若图片展示异常, 请访问我的[官方博客](https://blog.bugcatt.com/archives/267)
+> 若图片展示异常, 请访问我的[官方博客](/post/2020/docker-安装-mysql/)
 
 ## 准备工作
 
@@ -65,7 +65,7 @@ docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/lo
 - **`-p 3306:3306`**：将容器的 3306 端口映射到主机的 3306 端口。
 - **`-v $PWD/conf:/etc/mysql/conf.d`**：将主机当前目录下的 `conf/my.cnf` 挂载到容器的`/etc/mysql/my.cnf`。
 - **`-v $PWD/logs:/logs`**：将主机当前目录下的 logs 目录挂载到容器的 `/logs`。
-- **`-v $PWD/data:/var/lib/mysql`** ：将主机当前目录下的`data`目录挂载到容器的 `/var/lib/mysql`
+- **`-v $PWD/data:/var/lib/mysql`**：将主机当前目录下的`data`目录挂载到容器的 `/var/lib/mysql`
 - **`-e MYSQL_ROOT_PASSWORD=123456`：**初始化 root 用户的密码。
 
 ### 查看容器运行情况
@@ -96,6 +96,6 @@ docker restart [容器id]
 
 通过以上的一些步骤, 我们完成了Dokcer安装Mysql的目标, 是不是很简单?
 
-对文章若有任何问题、异议以及改进建议, 欢迎在下方进行评论. 作者将尽快回复! 获取最新文章, 欢迎阅读[官方博客](https://blog.bugcatt.com/archives/267).
+对文章若有任何问题、异议以及改进建议, 欢迎在下方进行评论. 作者将尽快回复! 获取最新文章, 欢迎阅读[官方博客](/post/2020/docker-安装-mysql/).
 
-更多更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](https://blog.bugcatt.com).
+更多更好的教程/博客/资讯, 欢迎访问我的官网: [阿航的技术小站](/)
