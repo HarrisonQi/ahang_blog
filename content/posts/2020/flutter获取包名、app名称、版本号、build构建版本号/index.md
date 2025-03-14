@@ -36,7 +36,7 @@ coverImage: "Flutter获取包名、应用APP名称、版本号、build构建版�
 
 进入`./pubspec.yaml`, 导入:
 
-```
+```yaml
 dependencies:
   package_info: ^0.4.0+18
 ```
@@ -49,7 +49,7 @@ dependencies:
 
 为了让大家更直观的看到, 这里提供`./lib/main.dart`的代码, 你可以直接进行复制并运行:
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -110,13 +110,13 @@ class _MyHomePageState extends State {
 
 在`./lib/main.dart`中进行导入:
 
-```
+```dart
 import 'package:package_info/package_info.dart';
 ```
 
 在`_MyHomePageState`中创建四个实例变量, 用来保存信息:
 
-```
+```dart
 // APP名称
 String _appName;
 // 包名
@@ -131,7 +131,7 @@ String _buildNumber;
 
 在`_MyHomePageState`内的`build()`下方创建函数`getAppInfo()`:
 
-```
+```dart
 /// 获取APP信息
 void getAppInfo(){
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
@@ -148,7 +148,7 @@ void getAppInfo(){
 
 我们要做的就是在这里获取数据, 并将其展示出来. 替换:
 
-```
+```dart
 Text(
     'App信息',
     style: TextStyle(fontSize: 30),
@@ -157,7 +157,7 @@ Text(
 
 为:
 
-```
+```dart
 Text(
     'App信息',
     style: TextStyle(fontSize: 30),
@@ -201,13 +201,13 @@ RaisedButton(
 
 先导入:
 
-```
+```dart
 import 'package:package_info/package_info.dart';
 ```
 
 再使用:
 
-```
+```dart
 PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
   String appName = packageInfo.appName;
   String packageName = packageInfo.packageName;
@@ -218,7 +218,7 @@ PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
 
 另一种写法(所在的函数必须由`async`修饰):
 
-```
+```dart
 PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
 String appName = packageInfo.appName;

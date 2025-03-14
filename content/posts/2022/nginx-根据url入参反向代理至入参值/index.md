@@ -13,4 +13,13 @@ categories:
 
 在nginx中添加配置:
 
-    `resolver 8.8.8.8;          location ~/video {       if ($query_string ~*  ^(.*)url=(.*)$){            set $mediaUrl $2;            proxy_pass $mediaUrl;       }     }`
+```nginx
+resolver 8.8.8.8;
+
+location ~/video {
+    if ($query_string ~* ^(.*)url=(.*)$) {
+        set $mediaUrl $2;
+        proxy_pass $mediaUrl;
+    }
+}
+```

@@ -20,17 +20,37 @@ CentOS
 
 使用此命令获取当前系统打开文件数量:
 
-    `lsof | wc -l`
+```bash
+lsof | wc -l
+```
 
 使用此命令获取打开文件数量上限:
 
-    `ulimit -a`
-    
+```bash
+ulimit -a
+```
 
 会返回类似:
 
-    `ulimit -a core file size          (blocks, -c) 0 data seg size           (kbytes, -d) unlimited scheduling priority             (-e) 0 file size               (blocks, -f) unlimited pending signals                 (-i) 7268 max locked memory       (kbytes, -l) 64 max memory size         (kbytes, -m) unlimited open files                      (-n) 1024 pipe size            (512 bytes, -p) 8 POSIX message queues     (bytes, -q) 819200 real-time priority              (-r) 0 stack size              (kbytes, -s) 8192 cpu time               (seconds, -t) unlimited max user processes              (-u) 7268 virtual memory          (kbytes, -v) unlimited file locks                      (-x) unlimited`
-    
+```plaintext
+ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 7268
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 7268
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+```
 
 其中, `open files`的值就为上限. 上方的例子为 1024.
 
@@ -46,6 +66,8 @@ CentOS
 
 使用该命令临时修改, 立即生效, 重启后失效:
 
-    `ulimit -n 2048`
+```bash
+ulimit -n 2048
+```
 
 你可以按需调整数量, 比如 `ulimit -n 65535`

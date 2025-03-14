@@ -17,11 +17,20 @@ tags:
 
 基于Set集合的不可重复特性, 我们利用该特性可轻松解决:
 
-    `void main() {   // 声明一个集合   var ids = [1, 1, 4, 4, 5, 6, 6];   // 进行去重, 存储去重后的集合   var distinctIds = ids.toSet().toList(); }`
+```dart
+void main() {
+  // 声明一个集合
+  var ids = [1, 1, 4, 4, 5, 6, 6];
+  // 进行去重, 存储去重后的集合
+  var distinctIds = ids.toSet().toList();
+}
+```
 
 当然, 基于该思路还有更牛逼的写法:
 
-    `var distinctIds = [...{...ids}];`
+```dart
+var distinctIds = [...{...ids}];
+```
 
 \[epcl\_box type="success"\]这也许是最优雅的解决方案.\[/epcl\_box\]
 
@@ -29,7 +38,16 @@ tags:
 
 方案一虽然优雅, 但也不是完美的. 它无法**保留顺序**. 如果我们的需求对顺序有绝对的要求时, 就需要以下方法了:
 
-    `import 'dart:collection'; void main() {   // 声明一个集合   List arr = ["a", "a", "b", "c", "b", "d"];   // 进行去重, 存储去重后的集合   List result = LinkedHashSet.from(arr).toList(); }`
+```dart
+import 'dart:collection';
+
+void main() {
+  // 声明一个集合
+  List arr = ["a", "a", "b", "c", "b", "d"];
+  // 进行去重, 存储去重后的集合
+  List result = LinkedHashSet.from(arr).toList();
+}
+```
 
 虽然不如方法一优雅, 但是其保留了顺序.
 

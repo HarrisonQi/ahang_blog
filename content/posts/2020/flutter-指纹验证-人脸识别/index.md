@@ -47,7 +47,7 @@ coverImage: "指纹人脸.png"
 
 在`./lib/pubspec.yaml`中导入:
 
-```
+```yaml
 dependencies:
   local_auth: ^0.6.1+3
 ```
@@ -56,13 +56,13 @@ dependencies:
 
 进入`./android/app/src/main/***/MainActivity.java`或`MainActivity.kt`,导入依赖:
 
-```
+```kotlin
 import io.flutter.embedding.android.FlutterFragmentActivity;
 ```
 
 修改:
 
-```
+```kotlin
 class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
@@ -72,7 +72,7 @@ class MainActivity: FlutterActivity() {
 
 为:
 
-```
+```kotlin
 class MainActivity: FlutterFragmentActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
@@ -98,7 +98,7 @@ class MainActivity: FlutterFragmentActivity() {
 
 进入 `android/app/src/main/AndroidManifest.xml`, 在`<manifest>`中, 添加:
 
-```
+```xml
 <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 ```
 
@@ -118,7 +118,7 @@ class MainActivity: FlutterFragmentActivity() {
 
 进入`./ios/Runner/Info.plist`, 添加:
 
-```
+```xml
 <key>NSFaceIDUsageDescription</key>
 <string>Why is my app authenticating using face id?</string>
 ```
@@ -143,7 +143,7 @@ class MainActivity: FlutterFragmentActivity() {
 
 替换`./lib/main.dart`内容为:
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -181,7 +181,7 @@ class _MyHomePageState extends State {
 
 导入:
 
-```
+```dart
 import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
@@ -190,7 +190,7 @@ import 'package:local_auth/error_codes.dart' as auth_error;
 
 class内容:
 
-```
+```dart
 class FingerPrintUtil {
   static Future checkTouchId() async {
     var localAuth = LocalAuthentication();
@@ -253,13 +253,13 @@ class FingerPrintUtil {
 
 打开`./lib/main.dart`, 导入我们刚才创建的工具类:
 
-```
+```dart
 import 'package:fingerprint_verification/fingerprint_util.dart';
 ```
 
 在`_MyHomePageState`的`build`函数中, 在`center`内添加一个child, 执行我们刚才创建的工具类:
 
-```
+```dart
 child: RaisedButton(
   onPressed: ()=>FingerPrintUtil.checkTouchId(),
   child: Text("测试指纹支付"),

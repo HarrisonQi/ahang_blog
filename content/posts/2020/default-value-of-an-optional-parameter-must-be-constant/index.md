@@ -12,7 +12,7 @@ coverImage: "Default-value-of-an-optional-parameter-must-be-constant-01.png"
 
 今天阿航在使用Flutter进行开发时, 希望为`final`修饰的实例变量提供默认值. 尝试过程中IDE报错:
 
-```
+```plaintext
 Default values of an optional parameter must be constant.
 ```
 
@@ -24,7 +24,7 @@ Default values of an optional parameter must be constant.
 
 先来看下错误源码:
 
-```
+```dart
 enum MyEnum { a, b }
 
 class ClassA {
@@ -44,7 +44,7 @@ class ClassB {
 
 其实解决方案很简单, 来看下修改后的代码(注意高亮的行):
 
-```
+```dart
 enum MyEnum { a, b }
 
 class ClassA {

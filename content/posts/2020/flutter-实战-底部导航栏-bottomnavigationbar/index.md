@@ -61,7 +61,7 @@ tags:
 
 创建`lib/main.dart`文件, 内容:
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -111,7 +111,7 @@ class _MyHomePageState extends State {
 
 **注意, 每个页面需要在注释处变更一下文字内容, 以便区分**
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 // 这里的class 名称分别为"PageFirst"、"PageSecond"以及"PageThird"
@@ -144,7 +144,7 @@ class _PageFirstState extends State {
 
 我们来尝试使用一下, 在`Scaffold`中添加一个参数`bottomNavigationBar`:
 
-```
+```dart
 class _MyHomePageState extends State {
 
   @override
@@ -170,7 +170,7 @@ class _MyHomePageState extends State {
 
 我们在`class _MyHomePageState`中创建一个集合, 把三个目标页面装进去:
 
-```
+```dart
   // 创建集合对象, 存储底部选项集合
   List barItems = [
     BottomNavigationBarItem(
@@ -227,7 +227,7 @@ class _MyHomePageState extends State {
 
 回到刚才的位置, 我们把刚刚创建的`BottomNavigationBarItem`集合放入`BottomNavigationBar`中:
 
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -266,7 +266,7 @@ class _MyHomePageState extends State {
 
 在`_MyHomePageState`中创建页面集合及变量:
 
-```
+```dart
   // 导航目标页集合
   final pages = [
     PageFirst(),
@@ -280,7 +280,7 @@ class _MyHomePageState extends State {
 
 在`_MyHomePageState`中创建函数:
 
-```
+```dart
 // 当点击导航栏按钮时, 触发此函数
 void _changeCurrentNavIndex(int index){
   // 细节: 当用户点击的导航和当前一致, 则不发生变化, 节省系统资源
@@ -294,7 +294,7 @@ void _changeCurrentNavIndex(int index){
 
 修改`build`函数:
 
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -355,14 +355,14 @@ void _changeCurrentNavIndex(int index){
 
 在`_MyHomePageState`中添加实例变量:
 
-```
+```dart
 /// pageView控制器
 PageController _pageViewController = PageController();
 ```
 
 在`_changeCurrentNavIndex()`中, `_currentNavIndex = index;`下面添加:
 
-```
+```dart
 _pageViewController.jumpToPage(index);
 ```
 
@@ -370,7 +370,7 @@ _pageViewController.jumpToPage(index);
 
 在我们新创建的文件`main_advanced_horizontal_scroll.dart`中, 替换`Scaffold`的`body`:
 
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -382,7 +382,7 @@ _pageViewController.jumpToPage(index);
 
 为:
 
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(

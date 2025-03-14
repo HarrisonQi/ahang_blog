@@ -14,7 +14,9 @@ tags:
 
 安装 Visual C ++ 14.0 :
 
-[https://www.lanzous.com/b0cju0voh](https://www.lanzous.com/b0cju0voh) 密码: `htjy`
+[https://www.lanzous.com/b0cju0voh](https://www.lanzous.com/b0cju0voh) 密码: ```plaintext
+htjy
+```
 
 ## 感谢
 

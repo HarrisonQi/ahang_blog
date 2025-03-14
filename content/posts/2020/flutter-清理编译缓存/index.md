@@ -30,7 +30,7 @@ coverImage: "banner-1.png"
 
 输入清理命令:
 
-```
+```bash
 flutter clean
 ```
 

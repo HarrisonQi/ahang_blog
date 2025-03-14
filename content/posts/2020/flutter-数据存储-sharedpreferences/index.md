@@ -101,7 +101,7 @@ SharedPreferences最终效果
 
 避免冗余代码误导我们, 替换`./lib/main.dart`为:
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -146,7 +146,7 @@ class _MyHomePageState extends State {
 
 进入`./pubspec.yaml`, 添加依赖:
 
-```
+```yaml
 dependencies:
   shared_preferences: ^0.5.6+3
 ```
@@ -169,7 +169,7 @@ dependencies:
 
 更新包, 在终端中输入(或者点击IDE的更新包的按钮):
 
-```
+```bash
 flutter packages get
 ```
 
@@ -197,14 +197,14 @@ flutter packages get
 
 #### 创建`SharedPreferencesUtil`类
 
-```
+```dart
 class SharedPreferencesUtil {
 }
 ```
 
 因为后面要用到SharedPreferences, 所以导入shared\_preferences:
 
-```
+```dart
 import 'package:shared_preferences/shared_preferences.dart';
 ```
 
@@ -212,9 +212,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 添加函数`saveData()`:
 
-```
+```dart
   /// 保存数据
-  static saveData(String key, T value) async {
+  static saveData<T>(String key, T value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     switch (T) {
@@ -258,7 +258,7 @@ SharedPreferencesUtil01
 
 添加函数`getData()`:
 
-```
+```dart
   /// 读取数据
   static Future getData(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -308,7 +308,7 @@ SharedPreferencesUtil02
 
 先导入`SharedPreferencesUtil`方便后续使用:
 
-```
+```dart
 import 'package:my_shared_preferences_demo/shared_preferences_util.dart';
 ```
 
@@ -316,7 +316,7 @@ import 'package:my_shared_preferences_demo/shared_preferences_util.dart';
 
 在`_MyHomePageState`定义实例变量`_savedValue`和`_currentInputValue`, 用于记录存储及当前输入的值:
 
-```
+```dart
   // 保存的值
   String _savedValue = "加载中..";
 
@@ -328,7 +328,7 @@ import 'package:my_shared_preferences_demo/shared_preferences_util.dart';
 
 定义`initState()`, 在初始化页面时读取已存的数据
 
-```
+```dart
   @override
   void initState() {
     super.initState();
@@ -344,7 +344,7 @@ import 'package:my_shared_preferences_demo/shared_preferences_util.dart';
 
 接下来就是绘制界面了, 在`build`\->`Scaffold`\->`body:Center`\->`child: Column`\->`children`中添加以下代码块:
 
-```
+```dart
 // 用于显示数据的Text
 Text(
   _savedValue == null ? "无数据" : _savedValue,

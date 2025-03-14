@@ -16,8 +16,12 @@ tags:
 
 运行`flutter package get`, 控制台报错如下:
 
-```
+```plaintext
+Because my_app depends on my_app which doesn't exist (could not find package my_app at http://pub.dartlang.org), version solving failed.
+pub get failed (1; could not find package my_app at http://pub.dartlang.org)
+exit code 1
 
+A package may not list itself as a dependency
 ```
 
 ## 原因
