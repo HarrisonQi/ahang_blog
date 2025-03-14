@@ -18,10 +18,10 @@ coverImage: "banner-4.png"
 
 找到你的`MaterialApp`(建议直接使用关键字进行全局搜索), 为其添加一个属性即可去掉:
 
-```
+```dart
 MaterialApp(
- debugShowCheckedModeBanner: false
- ...
+  debugShowCheckedModeBanner: false,
+  // ... 其他配置
 )
 ```
 
@@ -49,7 +49,7 @@ MaterialApp(
 
 ## 感谢
 
-- [Pexels](https://www.pexels.com/zh-cn/photo/5412/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 上的 [Jaymantri](https://www.pexels.com/zh-cn/@jaymantri?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 拍摄的照片
+- [Pexels](https://www.pexels.com/zh-cn/photo/5412/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 上的 [Jaymantri](https://www.pexels.com/zh-cn/@jaymantri?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 拍摄的照片
 - [How to remove debug banner in flutter on android emulator? - Stack Overflow](https://stackoverflow.com/questions/48893935/how-to-remove-debug-banner-in-flutter-on-android-emulator)
 - (排名不分先后)
 
@@ -57,4 +57,4 @@ MaterialApp(
 
 两种方式都可以进行修改, 唯一的区别就是方法一影响代码, 方法二不会变动代码. 你可以按实际情况选择你需要的方式!
 
-如果你对本篇文章有任何问题, 欢迎在下方评论区, 进行讨论, 或加入[阿航的技术小站交流群](https://jq.qq.com/?_wv=1027&k=egT9rjgu)
+如果你对本篇文章有任何问题, 欢迎在下方评论区, 进行讨论, 或加入[阿航的技术小站交流群](https://jq.qq.com/?_wv=1027&k=egT9rjgu) 
