@@ -9,8 +9,3 @@
 - [ ] content/posts/2020/default-value-of-an-optional-parameter-must-be-constant/index.md
 - [x] content/posts/2020/flutter-获取屏幕尺寸/index.md
 - [x] content/posts/2020/flutter-获取设备信息/index.md
-- [ ] content/posts/2020/flutter-获取当前页面的context/index.md
-- [ ] content/posts/2020/flutter-获取当前页面的widget/index.md
-- [ ] content/posts/2020/flutter-获取当前页面的state/index.md
-- [ ] content/posts/2020/flutter-获取当前页面的route/index.md
-- [ ] content/posts/2020/flutter-获取当前页面的navigator/index.md 
