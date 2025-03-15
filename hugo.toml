@@ -3,5 +3,11 @@ languageCode = 'zh-CN'
 title = '阿航的技术小站'
 theme = 'dream'
 
+# Sitemap 配置
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap-bugcatt.xml"
+
 [params]
-  footerBottomText = '<a href="https://beian.miit.gov.cn/" target="_blank" class="text-base-content/60 hover:underline">蜀ICP备2022014599号-1</a>'
+footerBottomText = '<a href="https://beian.miit.gov.cn/" target="_blank" class="text-base-content/60 hover:underline">蜀ICP备2022014599号-1</a>'
